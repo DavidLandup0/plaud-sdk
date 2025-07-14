@@ -314,12 +314,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer * _Nonnull)_ error:(NSError * _Nullable)error;
 @end
 
-@class NSString;
 @class NSCoder;
+@class NSString;
 @class NSBundle;
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK30PlaudAudioPlayerViewController")
 @interface PlaudAudioPlayerViewController : UIViewController <AVAudioPlayerDelegate>
-- (nonnull instancetype)initWithFilePath:(NSString * _Nonnull)filePath OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithSessionId:(NSInteger)sessionId OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)_ SWIFT_UNAVAILABLE;
 - (void)viewDidLoad;
 - (void)viewWillDisappear:(BOOL)animated;
@@ -356,6 +356,14 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 /// End scan
 /// @see        startScan()
 - (void)stopScan;
+/// Connect bluetooth device
+/// \param bleDevice Wrapped bluetooth device
+///
+/// \param deviceToken device token
+/// @see    Callback bleConnectState
+/// @see    Callback bleBind
+///
+- (void)connectBleDeviceWithBleDevice:(BleDevice * _Nonnull)bleDevice deviceToken:(NSString * _Nonnull)deviceToken;
 /// Connect bluetooth device
 /// \param bleDevice Wrapped bluetooth device
 /// @see    Callback bleConnectState
@@ -455,7 +463,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)syncFileWithSessionId:(NSInteger)sessionId start:(NSInteger)start end:(NSInteger)end;
 /// Download composite file (complete file)
 /// @see    Callback bleDownloadFile
-- (void)downloadFileWithSessionId:(NSInteger)sessionId outputPath:(NSString * _Nonnull)outputPath;
+- (void)downloadFileWithSessionId:(NSInteger)sessionId desiredOutputPath:(NSString * _Nonnull)desiredOutputPath;
 /// Stop file download
 /// @see    Callback bleDownloadFileStop
 - (void)stopDownloadFile;
@@ -769,7 +777,7 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 ///
 /// \param tips Tips
 ///
-- (void)bleDownloadFileWithSessionId:(NSInteger)sessionId outputPath:(NSString * _Nonnull)outputPath status:(NSInteger)status progress:(NSInteger)progress tips:(NSString * _Nonnull)tips;
+- (void)bleDownloadFileWithSessionId:(NSInteger)sessionId desiredOutputPath:(NSString * _Nonnull)desiredOutputPath status:(NSInteger)status progress:(NSInteger)progress tips:(NSString * _Nonnull)tips;
 /// Sync file terminated
 - (void)bleDownloadFileStop;
 /// Delete file
@@ -812,6 +820,7 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 ///
 - (void)onWifiSyncTestResultWithIndex:(uint32_t)index result:(NSInteger)result rawCode:(NSInteger)rawCode;
 - (void)onWifiSyncUrlWithUrl:(NSString * _Nonnull)url;
+- (void)onSdkFetchPermissionResultWithPass:(BOOL)pass tips:(NSString * _Nonnull)tips;
 - (void)onSdkCheckPermissionResultWithPass:(BOOL)pass tips:(NSString * _Nonnull)tips;
 - (void)onSdkCheckResourceResultWithPass:(BOOL)pass tips:(NSString * _Nonnull)tips;
 /// Idle sync

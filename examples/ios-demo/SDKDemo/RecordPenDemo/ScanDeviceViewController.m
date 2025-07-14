@@ -459,6 +459,9 @@
 - (void)bleAppKeyStateWithResult:(NSInteger)result{
 }
 
+
+
+
 - (void)bleConnectStateWithState:(NSInteger)state {
     NSString *message = @"";
     switch (state) {

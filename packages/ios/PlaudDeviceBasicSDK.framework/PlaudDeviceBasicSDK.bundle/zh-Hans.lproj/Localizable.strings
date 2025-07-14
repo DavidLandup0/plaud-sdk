@@ -100,7 +100,8 @@
 "file_downloading" = "流式文件下载中";
 "file_transcoding" = "转码中...";
 "file_download_complete" = "下载并转码完成";
-"file_transcode_error" = "转码错误"; 
+"file_transcode_error" = "转码错误";
+"file_transcode_error_no_permission" = "转码错误, 无权限";
 
 // Workflow Status
 "pending" = "等待中";

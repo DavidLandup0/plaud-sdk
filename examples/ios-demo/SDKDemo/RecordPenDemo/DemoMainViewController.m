@@ -115,6 +115,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.deviceAgent = [PlaudDeviceAgent shared];
+    self.deviceAgent.delegate = self;
     
     [self showAppKeyPopupIfNeed];
         
@@ -147,7 +148,7 @@
     
     if (savedAppKey && savedAppSecret) {
         [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:savedAppKey
-                                    appSecret:savedAppSecret bindToken:@"123456789" extra:@{}];
+                                    appSecret:savedAppSecret bindToken:@"123456789" extra:@{@"language": @"en"}]; //currently support en、zh
         return NO;
     } else {
         // Show input dialog
@@ -175,7 +176,7 @@
     
     // Initialize SDK
     [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:appKey
-                                appSecret:appSecret bindToken:@"123456789" extra:@{}];
+                                appSecret:appSecret bindToken:@"123456789" extra:@{@"language": @"en"}]; //currently support en、zh
 }
 
 - (void)appKeyInputDidCancel {
@@ -313,6 +314,10 @@
 
 - (void)languageDidChange {
     // No need for real-time refresh as we will restart the app
+}
+
+- (void)onSdkFetchPermissionResultWithPass:(BOOL)pass tips:(NSString *)tips {
+    NSLog(@"onSdkFetchPermissionResultWithPass pass=%@ tips=%@", pass ? @"YES":@"NO", tips);
 }
 
 @end

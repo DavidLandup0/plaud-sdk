@@ -5093,7 +5093,7 @@
           {
             "kind": "Function",
             "name": "bleDownloadFile",
-            "printedName": "bleDownloadFile(sessionId:outputPath:status:progress:tips:)",
+            "printedName": "bleDownloadFile(sessionId:desiredOutputPath:status:progress:tips:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -5132,13 +5132,13 @@
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@PlaudDeviceBasicSDK@objc(pl)PlaudDeviceAgentProtocol(im)bleDownloadFileWithSessionId:outputPath:status:progress:tips:",
-            "mangledName": "$s19PlaudDeviceBasicSDK0aB13AgentProtocolP15bleDownloadFile9sessionId10outputPath6status8progress4tipsySi_SSS2iSStF",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(pl)PlaudDeviceAgentProtocol(im)bleDownloadFileWithSessionId:desiredOutputPath:status:progress:tips:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB13AgentProtocolP15bleDownloadFile9sessionId17desiredOutputPath6status8progress4tipsySi_SSS2iSStF",
             "moduleName": "PlaudDeviceBasicSDK",
             "genericSig": "<τ_0_0 where τ_0_0 : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
             "sugared_genericSig": "<Self where Self : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
             "protocolReq": true,
-            "objc_name": "bleDownloadFileWithSessionId:outputPath:status:progress:tips:",
+            "objc_name": "bleDownloadFileWithSessionId:desiredOutputPath:status:progress:tips:",
             "declAttributes": [
               "Optional",
               "ObjC",
@@ -5531,6 +5531,44 @@
             "sugared_genericSig": "<Self where Self : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
             "protocolReq": true,
             "objc_name": "onWifiSyncUrlWithUrl:",
+            "declAttributes": [
+              "Optional",
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "onSdkFetchPermissionResult",
+            "printedName": "onSdkFetchPermissionResult(pass:tips:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(pl)PlaudDeviceAgentProtocol(im)onSdkFetchPermissionResultWithPass:tips:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB13AgentProtocolP26onSdkFetchPermissionResult4pass4tipsySb_SStF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "genericSig": "<τ_0_0 where τ_0_0 : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
+            "sugared_genericSig": "<Self where Self : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
+            "protocolReq": true,
+            "objc_name": "onSdkFetchPermissionResultWithPass:tips:",
             "declAttributes": [
               "Optional",
               "ObjC"
@@ -6215,6 +6253,41 @@
           {
             "kind": "Function",
             "name": "connectBleDevice",
+            "printedName": "connectBleDevice(bleDevice:deviceToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "BleDevice",
+                "printedName": "PenBleSDK.BleDevice",
+                "usr": "c:@M@PenBleSDK@objc(cs)BleDevice"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)connectBleDeviceWithBleDevice:deviceToken:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC010connectBleB003bleB011deviceTokeny03PengD00gB0C_SStF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "connectBleDeviceWithBleDevice:deviceToken:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "connectBleDevice",
             "printedName": "connectBleDevice(bleDevice:)",
             "children": [
               {
@@ -6824,7 +6897,7 @@
           {
             "kind": "Function",
             "name": "downloadFile",
-            "printedName": "downloadFile(sessionId:outputPath:)",
+            "printedName": "downloadFile(sessionId:desiredOutputPath:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -6845,10 +6918,10 @@
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)downloadFileWithSessionId:outputPath:",
-            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC12downloadFile9sessionId10outputPathySi_SStF",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)downloadFileWithSessionId:desiredOutputPath:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC12downloadFile9sessionId17desiredOutputPathySi_SStF",
             "moduleName": "PlaudDeviceBasicSDK",
-            "objc_name": "downloadFileWithSessionId:outputPath:",
+            "objc_name": "downloadFileWithSessionId:desiredOutputPath:",
             "declAttributes": [
               "AccessControl",
               "ObjC",
@@ -10502,6 +10575,66 @@
                 "accessorKind": "_modify"
               }
             ]
+          },
+          {
+            "kind": "Function",
+            "name": "checkRecordingExist",
+            "printedName": "checkRecordingExist(sessionId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:19PlaudDeviceBasicSDK0A12FileUploaderC19checkRecordingExist9sessionIdSbSi_tF",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A12FileUploaderC19checkRecordingExist9sessionIdSbSi_tF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getDownloadedRecordingPath",
+            "printedName": "getDownloadedRecordingPath(sessionId:desiredPath:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:19PlaudDeviceBasicSDK0A12FileUploaderC26getDownloadedRecordingPath9sessionId07desiredJ0SSSi_SStF",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A12FileUploaderC26getDownloadedRecordingPath9sessionId07desiredJ0SSSi_SStF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
           },
           {
             "kind": "Function",
@@ -14925,7 +15058,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(filePath:)",
+            "printedName": "init(sessionId:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -14935,16 +15068,16 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
               }
             ],
             "declKind": "Constructor",
-            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudAudioPlayerViewController(im)initWithFilePath:",
-            "mangledName": "$s19PlaudDeviceBasicSDK0A25AudioPlayerViewControllerC8filePathACSS_tcfc",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudAudioPlayerViewController(im)initWithSessionId:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A25AudioPlayerViewControllerC9sessionIdACSi_tcfc",
             "moduleName": "PlaudDeviceBasicSDK",
-            "objc_name": "initWithFilePath:",
+            "objc_name": "initWithSessionId:",
             "declAttributes": [
               "Preconcurrency",
               "Custom",
@@ -41553,7 +41686,7 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudDomainManager.swift",
       "kind": "BooleanLiteral",
-      "offset": 1573,
+      "offset": 1524,
       "length": 4,
       "value": "true"
     },
@@ -41749,77 +41882,77 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 11010,
+      "offset": 11106,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 11059,
+      "offset": 11155,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Array",
-      "offset": 11150,
+      "offset": 11246,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 11240,
+      "offset": 11336,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 11268,
+      "offset": 11364,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 11299,
+      "offset": 11395,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 11422,
+      "offset": 11518,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 12656,
+      "offset": 12756,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 13224,
+      "offset": 13324,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 14368,
+      "offset": 14420,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 24340,
+      "offset": 25295,
       "length": 3,
       "value": "[]"
     },
@@ -42095,6 +42228,13 @@
       "offset": 2927,
       "length": 3,
       "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudFileUploader.swift",
+      "kind": "Dictionary",
+      "offset": 918,
+      "length": 3,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/basicUI\/PlaudWifiAddingPage.swift",

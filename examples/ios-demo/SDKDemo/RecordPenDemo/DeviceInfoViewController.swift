@@ -149,19 +149,19 @@ import UIKit
     private lazy var wifiSettingButton = createActionButton(title: NSLocalizedString("device.action.wifi_setting", comment: ""))
 
     // New audio player button
-    private lazy var audioPlayerButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("device.action.audio_player", comment: ""), for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
-        button.layer.cornerRadius = 8
-        button.backgroundColor = .white
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0).cgColor
-        button.setTitleColor(UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0), for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        button.addTarget(self, action: #selector(audioPlayerButtonTapped), for: .touchUpInside)
-        return button
-    }()
+//    private lazy var audioPlayerButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle(NSLocalizedString("device.action.audio_player", comment: ""), for: .normal)
+//        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+//        button.layer.cornerRadius = 8
+//        button.backgroundColor = .white
+//        button.layer.borderWidth = 1
+//        button.layer.borderColor = UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0).cgColor
+//        button.setTitleColor(UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0), for: .normal)
+//        button.heightAnchor.constraint(equalToConstant: 44).isActive = true
+//        button.addTarget(self, action: #selector(audioPlayerButtonTapped), for: .touchUpInside)
+//        return button
+//    }()
 
     // MARK: - Initialization
 
@@ -398,8 +398,8 @@ import UIKit
             goWifiSettingPage(button: sender)
         case downloadTranscodedButton:
             downloadTranscoded(button: sender)
-        case audioPlayerButton:
-            audioPlayerButtonTapped()
+//        case audioPlayerButton:
+//            audioPlayerButtonTapped()
         default:
             break
         }
@@ -420,7 +420,7 @@ import UIKit
         deviceAgent.getFileList(startSessionId: 0)
     }
 
-    @objc private func     goWifiSettingPage(button _: UIButton) {
+    @objc private func goWifiSettingPage(button _: UIButton) {
         let vc = PlaudWifiSettingPage()
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -442,19 +442,13 @@ import UIKit
                 return
             }
 
-            let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            let fileName = "\(bleFile.sessionId)_download"
-
-            let targetPath = (documentsPath as NSString).appendingPathComponent(fileName)
-
             // Show progress bar popup
             self.progressAlert = ProgressAlertController(title: NSLocalizedString("device.progress.downloading_transcoded", comment: ""))
             self.progressAlert?.onCancel = { [weak self] in
                 self?.deviceAgent.stopDownloadFile()
             }
             self.progressAlert?.onUpload = { [weak self] in
-                let filePath = "\(targetPath).mp3"
-                if FileManager.default.fileExists(atPath: filePath) {
+                if PlaudFileUploader.shared.checkRecordingExist(sessionId: bleFile.sessionId) {
                     // First close current download progress popup
                     self?.progressAlert?.dismiss(animated: true) {
                         // Show upload progress popup after download popup is closed
@@ -504,7 +498,10 @@ import UIKit
             }
             self.present(self.progressAlert!, animated: true)
 
-            self.deviceAgent.downloadFile(sessionId: bleFile.sessionId, outputPath: targetPath)
+            let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            let fileName = "\(bleFile.sessionId)_download"
+            let desiredTargetPath = (documentsPath as NSString).appendingPathComponent(fileName)
+            self.deviceAgent.downloadFile(sessionId: bleFile.sessionId, desiredOutputPath: desiredTargetPath)
         }
     }
 
@@ -791,25 +788,6 @@ import UIKit
         present(alert, animated: true)
     }
 
-    @objc private func audioPlayerButtonTapped() {
-        // Get documents directory path
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-
-        // Show file selection dialog
-        let title = NSLocalizedString("device.dialog.file_count", comment: "").replacingOccurrences(of: "{count}", with: "\(recordList.count)")
-        showDownloadedSelectDialog(title: title) { [weak self] _, path in
-            let filePath = "\(path).mp3"
-
-            // Check if file exists
-            if FileManager.default.fileExists(atPath: filePath) {
-                let vc = PlaudAudioPlayerViewController(filePath: filePath)
-                self?.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                self?.showToastWithMessage(NSLocalizedString("device.error.audio_file_not_found", comment: ""))
-            }
-        }
-    }
-
     // Add file size formatting method
     private func formatFileSize(_ bytes: Int) -> String {
         let kb = 1024.0
@@ -956,11 +934,11 @@ extension DeviceInfoViewController: PlaudDeviceAgentProtocol {
 
     func bleDownloadFileStop() {}
 
-    func bleDownloadFile(sessionId: Int, outputPath: String, status: Int, progress: Int, tips: String) {
-        debugPrint("DeviceInfoViewController - bleDownloadFile sessionId=\(sessionId) outputPath=\(outputPath) status=\(status) progress=\(progress) tips=\(tips)")
+    func bleDownloadFile(sessionId: Int, desiredOutputPath: String, status: Int, progress: Int, tips: String) {
+        debugPrint("DeviceInfoViewController - bleDownloadFile sessionId=\(sessionId) outputPath=\(desiredOutputPath) status=\(status) progress=\(progress) tips=\(tips)")
 
         if progress == 100 {
-            downloadedFiles["\(sessionId)"] = outputPath
+            downloadedFiles["\(sessionId)"] = desiredOutputPath
         }
 
         // Update progress bar
@@ -969,9 +947,8 @@ extension DeviceInfoViewController: PlaudDeviceAgentProtocol {
             if progress == 100 {
                 self?.progressAlert?.setCancelButtonTitle(NSLocalizedString("device.action.view", comment: ""))
                 self?.progressAlert?.onCancel = { [weak self] in
-                    let filePath = "\(outputPath).mp3"
-                    if FileManager.default.fileExists(atPath: filePath) {
-                        let vc = PlaudAudioPlayerViewController(filePath: filePath)
+                    if PlaudFileUploader.shared.checkRecordingExist(sessionId: sessionId) {
+                        let vc = PlaudAudioPlayerViewController(sessionId: sessionId)
                         self?.navigationController?.pushViewController(vc, animated: true)
                     } else {
                         self?.showToastWithMessage(NSLocalizedString("device.error.audio_file_not_found", comment: ""))

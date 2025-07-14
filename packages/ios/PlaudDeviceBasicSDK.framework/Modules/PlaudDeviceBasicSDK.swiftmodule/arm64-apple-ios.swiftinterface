@@ -183,7 +183,7 @@ extension AVFAudio.AVAudioSession : PlaudDeviceBasicSDK.Session {
   @objc optional func bleDataComplete()
   @objc optional func bleDecodeFail(start: Swift.Int)
   @objc optional func bleSyncFileStop()
-  @objc optional func bleDownloadFile(sessionId: Swift.Int, outputPath: Swift.String, status: Swift.Int, progress: Swift.Int, tips: Swift.String)
+  @objc optional func bleDownloadFile(sessionId: Swift.Int, desiredOutputPath: Swift.String, status: Swift.Int, progress: Swift.Int, tips: Swift.String)
   @objc optional func bleDownloadFileStop()
   @objc optional func bleDeleteFile(sessionId: Swift.Int, status: Swift.Int)
   @objc optional func bleDepair(_ status: Swift.Int)
@@ -195,6 +195,7 @@ extension AVFAudio.AVAudioSession : PlaudDeviceBasicSDK.Session {
   @objc optional func onWifiSyncWillStart(seconds: Swift.Int)
   @objc optional func onWifiSyncTestResult(index: Swift.UInt32, result: Swift.Int, rawCode: Swift.Int)
   @objc optional func onWifiSyncUrl(url: Swift.String)
+  @objc optional func onSdkFetchPermissionResult(pass: Swift.Bool, tips: Swift.String)
   @objc optional func onSdkCheckPermissionResult(pass: Swift.Bool, tips: Swift.String)
   @objc optional func onSdkCheckResourceResult(pass: Swift.Bool, tips: Swift.String)
   @objc optional func onWifiSyncEnabled(_ value: Swift.Int)
@@ -214,6 +215,7 @@ extension AVFAudio.AVAudioSession : PlaudDeviceBasicSDK.Session {
   @objc public func setDeviceBinding(token: Swift.String)
   @objc public func startScan()
   @objc public func stopScan()
+  @objc public func connectBleDevice(bleDevice: PenBleSDK.BleDevice, deviceToken: Swift.String)
   @objc public func connectBleDevice(bleDevice: PenBleSDK.BleDevice)
   @objc public func disconnect()
   @objc public func tryReconnectLastDevice()
@@ -238,7 +240,7 @@ extension AVFAudio.AVAudioSession : PlaudDeviceBasicSDK.Session {
   @objc public func getFileList(startSessionId: Swift.Int)
   @objc public func getFile(sessionId: Swift.Int)
   @objc public func syncFile(sessionId: Swift.Int, start: Swift.Int, end: Swift.Int)
-  @objc public func downloadFile(sessionId: Swift.Int, outputPath: Swift.String)
+  @objc public func downloadFile(sessionId: Swift.Int, desiredOutputPath: Swift.String)
   @objc public func stopDownloadFile()
   @objc public func stopSyncFile()
   @objc public func deleteFile(sessionId: Swift.Int)
@@ -340,6 +342,8 @@ extension UIKit.UIColor {
 @_hasMissingDesignatedInitializers public class PlaudFileUploader {
   public static let shared: PlaudDeviceBasicSDK.PlaudFileUploader
   public var device: PenBleSDK.BleDevice?
+  public func checkRecordingExist(sessionId: Swift.Int) -> Swift.Bool
+  public func getDownloadedRecordingPath(sessionId: Swift.Int, desiredPath: Swift.String) -> Swift.String
   public func uploadRecording(sn: Swift.String, sessionId: Swift.Int, onProgress: @escaping (Swift.Double) -> Swift.Void, completion: @escaping (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void)
   public func bindDevice(ownerId: Swift.String, sn: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void)
   public func unbindDevice(ownerId: Swift.String, sn: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void)
@@ -367,7 +371,7 @@ extension UIKit.UIDevice {
   @_Concurrency.MainActor @preconcurrency public static func getOSInfo() -> Swift.String
 }
 @_hasMissingDesignatedInitializers @objc @_Concurrency.MainActor @preconcurrency public class PlaudAudioPlayerViewController : UIKit.UIViewController, AVFAudio.AVAudioPlayerDelegate {
-  @objc @_Concurrency.MainActor @preconcurrency public init(filePath: Swift.String)
+  @objc @_Concurrency.MainActor @preconcurrency public init(sessionId: Swift.Int)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency @objc public func audioPlayerDidFinishPlaying(_: AVFAudio.AVAudioPlayer, successfully flag: Swift.Bool)

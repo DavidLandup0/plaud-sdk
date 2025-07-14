@@ -99,7 +99,9 @@
 "file_downloading" = "Stream file downloading in progress";
 "file_transcoding" = "Transcoding...";
 "file_download_complete" = "Download file complete";
-"file_transcode_error" = "Transcoding error"; 
+"file_transcode_error" = "Transcoding error";
+"file_transcode_error_no_permission" = "Transcoding error, no permission";
+
 
 // Workflow Status
 "pending" = "Pending";
