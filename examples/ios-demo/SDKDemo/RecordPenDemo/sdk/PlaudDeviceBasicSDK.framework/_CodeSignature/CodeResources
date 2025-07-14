@@ -6,7 +6,7 @@
 	<dict>
 		<key>Frameworks/FirebaseAnalytics.framework/FirebaseAnalytics</key>
 		<data>
-		Mo1gDYASZmRT4ct+TvtJycXexUM=
+		1OSoZCeehcaX11fbsg50yCAocWE=
 		</data>
 		<key>Frameworks/FirebaseAnalytics.framework/Info.plist</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		eNQYmtT1cuTkL8zqDDdHN/b3Trw=
+		lSQlI5OTWyQGV+JnvrMK5+AJS5Q=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
@@ -134,7 +134,7 @@
 		</data>
 		<key>PenBleSDK.framework/PenBleSDK</key>
 		<data>
-		7HM8fX07dsPYX6myHb+HCyvOgXw=
+		abzFLV2ln2ZQ9eZyZD7L+3Ow/YI=
 		</data>
 		<key>PenBleSDK.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -173,11 +173,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Mo1gDYASZmRT4ct+TvtJycXexUM=
+			1OSoZCeehcaX11fbsg50yCAocWE=
 			</data>
 			<key>hash2</key>
 			<data>
-			sFv6xnSAUN2Y498s2A710Jw2sQpjH4Pd9c7mnoXlEFM=
+			ZbYKQcDFsR7YCjuuS0+222da7ty+5RWGH7RHNtkZ5Mo=
 			</data>
 		</dict>
 		<key>Frameworks/FirebaseAnalytics.framework/Info.plist</key>
@@ -239,11 +239,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			eNQYmtT1cuTkL8zqDDdHN/b3Trw=
+			lSQlI5OTWyQGV+JnvrMK5+AJS5Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			iiNOVlIFzpFWF8M8vVOgUa0Cmtn7o9CQF5VQ/vJ9CFk=
+			IuBhzuk6olPWYhKRKRYokPNfKkkHSEmEaiqIoCdI/S4=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
@@ -514,11 +514,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7HM8fX07dsPYX6myHb+HCyvOgXw=
+			abzFLV2ln2ZQ9eZyZD7L+3Ow/YI=
 			</data>
 			<key>hash2</key>
 			<data>
-			sGki/lKoitKkfd/3Tvyz5FNnD23JZOBNx29eSGy/oNM=
+			KmrdXeXQpdE1sMDR9LrCd54HyvnSKJAaOif+HDtMKQE=
 			</data>
 		</dict>
 		<key>PenBleSDK.framework/_CodeSignature/CodeResources</key>
