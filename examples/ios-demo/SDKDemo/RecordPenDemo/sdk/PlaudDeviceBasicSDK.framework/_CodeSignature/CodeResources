@@ -4,18 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Frameworks/FirebaseAnalytics.framework/FirebaseAnalytics</key>
-		<data>
-		olgKKmSSAy+D6WDH9zvv3cdfVcU=
-		</data>
-		<key>Frameworks/FirebaseAnalytics.framework/Info.plist</key>
-		<data>
-		dhPRzMxHPLDdCapQcivDF55K7XY=
-		</data>
-		<key>Frameworks/FirebaseAnalytics.framework/_CodeSignature/CodeResources</key>
-		<data>
-		Y0bNVFP9mrkmTk4qc1TDVlq7mrs=
-		</data>
 		<key>Headers/PlaudDeviceBasicSDK-Swift.h</key>
 		<data>
 		e5RUoRnjk7sZifiPwWgeV2H6gV8=
@@ -89,39 +77,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Frameworks/FirebaseAnalytics.framework/FirebaseAnalytics</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			olgKKmSSAy+D6WDH9zvv3cdfVcU=
-			</data>
-			<key>hash2</key>
-			<data>
-			7XKFi7F0PWqJuPkKIODLSVXIcktSBxn8RUteuBtZZ0M=
-			</data>
-		</dict>
-		<key>Frameworks/FirebaseAnalytics.framework/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dhPRzMxHPLDdCapQcivDF55K7XY=
-			</data>
-			<key>hash2</key>
-			<data>
-			mf5L1JCrI0Brxc0GfBWbysHO0OOZNK/0coqFGBiOtb4=
-			</data>
-		</dict>
-		<key>Frameworks/FirebaseAnalytics.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Y0bNVFP9mrkmTk4qc1TDVlq7mrs=
-			</data>
-			<key>hash2</key>
-			<data>
-			2ogu3QOE7AySRaA81wjhzGBoZMbi1Ke0/vWj/z0NvrU=
-			</data>
-		</dict>
 		<key>Headers/PlaudDeviceBasicSDK-Swift.h</key>
 		<dict>
 			<key>hash</key>
