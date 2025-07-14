@@ -316,7 +316,7 @@
     // No need for real-time refresh as we will restart the app
 }
 
-- (void)onSdkFetchPermissionResultWithPass:(BOOL)pass tips:(NSString *)tips {
+- (void)onSdkFetchPermissionResultWithPass:(BOOL)pass tips:(NSString *)tips {   
     NSLog(@"onSdkFetchPermissionResultWithPass pass=%@ tips=%@", pass ? @"YES":@"NO", tips);
 }
 
