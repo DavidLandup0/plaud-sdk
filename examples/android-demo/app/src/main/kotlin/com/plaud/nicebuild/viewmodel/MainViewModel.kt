@@ -80,10 +80,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val sn = currentDevice.value?.serialNumber ?: "Unknown"
-                val apiToken = NiceBuildSdk.apiToken ?: throw IllegalStateException("SDK Token not available")
 
                 val fileId = s3UploadManager.uploadFile(
-                    apiToken = apiToken,
                     filePath = opusFile.absolutePath,
                     fileSize = opusFile.length(),
                     fileType = "opus",
