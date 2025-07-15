@@ -26168,6 +26168,7 @@
             "protocolReq": true,
             "objc_name": "bleAppKeyStateWithResult:",
             "declAttributes": [
+              "Optional",
               "ObjC",
               "RawDocComment"
             ],
@@ -29235,11 +29236,13 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:19PlaudDeviceBasicSDK0aB5AgentC19clearSDKCredentialsyyF",
+            "usr": "c:@CM@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)clearSDKCredentials",
             "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC19clearSDKCredentialsyyF",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
+              "Dynamic",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isFromExtension": true,
@@ -42841,77 +42844,77 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 11106,
+      "offset": 11115,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 11155,
+      "offset": 11164,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Array",
-      "offset": 11246,
+      "offset": 11255,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 11336,
+      "offset": 11345,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 11364,
+      "offset": 11373,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 11395,
+      "offset": 11404,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 11518,
+      "offset": 11527,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 12756,
+      "offset": 12765,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 13324,
+      "offset": 13333,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 14420,
+      "offset": 14429,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 25295,
+      "offset": 25304,
       "length": 3,
       "value": "[]"
     },

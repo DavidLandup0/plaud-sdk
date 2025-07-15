@@ -293,7 +293,7 @@ public enum WorkflowParsingError : Swift.Error, Foundation.LocalizedError {
   }
 }
 extension PlaudDeviceBasicSDK.PlaudDeviceAgent {
-  public func clearSDKCredentials()
+  @objc dynamic public func clearSDKCredentials()
 }
 @_hasMissingDesignatedInitializers @objc @_Concurrency.MainActor @preconcurrency public class PlaudWifiAddingPage : UIKit.UIViewController {
   @_Concurrency.MainActor @preconcurrency public var completion: ((PlaudDeviceBasicSDK.PlaudWifiInfo?) -> Swift.Void)?
@@ -723,7 +723,7 @@ extension Swift.Array {
   @objc deinit
 }
 @objc public protocol PlaudDeviceAgentProtocol {
-  @objc func bleAppKeyState(result: Swift.Int)
+  @objc optional func bleAppKeyState(result: Swift.Int)
   @objc func blePenState(state: Swift.Int, privacy: Swift.Int, keyState: Swift.Int, uDisk: Swift.Int, findMyToken: Swift.Int, hasSndpKey: Swift.Int, deviceAccessToken: Swift.Int)
   @objc optional func bleScanResult(bleDevices: [PenBleSDK.BleDevice])
   @objc optional func bleScanOverTime()

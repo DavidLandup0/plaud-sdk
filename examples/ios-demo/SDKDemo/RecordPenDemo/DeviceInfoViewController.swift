@@ -1084,10 +1084,6 @@ extension DeviceInfoViewController: PlaudDeviceAgentProtocol {
         showToastWithMessage(tips)
     }
 
-    func bleAppKeyState(result: Int) {
-        debugPrint("DeviceInfoViewController - bleAppKeyState: result=\(result)")
-    }
-
     func bleScanResult(bleDevices: [PenBleSDK.BleDevice]) {
         debugPrint("DeviceInfoViewController - bleScanResult: devices=\(bleDevices)")
     }

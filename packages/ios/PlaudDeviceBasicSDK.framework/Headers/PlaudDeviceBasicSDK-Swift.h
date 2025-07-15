@@ -508,6 +508,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)onBinaryFileEndWithResult:(NSInteger)result;
 @end
 
+@interface PlaudDeviceAgent (SWIFT_EXTENSION(PlaudDeviceBasicSDK))
+/// Clears the stored SDK credentials (AppKey and AppSecret) from UserDefaults
+- (void)clearSDKCredentials;
+@end
+
 @class BleFile;
 @class NSData;
 @interface PlaudDeviceAgent (SWIFT_EXTENSION(PlaudDeviceBasicSDK)) <BleAgentProtocol>
@@ -594,10 +599,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 
 SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 @protocol PlaudDeviceAgentProtocol
+@optional
 /// AppKey verification result
 /// \param result Verification result 0 temporary 1 success 2 failure
 ///
 - (void)bleAppKeyStateWithResult:(NSInteger)result;
+@required
 /// Return status
 /// \param state Customized according to project (4099(0x00001003) indicates recorder is recording, 1 seems to be recording)
 ///

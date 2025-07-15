@@ -133,6 +133,7 @@ import UIKit
         let language = PLLanguageType(rawValue: sender.tag) ?? .english
         PLLanguageManager.shared().switch(language) { [weak self] in
             self?.updateButtonStyles()
+            self?.delegate?.languageDidChange()
             self?.dismiss(animated: true)
         }
     }

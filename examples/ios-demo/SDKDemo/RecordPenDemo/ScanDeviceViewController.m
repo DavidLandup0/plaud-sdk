@@ -207,11 +207,19 @@
 @property (nonatomic, strong) UIView *toastView;
 @property (nonatomic, strong) UILabel *toastLabel;
 @property (nonatomic, strong) BleDevice* currentDevice;
+@property (nonatomic, assign)  BOOL autoRefresh;
 @end
 
 
 @implementation ScanDeviceViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _autoRefresh = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -253,8 +261,6 @@
     // Parent return, reset delegate
     self.deviceAgent = [PlaudDeviceAgent shared];
     self.deviceAgent.delegate = self;
-    
-    [self startScanning];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -437,6 +443,13 @@
     [self startScanning];
 }
 
+-(void)onSdkFetchPermissionResultWithPass:(BOOL)pass tips:(NSString *)tips {
+    if (pass && _autoRefresh) {
+        [self startScanning];
+        _autoRefresh = NO;
+    }
+}
+
 - (void)bleScanResultWithBleDevices:(NSArray<BleDevice *> *)bleDevices {
     [self.devices removeAllObjects];
     
@@ -455,12 +468,6 @@
     [self.devices addObjectsFromArray:sortedDevices];
     [self.tableView reloadData];
 }
-
-- (void)bleAppKeyStateWithResult:(NSInteger)result{
-}
-
-
-
 
 - (void)bleConnectStateWithState:(NSInteger)state {
     NSString *message = @"";

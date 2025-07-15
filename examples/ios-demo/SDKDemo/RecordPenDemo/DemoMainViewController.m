@@ -310,14 +310,13 @@
     [self presentViewController:languageVC animated:YES completion:nil];
 }
 
-#pragma mark - PLLanguageSelectionDelegate
-
-- (void)languageDidChange {
-    // No need for real-time refresh as we will restart the app
+- (void)onSdkFetchPermissionResultWithPass:(BOOL)pass tips:(NSString *)tips {
+    NSLog(@"onSdkFetchPermissionResultWithPass pass=%@ tips=%@", pass ? @"YES":@"NO", tips);
 }
 
-- (void)onSdkFetchPermissionResultWithPass:(BOOL)pass tips:(NSString *)tips {   
-    NSLog(@"onSdkFetchPermissionResultWithPass pass=%@ tips=%@", pass ? @"YES":@"NO", tips);
+#pragma mark - PLLanguageSelectionDelegate
+- (void)languageDidChange {
+    [self.deviceAgent clearSDKCredentials];
 }
 
 @end
