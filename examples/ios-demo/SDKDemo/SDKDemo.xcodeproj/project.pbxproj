@@ -32,6 +32,7 @@
 		B682D70E2DC0C34300EBF60D /* DemoMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B682D70D2DC0C34300EBF60D /* DemoMainViewController.m */; };
 		B682D7262DC0EFF200EBF60D /* ScanDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B682D7252DC0EFF200EBF60D /* ScanDeviceViewController.m */; };
 		B6B70A902DCA3DF700180258 /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B70A8F2DCA3DF700180258 /* DeviceInfoViewController.swift */; };
+		B6C3053E2E27A66D00AFA2AA /* plaud_note_pin_guide.gif in Resources */ = {isa = PBXBuildFile; fileRef = B6C3053D2E27A66D00AFA2AA /* plaud_note_pin_guide.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +88,7 @@
 		B682D7242DC0EFF200EBF60D /* ScanDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanDeviceViewController.h; sourceTree = "<group>"; };
 		B682D7252DC0EFF200EBF60D /* ScanDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanDeviceViewController.m; sourceTree = "<group>"; };
 		B6B70A8F2DCA3DF700180258 /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
+		B6C3053D2E27A66D00AFA2AA /* plaud_note_pin_guide.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = plaud_note_pin_guide.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 		B667A29C2DD20B96006985FD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B6C3053D2E27A66D00AFA2AA /* plaud_note_pin_guide.gif */,
 				B66EB0CA2E1696AF006E72CA /* UploadProgressAlertController.swift */,
 				B63EB6C62DFC207800CE9463 /* AppKeyInputViewController.h */,
 				B63EB6C72DFC207800CE9463 /* AppKeyInputViewController.m */,
@@ -261,6 +264,7 @@
 				B63EB7092DFC28BD00CE9463 /* PlaudDeviceBasicSDK.bundle in Resources */,
 				25E6416622A60FD900302FAA /* LaunchScreen.storyboard in Resources */,
 				25E6416322A60FD900302FAA /* Assets.xcassets in Resources */,
+				B6C3053E2E27A66D00AFA2AA /* plaud_note_pin_guide.gif in Resources */,
 				25E6416122A60FD600302FAA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
