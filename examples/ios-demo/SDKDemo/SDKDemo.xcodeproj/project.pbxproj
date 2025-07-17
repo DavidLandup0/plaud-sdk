@@ -33,6 +33,7 @@
 		B682D7262DC0EFF200EBF60D /* ScanDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B682D7252DC0EFF200EBF60D /* ScanDeviceViewController.m */; };
 		B6B70A902DCA3DF700180258 /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B70A8F2DCA3DF700180258 /* DeviceInfoViewController.swift */; };
 		B6C3053E2E27A66D00AFA2AA /* plaud_note_pin_guide.gif in Resources */ = {isa = PBXBuildFile; fileRef = B6C3053D2E27A66D00AFA2AA /* plaud_note_pin_guide.gif */; };
+		B63B5AB72DBF1CA50090C52B /* PlaudDeviceBasicSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B63B5AB42DBF1C920090C52B /* PlaudDeviceBasicSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,7 +43,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B63B5AB62DBF1CA50090C52B /* PlaudDeviceBasicSDK.framework in CopyFiles */,
 				B6562C4C2DBE3DEC0083E78A /* PenBleSDK.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +99,7 @@
 				25172F9627D5FCEA00E84DCA /* SystemConfiguration.framework in Frameworks */,
 				25172F9227D5F98100E84DCA /* ExternalAccessory.framework in Frameworks */,
 				25E82F58269EE7BD0027C919 /* NetworkExtension.framework in Frameworks */,
+				B63B5AB72DBF1CA50090C52B /* PlaudDeviceBasicSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
