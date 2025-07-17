@@ -42,9 +42,9 @@
 		</dict>
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>${BLUETOOTH_PERMISSION_DESCRIPTION}</string>
+	<string>Bluetooth access is needed to connect and control recording pen devices for audio recording management and file transfer</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>${BLUETOOTH_PERMISSION_DESCRIPTION}</string>
+	<string>Bluetooth access is needed to connect and control recording pen devices for audio recording management and file transfer</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
