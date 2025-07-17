@@ -22,27 +22,27 @@
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		Y2LiY1T6ZKdh4uI+qFq+uVjo5uA=
+		PypXE2obFWCOg5+QTklUzZpBefk=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		M9pE9KKSZHYJNAtUdONKZZV7qEU=
+		aE9IjA8vcA5Zdm9yUD+I1uKpxOY=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		AxEVYhNDFeQBfs0XBpBwfLSIVR8=
+		tkMFxgg7Haz2NQvd3szf1baJ5jk=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		bedXSM968QHnKTpgF7mgzSMzdYw=
+		X9l1rTYOa23rDUNcvr+jEpIIbaU=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		AxEVYhNDFeQBfs0XBpBwfLSIVR8=
+		tkMFxgg7Haz2NQvd3szf1baJ5jk=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		vyVM+o+Ijvc/5qWJR8zEgsSxqL8=
+		k/OJT9ZK+ZNuHgGF57uEblpl3tc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -114,66 +114,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Y2LiY1T6ZKdh4uI+qFq+uVjo5uA=
+			PypXE2obFWCOg5+QTklUzZpBefk=
 			</data>
 			<key>hash2</key>
 			<data>
-			pnbruVftVSaeBACAtQBzEXXduT/+isUZ9qUFFP0Yjao=
+			j4SHNgx6XYUiEx9PhPlzc6pGtqo2At0X97zdkXaQnng=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			M9pE9KKSZHYJNAtUdONKZZV7qEU=
+			aE9IjA8vcA5Zdm9yUD+I1uKpxOY=
 			</data>
 			<key>hash2</key>
 			<data>
-			hRZtg6fsUCSifo58km/QZYPW7DKIg+yhPAagT11Rg64=
+			pd23piLCzVzBx01fTiJtLQnKWJHe9WBkuNbPsy2dvpM=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			AxEVYhNDFeQBfs0XBpBwfLSIVR8=
+			tkMFxgg7Haz2NQvd3szf1baJ5jk=
 			</data>
 			<key>hash2</key>
 			<data>
-			07tIxTk4s6gvEZjxSZ8iD64WzHCSzr/4hhEJENQNGL4=
+			MOgiIdwaOU8ZCH1LiYi9KI+/EJpagfYdT59sV3Z9qU8=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bedXSM968QHnKTpgF7mgzSMzdYw=
+			X9l1rTYOa23rDUNcvr+jEpIIbaU=
 			</data>
 			<key>hash2</key>
 			<data>
-			QX33wW8WkWtbiBwuG24CwsA4GKiIW8nz28C12W3dmiw=
+			vqm+mPUbTc9Dd09ndl8p5AqqqT4SWoTcwi+OhcwX3DY=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			AxEVYhNDFeQBfs0XBpBwfLSIVR8=
+			tkMFxgg7Haz2NQvd3szf1baJ5jk=
 			</data>
 			<key>hash2</key>
 			<data>
-			07tIxTk4s6gvEZjxSZ8iD64WzHCSzr/4hhEJENQNGL4=
+			MOgiIdwaOU8ZCH1LiYi9KI+/EJpagfYdT59sV3Z9qU8=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vyVM+o+Ijvc/5qWJR8zEgsSxqL8=
+			k/OJT9ZK+ZNuHgGF57uEblpl3tc=
 			</data>
 			<key>hash2</key>
 			<data>
-			L/nLr/2xG0qeJYnHBS6XWlKq2Q2WmTGMoY8ZTMgKL6w=
+			NjSjauyAllgSYJcCYGDw1HaCrCVkqCRmsFrYKSc47/4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
