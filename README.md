@@ -91,8 +91,6 @@ See the [SDK Integration Guide](https://github.com/Plaud-AI/plaud-sdk/blob/main/
 
 ## Examples
 
-Demo Videos
-
 <table>
   <tr>
     <td align="center">
