@@ -43,99 +43,184 @@
     self.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    // Container View
+    // Modern container with enhanced shadow and styling
     self.containerView = [[UIView alloc] init];
     self.containerView.backgroundColor = [UIColor whiteColor];
-    self.containerView.layer.cornerRadius = 12;
-    self.containerView.layer.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.1].CGColor;
-    self.containerView.layer.shadowOffset = CGSizeMake(0, 2);
+    self.containerView.layer.cornerRadius = 16;
+    
+    // Enhanced shadow with multiple layers for depth
+    self.containerView.layer.shadowColor = [UIColor colorWithRed:0.15 green:0.25 blue:0.4 alpha:0.08].CGColor;
+    self.containerView.layer.shadowOffset = CGSizeMake(0, 4);
     self.containerView.layer.shadowOpacity = 1;
-    self.containerView.layer.shadowRadius = 4;
+    self.containerView.layer.shadowRadius = 12;
+    
+    // Add subtle border
+    self.containerView.layer.borderWidth = 0.5;
+    self.containerView.layer.borderColor = [UIColor colorWithRed:0.9 green:0.92 blue:0.95 alpha:1.0].CGColor;
+    
     self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:self.containerView];
     
-    // Name Label
+    // Status indicator background
+    UIView *statusBar = [[UIView alloc] init];
+    statusBar.layer.cornerRadius = 16;
+    statusBar.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
+    statusBar.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.containerView addSubview:statusBar];
+    
+    // Device icon container
+    UIView *deviceIconContainer = [[UIView alloc] init];
+    deviceIconContainer.backgroundColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:0.1];
+    deviceIconContainer.layer.cornerRadius = 24;
+    deviceIconContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.containerView addSubview:deviceIconContainer];
+    
+    // Device icon
+    UIImageView *deviceIcon = [[UIImageView alloc] init];
+    deviceIcon.image = [UIImage systemImageNamed:@"headphones"];
+    deviceIcon.tintColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0];
+    deviceIcon.translatesAutoresizingMaskIntoConstraints = NO;
+    [deviceIconContainer addSubview:deviceIcon];
+    
+    // Name Label with improved typography
     self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.font = [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold];
-    self.nameLabel.textColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
+    self.nameLabel.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
     self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.containerView addSubview:self.nameLabel];
     
-    // Info Label
+    // Info Label with subtle styling
     self.infoLabel = [[UILabel alloc] init];
-    self.infoLabel.font = [UIFont systemFontOfSize:14];
-    self.infoLabel.textColor = [UIColor colorWithRed:0.45 green:0.45 blue:0.45 alpha:1.0];
+    self.infoLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
+    self.infoLabel.textColor = [UIColor colorWithRed:0.4 green:0.5 blue:0.6 alpha:1.0];
     self.infoLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.containerView addSubview:self.infoLabel];
     
-    // SN Label
+    // SN Label with improved readability
     self.snLabel = [[UILabel alloc] init];
-    self.snLabel.font = [UIFont systemFontOfSize:13];
-    self.snLabel.textColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0];
+    self.snLabel.font = [UIFont monospacedSystemFontOfSize:12 weight:UIFontWeightMedium];
+    self.snLabel.textColor = [UIColor colorWithRed:0.5 green:0.55 blue:0.65 alpha:1.0];
     self.snLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.snLabel.numberOfLines = 1;
     self.snLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     [self.containerView addSubview:self.snLabel];
     
+    // Bind Status with pill-shaped container
+    UIView *bindStatusContainer = [[UIView alloc] init];
+    bindStatusContainer.layer.cornerRadius = 12;
+    bindStatusContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.containerView addSubview:bindStatusContainer];
+    
     // Bind Status Label
     self.bindStatusLabel = [[UILabel alloc] init];
-    self.bindStatusLabel.font = [UIFont systemFontOfSize:13];
-    self.bindStatusLabel.textColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0];
+    self.bindStatusLabel.font = [UIFont systemFontOfSize:11 weight:UIFontWeightSemibold];
     self.bindStatusLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.containerView addSubview:self.bindStatusLabel];
+    [bindStatusContainer addSubview:self.bindStatusLabel];
     
-    // Bind Status Icon View
+    // Bind Status Icon View (dot indicator)
     self.bindStatusIconView = [[UIView alloc] init];
     self.bindStatusIconView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.bindStatusIconView.layer.cornerRadius = 5;
-    [self.containerView addSubview:self.bindStatusIconView];
+    self.bindStatusIconView.layer.cornerRadius = 4;
+    [bindStatusContainer addSubview:self.bindStatusIconView];
     
-    // Connect Button
+    // Modern Connect Button
     self.connectButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.connectButton setTitle:LocalizedString(@"common.connect") forState:UIControlStateNormal];
-    [self.connectButton setTitleColor:[UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-    self.connectButton.backgroundColor = [UIColor whiteColor];
-    self.connectButton.layer.cornerRadius = 8;
-    self.connectButton.layer.borderWidth = 1.5;
-    self.connectButton.layer.borderColor = [UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:1.0].CGColor;
-    self.connectButton.titleLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightSemibold];
+    [self.connectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    // Gradient background for button
+    CAGradientLayer *buttonGradient = [CAGradientLayer layer];
+    buttonGradient.colors = @[
+        (id)[UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0].CGColor,
+        (id)[UIColor colorWithRed:0.15 green:0.43 blue:0.86 alpha:1.0].CGColor
+    ];
+    buttonGradient.startPoint = CGPointMake(0, 0);
+    buttonGradient.endPoint = CGPointMake(1, 0);
+    buttonGradient.cornerRadius = 12;
+    
+    self.connectButton.layer.cornerRadius = 12;
+    self.connectButton.layer.shadowColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:0.3].CGColor;
+    self.connectButton.layer.shadowOffset = CGSizeMake(0, 3);
+    self.connectButton.layer.shadowOpacity = 1;
+    self.connectButton.layer.shadowRadius = 6;
+    
+    self.connectButton.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
     self.connectButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.connectButton addTarget:self action:@selector(connectButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.containerView addSubview:self.connectButton];
     
+    // Store gradient layer reference to update frame later
+    [self.connectButton.layer insertSublayer:buttonGradient atIndex:0];
+    
     [NSLayoutConstraint activateConstraints:@[
-        [self.containerView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:8],
-        [self.containerView.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:16],
-        [self.containerView.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-16],
-        [self.containerView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-8],
+        // Container constraints with improved margins
+        [self.containerView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:12],
+        [self.containerView.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:20],
+        [self.containerView.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-20],
+        [self.containerView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-12],
         
-        [self.nameLabel.topAnchor constraintEqualToAnchor:self.containerView.topAnchor constant:16],
-        [self.nameLabel.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:16],
-        [self.nameLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.connectButton.leadingAnchor constant:-16],
+        // Device icon container
+        [deviceIconContainer.topAnchor constraintEqualToAnchor:self.containerView.topAnchor constant:20],
+        [deviceIconContainer.leadingAnchor constraintEqualToAnchor:self.containerView.leadingAnchor constant:20],
+        [deviceIconContainer.widthAnchor constraintEqualToConstant:48],
+        [deviceIconContainer.heightAnchor constraintEqualToConstant:48],
         
-        [self.infoLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:8],
+        // Device icon
+        [deviceIcon.centerXAnchor constraintEqualToAnchor:deviceIconContainer.centerXAnchor],
+        [deviceIcon.centerYAnchor constraintEqualToAnchor:deviceIconContainer.centerYAnchor],
+        [deviceIcon.widthAnchor constraintEqualToConstant:24],
+        [deviceIcon.heightAnchor constraintEqualToConstant:24],
+        
+        // Name label
+        [self.nameLabel.topAnchor constraintEqualToAnchor:deviceIconContainer.topAnchor constant:2],
+        [self.nameLabel.leadingAnchor constraintEqualToAnchor:deviceIconContainer.trailingAnchor constant:16],
+        [self.nameLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.connectButton.leadingAnchor constant:-12],
+        
+        // Info label
+        [self.infoLabel.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:4],
         [self.infoLabel.leadingAnchor constraintEqualToAnchor:self.nameLabel.leadingAnchor],
-        [self.infoLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.connectButton.leadingAnchor constant:-16],
+        [self.infoLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.connectButton.leadingAnchor constant:-12],
         
-        [self.snLabel.topAnchor constraintEqualToAnchor:self.infoLabel.bottomAnchor constant:6],
+        // SN label
+        [self.snLabel.topAnchor constraintEqualToAnchor:self.infoLabel.bottomAnchor constant:8],
         [self.snLabel.leadingAnchor constraintEqualToAnchor:self.nameLabel.leadingAnchor],
-        [self.snLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.connectButton.leadingAnchor constant:-16],
+        [self.snLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.connectButton.leadingAnchor constant:-12],
         
-        [self.bindStatusLabel.topAnchor constraintEqualToAnchor:self.snLabel.bottomAnchor constant:6],
-        [self.bindStatusLabel.leadingAnchor constraintEqualToAnchor:self.nameLabel.leadingAnchor],
-        [self.bindStatusLabel.trailingAnchor constraintLessThanOrEqualToAnchor:self.connectButton.leadingAnchor constant:-16],
-        [self.bindStatusLabel.bottomAnchor constraintLessThanOrEqualToAnchor:self.containerView.bottomAnchor constant:-16],
+        // Bind status container
+        [bindStatusContainer.topAnchor constraintEqualToAnchor:self.snLabel.bottomAnchor constant:8],
+        [bindStatusContainer.leadingAnchor constraintEqualToAnchor:self.nameLabel.leadingAnchor],
+        [bindStatusContainer.heightAnchor constraintEqualToConstant:24],
+        [bindStatusContainer.bottomAnchor constraintLessThanOrEqualToAnchor:self.containerView.bottomAnchor constant:-20],
         
-        [self.bindStatusIconView.centerYAnchor constraintEqualToAnchor:self.bindStatusLabel.centerYAnchor],
-        [self.bindStatusIconView.leadingAnchor constraintEqualToAnchor:self.bindStatusLabel.trailingAnchor constant:12],
-        [self.bindStatusIconView.widthAnchor constraintEqualToConstant:10],
-        [self.bindStatusIconView.heightAnchor constraintEqualToConstant:10],
+        // Bind status icon
+        [self.bindStatusIconView.leadingAnchor constraintEqualToAnchor:bindStatusContainer.leadingAnchor constant:8],
+        [self.bindStatusIconView.centerYAnchor constraintEqualToAnchor:bindStatusContainer.centerYAnchor],
+        [self.bindStatusIconView.widthAnchor constraintEqualToConstant:8],
+        [self.bindStatusIconView.heightAnchor constraintEqualToConstant:8],
         
+        // Bind status label
+        [self.bindStatusLabel.leadingAnchor constraintEqualToAnchor:self.bindStatusIconView.trailingAnchor constant:6],
+        [self.bindStatusLabel.centerYAnchor constraintEqualToAnchor:bindStatusContainer.centerYAnchor],
+        [self.bindStatusLabel.trailingAnchor constraintEqualToAnchor:bindStatusContainer.trailingAnchor constant:-8],
+        
+        // Connect button with improved positioning
         [self.connectButton.centerYAnchor constraintEqualToAnchor:self.containerView.centerYAnchor],
-        [self.connectButton.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor constant:-16],
-        [self.connectButton.widthAnchor constraintEqualToConstant:80],
+        [self.connectButton.trailingAnchor constraintEqualToAnchor:self.containerView.trailingAnchor constant:-20],
+        [self.connectButton.widthAnchor constraintEqualToConstant:88],
         [self.connectButton.heightAnchor constraintEqualToConstant:36]
     ]];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    // Update button gradient frame
+    if (self.connectButton.layer.sublayers.count > 0) {
+        CALayer *gradientLayer = self.connectButton.layer.sublayers.firstObject;
+        if ([gradientLayer isKindOfClass:[CAGradientLayer class]]) {
+            gradientLayer.frame = self.connectButton.bounds;
+        }
+    }
 }
 
 - (void)configureWithDevice:(BleDevice *)device controller:(ScanDeviceViewController*)controller{
@@ -144,24 +229,64 @@
     self.nameLabel.text = self.bleDevice.name;
     self.infoLabel.text = [NSString stringWithFormat:LocalizedString(@"ble.device.signal_strength"), (long)self.bleDevice.rssi];
     self.snLabel.text = [NSString stringWithFormat:LocalizedString(@"ble.device.serial_number"), self.bleDevice.serialNumber];
+    
     BOOL isUnbound = self.bleDevice.bindCode == 0;
     self.bindStatusLabel.text = isUnbound ?
         LocalizedString(@"ble.device.bind_status.unbound") :
         LocalizedString(@"ble.device.bind_status.bound");
-    self.bindStatusIconView.backgroundColor = isUnbound ?
-        [UIColor colorWithRed:39/255.0 green:174/255.0 blue:96/255.0 alpha:1.0] :
-        [UIColor clearColor];
-    self.bindStatusIconView.hidden = !isUnbound;
     
-    // Add breathing animation if device is unbound
+    // Find the bind status container
+    UIView *bindStatusContainer = self.bindStatusLabel.superview;
+    
     if (isUnbound) {
-        [self startBreathingAnimation];
+        // Unbound device - green success style
+        self.bindStatusIconView.backgroundColor = [UIColor colorWithRed:0.2 green:0.78 blue:0.35 alpha:1.0];
+        self.bindStatusLabel.textColor = [UIColor colorWithRed:0.15 green:0.6 blue:0.28 alpha:1.0];
+        bindStatusContainer.backgroundColor = [UIColor colorWithRed:0.2 green:0.78 blue:0.35 alpha:0.15];
+        
+        // Remove animations to prevent button flickering
+        [self stopBreathingAnimation];
     } else {
+        // Bound device - neutral style
+        self.bindStatusIconView.backgroundColor = [UIColor colorWithRed:0.6 green:0.65 blue:0.7 alpha:1.0];
+        self.bindStatusLabel.textColor = [UIColor colorWithRed:0.5 green:0.55 blue:0.6 alpha:1.0];
+        bindStatusContainer.backgroundColor = [UIColor colorWithRed:0.94 green:0.95 blue:0.96 alpha:1.0];
+        
+        // Stop any animations
         [self stopBreathingAnimation];
     }
     
+    self.bindStatusIconView.hidden = NO;
+    
     [self.snLabel sizeToFit];
     self.controller = controller;
+}
+
+- (void)startEnhancedBreathingAnimation {
+    // Remove any existing animations
+    [self.bindStatusIconView.layer removeAllAnimations];
+    
+    // Create pulsing animation for the icon
+    CABasicAnimation *pulseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    pulseAnimation.fromValue = @(1.0);
+    pulseAnimation.toValue = @(1.4);
+    pulseAnimation.duration = 0.8;
+    pulseAnimation.autoreverses = YES;
+    pulseAnimation.repeatCount = HUGE_VALF;
+    pulseAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    // Create opacity animation
+    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacityAnimation.fromValue = @(1.0);
+    opacityAnimation.toValue = @(0.4);
+    opacityAnimation.duration = 0.8;
+    opacityAnimation.autoreverses = YES;
+    opacityAnimation.repeatCount = HUGE_VALF;
+    opacityAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    // Add animations to layer
+    [self.bindStatusIconView.layer addAnimation:pulseAnimation forKey:@"pulse"];
+    [self.bindStatusIconView.layer addAnimation:opacityAnimation forKey:@"breathe"];
 }
 
 - (void)connectButtonAction {
@@ -262,20 +387,38 @@
     [self stopScanning];
 }
 
-- (void)updateTitleForGuideView:(BOOL)isGuideVisible {
-    NSString *titleText = isGuideVisible ? LocalizedString(@"ble.scan.searching") : LocalizedString(@"ble.scan.title");
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     
-    // Set navigation bar title style
+    // Update gradient background frame
+    if (self.view.layer.sublayers.count > 0) {
+        CALayer *firstLayer = self.view.layer.sublayers.firstObject;
+        if ([firstLayer isKindOfClass:[CAGradientLayer class]]) {
+            firstLayer.frame = self.view.bounds;
+        }
+    }
+}
+
+- (void)updateTitleForGuideView:(BOOL)isGuideVisible {
+    NSString *titleText =  LocalizedString(@"ble.scan.title");
+    
+    // Set navigation bar title style with modern typography
     UIView *titleContainer = [[UIView alloc] init];
     titleContainer.translatesAutoresizingMaskIntoConstraints = NO;
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.text = titleText;
-    titleLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightBold];
-    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightBold]; // Slightly smaller for modern look
+    titleLabel.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0]; // Darker for better contrast
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [titleContainer addSubview:titleLabel];
+    
+    // Add subtle shadow for depth
+    titleLabel.layer.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.05].CGColor;
+    titleLabel.layer.shadowOffset = CGSizeMake(0, 1);
+    titleLabel.layer.shadowOpacity = 1;
+    titleLabel.layer.shadowRadius = 2;
     
     // Use auto layout constraints to ensure title is centered
     [NSLayoutConstraint activateConstraints:@[
@@ -291,33 +434,68 @@
 }
 
 - (void)setupUI {
-    self.view.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0];
+    // Modern gradient background
+    self.view.backgroundColor = [UIColor colorWithRed:0.96 green:0.97 blue:0.99 alpha:1.0];
+    
+    // Create gradient background layer
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[
+        (id)[UIColor colorWithRed:0.96 green:0.97 blue:0.99 alpha:1.0].CGColor,
+        (id)[UIColor colorWithRed:0.94 green:0.96 blue:0.98 alpha:1.0].CGColor
+    ];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1, 1);
+    gradientLayer.frame = self.view.bounds;
+    [self.view.layer insertSublayer:gradientLayer atIndex:0];
     
     [self updateTitleForGuideView:NO];
     
-    // Add refresh button
+    // Modern refresh button with enhanced styling
     UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [refreshButton setImage:[UIImage systemImageNamed:@"arrow.clockwise"] forState:UIControlStateNormal];
-    [refreshButton setTitle:[NSString stringWithFormat:@"%@ ", LocalizedString(@"common.refresh")] forState:UIControlStateNormal];
-    [refreshButton setTitleColor:[UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-    refreshButton.titleLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
+    
+    // Create refresh icon with subtle background
+    UIView *refreshContainer = [[UIView alloc] init];
+    refreshContainer.backgroundColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:0.1];
+    refreshContainer.layer.cornerRadius = 18;
+    refreshContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    UIImageView *refreshIcon = [[UIImageView alloc] init];
+    refreshIcon.image = [UIImage systemImageNamed:@"arrow.clockwise"];
+    refreshIcon.tintColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0];
+    refreshIcon.translatesAutoresizingMaskIntoConstraints = NO;
+    [refreshContainer addSubview:refreshIcon];
+    
+    UILabel *refreshLabel = [[UILabel alloc] init];
+    refreshLabel.text = LocalizedString(@"common.refresh");
+    refreshLabel.textColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0];
+    refreshLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
+    refreshLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [refreshButton addSubview:refreshContainer];
+    [refreshButton addSubview:refreshLabel];
     [refreshButton addTarget:self action:@selector(refreshButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     
-    // Set button size
-    [refreshButton sizeToFit];
-    CGFloat buttonWidth = refreshButton.frame.size.width + 24;
-    CGFloat buttonHeight = 44;
-    refreshButton.frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
+    // Set button constraints
+    refreshButton.frame = CGRectMake(0, 0, 100, 44);
     
-    // Set spacing between button image and text
-    refreshButton.imageEdgeInsets = UIEdgeInsetsMake(0, -4, 0, 4);
-    refreshButton.titleEdgeInsets = UIEdgeInsetsMake(0, 4, 0, -4);
-    refreshButton.contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
+    [NSLayoutConstraint activateConstraints:@[
+        [refreshContainer.centerYAnchor constraintEqualToAnchor:refreshButton.centerYAnchor],
+        [refreshContainer.leadingAnchor constraintEqualToAnchor:refreshButton.leadingAnchor],
+        [refreshContainer.widthAnchor constraintEqualToConstant:36],
+        [refreshContainer.heightAnchor constraintEqualToConstant:36],
+        
+        [refreshIcon.centerXAnchor constraintEqualToAnchor:refreshContainer.centerXAnchor],
+        [refreshIcon.centerYAnchor constraintEqualToAnchor:refreshContainer.centerYAnchor],
+        [refreshIcon.widthAnchor constraintEqualToConstant:18],
+        [refreshIcon.heightAnchor constraintEqualToConstant:18],
+        
+        [refreshLabel.centerYAnchor constraintEqualToAnchor:refreshButton.centerYAnchor],
+        [refreshLabel.leadingAnchor constraintEqualToAnchor:refreshContainer.trailingAnchor constant:8],
+        [refreshLabel.trailingAnchor constraintEqualToAnchor:refreshButton.trailingAnchor]
+    ]];
     
     UIBarButtonItem *refreshBarButton = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
-    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spacer.width = -8;
-    self.navigationItem.rightBarButtonItems = @[spacer, refreshBarButton];
+    self.navigationItem.rightBarButtonItem = refreshBarButton;
     
     // Initialize Toast view
     [self setupToastView];
@@ -414,9 +592,9 @@
 }
 
 - (void)setupGuideView {
-    // Main guide view container
+    // Main guide view container with modern background
     self.guideView = [[UIView alloc] init];
-    self.guideView.backgroundColor = [UIColor whiteColor];
+    self.guideView.backgroundColor = [UIColor clearColor];
     self.guideView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.guideView];
     
@@ -432,132 +610,183 @@
     self.guideContentView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.guideScrollView addSubview:self.guideContentView];
     
-    // Searching label
+    // Modern header section
+    UIView *headerSection = [[UIView alloc] init];
+    headerSection.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.guideContentView addSubview:headerSection];
+    
+    // Header icon container
+    UIView *headerIconContainer = [[UIView alloc] init];
+    headerIconContainer.backgroundColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:0.1];
+    headerIconContainer.layer.cornerRadius = 32;
+    headerIconContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    [headerSection addSubview:headerIconContainer];
+    
+    // Search icon
+    UIImageView *searchIcon = [[UIImageView alloc] init];
+    searchIcon.image = [UIImage systemImageNamed:@"wifi.circle"];
+    searchIcon.tintColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0];
+    searchIcon.translatesAutoresizingMaskIntoConstraints = NO;
+    [headerIconContainer addSubview:searchIcon];
+    
+    // Searching label with enhanced typography
     self.searchingLabel = [[UILabel alloc] init];
-    //self.searchingLabel.text = LocalizedString(@"ble.scan.searching");
-    self.searchingLabel.font = [UIFont systemFontOfSize:24 weight:UIFontWeightMedium];
-    self.searchingLabel.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
+    self.searchingLabel.text = LocalizedString(@"ble.scan.searching");
+    self.searchingLabel.font = [UIFont systemFontOfSize:28 weight:UIFontWeightBold];
+    self.searchingLabel.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
     self.searchingLabel.textAlignment = NSTextAlignmentCenter;
+    self.searchingLabel.numberOfLines = 0; // Allow multiple lines
+    self.searchingLabel.lineBreakMode = NSLineBreakByWordWrapping; // Better word wrapping
     self.searchingLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.guideContentView addSubview:self.searchingLabel];
+    [headerSection addSubview:self.searchingLabel];
     
-    // Step 1 container
-    UIView *step1Container = [[UIView alloc] init];
-    step1Container.backgroundColor = [UIColor whiteColor];
-    step1Container.layer.cornerRadius = 16;
-    step1Container.layer.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.08].CGColor;
-    step1Container.layer.shadowOffset = CGSizeMake(0, 2);
-    step1Container.layer.shadowOpacity = 1;
-    step1Container.layer.shadowRadius = 8;
-    step1Container.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.guideContentView addSubview:step1Container];
+    // Subtitle label
+    UILabel *subtitleLabel = [[UILabel alloc] init];
+    subtitleLabel.text = LocalizedString(@"ble.scan.subtitle");
+    subtitleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightMedium];
+    subtitleLabel.textColor = [UIColor colorWithRed:0.4 green:0.5 blue:0.6 alpha:1.0];
+    subtitleLabel.textAlignment = NSTextAlignmentCenter;
+    subtitleLabel.numberOfLines = 0;
+    subtitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [headerSection addSubview:subtitleLabel];
     
-    // Step 1 header
-    UIView *step1Header = [[UIView alloc] init];
-    step1Header.translatesAutoresizingMaskIntoConstraints = NO;
-    [step1Container addSubview:step1Header];
+    // Instructions container with modern card design
+    UIView *instructionsContainer = [[UIView alloc] init];
+    instructionsContainer.backgroundColor = [UIColor whiteColor];
+    instructionsContainer.layer.cornerRadius = 20;
+    instructionsContainer.layer.shadowColor = [UIColor colorWithRed:0.15 green:0.25 blue:0.4 alpha:0.06].CGColor;
+    instructionsContainer.layer.shadowOffset = CGSizeMake(0, 8);
+    instructionsContainer.layer.shadowOpacity = 1;
+    instructionsContainer.layer.shadowRadius = 16;
+    instructionsContainer.layer.borderWidth = 0.5;
+    instructionsContainer.layer.borderColor = [UIColor colorWithRed:0.9 green:0.92 blue:0.95 alpha:1.0].CGColor;
+    instructionsContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.guideContentView addSubview:instructionsContainer];
     
-    // Step 1 icon
-    UIView *step1Icon = [[UIView alloc] init];
-    step1Icon.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
-    step1Icon.layer.cornerRadius = 20;
-    step1Icon.translatesAutoresizingMaskIntoConstraints = NO;
-    [step1Header addSubview:step1Icon];
+    // Step 1 horizontal container (text left, device image right)
+    UIView *step1HorizontalContainer = [[UIView alloc] init];
+    step1HorizontalContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    [instructionsContainer addSubview:step1HorizontalContainer];
     
-    // Sun icon inside step1Icon
-    UIImageView *sunIcon = [[UIImageView alloc] init];
-    sunIcon.image = [UIImage systemImageNamed:@"sun.max.fill"];
-    sunIcon.tintColor = [UIColor whiteColor];
-    sunIcon.translatesAutoresizingMaskIntoConstraints = NO;
-    [step1Icon addSubview:sunIcon];
+    // Step 1 section (left side)
+    UIView *step1Section = [[UIView alloc] init];
+    step1Section.translatesAutoresizingMaskIntoConstraints = NO;
+    [step1HorizontalContainer addSubview:step1Section];
     
-    // Step 1 text
-    UILabel *step1Text = [[UILabel alloc] init];
-    step1Text.text = LocalizedString(@"ble.scan.step1.instruction");
-    step1Text.font = [UIFont systemFontOfSize:16];
-    step1Text.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
-    step1Text.numberOfLines = 0;
-    step1Text.translatesAutoresizingMaskIntoConstraints = NO;
-    [step1Header addSubview:step1Text];
+    // Step number badge for step 1
+    UIView *step1Badge = [[UIView alloc] init];
+    step1Badge.backgroundColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0];
+    step1Badge.layer.cornerRadius = 16;
+    step1Badge.translatesAutoresizingMaskIntoConstraints = NO;
+    [step1Section addSubview:step1Badge];
     
-    // Container for the GIF to clip it
-    UIView *gifContainer = [[UIView alloc] init];
-    gifContainer.translatesAutoresizingMaskIntoConstraints = NO;
-    gifContainer.clipsToBounds = YES;
-    [step1Container addSubview:gifContainer];
+    UILabel *step1Number = [[UILabel alloc] init];
+    step1Number.text = @"1";
+    step1Number.font = [UIFont systemFontOfSize:14 weight:UIFontWeightBold];
+    step1Number.textColor = [UIColor whiteColor];
+    step1Number.textAlignment = NSTextAlignmentCenter;
+    step1Number.translatesAutoresizingMaskIntoConstraints = NO;
+    [step1Badge addSubview:step1Number];
+    
+    // Step 1 content
+    UIView *step1Content = [[UIView alloc] init];
+    step1Content.translatesAutoresizingMaskIntoConstraints = NO;
+    [step1Section addSubview:step1Content];
+    
+    UILabel *step1Title = [[UILabel alloc] init];
+    step1Title.text = LocalizedString(@"ble.scan.step1.instruction");
+    step1Title.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
+    step1Title.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
+    step1Title.numberOfLines = 0;
+    step1Title.lineBreakMode = NSLineBreakByWordWrapping; // Better word wrapping
+    step1Title.translatesAutoresizingMaskIntoConstraints = NO;
+    [step1Content addSubview:step1Title];
+    
+    // Step 1 description will be added separately to create text wrapping effect
+    UILabel *step1Description = [[UILabel alloc] init];
+    step1Description.text = LocalizedString(@"ble.scan.step1.description");
+    step1Description.font = [UIFont systemFontOfSize:14];
+    step1Description.textColor = [UIColor colorWithRed:0.5 green:0.55 blue:0.65 alpha:1.0];
+    step1Description.numberOfLines = 0;
+    step1Description.lineBreakMode = NSLineBreakByWordWrapping; // Better word wrapping
+    step1Description.translatesAutoresizingMaskIntoConstraints = NO;
+    [instructionsContainer addSubview:step1Description]; // Add to main container instead of step1Content
+    
+    // Device animation container (right side)
+    UIView *animationContainer = [[UIView alloc] init];
+    animationContainer.backgroundColor = [UIColor colorWithRed:0.98 green:0.99 blue:1.0 alpha:1.0];
+    animationContainer.layer.cornerRadius = 16;
+    animationContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    [step1HorizontalContainer addSubview:animationContainer];
     
     // Device image (gif animation)
     self.deviceImageView = [[UIImageView alloc] init];
     [self setupDeviceGifAnimation];
     self.deviceImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.deviceImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [gifContainer addSubview:self.deviceImageView];
+    [animationContainer addSubview:self.deviceImageView];
     
-    // Step 1 label
-    UILabel *step1Label = [[UILabel alloc] init];
-    step1Label.text = LocalizedString(@"ble.scan.step1.title");
-    step1Label.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
-    step1Label.textColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
-    step1Label.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.guideContentView addSubview:step1Label];
+    // Visual separator
+    UIView *separator = [[UIView alloc] init];
+    separator.backgroundColor = [UIColor colorWithRed:0.94 green:0.95 blue:0.96 alpha:1.0];
+    separator.translatesAutoresizingMaskIntoConstraints = NO;
+    [instructionsContainer addSubview:separator];
     
-    // Step 2 container
-    UIView *step2Container = [[UIView alloc] init];
-    step2Container.backgroundColor = [UIColor whiteColor];
-    step2Container.layer.cornerRadius = 16;
-    step2Container.layer.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.08].CGColor;
-    step2Container.layer.shadowOffset = CGSizeMake(0, 2);
-    step2Container.layer.shadowOpacity = 1;
-    step2Container.layer.shadowRadius = 8;
-    step2Container.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.guideContentView addSubview:step2Container];
+    // Step 2 section
+    UIView *step2Section = [[UIView alloc] init];
+    step2Section.translatesAutoresizingMaskIntoConstraints = NO;
+    [instructionsContainer addSubview:step2Section];
     
-    // Step 2 header
-    UIView *step2Header = [[UIView alloc] init];
-    step2Header.translatesAutoresizingMaskIntoConstraints = NO;
-    [step2Container addSubview:step2Header];
+    // Step number badge for step 2
+    UIView *step2Badge = [[UIView alloc] init];
+    step2Badge.backgroundColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0];
+    step2Badge.layer.cornerRadius = 16;
+    step2Badge.translatesAutoresizingMaskIntoConstraints = NO;
+    [step2Section addSubview:step2Badge];
     
-    // Step 2 icon
-    UIView *step2Icon = [[UIView alloc] init];
-    step2Icon.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
-    step2Icon.layer.cornerRadius = 20;
-    step2Icon.translatesAutoresizingMaskIntoConstraints = NO;
-    [step2Header addSubview:step2Icon];
+    UILabel *step2Number = [[UILabel alloc] init];
+    step2Number.text = @"2";
+    step2Number.font = [UIFont systemFontOfSize:14 weight:UIFontWeightBold];
+    step2Number.textColor = [UIColor whiteColor];
+    step2Number.textAlignment = NSTextAlignmentCenter;
+    step2Number.translatesAutoresizingMaskIntoConstraints = NO;
+    [step2Badge addSubview:step2Number];
     
-    // Phone icon inside step2Icon
-    UIImageView *phoneIcon = [[UIImageView alloc] init];
-    phoneIcon.image = [UIImage systemImageNamed:@"iphone"];
-    phoneIcon.tintColor = [UIColor whiteColor];
-    phoneIcon.translatesAutoresizingMaskIntoConstraints = NO;
-    [step2Icon addSubview:phoneIcon];
+    // Step 2 content
+    UIView *step2Content = [[UIView alloc] init];
+    step2Content.translatesAutoresizingMaskIntoConstraints = NO;
+    [step2Section addSubview:step2Content];
     
-    // Step 2 text
-    UILabel *step2Text = [[UILabel alloc] init];
-    step2Text.text = LocalizedString(@"ble.scan.step2.instruction");
-    step2Text.font = [UIFont systemFontOfSize:16];
-    step2Text.textColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
-    step2Text.numberOfLines = 0;
-    step2Text.translatesAutoresizingMaskIntoConstraints = NO;
-    [step2Header addSubview:step2Text];
+    UILabel *step2Title = [[UILabel alloc] init];
+    step2Title.text = LocalizedString(@"ble.scan.step2.instruction");
+    step2Title.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
+    step2Title.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0];
+    step2Title.numberOfLines = 0;
+    step2Title.lineBreakMode = NSLineBreakByWordWrapping; // Better word wrapping
+    step2Title.translatesAutoresizingMaskIntoConstraints = NO;
+    [step2Content addSubview:step2Title];
     
-    // Step 2 label
-    UILabel *step2Label = [[UILabel alloc] init];
-    step2Label.text = LocalizedString(@"ble.scan.step2.title");
-    step2Label.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
-    step2Label.textColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
-    step2Label.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.guideContentView addSubview:step2Label];
+    UILabel *step2Description = [[UILabel alloc] init];
+    step2Description.text = LocalizedString(@"ble.scan.step2.description");
+    step2Description.font = [UIFont systemFontOfSize:14];
+    step2Description.textColor = [UIColor colorWithRed:0.5 green:0.55 blue:0.65 alpha:1.0];
+    step2Description.numberOfLines = 0;
+    step2Description.lineBreakMode = NSLineBreakByWordWrapping; // Better word wrapping
+    step2Description.translatesAutoresizingMaskIntoConstraints = NO;
+    [step2Content addSubview:step2Description];
     
-    // Help button
+    // Modern help button
     self.helpButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.helpButton setTitle:LocalizedString(@"ble.scan.help.title") forState:UIControlStateNormal];
-    [self.helpButton setTitleColor:[UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
-    self.helpButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self.helpButton setTitleColor:[UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0] forState:UIControlStateNormal];
+    self.helpButton.backgroundColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:0.08];
+    self.helpButton.layer.cornerRadius = 12;
+    self.helpButton.titleLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightMedium];
     [self.helpButton addTarget:self action:@selector(helpButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     self.helpButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.guideView addSubview:self.helpButton];
     
-    // Setup constraints
+    // Setup constraints with improved spacing
     [NSLayoutConstraint activateConstraints:@[
         // Guide view constraints
         [self.guideView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
@@ -569,7 +798,7 @@
         [self.guideScrollView.topAnchor constraintEqualToAnchor:self.guideView.topAnchor],
         [self.guideScrollView.leadingAnchor constraintEqualToAnchor:self.guideView.leadingAnchor],
         [self.guideScrollView.trailingAnchor constraintEqualToAnchor:self.guideView.trailingAnchor],
-        [self.guideScrollView.bottomAnchor constraintEqualToAnchor:self.guideView.bottomAnchor],
+        [self.guideScrollView.bottomAnchor constraintEqualToAnchor:self.helpButton.topAnchor constant:-24],
         
         // Content view constraints
         [self.guideContentView.topAnchor constraintEqualToAnchor:self.guideScrollView.topAnchor],
@@ -578,93 +807,139 @@
         [self.guideContentView.bottomAnchor constraintEqualToAnchor:self.guideScrollView.bottomAnchor],
         [self.guideContentView.widthAnchor constraintEqualToAnchor:self.guideScrollView.widthAnchor],
         
+        // Header section
+        [headerSection.topAnchor constraintEqualToAnchor:self.guideContentView.topAnchor constant:32],
+        [headerSection.leadingAnchor constraintEqualToAnchor:self.guideContentView.leadingAnchor constant:24],
+        [headerSection.trailingAnchor constraintEqualToAnchor:self.guideContentView.trailingAnchor constant:-24],
+        
+        // Header icon container
+        [headerIconContainer.topAnchor constraintEqualToAnchor:headerSection.topAnchor],
+        [headerIconContainer.centerXAnchor constraintEqualToAnchor:headerSection.centerXAnchor],
+        [headerIconContainer.widthAnchor constraintEqualToConstant:64],
+        [headerIconContainer.heightAnchor constraintEqualToConstant:64],
+        
+        // Search icon
+        [searchIcon.centerXAnchor constraintEqualToAnchor:headerIconContainer.centerXAnchor],
+        [searchIcon.centerYAnchor constraintEqualToAnchor:headerIconContainer.centerYAnchor],
+        [searchIcon.widthAnchor constraintEqualToConstant:32],
+        [searchIcon.heightAnchor constraintEqualToConstant:32],
+        
         // Searching label
-        [self.searchingLabel.topAnchor constraintEqualToAnchor:self.guideContentView.topAnchor constant:40],
-        [self.searchingLabel.centerXAnchor constraintEqualToAnchor:self.guideContentView.centerXAnchor],
+        [self.searchingLabel.topAnchor constraintEqualToAnchor:headerIconContainer.bottomAnchor constant:20],
+        [self.searchingLabel.centerXAnchor constraintEqualToAnchor:headerSection.centerXAnchor],
+        [self.searchingLabel.leadingAnchor constraintGreaterThanOrEqualToAnchor:headerSection.leadingAnchor],
+        [self.searchingLabel.trailingAnchor constraintLessThanOrEqualToAnchor:headerSection.trailingAnchor],
         
-        // Step 1 label
-        [step1Label.topAnchor constraintEqualToAnchor:self.searchingLabel.bottomAnchor constant:40],
-        [step1Label.leadingAnchor constraintEqualToAnchor:self.guideContentView.leadingAnchor constant:20],
+        // Subtitle label
+        [subtitleLabel.topAnchor constraintEqualToAnchor:self.searchingLabel.bottomAnchor constant:12],
+        [subtitleLabel.centerXAnchor constraintEqualToAnchor:headerSection.centerXAnchor],
+        [subtitleLabel.leadingAnchor constraintEqualToAnchor:headerSection.leadingAnchor],
+        [subtitleLabel.trailingAnchor constraintEqualToAnchor:headerSection.trailingAnchor],
+        [subtitleLabel.bottomAnchor constraintEqualToAnchor:headerSection.bottomAnchor],
         
-        // Step 1 container
-        [step1Container.topAnchor constraintEqualToAnchor:step1Label.bottomAnchor constant:12],
-        [step1Container.leadingAnchor constraintEqualToAnchor:self.guideContentView.leadingAnchor constant:20],
-        [step1Container.trailingAnchor constraintEqualToAnchor:self.guideContentView.trailingAnchor constant:-20],
+        // Instructions container
+        [instructionsContainer.topAnchor constraintEqualToAnchor:headerSection.bottomAnchor constant:40],
+        [instructionsContainer.leadingAnchor constraintEqualToAnchor:self.guideContentView.leadingAnchor constant:24],
+        [instructionsContainer.trailingAnchor constraintEqualToAnchor:self.guideContentView.trailingAnchor constant:-24],
+        [instructionsContainer.bottomAnchor constraintEqualToAnchor:self.guideContentView.bottomAnchor constant:-32],
         
-        // Step 1 header
-        [step1Header.topAnchor constraintEqualToAnchor:step1Container.topAnchor constant:20],
-        [step1Header.leadingAnchor constraintEqualToAnchor:step1Container.leadingAnchor constant:20],
-        [step1Header.trailingAnchor constraintEqualToAnchor:step1Container.trailingAnchor constant:-20],
+        // Step 1 horizontal container
+        [step1HorizontalContainer.topAnchor constraintEqualToAnchor:instructionsContainer.topAnchor constant:28],
+        [step1HorizontalContainer.leadingAnchor constraintEqualToAnchor:instructionsContainer.leadingAnchor constant:24],
+        [step1HorizontalContainer.trailingAnchor constraintEqualToAnchor:instructionsContainer.trailingAnchor constant:-24],
+        [step1HorizontalContainer.heightAnchor constraintGreaterThanOrEqualToConstant:100], // Reduced height since description is now separate
+        [step1HorizontalContainer.bottomAnchor constraintGreaterThanOrEqualToAnchor:step1Content.bottomAnchor],
         
-        // Step 1 icon
-        [step1Icon.leadingAnchor constraintEqualToAnchor:step1Header.leadingAnchor],
-        [step1Icon.centerYAnchor constraintEqualToAnchor:step1Header.centerYAnchor],
-        [step1Icon.widthAnchor constraintEqualToConstant:40],
-        [step1Icon.heightAnchor constraintEqualToConstant:40],
+        // Step 1 section (left side)
+        [step1Section.topAnchor constraintEqualToAnchor:step1HorizontalContainer.topAnchor],
+        [step1Section.leadingAnchor constraintEqualToAnchor:step1HorizontalContainer.leadingAnchor],
+        [step1Section.bottomAnchor constraintEqualToAnchor:step1Content.bottomAnchor],
+        [step1Section.trailingAnchor constraintEqualToAnchor:animationContainer.leadingAnchor constant:-16],
         
-        // Sun icon
-        [sunIcon.centerXAnchor constraintEqualToAnchor:step1Icon.centerXAnchor],
-        [sunIcon.centerYAnchor constraintEqualToAnchor:step1Icon.centerYAnchor],
-        [sunIcon.widthAnchor constraintEqualToConstant:20],
-        [sunIcon.heightAnchor constraintEqualToConstant:20],
+        // Step 1 badge
+        [step1Badge.leadingAnchor constraintEqualToAnchor:step1Section.leadingAnchor],
+        [step1Badge.topAnchor constraintEqualToAnchor:step1Section.topAnchor],
+        [step1Badge.widthAnchor constraintEqualToConstant:32],
+        [step1Badge.heightAnchor constraintEqualToConstant:32],
         
-        // Step 1 text
-        [step1Text.leadingAnchor constraintEqualToAnchor:step1Icon.trailingAnchor constant:16],
-        [step1Text.trailingAnchor constraintEqualToAnchor:step1Header.trailingAnchor],
-        [step1Text.topAnchor constraintEqualToAnchor:step1Header.topAnchor],
-        [step1Text.bottomAnchor constraintEqualToAnchor:step1Header.bottomAnchor],
+        // Step 1 number
+        [step1Number.centerXAnchor constraintEqualToAnchor:step1Badge.centerXAnchor],
+        [step1Number.centerYAnchor constraintEqualToAnchor:step1Badge.centerYAnchor],
         
-        // Device image container
-        [gifContainer.topAnchor constraintEqualToAnchor:step1Header.bottomAnchor constant:24],
-        [gifContainer.centerXAnchor constraintEqualToAnchor:step1Container.centerXAnchor],
-        [gifContainer.widthAnchor constraintEqualToConstant:200],
-        [gifContainer.heightAnchor constraintEqualToConstant:135],
-        [gifContainer.bottomAnchor constraintEqualToAnchor:step1Container.bottomAnchor constant:-24],
-
-        // Device image view
-        [self.deviceImageView.topAnchor constraintEqualToAnchor:gifContainer.topAnchor],
-        [self.deviceImageView.centerXAnchor constraintEqualToAnchor:gifContainer.centerXAnchor],
-        [self.deviceImageView.widthAnchor constraintEqualToConstant:200],
-        [self.deviceImageView.heightAnchor constraintEqualToConstant:150],
+        // Step 1 content (now only contains title)
+        [step1Content.leadingAnchor constraintEqualToAnchor:step1Badge.trailingAnchor constant:16],
+        [step1Content.trailingAnchor constraintEqualToAnchor:step1Section.trailingAnchor],
+        [step1Content.topAnchor constraintEqualToAnchor:step1Section.topAnchor],
+        [step1Content.bottomAnchor constraintEqualToAnchor:step1Title.bottomAnchor],
         
-        // Step 2 label
-        [step2Label.topAnchor constraintEqualToAnchor:step1Container.bottomAnchor constant:32],
-        [step2Label.leadingAnchor constraintEqualToAnchor:self.guideContentView.leadingAnchor constant:20],
+        // Step 1 title
+        [step1Title.topAnchor constraintEqualToAnchor:step1Content.topAnchor],
+        [step1Title.leadingAnchor constraintEqualToAnchor:step1Content.leadingAnchor],
+        [step1Title.trailingAnchor constraintEqualToAnchor:step1Content.trailingAnchor],
+        [step1Title.bottomAnchor constraintEqualToAnchor:step1Content.bottomAnchor],
         
-        // Step 2 container
-        [step2Container.topAnchor constraintEqualToAnchor:step2Label.bottomAnchor constant:12],
-        [step2Container.leadingAnchor constraintEqualToAnchor:self.guideContentView.leadingAnchor constant:20],
-        [step2Container.trailingAnchor constraintEqualToAnchor:self.guideContentView.trailingAnchor constant:-20],
-        [step2Container.bottomAnchor constraintEqualToAnchor:self.guideContentView.bottomAnchor constant:-100],
+        // Step 1 description (positioned to align with title text for text wrapping effect)
+        [step1Description.topAnchor constraintEqualToAnchor:step1HorizontalContainer.bottomAnchor constant:12],
+        [step1Description.leadingAnchor constraintEqualToAnchor:step1Content.leadingAnchor],
+        [step1Description.trailingAnchor constraintEqualToAnchor:instructionsContainer.trailingAnchor constant:-24],
         
-        // Step 2 header
-        [step2Header.topAnchor constraintEqualToAnchor:step2Container.topAnchor constant:20],
-        [step2Header.leadingAnchor constraintEqualToAnchor:step2Container.leadingAnchor constant:20],
-        [step2Header.trailingAnchor constraintEqualToAnchor:step2Container.trailingAnchor constant:-20],
-        [step2Header.bottomAnchor constraintEqualToAnchor:step2Container.bottomAnchor constant:-20],
+        // Animation container (right side) - reduced by 10%
+        [animationContainer.topAnchor constraintEqualToAnchor:step1HorizontalContainer.topAnchor],
+        [animationContainer.trailingAnchor constraintEqualToAnchor:step1HorizontalContainer.trailingAnchor],
+        [animationContainer.widthAnchor constraintEqualToConstant:144], // 160 * 0.9 = 144
+        [animationContainer.heightAnchor constraintEqualToConstant:117], // 130 * 0.9 = 117
+        [animationContainer.centerYAnchor constraintEqualToAnchor:step1HorizontalContainer.centerYAnchor],
         
-        // Step 2 icon
-        [step2Icon.leadingAnchor constraintEqualToAnchor:step2Header.leadingAnchor],
-        [step2Icon.centerYAnchor constraintEqualToAnchor:step2Header.centerYAnchor],
-        [step2Icon.widthAnchor constraintEqualToConstant:40],
-        [step2Icon.heightAnchor constraintEqualToConstant:40],
+        // Device image view - reduced by 10%
+        [self.deviceImageView.centerXAnchor constraintEqualToAnchor:animationContainer.centerXAnchor],
+        [self.deviceImageView.centerYAnchor constraintEqualToAnchor:animationContainer.centerYAnchor],
+        [self.deviceImageView.widthAnchor constraintEqualToConstant:117], // 130 * 0.9 = 117
+        [self.deviceImageView.heightAnchor constraintEqualToConstant:99], // 110 * 0.9 = 99
         
-        // Phone icon
-        [phoneIcon.centerXAnchor constraintEqualToAnchor:step2Icon.centerXAnchor],
-        [phoneIcon.centerYAnchor constraintEqualToAnchor:step2Icon.centerYAnchor],
-        [phoneIcon.widthAnchor constraintEqualToConstant:18],
-        [phoneIcon.heightAnchor constraintEqualToConstant:20],
+        // Separator
+        [separator.topAnchor constraintEqualToAnchor:step1Description.bottomAnchor constant:32],
+        [separator.leadingAnchor constraintEqualToAnchor:instructionsContainer.leadingAnchor constant:24],
+        [separator.trailingAnchor constraintEqualToAnchor:instructionsContainer.trailingAnchor constant:-24],
+        [separator.heightAnchor constraintEqualToConstant:1],
         
-        // Step 2 text
-        [step2Text.leadingAnchor constraintEqualToAnchor:step2Icon.trailingAnchor constant:16],
-        [step2Text.trailingAnchor constraintEqualToAnchor:step2Header.trailingAnchor],
-        [step2Text.topAnchor constraintEqualToAnchor:step2Header.topAnchor],
-        [step2Text.bottomAnchor constraintEqualToAnchor:step2Header.bottomAnchor],
+        // Step 2 section
+        [step2Section.topAnchor constraintEqualToAnchor:separator.bottomAnchor constant:32],
+        [step2Section.leadingAnchor constraintEqualToAnchor:instructionsContainer.leadingAnchor constant:24],
+        [step2Section.trailingAnchor constraintEqualToAnchor:instructionsContainer.trailingAnchor constant:-24],
+        [step2Section.bottomAnchor constraintEqualToAnchor:instructionsContainer.bottomAnchor constant:-32],
+        
+        // Step 2 badge
+        [step2Badge.leadingAnchor constraintEqualToAnchor:step2Section.leadingAnchor],
+        [step2Badge.topAnchor constraintEqualToAnchor:step2Section.topAnchor],
+        [step2Badge.widthAnchor constraintEqualToConstant:32],
+        [step2Badge.heightAnchor constraintEqualToConstant:32],
+        
+        // Step 2 number
+        [step2Number.centerXAnchor constraintEqualToAnchor:step2Badge.centerXAnchor],
+        [step2Number.centerYAnchor constraintEqualToAnchor:step2Badge.centerYAnchor],
+        
+        // Step 2 content
+        [step2Content.leadingAnchor constraintEqualToAnchor:step2Badge.trailingAnchor constant:16],
+        [step2Content.trailingAnchor constraintEqualToAnchor:step2Section.trailingAnchor],
+        [step2Content.topAnchor constraintEqualToAnchor:step2Section.topAnchor],
+        [step2Content.bottomAnchor constraintEqualToAnchor:step2Section.bottomAnchor],
+        
+        // Step 2 title
+        [step2Title.topAnchor constraintEqualToAnchor:step2Content.topAnchor],
+        [step2Title.leadingAnchor constraintEqualToAnchor:step2Content.leadingAnchor],
+        [step2Title.trailingAnchor constraintEqualToAnchor:step2Content.trailingAnchor],
+        
+        // Step 2 description
+        [step2Description.topAnchor constraintEqualToAnchor:step2Title.bottomAnchor constant:8],
+        [step2Description.leadingAnchor constraintEqualToAnchor:step2Content.leadingAnchor],
+        [step2Description.trailingAnchor constraintEqualToAnchor:step2Content.trailingAnchor],
+        [step2Description.bottomAnchor constraintLessThanOrEqualToAnchor:step2Content.bottomAnchor],
         
         // Help button
-        [self.helpButton.centerXAnchor constraintEqualToAnchor:self.guideView.centerXAnchor],
-        [self.helpButton.bottomAnchor constraintEqualToAnchor:self.guideView.safeAreaLayoutGuide.bottomAnchor constant:-20],
-        [self.helpButton.heightAnchor constraintGreaterThanOrEqualToConstant:44]
+        [self.helpButton.leadingAnchor constraintEqualToAnchor:self.guideView.leadingAnchor constant:24],
+        [self.helpButton.trailingAnchor constraintEqualToAnchor:self.guideView.trailingAnchor constant:-24],
+        [self.helpButton.bottomAnchor constraintEqualToAnchor:self.guideView.safeAreaLayoutGuide.bottomAnchor constant:-24],
+        [self.helpButton.heightAnchor constraintEqualToConstant:48]
     ]];
 }
 
@@ -696,12 +971,59 @@
         NSData *gifData = [NSData dataWithContentsOfFile:gifPath];
         if (gifData) {
             [self setGifData:gifData toImageView:self.deviceImageView];
+            // Add watermark overlay to hide the watermark in bottom left corner
+            [self addWatermarkOverlayToImageView:self.deviceImageView];
             return;
         }
     }
     
     // Fallback to static image if gif loading fails or not found
     self.deviceImageView.image = [UIImage systemImageNamed:@"iphone"];
+    // Add watermark overlay even for fallback image
+    [self addWatermarkOverlayToImageView:self.deviceImageView];
+}
+
+- (void)addWatermarkOverlayToImageView:(UIImageView *)imageView {
+    if (!imageView) {
+        NSLog(@"Warning: imageView is nil, cannot add watermark mask");
+        return;
+    }
+    
+    // Schedule the mask creation after view layout is complete
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // Create a mask to clip out the watermark area at the bottom
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        
+        // Get the imageView bounds for the mask
+        CGRect bounds = imageView.bounds;
+        if (CGRectIsEmpty(bounds)) {
+            // If bounds are empty, set a default size and try again later
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self addWatermarkOverlayToImageView:imageView];
+            });
+            return;
+        }
+        
+        // Create a path that covers everything except the bottom watermark area
+        UIBezierPath *maskPath = [UIBezierPath bezierPath];
+        
+                 // Cover the entire image except the bottom area where watermark appears
+         CGFloat cropHeight = 15.0; // Reduced height to crop from bottom - just enough to hide watermark
+         CGRect visibleRect = CGRectMake(0, 0, bounds.size.width, bounds.size.height - cropHeight);
+        [maskPath appendPath:[UIBezierPath bezierPathWithRect:visibleRect]];
+        
+        // Set the mask path
+        maskLayer.path = maskPath.CGPath;
+        maskLayer.frame = bounds;
+        
+        // Apply the mask to the imageView
+        imageView.layer.mask = maskLayer;
+        
+        // Also apply clipping to ensure everything is contained
+        imageView.clipsToBounds = YES;
+        
+        NSLog(@"✅ Watermark mask applied to imageView, cropping bottom %f pixels", cropHeight);
+    });
 }
 
 - (void)setGifData:(NSData *)gifData toImageView:(UIImageView *)imageView {
@@ -755,6 +1077,7 @@
     self.tableView = [[UITableView alloc] init];
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.contentInset = UIEdgeInsetsMake(16, 0, 16, 0);
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -770,7 +1093,7 @@
 }
 
 - (void)startScanning {
-    [self.deviceAgent startScan];  
+    [self.deviceAgent startScan];
 }
 
 - (void)stopScanning {
@@ -893,7 +1216,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 140;
+    return 156; // Increased height for modern card design
 }
 
 #pragma mark - Device Connection
@@ -912,4 +1235,5 @@
 }
 
 @end
+
 
