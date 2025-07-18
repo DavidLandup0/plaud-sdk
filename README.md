@@ -91,7 +91,22 @@ See the [SDK Integration Guide](https://github.com/Plaud-AI/plaud-sdk/blob/main/
 
 ## Examples
 
-Check out our example applications:
+Demo Videos
+
+<table>
+  <tr>
+    <td align="center">
+      <h3>iOS Demo App</h3>
+      <video controls src=""></video>
+    </td>
+    <td align="center">
+      <h3>Android Demo App</h3>
+      <video controls src=""></video>
+    </td>
+  </tr>
+</table>
+
+Check out the example applications:
 
 - [iOS Demo App](https://github.com/Plaud-AI/plaud-sdk/tree/main/examples/ios-demo)
 - [Android Demo App](https://github.com/Plaud-AI/plaud-sdk/tree/main/examples/android-demo)
