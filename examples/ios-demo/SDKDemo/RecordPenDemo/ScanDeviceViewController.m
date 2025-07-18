@@ -123,20 +123,13 @@
     self.bindStatusIconView.layer.cornerRadius = 4;
     [bindStatusContainer addSubview:self.bindStatusIconView];
     
-    // Modern Connect Button
+    // Modern Connect Button with solid background to prevent flickering
     self.connectButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [self.connectButton setTitle:LocalizedString(@"common.connect") forState:UIControlStateNormal];
     [self.connectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    // Gradient background for button
-    CAGradientLayer *buttonGradient = [CAGradientLayer layer];
-    buttonGradient.colors = @[
-        (id)[UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0].CGColor,
-        (id)[UIColor colorWithRed:0.15 green:0.43 blue:0.86 alpha:1.0].CGColor
-    ];
-    buttonGradient.startPoint = CGPointMake(0, 0);
-    buttonGradient.endPoint = CGPointMake(1, 0);
-    buttonGradient.cornerRadius = 12;
+    // Use solid background color instead of gradient to prevent flickering
+    self.connectButton.backgroundColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:1.0];
     
     self.connectButton.layer.cornerRadius = 12;
     self.connectButton.layer.shadowColor = [UIColor colorWithRed:0.25 green:0.53 blue:0.96 alpha:0.3].CGColor;
@@ -147,10 +140,17 @@
     self.connectButton.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
     self.connectButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.connectButton addTarget:self action:@selector(connectButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.containerView addSubview:self.connectButton];
     
-    // Store gradient layer reference to update frame later
-    [self.connectButton.layer insertSublayer:buttonGradient atIndex:0];
+    // Disable all animations on the button to prevent flickering
+    self.connectButton.layer.actions = @{
+        @"backgroundColor": [NSNull null],
+        @"opacity": [NSNull null],
+        @"transform": [NSNull null],
+        @"bounds": [NSNull null],
+        @"frame": [NSNull null]
+    };
+    
+    [self.containerView addSubview:self.connectButton];
     
     [NSLayoutConstraint activateConstraints:@[
         // Container constraints with improved margins
@@ -214,13 +214,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    // Update button gradient frame
-    if (self.connectButton.layer.sublayers.count > 0) {
-        CALayer *gradientLayer = self.connectButton.layer.sublayers.firstObject;
-        if ([gradientLayer isKindOfClass:[CAGradientLayer class]]) {
-            gradientLayer.frame = self.connectButton.bounds;
-        }
-    }
+    // No gradient layer management needed anymore - using solid background color
 }
 
 - (void)configureWithDevice:(BleDevice *)device controller:(ScanDeviceViewController*)controller{
@@ -258,35 +252,19 @@
     
     self.bindStatusIconView.hidden = NO;
     
+    // Ensure all animations are stopped to prevent flickering
+    [self stopBreathingAnimation];
+    
     [self.snLabel sizeToFit];
     self.controller = controller;
 }
 
 - (void)startEnhancedBreathingAnimation {
-    // Remove any existing animations
+    // Remove any existing animations to prevent flickering
     [self.bindStatusIconView.layer removeAllAnimations];
     
-    // Create pulsing animation for the icon
-    CABasicAnimation *pulseAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    pulseAnimation.fromValue = @(1.0);
-    pulseAnimation.toValue = @(1.4);
-    pulseAnimation.duration = 0.8;
-    pulseAnimation.autoreverses = YES;
-    pulseAnimation.repeatCount = HUGE_VALF;
-    pulseAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    
-    // Create opacity animation
-    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    opacityAnimation.fromValue = @(1.0);
-    opacityAnimation.toValue = @(0.4);
-    opacityAnimation.duration = 0.8;
-    opacityAnimation.autoreverses = YES;
-    opacityAnimation.repeatCount = HUGE_VALF;
-    opacityAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    
-    // Add animations to layer
-    [self.bindStatusIconView.layer addAnimation:pulseAnimation forKey:@"pulse"];
-    [self.bindStatusIconView.layer addAnimation:opacityAnimation forKey:@"breathe"];
+    // Disable all animations to prevent button flickering
+    // No animations will be added
 }
 
 - (void)connectButtonAction {
@@ -304,24 +282,22 @@
 }
 
 - (void)startBreathingAnimation {
-    // Remove any existing animations
+    // Remove any existing animations to prevent flickering
     [self.bindStatusIconView.layer removeAllAnimations];
     
-    // Create breathing animation
-    CABasicAnimation *breathingAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    breathingAnimation.fromValue = @(1.0);
-    breathingAnimation.toValue = @(0.2);
-    breathingAnimation.duration = 0.6;
-    breathingAnimation.autoreverses = YES;
-    breathingAnimation.repeatCount = HUGE_VALF;
-    breathingAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    
-    // Add animation to layer
-    [self.bindStatusIconView.layer addAnimation:breathingAnimation forKey:@"breathing"];
+    // Disable breathing animation to prevent button flickering
+    // No animations will be added
 }
 
 - (void)stopBreathingAnimation {
     [self.bindStatusIconView.layer removeAllAnimations];
+    
+    // Also ensure the connect button has no animations
+    [self.connectButton.layer removeAllAnimations];
+    
+    // Set final state values to prevent any residual animation effects
+    self.bindStatusIconView.layer.opacity = 1.0;
+    self.bindStatusIconView.transform = CGAffineTransformIdentity;
 }
 
 @end
