@@ -97,11 +97,11 @@ Demo Videos
   <tr>
     <td align="center">
       <h3>iOS Demo App</h3>
-      <video controls src="https://github.com/Plaud-AI/plaud-sdk/blob/1541c65dbbae6fdc6778ee32646b86a318bed49d/assets/PLAUD_SDK_Demo_iOS.mp4"></video>
+      <video controls src="https://github.com/Plaud-AI/plaud-sdk/raw/1541c65dbbae6fdc6778ee32646b86a318bed49d/assets/PLAUD_SDK_Demo_iOS.mp4"></video>
     </td>
     <td align="center">
       <h3>Android Demo App</h3>
-      <video controls src="https://github.com/Plaud-AI/plaud-sdk/blob/1541c65dbbae6fdc6778ee32646b86a318bed49d/assets/PLAUD_SDK_Demo_Android.mp4"></video>
+      <video controls src="https://github.com/Plaud-AI/plaud-sdk/raw/1541c65dbbae6fdc6778ee32646b86a318bed49d/assets/PLAUD_SDK_Demo_Android.mp4"></video>
     </td>
   </tr>
 </table>
