@@ -190,24 +190,24 @@ class CloudSyncViewController: UIViewController {
                     uploadProgressAlert.updateProgress(Float(progress))
                 }
             },
-            completion: { [weak self] result in
+            onSuccess: { [weak self] response in
                 DispatchQueue.main.async {
-                    switch result {
-                    case let .success(response):
-                        self?.uploadedFiles.insert(fileName)
-                        uploadProgressAlert.updateProgress(1.0, text: NSLocalizedString("upload.progress.success", comment: ""))
-                        uploadProgressAlert.setActionButtonAsConfirm()
-                        uploadProgressAlert.onConfirm = {
-                            uploadProgressAlert.dismiss(animated: true)
-                        }
-                        self?.tableView.reloadData()
-                        self?.processUpdateSuccessResult(response: result, fileName: fileName)
-                    case .failure:
-                        uploadProgressAlert.updateProgress(0.0, text: NSLocalizedString("upload.progress.failed", comment: ""))
-                        uploadProgressAlert.setActionButtonAsConfirm()
-                        uploadProgressAlert.onConfirm = {
-                            uploadProgressAlert.dismiss(animated: true)
-                        }
+                    self?.uploadedFiles.insert(fileName)
+                    uploadProgressAlert.updateProgress(1.0, text: NSLocalizedString("upload.progress.success", comment: ""))
+                    uploadProgressAlert.setActionButtonAsConfirm()
+                    uploadProgressAlert.onConfirm = {
+                        uploadProgressAlert.dismiss(animated: true)
+                    }
+                    self?.tableView.reloadData()
+                    self?.processUpdateSuccessResult(response: .success(response), fileName: fileName)
+                }
+            },
+            onFailure: { [weak self] error in
+                DispatchQueue.main.async {
+                    uploadProgressAlert.updateProgress(0.0, text: NSLocalizedString("upload.progress.failed", comment: ""))
+                    uploadProgressAlert.setActionButtonAsConfirm()
+                    uploadProgressAlert.onConfirm = {
+                        uploadProgressAlert.dismiss(animated: true)
                     }
                 }
             }

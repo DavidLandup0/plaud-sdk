@@ -62,10 +62,13 @@
 "ble.scan.start" = "Start Scanning";
 "ble.scan.stop" = "Stop Scanning";
 "ble.scan.searching" = "Searching...";
+"ble.scan.subtitle" = "Find your PLAUD NotePin and establish connection";
 "ble.scan.step1.title" = "Step 1";
-"ble.scan.step1.instruction" = "Press and hold the PLAUD NotePin recording button until the white light flashes";
+"ble.scan.step1.instruction" = "Press and hold the NotePin recording button until the white light flashes";
+"ble.scan.step1.description" = "Press and hold the recording button until the white light flashes";
 "ble.scan.step2.title" = "Step 2";
-"ble.scan.step2.instruction" = "Bring your PLAUD NotePin close to your phone";
+"ble.scan.step2.instruction" = "Bring your NotePin close to your phone";
+"ble.scan.step2.description" = "Bring the device close to your phone to establish connection";
 "ble.scan.help.title" = "Can't activate your PLAUD NotePin?";
 "ble.scan.help.message" = "Please make sure your device is charged and try the steps again. If the problem persists, contact support@plaud.ai";
 "ble.status.connected" = "Connected";

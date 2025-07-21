@@ -471,22 +471,22 @@ import UIKit
                                     uploadProgressAlert.updateProgress(Float(progress))
                                 }
                             },
-                            completion: { result in
+                            onSuccess: { response in
                                 DispatchQueue.main.async {
-                                    switch result {
-                                    case .success:
-                                        // Upload successful
-                                        uploadProgressAlert.updateProgress(1.0, text: NSLocalizedString("upload.progress.success", comment: ""))
-                                        uploadProgressAlert.setActionButtonAsConfirm()
-                                        uploadProgressAlert.onConfirm = {
-                                            uploadProgressAlert.dismiss(animated: true)
-                                        }
-                                    case .failure:
-                                        uploadProgressAlert.updateProgress(0.0, text: NSLocalizedString("upload.progress.failed", comment: ""))
-                                        uploadProgressAlert.setActionButtonAsConfirm()
-                                        uploadProgressAlert.onConfirm = {
-                                            uploadProgressAlert.dismiss(animated: true)
-                                        }
+                                    // Upload successful
+                                    uploadProgressAlert.updateProgress(1.0, text: NSLocalizedString("upload.progress.success", comment: ""))
+                                    uploadProgressAlert.setActionButtonAsConfirm()
+                                    uploadProgressAlert.onConfirm = {
+                                        uploadProgressAlert.dismiss(animated: true)
+                                    }
+                                }
+                            },
+                            onFailure: { error in
+                                DispatchQueue.main.async {
+                                    uploadProgressAlert.updateProgress(0.0, text: NSLocalizedString("upload.progress.failed", comment: ""))
+                                    uploadProgressAlert.setActionButtonAsConfirm()
+                                    uploadProgressAlert.onConfirm = {
+                                        uploadProgressAlert.dismiss(animated: true)
                                     }
                                 }
                             }

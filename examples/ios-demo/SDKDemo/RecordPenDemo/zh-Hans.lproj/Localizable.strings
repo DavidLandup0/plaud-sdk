@@ -45,10 +45,13 @@
 "ble.scan.start" = "开始扫描";
 "ble.scan.stop" = "停止扫描";
 "ble.scan.searching" = "搜索中..";
+"ble.scan.subtitle" = "找到您的 PLAUD NotePin 并建立连接";
 "ble.scan.step1.title" = "步骤 1";
 "ble.scan.step1.instruction" = "按住 PLAUD NotePin 的录音按键，直到白灯闪烁";
+"ble.scan.step1.description" = "长按录音按钮直到白灯闪烁";
 "ble.scan.step2.title" = "步骤 2";
 "ble.scan.step2.instruction" = "将您的 PLAUD NotePin 靠近您的手机";
+"ble.scan.step2.description" = "将设备靠近手机以建立连接";
 "ble.scan.help.title" = "无法激活您的 PLAUD NotePin?";
 "ble.scan.help.message" = "请确保您的设备已充电，然后重试上述步骤。如果问题持续存在，请联系 support@plaud.ai";
 "ble.status.connected" = "已连接";

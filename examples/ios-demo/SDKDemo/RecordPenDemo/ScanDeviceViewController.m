@@ -1069,7 +1069,7 @@
 }
 
 - (void)startScanning {
-    [self.deviceAgent startScan];
+    [self.deviceAgent startScan];  
 }
 
 - (void)stopScanning {
@@ -1211,5 +1211,4 @@
 }
 
 @end
-
 
