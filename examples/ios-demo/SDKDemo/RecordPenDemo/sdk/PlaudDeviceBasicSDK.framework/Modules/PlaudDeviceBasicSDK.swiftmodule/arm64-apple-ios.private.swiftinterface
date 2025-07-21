@@ -40,12 +40,12 @@ extension PlaudDeviceBasicSDK.PlaudDeviceAgent {
   public static func batchProcessingExample()
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class PlaudFileUploader {
-  public static let shared: PlaudDeviceBasicSDK.PlaudFileUploader
-  public var device: PenBleSDK.BleDevice?
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class PlaudFileUploader : ObjectiveC.NSObject {
+  @objc public static let shared: PlaudDeviceBasicSDK.PlaudFileUploader
+  @objc public var device: PenBleSDK.BleDevice?
   public func checkRecordingExist(sessionId: Swift.Int) -> Swift.Bool
   public func getDownloadedRecordingPath(sessionId: Swift.Int, desiredPath: Swift.String) -> Swift.String
-  public func uploadRecording(sn: Swift.String, sessionId: Swift.Int, onProgress: @escaping (Swift.Double) -> Swift.Void, completion: @escaping (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void)
+  @objc public func uploadRecording(sn: Swift.String, sessionId: Swift.Int, onProgress: @escaping (Swift.Double) -> Swift.Void, onSuccess: @escaping ([Swift.String : Any]) -> Swift.Void, onFailure: @escaping (any Swift.Error) -> Swift.Void)
   public func bindDevice(ownerId: Swift.String, sn: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void)
   public func unbindDevice(ownerId: Swift.String, sn: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void)
   @objc deinit

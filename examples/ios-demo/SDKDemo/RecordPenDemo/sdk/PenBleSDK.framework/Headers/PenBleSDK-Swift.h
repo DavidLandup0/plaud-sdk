@@ -428,7 +428,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BleAgent * _
 /// @see startLoopScan
 /// \param bleDevice Wrapped Bluetooth device
 ///
-/// \param devToken Pen-side token from QR code binding, length is 8 after utf-8 conversion to data, non-QR code binding is 8 zeros (for Jetone, other customers should not pass)
+/// \param devToken Pen-side token
 ///
 /// \param userName Username (for Jetone, other customers should not pass)
 /// @see    Callback bleConnectState

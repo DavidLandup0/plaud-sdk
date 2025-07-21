@@ -991,6 +991,7 @@ extension PenBleSDK.JXPcmProcess : PenBleSDK.JXPcmProcessDelegate {
   @objc public func wholeVersion() -> Swift.String
   @objc public func toString() -> Swift.String
   @objc public func zoneSecond() -> Swift.Int
+  public func disconnect(_ manager: CoreBluetooth.CBCentralManager?)
   @objc deinit
 }
 extension PenBleSDK.BleDevice : CoreBluetooth.CBPeripheralDelegate {

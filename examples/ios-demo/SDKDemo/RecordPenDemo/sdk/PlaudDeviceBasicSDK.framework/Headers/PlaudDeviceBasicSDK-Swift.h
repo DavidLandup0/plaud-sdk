@@ -837,6 +837,16 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 - (void)onCommonMsgChannelWithType:(NSInteger)type value:(NSInteger)value tips:(NSString * _Nonnull)tips;
 @end
 
+SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK17PlaudFileUploader")
+@interface PlaudFileUploader : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudFileUploader * _Nonnull shared;)
++ (PlaudFileUploader * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, strong) BleDevice * _Nullable device;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)uploadRecordingWithSn:(NSString * _Nonnull)sn sessionId:(NSInteger)sessionId onProgress:(void (^ _Nonnull)(double))onProgress onSuccess:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))onSuccess onFailure:(void (^ _Nonnull)(NSError * _Nonnull))onFailure;
+@end
+
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK14PlaudSDKLogger")
 @interface PlaudSDKLogger : NSObject
 + (void)logEvent:(NSString * _Nonnull)eventName parameters:(NSDictionary * _Nullable)parameters;
