@@ -95,7 +95,7 @@ See the [SDK Integration Guide](https://github.com/Plaud-AI/plaud-sdk/blob/main/
   <tr>
     <td align="center">
       <h3>iOS Demo App</h3>
-      <video controls src="https://github.com/user-attachments/assets/1d186b80-d62d-4e8b-8893-f803c19e59b2"></video>
+      <video controls src="https://github.com/user-attachments/assets/49ea5fbf-fdc0-4f1e-9592-76d4e21825d4"></video>
     </td>
     <td align="center">
       <h3>Android Demo App</h3>
