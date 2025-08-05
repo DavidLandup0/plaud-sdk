@@ -691,6 +691,19 @@ The connection status will be returned in the following callback:
 
 #### Wifi Fast-Transfer
 
+Tips: Since the SDK has added WiFi transmission capabilities, some configuration is required before submitting for review:
+
+a. Add the following entitlements to your App ID: Access WiFi Information, Hotspot Configuration, and Network Extensions.
+
+b. Add the following entries to your App's entitlements file:
+
+<key>com.apple.developer.networking.HotspotConfiguration</key>
+<true/>
+<key>com.apple.developer.networking.networkextension</key>
+<array/>
+<key>com.apple.developer.networking.wifi-info</key>
+<true/>
+
 - Open device wifi
 
 ```code
