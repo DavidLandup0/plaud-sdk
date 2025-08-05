@@ -4,10 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>.DS_Store</key>
-		<data>
-		mLcCNRqVfRwGku5TmzAoo8Ut46k=
-		</data>
 		<key>Headers/PlaudDeviceBasicSDK-Swift.h</key>
 		<data>
 		kfV4wUyQ5y8X5Br5M6sRnD0WaFk=
@@ -60,7 +56,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7eKsPNaSIAcNym99g5wuXRtx9to=
+			ngHpg9ipqfNakB8LmPWygJnUCJw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -69,7 +65,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SXP7ig80h/3EIPKq6B9dMryUPyE=
+			YJwihiS7ECdNICNd0dokgltakgU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -206,11 +202,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7eKsPNaSIAcNym99g5wuXRtx9to=
+			ngHpg9ipqfNakB8LmPWygJnUCJw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Djp7xTCLObgpLuSjCwrg2YMAdTQOyozOHNjrkq8S0/A=
+			dTC32uk+I2HFixEsneAD7w/QTeILDtprdILjTeP4fuE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -219,11 +215,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SXP7ig80h/3EIPKq6B9dMryUPyE=
+			YJwihiS7ECdNICNd0dokgltakgU=
 			</data>
 			<key>hash2</key>
 			<data>
-			jkZoDeyd3/oUENASZbSVEORl53K2NmTmYtrf+wFgNhs=
+			SEvVGLmyY2YbzoMZm/uMkBjqDD9f415Cm5KDejLoQN8=
 			</data>
 			<key>optional</key>
 			<true/>
