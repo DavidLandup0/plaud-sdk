@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.plaud.nicebuild.R
 import com.plaud.nicebuild.utils.AppKeyManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import sdk.NiceBuildSdk
@@ -53,6 +54,10 @@ class BleCore private constructor(private val context: Context) {
     private var currentRetryDevice: BleDevice? = null
     private var currentRetryToken: String? = null
     private var connectTimeoutHandler: Handler? = null
+    
+    // Scan log deduplication related variables
+    private val deviceLogTimeMap = mutableMapOf<String, Long>()
+    private val SCAN_LOG_INTERVAL = 5000L // Don't repeat log for same device within 5 seconds
 
 
     companion object {
@@ -62,7 +67,7 @@ class BleCore private constructor(private val context: Context) {
 
         fun getInstance(context: Context): BleCore {
             return instance ?: synchronized(this) {
-                instance ?: BleCore(context).also { instance = it }
+                instance ?: BleCore(context.applicationContext).also { instance = it }
             }
         }
     }
@@ -77,7 +82,7 @@ class BleCore private constructor(private val context: Context) {
                 appKey ?: "",
                 appSecret ?: "",
                 listener,
-                "Plaud SDK Showcase",
+                "Plaud Demo",
                 null
             )
         }
@@ -102,10 +107,19 @@ class BleCore private constructor(private val context: Context) {
     private fun setupBleAgentListener() {
         bleAgentListener = object : BleAgentListener {
             override fun scanBleDeviceReceiver(device: BleDevice) {
-                Log.i(
-                    TAG,
-                    "scanBleDeviceReceiver-- name:${device.name} ,serialNumber${device.serialNumber}"
-                )
+                // Add log deduplication logic to avoid frequent logging for same device
+                val deviceKey = device.serialNumber ?: device.macAddress ?: "unknown"
+                val currentTime = System.currentTimeMillis()
+                val lastLogTime = deviceLogTimeMap[deviceKey] ?: 0L
+                
+                // Only print when first discovering device or when time since last log exceeds specified interval
+                if (currentTime - lastLogTime > SCAN_LOG_INTERVAL) {
+                    Log.i(
+                        TAG,
+                        "scanBleDeviceReceiver-- name:${device.name} ,serialNumber${device.serialNumber}, rssi:${device.rssi}"
+                    )
+                    deviceLogTimeMap[deviceKey] = currentTime
+                }
                 addBleDevice(device)
             }
 
@@ -150,9 +164,9 @@ class BleCore private constructor(private val context: Context) {
                 Log.e(TAG, "bleConnectFail: ${p1.name}")
                 isConnecting = false
                 val reason = p1.name
-
-                connectCallback?.invoke(false, "-3", context.getString(R.string.connect_error_generic_fail_with_reason, reason))
-
+                if (retryCount >= MAX_RETRY_COUNT -1) {
+                    connectCallback?.invoke(false, "-3", context.getString(R.string.connect_error_generic_fail_with_reason, reason))
+                }
             }
 
             override fun scanFail(p0: sdk.penblesdk.Constants.ScanFailed) {
@@ -235,6 +249,8 @@ class BleCore private constructor(private val context: Context) {
         val agent = getBleAgent()
         agent.scanBle(false, { errorCode -> handleBleError(errorCode) })
         scanCallback = null
+        // Clear device log time records to prevent memory leaks
+        deviceLogTimeMap.clear()
     }
 
     fun connectDevice(
@@ -279,38 +295,51 @@ class BleCore private constructor(private val context: Context) {
         token: String,
         callback: (Boolean, String?, String?) -> Unit
     ) {
-        val agent = getBleAgent()
-        agent.scanBle(false, { errorCode -> handleBleError(errorCode) })
-        isConnecting = true
-        connectCallback = callback
+        // Execute connection operations in background thread to avoid blocking UI
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val agent = getBleAgent()
+                agent.scanBle(false, { errorCode -> handleBleError(errorCode) })
+                isConnecting = true
+                connectCallback = callback
 
-        connectTimeoutHandler?.removeCallbacksAndMessages(null)
-        connectTimeoutHandler = Handler(Looper.getMainLooper()).apply {
-            postDelayed({
-                if (isConnecting) {
-                    handleConnectTimeout(callback)
+                // Set timeout handler
+                connectTimeoutHandler?.removeCallbacksAndMessages(null)
+                connectTimeoutHandler = Handler(Looper.getMainLooper()).apply {
+                    postDelayed({
+                        if (isConnecting) {
+                            handleConnectTimeout(callback)
+                        }
+                    }, TNT_CONNECTION_BLE_CONNECTTIMEOUT)
                 }
-            }, TNT_CONNECTION_BLE_CONNECTTIMEOUT)
-        }
 
-        try {
-            Log.i(TAG, "Starting BLE connection, attempt ${retryCount + 1}")
-            agent.connectionBLE(
-                device,
-                token,
-                null,
-                null,
-                TNT_CONNECTION_BLE_CONNECTTIMEOUT,
-                TNT_CONNECTION_BLE_HANDSHAKETIMEOUT
-            )
-        } catch (e: Exception) {
-            Log.e(TAG, "Connection error occurred: ${e.message}")
-            handleConnectError(callback, e.message ?: context.getString(R.string.ble_error_unknown))
+                Log.i(TAG, "Starting BLE connection (background thread), attempt ${retryCount + 1}")
+                agent.connectionBLE(
+                    device,
+                    token,
+                    null,
+                    null,
+                    TNT_CONNECTION_BLE_CONNECTTIMEOUT,
+                    TNT_CONNECTION_BLE_HANDSHAKETIMEOUT
+                )
+            } catch (e: Exception) {
+                Log.e(TAG, "Connection error occurred: ${e.message}")
+                handleConnectError(callback, e.message ?: context.getString(R.string.ble_error_unknown))
+            }
         }
     }
 
     fun isConnected(): Boolean {
         return getBleAgent().isConnected()
+    }
+
+    fun getCurrentDevice(): sdk.penblesdk.entity.BleDevice? {
+        return try {
+            getBleAgent().lastConnectedDevice
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting current connected device: ${e.message}", e)
+            null
+        }
     }
 
     private fun handleConnectTimeout(callback: (Boolean, String?, String?) -> Unit) {
@@ -631,6 +660,8 @@ class BleCore private constructor(private val context: Context) {
 
     fun clearDeviceList() {
         bleDeviceList.clear()
+        // Also clean up device log time records
+        deviceLogTimeMap.clear()
     }
 
     fun setOnRecordingStateChangeListener(listener: (Boolean) -> Unit) {
@@ -853,6 +884,26 @@ class BleCore private constructor(private val context: Context) {
             callback(it?.isOnOff == enable)
         })
     }
+
+    fun openDeviceWifi(callback: (Boolean, String?, String?) -> Unit) {
+        getBleAgent().openDeviceWifi({
+            Log.d(TAG, "openDeviceWifi request: $it")
+        }, { rsp ->
+            Log.d(TAG, "openDeviceWifi response: $rsp")
+            if (rsp != null && rsp.isSuccess()) {
+                callback(true, rsp.wifiName, rsp.wifiPassword)
+            } else {
+                val errorMsg = rsp?.getErrorMessage() ?: "Unknown error"
+                Log.e(TAG, "openDeviceWifi failed: $errorMsg")
+                callback(false, null, null)
+            }
+        }, { errorCode ->
+            handleBleError(errorCode)
+            callback(false, null, null)
+        })
+    }
+
+
 
     private fun handleBleError(errorCode: BleErrorCode) {
         Log.e(TAG, "BLE Error: ${errorCode.name}")

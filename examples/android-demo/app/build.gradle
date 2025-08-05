@@ -20,7 +20,7 @@ plugins {
 android {
     namespace = "com.plaud.nicebuild"
     compileSdk = 34
-    
+
     buildFeatures {
         buildConfig = true
     }
@@ -61,29 +61,29 @@ android {
         }
     }
 
-        buildTypes {
+    buildTypes {
         release {
             signingConfig = signingConfigs.release
             minifyEnabled = true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            
+
 
             shrinkResources = true
-            
-           
+
+
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
                     outputFileName = "plaud-sdk-showcase.apk"
                 }
             }
         }
-        
+
         debug {
             applicationIdSuffix = ".debug"
             debuggable = true
         }
     }
-    
+
     // Enable AAB build optimization
     bundle {
         language {
@@ -105,8 +105,8 @@ repositories {
 }
 
 dependencies {
-     // Include SDK aar dependency
-     implementation(name: 'plaud-sdk', ext: 'aar')
+    // Include SDK aar dependency
+    implementation(name: 'plaud-sdk', ext: 'aar')
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
@@ -118,7 +118,7 @@ dependencies {
     implementation("com.google.guava:guava:28.2-android")
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
-    
+
     // SDK log dependencies
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.github.tony19:logback-android:2.0.0'
@@ -129,8 +129,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
-    
-    // SDK Firebase依赖
+    implementation 'org.java-websocket:Java-WebSocket:1.5.1'
+    // SDK Firebase dependencies
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
     implementation 'com.google.firebase:firebase-analytics'
 

@@ -1,101 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F8F9FA">
+    android:background="@android:color/white">
 
-    <!-- Header with iOS-style navigation -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="16dp"
-        android:gravity="center_vertical"
+        android:padding="16dp"
         android:background="@android:color/white"
-        android:elevation="1dp">
+        android:elevation="4dp">
 
-        <!-- Empty space for balance -->
-        <View
-            android:layout_width="44dp"
-            android:layout_height="44dp" />
-
-        <!-- Title -->
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/privacy_policy_title"
-            android:textColor="#1D1D1F"
-            android:textSize="17sp"
+            android:text="@string/privacy_policy"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:gravity="center" />
+            android:textColor="@android:color/black"
+            android:layout_centerInParent="true" />
 
-        <!-- Close Button with iOS style -->
         <TextView
             android:id="@+id/btn_close"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:text="Done"
-            android:textColor="#007AFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Close"
+            android:textColor="@android:color/holo_blue_dark"
             android:textSize="16sp"
-            android:gravity="center"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true" />
+            android:padding="8dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <!-- Subtle divider -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#E5E5E7" />
-
-    <!-- Content Container -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@android:color/white">
+        android:layout_height="match_parent">
 
-        <!-- WebView with padding for better readability -->
         <WebView
             android:id="@+id/webview_privacy_policy"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp" />
+            android:layout_height="match_parent" />
 
-        <!-- iOS-style loading indicator -->
         <LinearLayout
             android:id="@+id/loading_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             android:background="@android:color/white"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ProgressBar
-                android:id="@+id/progress_bar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:indeterminateTint="#007AFF" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="Loading..."
-                android:textColor="#86868B"
-                android:textSize="14sp" />
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
 
         </LinearLayout>
 
     </FrameLayout>
 
-</LinearLayout> 
+</LinearLayout>

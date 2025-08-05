@@ -13,20 +13,20 @@ enum class AppLanguage(val code: String, val displayName: String) {
 
     companion object {
         val DEFAULT = ENGLISH
-
+        
         fun fromCode(code: String?): AppLanguage {
             return values().find { it.code == code } ?: DEFAULT
         }
-
+        
         fun getAllCodes(): Array<String> {
             return values().map { it.code }.toTypedArray()
         }
-
+        
         fun getAllDisplayNames(): Array<String> {
             return values().map { it.displayName }.toTypedArray()
         }
     }
-
+    
     fun isDefault(): Boolean = this == DEFAULT
 }
 

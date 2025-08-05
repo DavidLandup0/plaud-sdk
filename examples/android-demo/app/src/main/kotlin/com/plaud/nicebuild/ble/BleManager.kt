@@ -30,30 +30,47 @@ class BleManager private constructor(private val context: Context) {
         device: BleDevice,
         callback: (Boolean, String?, String?) -> Unit
     ) {
-        CoroutineScope(Dispatchers.Main).launch {
-            LoadingManager.showLoading(context, "Connecting...")
-            bleCore.stopScan()
+        // Use IO thread to handle connection, avoid blocking UI thread
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Show loading dialog on main thread
+                withContext(Dispatchers.Main) {
+                    LoadingManager.showLoading(context, "Connecting...")
+                }
+                
+                // Stop scanning (on IO thread)
+                bleCore.stopScan()
 
-            val result = withTimeoutOrNull(20000L) { // 20s timeout from fragment
-                suspendCoroutine<Triple<Boolean, String?, String?>> { continuation ->
-                    bleCore.connectDevice(device.serialNumber, device.serialNumber) { success, code, message ->
-                        if (continuation.context.isActive) {
-                            continuation.resume(Triple(success, code, message))
+                val result = withTimeoutOrNull(20000L) { // 20s timeout
+                    suspendCoroutine<Triple<Boolean, String?, String?>> { continuation ->
+                        bleCore.connectDevice(device.serialNumber, device.serialNumber) { success, code, message ->
+                            if (continuation.context.isActive) {
+                                continuation.resume(Triple(success, code, message))
+                            }
                         }
                     }
                 }
-            }
-            
-            LoadingManager.hideLoading()
-
-            if (result != null) {
-                if (!result.first) {
-                    bleCore.disconnectDevice()
+                
+                // Hide loading dialog on main thread
+                withContext(Dispatchers.Main) {
+                    LoadingManager.hideLoading()
                 }
-                callback(result.first, result.second, result.third)
-            } else { // timeout
-                bleCore.disconnectDevice()
-                callback(false, "-100", "Connection timed out")
+
+                if (result != null) {
+                    if (!result.first) {
+                        bleCore.disconnectDevice()
+                    }
+                    callback(result.first, result.second, result.third)
+                } else { // timeout
+                    bleCore.disconnectDevice()
+                    callback(false, "-100", "Connection timed out")
+                }
+            } catch (e: Exception) {
+                // Ensure loading dialog is hidden even in exception cases
+                withContext(Dispatchers.Main) {
+                    LoadingManager.hideLoading()
+                }
+                callback(false, "-101", "Connection error: ${e.message}")
             }
         }
     }

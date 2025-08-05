@@ -13,6 +13,8 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.ViewHolder>() {
 
     private val devices = mutableListOf<BleDevice>()
     private var onItemClickListener: ((BleDevice) -> Unit)? = null
+    private var lastClickTime = 0L
+    private val CLICK_DEBOUNCE_TIME = 1000L // 1 second anti-duplicate click
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val deviceName: TextView = itemView.findViewById(R.id.tv_device_name)
@@ -33,7 +35,22 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.ViewHolder>() {
         holder.signalValue.text = "${device.rssi} dBm"
 
         holder.connectButton.setOnClickListener {
+            val currentTime = System.currentTimeMillis()
+            if (currentTime - lastClickTime < CLICK_DEBOUNCE_TIME) {
+                // Prevent duplicate clicks
+                return@setOnClickListener
+            }
+            lastClickTime = currentTime
+            
+            // Disable button to prevent duplicate clicks
+            holder.connectButton.isEnabled = false
+            
             onItemClickListener?.invoke(device)
+            
+            // Re-enable button after 1 second
+            holder.connectButton.postDelayed({
+                holder.connectButton.isEnabled = true
+            }, CLICK_DEBOUNCE_TIME)
         }
     }
 
@@ -47,5 +64,12 @@ class DeviceAdapter : RecyclerView.Adapter<DeviceAdapter.ViewHolder>() {
 
     fun setOnItemClickListener(listener: (BleDevice) -> Unit) {
         onItemClickListener = listener
+    }
+    
+    /**
+     * Re-enable all connect buttons
+     */
+    fun enableAllConnectButtons() {
+        notifyDataSetChanged()
     }
 } 

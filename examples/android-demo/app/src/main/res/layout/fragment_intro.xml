@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="Plaud SDK Showcase"
+            android:text="Plaud SDK App"
             android:textSize="36sp"
             android:textStyle="bold" />
 
@@ -53,20 +53,17 @@
         android:layout_margin="24dp"
         android:text="@string/fragment_intro_start_scan_button" />
 
-    <!-- Privacy Policy Link -->
+    <!-- Privacy Policy link -->
     <TextView
         android:id="@+id/tv_privacy_policy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="@string/privacy_policy_title"
-        android:textColor="?attr/colorPrimary"
+        android:layout_marginBottom="32dp"
+        android:text="@string/privacy_policy"
+        android:textColor="#2196F3"
         android:textSize="14sp"
-        android:textStyle="bold"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:padding="8dp" />
 
 </LinearLayout>

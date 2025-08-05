@@ -1,16 +1,10 @@
 package com.plaud.nicebuild.ui
 
-import android.Manifest
 import android.app.AlertDialog
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
+
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -18,8 +12,6 @@ import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -37,11 +29,9 @@ import com.plaud.nicebuild.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import sdk.NiceBuildSdk
-import sdk.network.RetrofitClient
 import sdk.network.manager.S3UploadManager
+import sdk.penblesdk.core.IWifiAgent
 import sdk.network.model.SummarizeTaskResult
-import sdk.network.model.Task
-import sdk.network.model.TranscribeResult
 import sdk.penblesdk.entity.BleFile
 import java.io.FileOutputStream
 import java.util.concurrent.TimeUnit
@@ -77,10 +67,12 @@ class FileListFragment : Fragment(), OpusPlayer.PlayerStateListener {
     private lateinit var btnUploadSelection: Button
     private lateinit var tvFileCount: TextView
     private lateinit var btnSelect: Button
+    private lateinit var btnWifiDownloadAll: Button
     
     private var isSelectionMode = false
     private var isPlayerPlaying = false
     private var isDownloading = false
+    private var downloadAllProgressDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,8 +96,14 @@ class FileListFragment : Fragment(), OpusPlayer.PlayerStateListener {
         // Initialize new header views
         tvFileCount = view.findViewById(R.id.tv_file_count)
         btnSelect = view.findViewById(R.id.btn_select)
+        btnWifiDownloadAll = view.findViewById(R.id.btn_wifi_download_all)
+        
         btnSelect.setOnClickListener {
             setSelectionMode(!isSelectionMode)
+        }
+        
+        btnWifiDownloadAll.setOnClickListener {
+            showDownloadAllConfirmationDialog()
         }
 
         // Initialize Player views
@@ -129,6 +127,8 @@ class FileListFragment : Fragment(), OpusPlayer.PlayerStateListener {
         setupPlayerControls()
         setupSelectionControls()
         updatePlayerUiToDefault()
+        observeBatchDownloadStatus()
+        observeWifiConnectionState()
 
         // Initial fetch
         bleManager.getFileList(0) { fileList ->
@@ -144,7 +144,7 @@ class FileListFragment : Fragment(), OpusPlayer.PlayerStateListener {
                 handlePlayClick(file)
             }
             onDownloadClick = { file, position ->
-                downloadFile(file, position)
+                showDownloadMethodSelectionDialog(file, position)
             }
             onUploadClick = { file, position ->
                 startUpload(file, position)
@@ -455,7 +455,7 @@ class FileListFragment : Fragment(), OpusPlayer.PlayerStateListener {
         btnUploadSelection.setOnClickListener {
             val selectedFiles = fileAdapter.selectedItems.toList()
             if (selectedFiles.isNotEmpty()) {
-                uploadFiles(selectedFiles)
+                showTransferMethodSelectionDialog(selectedFiles)
             }
         }
     }
@@ -531,6 +531,123 @@ class FileListFragment : Fragment(), OpusPlayer.PlayerStateListener {
             return
         }
 
+        // Show transfer method selection dialog
+        showTransferMethodSelectionDialog(listOf(file))
+    }
+    
+    /**
+     * Show upload method selection dialog for files
+     * Note: Upload only deals with already downloaded files, so WiFi transfer is not relevant here
+     */
+    private fun showTransferMethodSelectionDialog(files: List<BleFile>) {
+        // For upload, we only need to check if files exist locally and BLE is available for download if needed
+        val bleAvailable = checkBleTransferAvailability()
+        
+        if (files.size == 1) {
+            val file = files.first()
+            val opusFile = FileHelper.getOpusFile(file)
+            if (opusFile.exists()) {
+                // File exists locally, upload directly
+                val position = mainViewModel.fileList.value?.indexOf(file) ?: -1
+                if (position != -1) {
+                    startBleUploadSingle(file, position)
+                }
+            } else {
+                // File not downloaded yet, ask user to download first
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.upload_file_not_downloaded_title))
+                    .setMessage(getString(R.string.upload_file_not_downloaded_message))
+                    .setPositiveButton(getString(R.string.action_download_first)) { _, _ ->
+                        val position = mainViewModel.fileList.value?.indexOf(file) ?: -1
+                        if (position != -1) {
+                            showDownloadMethodSelectionDialog(file, position)
+                        }
+                    }
+                    .setNegativeButton(getString(R.string.action_cancel), null)
+                    .show()
+            }
+        } else {
+            // Multiple files upload
+            val localFiles = files.filter { FileHelper.getOpusFile(it).exists() }
+            val missingFiles = files.filter { !FileHelper.getOpusFile(it).exists() }
+            
+            if (missingFiles.isNotEmpty()) {
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.upload_files_not_downloaded_title))
+                    .setMessage(getString(R.string.upload_files_not_downloaded_message, missingFiles.size, files.size))
+                    .setPositiveButton(getString(R.string.action_upload_available)) { _, _ ->
+                        if (localFiles.isNotEmpty()) {
+                            uploadFiles(localFiles)
+                        }
+                    }
+                    .setNegativeButton(getString(R.string.action_cancel), null)
+                    .show()
+            } else {
+                // All files exist locally, upload them
+                uploadFiles(files)
+            }
+        }
+    }
+    
+    /**
+     * Check if WiFi fast transfer is available
+     */
+    private fun checkWifiTransferAvailability(): Boolean {
+        return mainViewModel.isWifiTransferAvailable()
+    }
+    
+    /**
+     * Check if BLE transfer is available
+     */
+    private fun checkBleTransferAvailability(): Boolean {
+        return bleManager.isConnected()
+    }
+    
+    /**
+     * Show download method - only BLE download available
+     */
+    private fun showDownloadMethodSelectionDialog(file: BleFile, position: Int) {
+        val bleAvailable = checkBleTransferAvailability()
+        
+        if (bleAvailable) {
+            downloadFile(file, position) // Use BLE download directly
+        } else {
+            Toast.makeText(requireContext(), getString(R.string.wifi_transfer_device_not_connected), Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+
+
+    
+    /**
+     * Start BLE transfer for selected files
+     */
+    private fun startBleTransfer(files: List<BleFile>) {
+        if (files.size == 1) {
+            // Single file upload
+            val file = files.first()
+            val position = mainViewModel.fileList.value?.indexOf(file) ?: -1
+            if (position != -1) {
+                startBleUploadSingle(file, position)
+            }
+        } else {
+            // Multiple files upload - show confirmation
+            AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.transfer_method_ble_title))
+                .setMessage(getString(R.string.ble_batch_upload_confirmation, files.size))
+                .setPositiveButton(getString(R.string.action_continue)) { _, _ ->
+                    uploadFiles(files)
+                }
+                .setNegativeButton(getString(R.string.action_cancel), null)
+                .show()
+        }
+    }
+    
+    /**
+     * Start BLE upload for single file
+     */
+    private fun startBleUploadSingle(file: BleFile, position: Int) {
+        val opusFile = FileHelper.getOpusFile(file)
         fileAdapter.setUploading(position, true)
 
         mainViewModel.uploadFile(opusFile, file,
@@ -641,8 +758,96 @@ class FileListFragment : Fragment(), OpusPlayer.PlayerStateListener {
         }
     }
 
+
+
+            // Confirmation dialog
+    private fun showDownloadAllConfirmationDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.download_all_confirmation_title))
+            .setMessage(getString(R.string.download_all_confirmation_message))
+            .setPositiveButton(getString(R.string.action_continue)) { _, _ ->
+                mainViewModel.downloadAllFiles()
+            }
+            .setNegativeButton(getString(R.string.action_cancel), null)
+            .show()
+    }
+
+            // Observe WiFi connection state
+    private fun observeWifiConnectionState() {
+        mainViewModel.wifiConnectionState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                IWifiAgent.WifiConnectionState.READY -> {
+                    btnWifiDownloadAll.visibility = View.VISIBLE
+                }
+                else -> {
+                    btnWifiDownloadAll.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+            // Observe batch download status
+    private fun observeBatchDownloadStatus() {
+        mainViewModel.batchDownloadStatus.observe(viewLifecycleOwner) { status ->
+            if (status.isActive) {
+                if (status.currentIndex == 0) {
+                    // Starting, show progress dialog
+                    showDownloadAllProgressDialog(status)
+                } else {
+                    // Update progress
+                    updateDownloadAllProgressDialog(status)
+                }
+            } else {
+                // Download completed, close progress dialog
+                dismissDownloadAllProgressDialog()
+            }
+        }
+    }
+
+    // Show download progress dialog
+    private fun showDownloadAllProgressDialog(status: com.plaud.nicebuild.manager.WifiManager.BatchDownloadStatus) {
+        val message = getString(
+            R.string.download_all_progress_message,
+            status.currentIndex,
+            status.totalFiles,
+            status.currentFileName
+        )
+        
+        downloadAllProgressDialog = AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.download_all_progress_title))
+            .setMessage(message)
+            .setCancelable(false)
+                                    .setNegativeButton(R.string.dialog_cancel_button) { _, _ ->
+                            // Cancel download logic can be added here
+                            // mainViewModel.stopWifiTransfer() // TODO: Implement cancel download logic
+                        }
+            .create()
+        
+        downloadAllProgressDialog?.show()
+    }
+
+    // Update download progress dialog
+    private fun updateDownloadAllProgressDialog(status: com.plaud.nicebuild.manager.WifiManager.BatchDownloadStatus) {
+        downloadAllProgressDialog?.let { dialog ->
+            val message = getString(
+                R.string.download_all_progress_message,
+                status.currentIndex,
+                status.totalFiles,
+                status.currentFileName
+            )
+            dialog.setMessage(message)
+        }
+    }
+
+    // Close download progress dialog
+    private fun dismissDownloadAllProgressDialog() {
+        downloadAllProgressDialog?.dismiss()
+        downloadAllProgressDialog = null
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        dismissDownloadAllProgressDialog()
         opusPlayer.stop()
     }
 }

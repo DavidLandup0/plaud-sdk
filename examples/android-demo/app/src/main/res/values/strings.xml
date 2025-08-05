@@ -134,6 +134,12 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_delete_selected">Delete Selected</string>
     <string name="action_delete_all">Delete All Files</string>
+
+    <string name="action_wifi_download_all">WiFi Download All</string>
+    <string name="download_all_confirmation_title">Confirm Download All</string>
+    <string name="download_all_confirmation_message">This will download all files from the device to your phone via WiFi fast transfer. Do you want to continue?</string>
+    <string name="download_all_progress_title">Downloading Files</string>
+    <string name="download_all_progress_message">Downloading file %1$d/%2$d\n%3$s</string>
     <string name="dialog_message_delete_selected_confirm">Are you sure you want to delete %1$d selected files?</string>
     <string name="device_status_idle">Idle</string>
     <string name="device_status_vpr">VPR Mode</string>
@@ -238,20 +244,108 @@
     <string name="current_environment_info">Current environment: %1$s (%2$s)</string>
     <string name="toast_language_and_environment_switched">Language switched to %1$s, environment automatically switched to %2$s</string>
     <string name="button_show_environment_info">Environment Info</string>
-
+    
     <!-- Language Config Manager strings -->
     <string name="toast_language_config_not_found">Language configuration not found</string>
     <string name="toast_language_config_applied">Configuration applied: %1$s</string>
     <string name="toast_language_config_apply_failed">Failed to apply configuration</string>
-
+    
     <!-- AppKey setting dialog strings -->
     <string name="dialog_btn_set">Set</string>
     <string name="dialog_btn_cancel">Cancel</string>
     <string name="toast_app_key_set_success">App Key set successfully</string>
-
+    
+    <!-- WiFi transfer permission dialog strings -->
+    <string name="wifi_transfer_permission_title">WiFi Transfer Permission Required</string>
+    <string name="wifi_transfer_permission_message">WiFi fast transfer requires additional permissions or settings:\n\n%1$s\n\nPlease grant the required permissions and enable necessary settings.</string>
+    <string name="action_go_to_settings">Go to Settings</string>
+    <string name="action_retry">Retry</string>
+    
+    <!-- Status strings -->
+    <string name="status_not_connected">Not Connected</string>
+    <string name="status_connected">Connected</string>
+    <string name="status_not_recording">Not Recording</string>
+    <string name="status_recording">Recording</string>
+    
+    <!-- Real-time sync strings -->
+    <string name="realtime_sync_started">Real-time sync started, saving to: %1$s</string>
+    <string name="realtime_sync_completed">Real-time sync completed, file saved: %1$s</string>
+    
+    <!-- Connection timeout -->
+    <string name="connection_timeout_retry">Connection timeout, please retry</string>
+    
+    <!-- WiFi Fast Transfer -->
+    <string name="wifi_transfer_button">WiFi Fast Transfer</string>
+    <string name="wifi_transfer_dialog_title">WiFi Fast Transfer</string>
+    <string name="wifi_transfer_connecting">Connecting to device…</string>
+    <string name="wifi_transfer_checking">Checking prerequisites…</string>
+    <string name="wifi_transfer_device_wifi">Connecting to device WiFi…</string>
+    <string name="wifi_transfer_transferring">Transferring files…</string>
+    <string name="wifi_transfer_completed">Transfer completed successfully!</string>
+    <string name="wifi_transfer_failed">Transfer failed</string>
+    <string name="wifi_transfer_cancel">Cancel</string>
+    <string name="wifi_transfer_close">Close</string>
+    <string name="wifi_transfer_ready">Ready to start transfer</string>
+    <string name="wifi_transfer_current_file">Current File:</string>
+    
+    <!-- WiFi Transfer Permissions -->
+    <string name="wifi_transfer_permissions_title">Permissions Required</string>
+    <string name="wifi_transfer_permissions_message">WiFi fast transfer requires the following permissions:\n\n• WiFi access and control\n• Location services\n• File storage access\n\nThese permissions are needed to connect to device WiFi and download files.</string>
+    <string name="wifi_transfer_grant_permissions">Grant Permissions</string>
+    <string name="wifi_transfer_cancel_permissions">Cancel</string>
+    <string name="wifi_transfer_permissions_denied">Some permissions were denied. WiFi transfer may not work properly.</string>
+    
+    <!-- WiFi Transfer Prerequisites -->
+    <string name="wifi_transfer_wifi_required_title">WiFi Required</string>
+    <string name="wifi_transfer_wifi_required_message">WiFi fast transfer requires WiFi to be enabled. Would you like to open WiFi settings?</string>
+    <string name="wifi_transfer_location_required_title">Location Services Required</string>
+    <string name="wifi_transfer_location_required_message">WiFi fast transfer requires location services to be enabled for WiFi scanning. Would you like to open location settings?</string>
+    <string name="wifi_transfer_write_settings_required_title">System Settings Permission Required</string>
+    <string name="wifi_transfer_write_settings_required_message">WiFi fast transfer requires permission to modify system settings for network connection. Would you like to grant this permission?</string>
+    <string name="wifi_transfer_open_settings">Open Settings</string>
+    <string name="wifi_transfer_device_not_connected">Please connect to device first</string>
+    <string name="wifi_transfer_not_available">WiFi transfer not available. Please ensure WiFi and location services are enabled and device is connected.</string>
+    
+    <!-- Transfer Method Selection -->
+    <string name="transfer_method_selection_title">Choose Transfer Method</string>
+    <string name="transfer_method_selection_description">Select the method to upload your files</string>
+    <string name="transfer_method_wifi_title">WiFi Fast Transfer</string>
+    <string name="transfer_method_wifi_description">High-speed transfer via WiFi connection</string>
+    <string name="transfer_method_ble_title">Bluetooth Transfer</string>
+    <string name="transfer_method_ble_description">Reliable transfer via Bluetooth connection</string>
+    <string name="transfer_method_status_available">Available</string>
+    <string name="transfer_method_status_unavailable">Unavailable</string>
+    <string name="transfer_method_status_limited">Limited</string>
+    <string name="wifi_transfer_confirmation_message">WiFi fast transfer will download all files from device to phone, then automatically upload to cloud.\n\nNote: This will transfer all files on the device, not just selected files.\n\nContinue?</string>
+    <string name="action_continue">Continue</string>
+    <string name="ble_batch_upload_confirmation">Upload %d files via Bluetooth to cloud?\n\nThis may take some time depending on file sizes and connection quality.</string>
+    
+    <!-- Download Method Selection -->
+    <string name="download_method_selection_title">Choose Download Method</string>
+    <string name="download_method_wifi_title">WiFi Fast Download</string>
+    <string name="download_method_ble_title">Bluetooth Download</string>
+    <string name="wifi_download_confirmation_message">Download this file via WiFi?\n\nThis will be faster than Bluetooth but requires WiFi connection to the device.</string>
+    
+    <!-- Upload File Management -->
+    <string name="upload_file_not_downloaded_title">File Not Downloaded</string>
+    <string name="upload_file_not_downloaded_message">This file hasn\'t been downloaded yet. Please download it first before uploading to cloud.</string>
+    <string name="upload_files_not_downloaded_title">Some Files Not Downloaded</string>
+    <string name="upload_files_not_downloaded_message">%1$d of %2$d selected files haven\'t been downloaded yet. Upload only the available files?</string>
+    <string name="action_download_first">Download First</string>
+    <string name="action_upload_available">Upload Available Files</string>
+    
+    <!-- WiFi batch download strings -->
+    <string name="wifi_batch_download_start">Starting download of %d files...</string>
+    <string name="wifi_batch_download_progress">Downloading file %1$d/%2$d: %3$s</string>
+    <string name="wifi_batch_download_success_all">All %d files downloaded successfully!</string>
+    <string name="wifi_batch_download_success_partial">Download completed: %1$d successful, %2$d failed</string>
+    <string name="wifi_batch_download_failed_start">Failed to start batch download</string>
+    <string name="wifi_not_ready">WiFi is not ready, cannot start download</string>
+    
+    <!-- Dialog cancel button -->
+    <string name="dialog_cancel_button">Cancel</string>
+    
     <!-- Privacy Policy -->
-    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string name="privacy_policy_url">https://app.plaud.ai/privacy</string>
-    <string name="settings_title">Settings</string>
-    <string name="about_title">About</string>
 </resources>

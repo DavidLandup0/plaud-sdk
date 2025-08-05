@@ -151,7 +151,7 @@
                             android:id="@+id/btn_record_control"
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_weight="1"
                             android:minHeight="56dp"
@@ -162,7 +162,7 @@
                             android:id="@+id/btn_pause_resume"
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
                             android:enabled="false"
@@ -346,6 +346,25 @@
                             android:minHeight="56dp"
                             android:text="@string/fragment_device_feature_wifi_cloud"
                             android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <!-- WiFi Fast Transfer Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_wifi_transfer"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:text="@string/wifi_transfer_button"
+                            android:textSize="14sp"
+                            android:drawableStart="@android:drawable/ic_dialog_info"
+                            android:drawablePadding="8dp" />
+
                     </LinearLayout>
 
                     <!-- Row 3 -->

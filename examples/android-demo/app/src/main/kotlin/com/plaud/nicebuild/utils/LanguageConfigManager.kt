@@ -13,7 +13,7 @@ import sdk.models.AppKeyPairEnv
  * Automatically matches corresponding AppKey, AppSecret and ServerEnvironment based on language code
  */
 object LanguageConfigManager {
-
+    
     /**
      * Language configuration data class
      */
@@ -22,7 +22,7 @@ object LanguageConfigManager {
         val serverEnvironment: ServerEnvironment,
         val displayName: String
     )
-
+    
     /**
      * Language configuration mapping table
      */
@@ -38,14 +38,14 @@ object LanguageConfigManager {
             displayName = "US Environment"
         )
     )
-
+    
     /**
      * Get configuration for language code
      */
     fun getConfigForLanguage(languageCode: String): LanguageConfig? {
         return languageConfigMap[languageCode]
     }
-
+    
     /**
      * Apply configuration for language code - now only switches domain, sets default AppKey only if user hasn't manually set one
      * @param context Context
@@ -54,35 +54,35 @@ object LanguageConfigManager {
      * @return Whether configuration was applied successfully
      */
     fun applyConfigForLanguage(
-        context: Context,
-        languageCode: String,
+        context: Context, 
+        languageCode: String, 
         bleManager: BleManager
     ): Boolean {
         val config = getConfigForLanguage(languageCode)
         if (config == null) {
             Toast.makeText(
-                context,
-                context.getString(R.string.toast_language_config_not_found),
+                context, 
+                context.getString(R.string.toast_language_config_not_found), 
                 Toast.LENGTH_SHORT
             ).show()
             return false
         }
-
+        
         try {
             // 1. Always switch server environment
             NiceBuildSdk.switchEnvironment(config.serverEnvironment)
-
+            
             // 2. Only set AppKey if user hasn't manually set one
             if (!AppKeyManager.hasManuallySetAppKey(context)) {
                 AppKeyManager.saveAppKeyPairAsDefault(
-                    context,
-                    config.appKeyPairEnv.appKey,
+                    context, 
+                    config.appKeyPairEnv.appKey, 
                     config.appKeyPairEnv.appSecret
                 )
-
+                
                 // Update BLE manager with default AppKey
                 bleManager.updateAppKey(
-                    config.appKeyPairEnv.appKey,
+                    config.appKeyPairEnv.appKey, 
                     config.appKeyPairEnv.appSecret
                 )
             } else {
@@ -92,8 +92,14 @@ object LanguageConfigManager {
                     bleManager.updateAppKey(appKey, appSecret)
                 }
             }
-
-
+            
+            // 3. Show success message
+            Toast.makeText(
+                context,
+                context.getString(R.string.toast_language_config_applied, config.displayName),
+                Toast.LENGTH_SHORT
+            ).show()
+            
             return true
         } catch (e: Exception) {
             Toast.makeText(
@@ -104,7 +110,7 @@ object LanguageConfigManager {
             return false
         }
     }
-
+    
     /**
      * Get current configuration for language
      */
@@ -112,19 +118,19 @@ object LanguageConfigManager {
         val currentLanguageCode = LocaleHelper.getLanguage(context)
         return getConfigForLanguage(currentLanguageCode)
     }
-
+    
     /**
      * Check if current configuration is synced with language
      */
     fun isConfigSyncedWithLanguage(context: Context): Boolean {
         val currentLanguageCode = LocaleHelper.getLanguage(context)
         val expectedConfig = getConfigForLanguage(currentLanguageCode) ?: return false
-
+        
         val (currentAppKey, currentAppSecret) = AppKeyManager.getAppKeyPair(context)
         val currentEnvironment = NiceBuildSdk.getCurrentEnvironment()
-
+        
         return currentAppKey == expectedConfig.appKeyPairEnv.appKey &&
-                currentAppSecret == expectedConfig.appKeyPairEnv.appSecret &&
-                currentEnvironment == expectedConfig.serverEnvironment
+               currentAppSecret == expectedConfig.appKeyPairEnv.appSecret &&
+               currentEnvironment == expectedConfig.serverEnvironment
     }
 } 

@@ -8,10 +8,15 @@ gradle-wrapper.jar
 build/
 */build/
 app/build/
+libs/build/
 
 # Generated files
 GeneratedPluginRegistrant.java
 /libs/.cxx/
+**/.cxx/
+
+# JNI libs (prebuilt binaries should not change frequently)
+libs/src/main/jniLibs/
 
 # SDK demo build output
 sdk_output/demo/android/build/
