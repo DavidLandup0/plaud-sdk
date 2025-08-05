@@ -35,6 +35,12 @@ This document provides guidance for integrating and using of the PLAUD SDK.
         - Update Wifi
         - Get Wifi list
         - Set cloud address
+       - Wifi Fast-Transfer
+        - Open device wifi
+        - Connect to device wifi
+        - Get file list
+        - Delete file
+        - Download all files
       - Cloud Processing Service
         - AI Transcription & Summarization
 
@@ -681,6 +687,99 @@ The connection status will be returned in the following callback:
   /// Get Wi-Fi Test Result
   /// - Parameter wifiIndex: Wi-Fi index (4 bytes)
   @objc public func getWifiSyncTestResult(wifiIndex: UInt32)
+```
+
+#### Wifi Fast-Transfer
+
+- Open device wifi
+
+```code
+  deviceAgent.setDeviceWiFi(open: true)
+```
+
+- Connect to device wifi
+
+```code
+    //when device wifi opened successfully, connect to it
+    func onWiFiOpen(_ status: Int, _ wifiName: String, _ wholeName: String, _ wifiPass: String) {
+        debugPrint("onWiFiOpen status:\(status)")
+        switch status {
+        case 0:
+            // WiFi opened successfully, navigate to transfer page and connect
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.connectToWiFi(wifiName, wifiPass)
+                self.navigateToWiFiTransferPage()
+            }
+        case 1:
+            showToastWithMessage(NSLocalizedString("wifi.error.recording_in_progress", comment: ""))
+            wifiOpening = false
+        case 2:
+            showToastWithMessage(NSLocalizedString("wifi.error.udisk_mode_active", comment: ""))
+            wifiOpening = false
+        default:
+            wifiOpening = false
+            break
+        }
+    }
+```
+
+- Get file list
+
+```code
+    /// Get file list 
+    /// - Parameters:
+    ///   - uid: Request uid, new requests will naturally override old requests
+    ///   - sessionId: Starting sessionId
+    ///   - single: Whether to only get current file information, default false
+    @objc public func getFileList(_ uid: Int, _ sessionId: Int, _ single: Bool = false)
+
+    //result call back
+    /// - Parameter files: Recording list
+    @objc optional func wifiFileList(_ files: [BleFile])
+```
+
+- Delete file
+
+```code
+    /// Delete file
+    /// - Parameters:
+    ///   - sessionId: Recording ID
+    ///   - scene: Scene, default 1
+    @objc public func deleteFile(_ sessionId: Int, _ scene: Int = 1) 
+
+    //result call back
+    // File deletion result
+    /// - Parameters:
+    ///   - sessionId: Recording ID
+    ///   - status: Deletion result 0 success, >0 failure reason
+    @objc optional func wifiFileDelete(_ sessionId: Int, _ status: Int)
+```
+
+- Download all files
+
+```code
+    /// Start downloading all files
+    /// First get file list, then download one by one
+    @objc public func startDownloadAll()
+
+    //call back
+    /// File sync--file status
+    /// - Parameters:
+    ///   - sessionId: Recording ID
+    ///   - status: Status
+    @objc optional func wifiSyncFile(_ sessionId: Int, _ status: Int)
+
+    /// File sync--file data
+    /// - Parameters:
+    ///   - sessionId: Recording ID
+    ///   - offset: File offset (bytes)
+    ///   - count: File length (bytes)
+    ///   - binData: Data
+    @objc optional func wifiSyncFileData(_ sessionId: Int, _ offset: Int, _ count: Int, _ binData: Data)
+
+    /// A file download completed
+    @objc optional func wifiDataComplete()
+
 ```
 
 #### AI Cloud Workflow
