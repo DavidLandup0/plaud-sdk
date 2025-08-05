@@ -434,7 +434,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BleAgent * _
 /// @see    Callback bleConnectState
 /// @see    Callback bleBind
 ///
-- (void)connectBleDeviceWithBleDevice:(BleDevice * _Nonnull)bleDevice :(NSString * _Nullable)devToken :(NSString * _Nullable)userName;
+- (void)connectBleDeviceWithBleDevice:(BleDevice * _Nonnull)bleDevice :(NSString * _Nullable)deviceToken :(NSString * _Nullable)userName;
 /// Disconnect Bluetooth connection
 - (void)disconnect;
 /// Is the recording pen temporarily authenticated?
