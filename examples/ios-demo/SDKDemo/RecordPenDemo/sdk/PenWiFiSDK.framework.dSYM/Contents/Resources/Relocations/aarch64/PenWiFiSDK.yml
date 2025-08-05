@@ -1,0 +1,666 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/xionghao/Library/Developer/Xcode/DerivedData/SDKDemoInternal-fvwqmaeirzmerabyqemxrxrjlakb/Build/Products/Release-iphoneos/PenWiFiSDK.framework/PenWiFiSDK'
+relocations:
+  - { offset: 0x9536C, size: 0x8, addend: 0x0, symName: _PenWiFiSDKVersionString, symObjAddr: 0x0, symBinAddr: 0x274E0, symSize: 0x0 }
+  - { offset: 0x953A1, size: 0x8, addend: 0x0, symName: _PenWiFiSDKVersionNumber, symObjAddr: 0x30, symBinAddr: 0x27510, symSize: 0x0 }
+  - { offset: 0x953DE, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer startListen:]', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0x58 }
+  - { offset: 0x95551, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer startListen:]', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0x58 }
+  - { offset: 0x95594, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer sendText:]', symObjAddr: 0x58, symBinAddr: 0x4058, symSize: 0x10 }
+  - { offset: 0x955D5, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer sendData:]', symObjAddr: 0x68, symBinAddr: 0x4068, symSize: 0x10 }
+  - { offset: 0x95616, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer closeClient]', symObjAddr: 0x78, symBinAddr: 0x4078, symSize: 0x10 }
+  - { offset: 0x95649, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer close]', symObjAddr: 0x88, symBinAddr: 0x4088, symSize: 0x34 }
+  - { offset: 0x9567C, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer serverDidStart:]', symObjAddr: 0xBC, symBinAddr: 0x40BC, symSize: 0x44 }
+  - { offset: 0x956DE, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer serverDidStop:]', symObjAddr: 0x100, symBinAddr: 0x4100, symSize: 0x50 }
+  - { offset: 0x9572B, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer server:didFailWithError:]', symObjAddr: 0x150, symBinAddr: 0x4150, symSize: 0xA0 }
+  - { offset: 0x95788, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer server:webSocketDidOpen:]', symObjAddr: 0x1F0, symBinAddr: 0x41F0, symSize: 0x5C }
+  - { offset: 0x957E5, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer server:webSocket:didReceiveMessage:]', symObjAddr: 0x24C, symBinAddr: 0x424C, symSize: 0xC8 }
+  - { offset: 0x95840, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer server:webSocket:didFailWithError:]', symObjAddr: 0x314, symBinAddr: 0x4314, symSize: 0x94 }
+  - { offset: 0x958A9, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer server:webSocket:didCloseWithCode:reason:wasClean:]', symObjAddr: 0x3A8, symBinAddr: 0x43A8, symSize: 0xB0 }
+  - { offset: 0x95932, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer delegate]', symObjAddr: 0x458, symBinAddr: 0x4458, symSize: 0x18 }
+  - { offset: 0x95969, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer setDelegate:]', symObjAddr: 0x470, symBinAddr: 0x4470, symSize: 0xC }
+  - { offset: 0x959AA, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer server]', symObjAddr: 0x47C, symBinAddr: 0x447C, symSize: 0x8 }
+  - { offset: 0x959E1, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer setServer:]', symObjAddr: 0x484, symBinAddr: 0x4484, symSize: 0xC }
+  - { offset: 0x95A22, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer client]', symObjAddr: 0x490, symBinAddr: 0x4490, symSize: 0x8 }
+  - { offset: 0x95A59, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer setClient:]', symObjAddr: 0x498, symBinAddr: 0x4498, symSize: 0xC }
+  - { offset: 0x95A9A, size: 0x8, addend: 0x0, symName: '-[JXWebSocketServer .cxx_destruct]', symObjAddr: 0x4A4, symBinAddr: 0x44A4, symSize: 0x38 }
+  - { offset: 0x95B22, size: 0x8, addend: 0x0, symName: '+[PSWebSocket isWebSocketRequest:]', symObjAddr: 0x0, symBinAddr: 0x44DC, symSize: 0xC }
+  - { offset: 0x95E12, size: 0x8, addend: 0x0, symName: '+[PSWebSocket isWebSocketRequest:]', symObjAddr: 0x0, symBinAddr: 0x44DC, symSize: 0xC }
+  - { offset: 0x95E53, size: 0x8, addend: 0x0, symName: '-[PSWebSocket readyState]', symObjAddr: 0xC, symBinAddr: 0x44E8, symSize: 0xA0 }
+  - { offset: 0x95E9E, size: 0x8, addend: 0x0, symName: '___25-[PSWebSocket readyState]_block_invoke', symObjAddr: 0xAC, symBinAddr: 0x4588, symSize: 0x14 }
+  - { offset: 0x95EF5, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40r, symObjAddr: 0xC0, symBinAddr: 0x459C, symSize: 0x34 }
+  - { offset: 0x95F1E, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40r, symObjAddr: 0xF4, symBinAddr: 0x45D0, symSize: 0x2C }
+  - { offset: 0x95F3D, size: 0x8, addend: 0x0, symName: '-[PSWebSocket remoteAddress]', symObjAddr: 0x120, symBinAddr: 0x45FC, symSize: 0x8 }
+  - { offset: 0x95F82, size: 0x8, addend: 0x0, symName: _PSPeerAddressOfInputStream, symObjAddr: 0x128, symBinAddr: 0x4604, symSize: 0xD0 }
+  - { offset: 0x960D1, size: 0x8, addend: 0x0, symName: '-[PSWebSocket remoteHost]', symObjAddr: 0x1F8, symBinAddr: 0x46D4, symSize: 0xDC }
+  - { offset: 0x961A7, size: 0x8, addend: 0x0, symName: '-[PSWebSocket isInputPaused]', symObjAddr: 0x2D4, symBinAddr: 0x47B0, symSize: 0x9C }
+  - { offset: 0x961F2, size: 0x8, addend: 0x0, symName: '___28-[PSWebSocket isInputPaused]_block_invoke', symObjAddr: 0x370, symBinAddr: 0x484C, symSize: 0x14 }
+  - { offset: 0x96249, size: 0x8, addend: 0x0, symName: '-[PSWebSocket setInputPaused:]', symObjAddr: 0x384, symBinAddr: 0x4860, symSize: 0x54 }
+  - { offset: 0x96288, size: 0x8, addend: 0x0, symName: '___30-[PSWebSocket setInputPaused:]_block_invoke', symObjAddr: 0x3D8, symBinAddr: 0x48B4, symSize: 0x2C }
+  - { offset: 0x962D7, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s, symObjAddr: 0x404, symBinAddr: 0x48E0, symSize: 0x8 }
+  - { offset: 0x962FE, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s, symObjAddr: 0x40C, symBinAddr: 0x48E8, symSize: 0x8 }
+  - { offset: 0x9631D, size: 0x8, addend: 0x0, symName: '-[PSWebSocket isOutputPaused]', symObjAddr: 0x414, symBinAddr: 0x48F0, symSize: 0x9C }
+  - { offset: 0x96368, size: 0x8, addend: 0x0, symName: '___29-[PSWebSocket isOutputPaused]_block_invoke', symObjAddr: 0x4B0, symBinAddr: 0x498C, symSize: 0x14 }
+  - { offset: 0x963BF, size: 0x8, addend: 0x0, symName: '-[PSWebSocket setOutputPaused:]', symObjAddr: 0x4C4, symBinAddr: 0x49A0, symSize: 0x54 }
+  - { offset: 0x963FE, size: 0x8, addend: 0x0, symName: '___31-[PSWebSocket setOutputPaused:]_block_invoke', symObjAddr: 0x518, symBinAddr: 0x49F4, symSize: 0x2C }
+  - { offset: 0x9644D, size: 0x8, addend: 0x0, symName: '-[PSWebSocket initWithMode:request:]', symObjAddr: 0x544, symBinAddr: 0x4A20, symSize: 0x2BC }
+  - { offset: 0x964F0, size: 0x8, addend: 0x0, symName: '+[PSWebSocket clientSocketWithRequest:]', symObjAddr: 0x800, symBinAddr: 0x4CDC, symSize: 0x48 }
+  - { offset: 0x96537, size: 0x8, addend: 0x0, symName: '-[PSWebSocket initClientSocketWithRequest:]', symObjAddr: 0x848, symBinAddr: 0x4D24, symSize: 0x1A0 }
+  - { offset: 0x96645, size: 0x8, addend: 0x0, symName: '+[PSWebSocket serverSocketWithRequest:inputStream:outputStream:]', symObjAddr: 0x9E8, symBinAddr: 0x4EC4, symSize: 0x88 }
+  - { offset: 0x966AC, size: 0x8, addend: 0x0, symName: '-[PSWebSocket initServerWithRequest:inputStream:outputStream:]', symObjAddr: 0xA70, symBinAddr: 0x4F4C, symSize: 0x94 }
+  - { offset: 0x96713, size: 0x8, addend: 0x0, symName: '-[PSWebSocket open]', symObjAddr: 0xB04, symBinAddr: 0x4FE0, symSize: 0x50 }
+  - { offset: 0x96746, size: 0x8, addend: 0x0, symName: '___19-[PSWebSocket open]_block_invoke', symObjAddr: 0xB54, symBinAddr: 0x5030, symSize: 0x40 }
+  - { offset: 0x96785, size: 0x8, addend: 0x0, symName: '-[PSWebSocket send:]', symObjAddr: 0xB94, symBinAddr: 0x5070, symSize: 0x80 }
+  - { offset: 0x967C8, size: 0x8, addend: 0x0, symName: '___20-[PSWebSocket send:]_block_invoke', symObjAddr: 0xC14, symBinAddr: 0x50F0, symSize: 0xD0 }
+  - { offset: 0x96817, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s, symObjAddr: 0xCE4, symBinAddr: 0x51C0, symSize: 0x28 }
+  - { offset: 0x96840, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s, symObjAddr: 0xD0C, symBinAddr: 0x51E8, symSize: 0x28 }
+  - { offset: 0x9685F, size: 0x8, addend: 0x0, symName: '-[PSWebSocket ping:handler:]', symObjAddr: 0xD34, symBinAddr: 0x5210, symSize: 0xC0 }
+  - { offset: 0x968B2, size: 0x8, addend: 0x0, symName: '___28-[PSWebSocket ping:handler:]_block_invoke', symObjAddr: 0xDF4, symBinAddr: 0x52D0, symSize: 0x58 }
+  - { offset: 0x96911, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48b, symObjAddr: 0xE4C, symBinAddr: 0x5328, symSize: 0x3C }
+  - { offset: 0x9693A, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s, symObjAddr: 0xE88, symBinAddr: 0x5364, symSize: 0x30 }
+  - { offset: 0x96959, size: 0x8, addend: 0x0, symName: '-[PSWebSocket close]', symObjAddr: 0xEB8, symBinAddr: 0x5394, symSize: 0xC }
+  - { offset: 0x9698A, size: 0x8, addend: 0x0, symName: '-[PSWebSocket closeWithCode:reason:]', symObjAddr: 0xEC4, symBinAddr: 0x53A0, symSize: 0x88 }
+  - { offset: 0x969E0, size: 0x8, addend: 0x0, symName: '___36-[PSWebSocket closeWithCode:reason:]_block_invoke', symObjAddr: 0xF4C, symBinAddr: 0x5428, symSize: 0xE4 }
+  - { offset: 0x96A43, size: 0x8, addend: 0x0, symName: '___36-[PSWebSocket closeWithCode:reason:]_block_invoke', symObjAddr: 0xF4C, symBinAddr: 0x5428, symSize: 0xE4 }
+  - { offset: 0x96B45, size: 0x8, addend: 0x0, symName: '___36-[PSWebSocket closeWithCode:reason:]_block_invoke_2', symObjAddr: 0x1030, symBinAddr: 0x550C, symSize: 0x74 }
+  - { offset: 0x96BA3, size: 0x8, addend: 0x0, symName: '___36-[PSWebSocket closeWithCode:reason:]_block_invoke_3', symObjAddr: 0x10A4, symBinAddr: 0x5580, symSize: 0x18 }
+  - { offset: 0x96BE1, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32w, symObjAddr: 0x10BC, symBinAddr: 0x5598, symSize: 0xC }
+  - { offset: 0x96C0A, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32w, symObjAddr: 0x10C8, symBinAddr: 0x55A4, symSize: 0x8 }
+  - { offset: 0x96C29, size: 0x8, addend: 0x0, symName: '-[PSWebSocket copyStreamPropertyForKey:]', symObjAddr: 0x10D0, symBinAddr: 0x55AC, symSize: 0xCC }
+  - { offset: 0x96C87, size: 0x8, addend: 0x0, symName: '___40-[PSWebSocket copyStreamPropertyForKey:]_block_invoke', symObjAddr: 0x119C, symBinAddr: 0x5678, symSize: 0x34 }
+  - { offset: 0x96D11, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48r, symObjAddr: 0x11D0, symBinAddr: 0x56AC, symSize: 0x3C }
+  - { offset: 0x96D3A, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48r, symObjAddr: 0x120C, symBinAddr: 0x56E8, symSize: 0x34 }
+  - { offset: 0x96D59, size: 0x8, addend: 0x0, symName: '-[PSWebSocket setStreamProperty:forKey:]', symObjAddr: 0x1240, symBinAddr: 0x571C, symSize: 0x88 }
+  - { offset: 0x96DAF, size: 0x8, addend: 0x0, symName: '___40-[PSWebSocket setStreamProperty:forKey:]_block_invoke', symObjAddr: 0x12C8, symBinAddr: 0x57A4, symSize: 0x40 }
+  - { offset: 0x96E45, size: 0x8, addend: 0x0, symName: '-[PSWebSocket connect]', symObjAddr: 0x1308, symBinAddr: 0x57E4, symSize: 0x2BC }
+  - { offset: 0x96F5A, size: 0x8, addend: 0x0, symName: '___22-[PSWebSocket connect]_block_invoke', symObjAddr: 0x15C4, symBinAddr: 0x5AA0, symSize: 0x4C }
+  - { offset: 0x96FAD, size: 0x8, addend: 0x0, symName: '___22-[PSWebSocket connect]_block_invoke_2', symObjAddr: 0x1610, symBinAddr: 0x5AEC, symSize: 0x74 }
+  - { offset: 0x9700B, size: 0x8, addend: 0x0, symName: '___22-[PSWebSocket connect]_block_invoke_3', symObjAddr: 0x1684, symBinAddr: 0x5B60, symSize: 0x20 }
+  - { offset: 0x97049, size: 0x8, addend: 0x0, symName: '-[PSWebSocket disconnectGracefully]', symObjAddr: 0x16A4, symBinAddr: 0x5B80, symSize: 0xC }
+  - { offset: 0x9707B, size: 0x8, addend: 0x0, symName: '-[PSWebSocket disconnect]', symObjAddr: 0x16B0, symBinAddr: 0x5B8C, symSize: 0x58 }
+  - { offset: 0x970AF, size: 0x8, addend: 0x0, symName: '-[PSWebSocket negotiateSSL:]', symObjAddr: 0x1708, symBinAddr: 0x5BE4, symSize: 0x164 }
+  - { offset: 0x97132, size: 0x8, addend: 0x0, symName: '-[PSWebSocket pumpInput]', symObjAddr: 0x186C, symBinAddr: 0x5D48, symSize: 0x1D8 }
+  - { offset: 0x97233, size: 0x8, addend: 0x0, symName: '-[PSWebSocket pumpOutput]', symObjAddr: 0x1A44, symBinAddr: 0x5F20, symSize: 0x1B0 }
+  - { offset: 0x972B0, size: 0x8, addend: 0x0, symName: '-[PSWebSocket failWithCode:reason:]', symObjAddr: 0x1BF4, symBinAddr: 0x60D0, symSize: 0x44 }
+  - { offset: 0x97306, size: 0x8, addend: 0x0, symName: '-[PSWebSocket failWithError:]', symObjAddr: 0x1C38, symBinAddr: 0x6114, symSize: 0x120 }
+  - { offset: 0x9734B, size: 0x8, addend: 0x0, symName: '___29-[PSWebSocket failWithError:]_block_invoke', symObjAddr: 0x1D58, symBinAddr: 0x6234, symSize: 0xA0 }
+  - { offset: 0x9739E, size: 0x8, addend: 0x0, symName: '___29-[PSWebSocket failWithError:]_block_invoke_2', symObjAddr: 0x1DF8, symBinAddr: 0x62D4, symSize: 0x8 }
+  - { offset: 0x973E0, size: 0x8, addend: 0x0, symName: '___29-[PSWebSocket failWithError:]_block_invoke_3', symObjAddr: 0x1E00, symBinAddr: 0x62DC, symSize: 0x54 }
+  - { offset: 0x97433, size: 0x8, addend: 0x0, symName: '-[PSWebSocket driverDidOpen:]', symObjAddr: 0x1E54, symBinAddr: 0x6330, symSize: 0x58 }
+  - { offset: 0x97474, size: 0x8, addend: 0x0, symName: '-[PSWebSocket driver:didFailWithError:]', symObjAddr: 0x1EAC, symBinAddr: 0x6388, symSize: 0x8 }
+  - { offset: 0x974C4, size: 0x8, addend: 0x0, symName: '-[PSWebSocket driver:didCloseWithCode:reason:]', symObjAddr: 0x1EB4, symBinAddr: 0x6390, symSize: 0xA4 }
+  - { offset: 0x97527, size: 0x8, addend: 0x0, symName: '___46-[PSWebSocket driver:didCloseWithCode:reason:]_block_invoke', symObjAddr: 0x1F58, symBinAddr: 0x6434, symSize: 0x8 }
+  - { offset: 0x97569, size: 0x8, addend: 0x0, symName: '-[PSWebSocket driver:didReceiveMessage:]', symObjAddr: 0x1F60, symBinAddr: 0x643C, symSize: 0x8 }
+  - { offset: 0x975B9, size: 0x8, addend: 0x0, symName: '-[PSWebSocket driver:didReceivePing:]', symObjAddr: 0x1F68, symBinAddr: 0x6444, symSize: 0xB8 }
+  - { offset: 0x9760F, size: 0x8, addend: 0x0, symName: '___37-[PSWebSocket driver:didReceivePing:]_block_invoke', symObjAddr: 0x2020, symBinAddr: 0x64FC, symSize: 0x84 }
+  - { offset: 0x97673, size: 0x8, addend: 0x0, symName: '___37-[PSWebSocket driver:didReceivePing:]_block_invoke_2', symObjAddr: 0x20A4, symBinAddr: 0x6580, symSize: 0xC }
+  - { offset: 0x976C2, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48s, symObjAddr: 0x20B0, symBinAddr: 0x658C, symSize: 0x30 }
+  - { offset: 0x976EB, size: 0x8, addend: 0x0, symName: '-[PSWebSocket driver:didReceivePong:]', symObjAddr: 0x20E0, symBinAddr: 0x65BC, symSize: 0xCC }
+  - { offset: 0x9774E, size: 0x8, addend: 0x0, symName: '___37-[PSWebSocket driver:didReceivePong:]_block_invoke', symObjAddr: 0x21AC, symBinAddr: 0x6688, symSize: 0x10 }
+  - { offset: 0x977A9, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40b, symObjAddr: 0x21BC, symBinAddr: 0x6698, symSize: 0x34 }
+  - { offset: 0x977D2, size: 0x8, addend: 0x0, symName: '-[PSWebSocket driver:write:]', symObjAddr: 0x21F0, symBinAddr: 0x66CC, symSize: 0x38 }
+  - { offset: 0x97824, size: 0x8, addend: 0x0, symName: '-[PSWebSocket stream:handleEvent:]', symObjAddr: 0x2228, symBinAddr: 0x6704, symSize: 0x20C }
+  - { offset: 0x978AB, size: 0x8, addend: 0x0, symName: '-[PSWebSocket notifyDelegateDidOpen]', symObjAddr: 0x2434, symBinAddr: 0x6910, symSize: 0x50 }
+  - { offset: 0x978DF, size: 0x8, addend: 0x0, symName: '___36-[PSWebSocket notifyDelegateDidOpen]_block_invoke', symObjAddr: 0x2484, symBinAddr: 0x6960, symSize: 0x38 }
+  - { offset: 0x97921, size: 0x8, addend: 0x0, symName: '-[PSWebSocket notifyDelegateDidReceiveMessage:]', symObjAddr: 0x24BC, symBinAddr: 0x6998, symSize: 0x80 }
+  - { offset: 0x97966, size: 0x8, addend: 0x0, symName: '___47-[PSWebSocket notifyDelegateDidReceiveMessage:]_block_invoke', symObjAddr: 0x253C, symBinAddr: 0x6A18, symSize: 0x38 }
+  - { offset: 0x979B9, size: 0x8, addend: 0x0, symName: '-[PSWebSocket notifyDelegateDidFailWithError:]', symObjAddr: 0x2574, symBinAddr: 0x6A50, symSize: 0x80 }
+  - { offset: 0x979FE, size: 0x8, addend: 0x0, symName: '___46-[PSWebSocket notifyDelegateDidFailWithError:]_block_invoke', symObjAddr: 0x25F4, symBinAddr: 0x6AD0, symSize: 0x38 }
+  - { offset: 0x97A51, size: 0x8, addend: 0x0, symName: '-[PSWebSocket notifyDelegateDidCloseWithCode:reason:wasClean:]', symObjAddr: 0x262C, symBinAddr: 0x6B08, symSize: 0x98 }
+  - { offset: 0x97AB4, size: 0x8, addend: 0x0, symName: '___62-[PSWebSocket notifyDelegateDidCloseWithCode:reason:wasClean:]_block_invoke', symObjAddr: 0x26C4, symBinAddr: 0x6BA0, symSize: 0x40 }
+  - { offset: 0x97B29, size: 0x8, addend: 0x0, symName: '-[PSWebSocket notifyDelegateDidFlushInput]', symObjAddr: 0x2704, symBinAddr: 0x6BE0, symSize: 0x50 }
+  - { offset: 0x97B5D, size: 0x8, addend: 0x0, symName: '___42-[PSWebSocket notifyDelegateDidFlushInput]_block_invoke', symObjAddr: 0x2754, symBinAddr: 0x6C30, symSize: 0x7C }
+  - { offset: 0x97B9F, size: 0x8, addend: 0x0, symName: '-[PSWebSocket notifyDelegateDidFlushOutput]', symObjAddr: 0x27D0, symBinAddr: 0x6CAC, symSize: 0x50 }
+  - { offset: 0x97BD3, size: 0x8, addend: 0x0, symName: '___43-[PSWebSocket notifyDelegateDidFlushOutput]_block_invoke', symObjAddr: 0x2820, symBinAddr: 0x6CFC, symSize: 0x7C }
+  - { offset: 0x97C15, size: 0x8, addend: 0x0, symName: '-[PSWebSocket askDelegateToEvaluateServerTrust:]', symObjAddr: 0x289C, symBinAddr: 0x6D78, symSize: 0xA4 }
+  - { offset: 0x97C73, size: 0x8, addend: 0x0, symName: '___48-[PSWebSocket askDelegateToEvaluateServerTrust:]_block_invoke', symObjAddr: 0x2940, symBinAddr: 0x6E1C, symSize: 0x8C }
+  - { offset: 0x97CD7, size: 0x8, addend: 0x0, symName: '-[PSWebSocket executeWork:]', symObjAddr: 0x29CC, symBinAddr: 0x6EA8, symSize: 0xC }
+  - { offset: 0x97D46, size: 0x8, addend: 0x0, symName: '-[PSWebSocket executeWorkAndWait:]', symObjAddr: 0x29D8, symBinAddr: 0x6EB4, symSize: 0xC }
+  - { offset: 0x97DB6, size: 0x8, addend: 0x0, symName: '-[PSWebSocket executeDelegate:]', symObjAddr: 0x29E4, symBinAddr: 0x6EC0, symSize: 0x1C }
+  - { offset: 0x97E12, size: 0x8, addend: 0x0, symName: '-[PSWebSocket executeDelegateAndWait:]', symObjAddr: 0x2A00, symBinAddr: 0x6EDC, symSize: 0x1C }
+  - { offset: 0x97E6E, size: 0x8, addend: 0x0, symName: '-[PSWebSocket dealloc]', symObjAddr: 0x2A1C, symBinAddr: 0x6EF8, symSize: 0x44 }
+  - { offset: 0x97EA2, size: 0x8, addend: 0x0, symName: '-[PSWebSocket request]', symObjAddr: 0x2A60, symBinAddr: 0x6F3C, symSize: 0x8 }
+  - { offset: 0x97ED9, size: 0x8, addend: 0x0, symName: '-[PSWebSocket delegate]', symObjAddr: 0x2A68, symBinAddr: 0x6F44, symSize: 0x18 }
+  - { offset: 0x97F10, size: 0x8, addend: 0x0, symName: '-[PSWebSocket setDelegate:]', symObjAddr: 0x2A80, symBinAddr: 0x6F5C, symSize: 0xC }
+  - { offset: 0x97F51, size: 0x8, addend: 0x0, symName: '-[PSWebSocket delegateQueue]', symObjAddr: 0x2A8C, symBinAddr: 0x6F68, symSize: 0x8 }
+  - { offset: 0x97F88, size: 0x8, addend: 0x0, symName: '-[PSWebSocket setDelegateQueue:]', symObjAddr: 0x2A94, symBinAddr: 0x6F70, symSize: 0xC }
+  - { offset: 0x97FC9, size: 0x8, addend: 0x0, symName: '-[PSWebSocket .cxx_destruct]', symObjAddr: 0x2AA0, symBinAddr: 0x6F7C, symSize: 0x98 }
+  - { offset: 0x98F00, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater initWithWindowBits:]', symObjAddr: 0x0, symBinAddr: 0x7014, symSize: 0x58 }
+  - { offset: 0x98FA4, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater initWithWindowBits:]', symObjAddr: 0x0, symBinAddr: 0x7014, symSize: 0x58 }
+  - { offset: 0x98FEB, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater begin:error:]', symObjAddr: 0x58, symBinAddr: 0x706C, symSize: 0x68 }
+  - { offset: 0x99042, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater appendBytes:length:error:]', symObjAddr: 0xC0, symBinAddr: 0x70D4, symSize: 0xF4 }
+  - { offset: 0x990FD, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater end:]', symObjAddr: 0x1B4, symBinAddr: 0x71C8, symSize: 0x30 }
+  - { offset: 0x99153, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater reset]', symObjAddr: 0x1E4, symBinAddr: 0x71F8, symSize: 0x74 }
+  - { offset: 0x991A7, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater ensureReady:]', symObjAddr: 0x258, symBinAddr: 0x726C, symSize: 0xA4 }
+  - { offset: 0x99230, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater dealloc]', symObjAddr: 0x2FC, symBinAddr: 0x7310, symSize: 0x44 }
+  - { offset: 0x99263, size: 0x8, addend: 0x0, symName: '-[PSWebSocketInflater .cxx_destruct]', symObjAddr: 0x340, symBinAddr: 0x7354, symSize: 0x10 }
+  - { offset: 0x99319, size: 0x8, addend: 0x0, symName: '+[PSWebSocketNetworkThread sharedNetworkThread]', symObjAddr: 0x0, symBinAddr: 0x7364, symSize: 0x74 }
+  - { offset: 0x99327, size: 0x8, addend: 0x0, symName: '+[PSWebSocketNetworkThread sharedNetworkThread]', symObjAddr: 0x0, symBinAddr: 0x7364, symSize: 0x74 }
+  - { offset: 0x99351, size: 0x8, addend: 0x0, symName: _sharedNetworkThread.sharedNetworkThread, symObjAddr: 0x2560, symBinAddr: 0x3AC70, symSize: 0x0 }
+  - { offset: 0x99367, size: 0x8, addend: 0x0, symName: _sharedNetworkThread.sharedNetworkThreadOnce, symObjAddr: 0x2568, symBinAddr: 0x3AC78, symSize: 0x0 }
+  - { offset: 0x99474, size: 0x8, addend: 0x0, symName: '___47+[PSWebSocketNetworkThread sharedNetworkThread]_block_invoke', symObjAddr: 0x74, symBinAddr: 0x73D8, symSize: 0x28 }
+  - { offset: 0x994B3, size: 0x8, addend: 0x0, symName: '-[PSWebSocketNetworkThread runLoop]', symObjAddr: 0x9C, symBinAddr: 0x7400, symSize: 0x3C }
+  - { offset: 0x99516, size: 0x8, addend: 0x0, symName: '-[PSWebSocketNetworkThread init]', symObjAddr: 0xD8, symBinAddr: 0x743C, symSize: 0x74 }
+  - { offset: 0x99584, size: 0x8, addend: 0x0, symName: '-[PSWebSocketNetworkThread main]', symObjAddr: 0x14C, symBinAddr: 0x74B0, symSize: 0x160 }
+  - { offset: 0x995FF, size: 0x8, addend: 0x0, symName: '-[PSWebSocketNetworkThread setRunLoop:]', symObjAddr: 0x2AC, symBinAddr: 0x7610, symSize: 0x14 }
+  - { offset: 0x99640, size: 0x8, addend: 0x0, symName: '-[PSWebSocketNetworkThread .cxx_destruct]', symObjAddr: 0x2C0, symBinAddr: 0x7624, symSize: 0x40 }
+  - { offset: 0x9975F, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection init]', symObjAddr: 0x0, symBinAddr: 0x7664, symSize: 0xBC }
+  - { offset: 0x99A35, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection init]', symObjAddr: 0x0, symBinAddr: 0x7664, symSize: 0xBC }
+  - { offset: 0x99A6C, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection identifier]', symObjAddr: 0xBC, symBinAddr: 0x7720, symSize: 0x8 }
+  - { offset: 0x99AA3, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection readyState]', symObjAddr: 0xC4, symBinAddr: 0x7728, symSize: 0x8 }
+  - { offset: 0x99ADA, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection setReadyState:]', symObjAddr: 0xCC, symBinAddr: 0x7730, symSize: 0x8 }
+  - { offset: 0x99B17, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection inputStream]', symObjAddr: 0xD4, symBinAddr: 0x7738, symSize: 0x8 }
+  - { offset: 0x99B4E, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection setInputStream:]', symObjAddr: 0xDC, symBinAddr: 0x7740, symSize: 0xC }
+  - { offset: 0x99B8F, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection outputStream]', symObjAddr: 0xE8, symBinAddr: 0x774C, symSize: 0x8 }
+  - { offset: 0x99BC6, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection setOutputStream:]', symObjAddr: 0xF0, symBinAddr: 0x7754, symSize: 0xC }
+  - { offset: 0x99C07, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection inputStreamOpenCompleted]', symObjAddr: 0xFC, symBinAddr: 0x7760, symSize: 0x8 }
+  - { offset: 0x99C3E, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection setInputStreamOpenCompleted:]', symObjAddr: 0x104, symBinAddr: 0x7768, symSize: 0x8 }
+  - { offset: 0x99C79, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection outputStreamOpenCompleted]', symObjAddr: 0x10C, symBinAddr: 0x7770, symSize: 0x8 }
+  - { offset: 0x99CB0, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection setOutputStreamOpenCompleted:]', symObjAddr: 0x114, symBinAddr: 0x7778, symSize: 0x8 }
+  - { offset: 0x99CEB, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection inputBuffer]', symObjAddr: 0x11C, symBinAddr: 0x7780, symSize: 0x8 }
+  - { offset: 0x99D22, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection setInputBuffer:]', symObjAddr: 0x124, symBinAddr: 0x7788, symSize: 0xC }
+  - { offset: 0x99D63, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection outputBuffer]', symObjAddr: 0x130, symBinAddr: 0x7794, symSize: 0x8 }
+  - { offset: 0x99D9A, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection setOutputBuffer:]', symObjAddr: 0x138, symBinAddr: 0x779C, symSize: 0xC }
+  - { offset: 0x99DDB, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServerConnection .cxx_destruct]', symObjAddr: 0x144, symBinAddr: 0x77A8, symSize: 0x54 }
+  - { offset: 0x99E0E, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer runLoop]', symObjAddr: 0x198, symBinAddr: 0x77FC, symSize: 0x4C }
+  - { offset: 0x99E41, size: 0x8, addend: 0x0, symName: '+[PSWebSocketServer serverWithHost:port:]', symObjAddr: 0x1E4, symBinAddr: 0x7848, symSize: 0x5C }
+  - { offset: 0x99E98, size: 0x8, addend: 0x0, symName: '+[PSWebSocketServer serverWithHost:port:SSLCertificates:]', symObjAddr: 0x240, symBinAddr: 0x78A4, symSize: 0x74 }
+  - { offset: 0x99EFF, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer initWithHost:port:SSLCertificates:]', symObjAddr: 0x2B4, symBinAddr: 0x7918, symSize: 0x224 }
+  - { offset: 0x99FD9, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer start]', symObjAddr: 0x4D8, symBinAddr: 0x7B3C, symSize: 0x50 }
+  - { offset: 0x9A00C, size: 0x8, addend: 0x0, symName: '___26-[PSWebSocketServer start]_block_invoke', symObjAddr: 0x528, symBinAddr: 0x7B8C, symSize: 0xC }
+  - { offset: 0x9A04B, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer stop]', symObjAddr: 0x544, symBinAddr: 0x7B98, symSize: 0x50 }
+  - { offset: 0x9A07E, size: 0x8, addend: 0x0, symName: '___25-[PSWebSocketServer stop]_block_invoke', symObjAddr: 0x594, symBinAddr: 0x7BE8, symSize: 0xC }
+  - { offset: 0x9A0BD, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer connect:]', symObjAddr: 0x5A0, symBinAddr: 0x7BF4, symSize: 0x180 }
+  - { offset: 0x9A2BA, size: 0x8, addend: 0x0, symName: _PSWebSocketServerAcceptCallback, symObjAddr: 0x720, symBinAddr: 0x7D74, symSize: 0xC }
+  - { offset: 0x9A319, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer disconnectGracefully:]', symObjAddr: 0x72C, symBinAddr: 0x7D80, symSize: 0x20C }
+  - { offset: 0x9A386, size: 0x8, addend: 0x0, symName: '___42-[PSWebSocketServer disconnectGracefully:]_block_invoke', symObjAddr: 0x938, symBinAddr: 0x7F8C, symSize: 0x10 }
+  - { offset: 0x9A3D5, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer disconnect:]', symObjAddr: 0x948, symBinAddr: 0x7F9C, symSize: 0xB8 }
+  - { offset: 0x9A4D3, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer accept:]', symObjAddr: 0xA00, symBinAddr: 0x8054, symSize: 0x74 }
+  - { offset: 0x9A534, size: 0x8, addend: 0x0, symName: '___28-[PSWebSocketServer accept:]_block_invoke', symObjAddr: 0xA74, symBinAddr: 0x80C8, symSize: 0x234 }
+  - { offset: 0x9A750, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer attachWebSocket:]', symObjAddr: 0xCA8, symBinAddr: 0x82FC, symSize: 0x6C }
+  - { offset: 0x9A7A3, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer detachWebSocket:]', symObjAddr: 0xD14, symBinAddr: 0x8368, symSize: 0x60 }
+  - { offset: 0x9A7F6, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer webSocketDidOpen:]', symObjAddr: 0xD74, symBinAddr: 0x83C8, symSize: 0x44 }
+  - { offset: 0x9A849, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer webSocket:didReceiveMessage:]', symObjAddr: 0xDB8, symBinAddr: 0x840C, symSize: 0x4 }
+  - { offset: 0x9A899, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer webSocket:didFailWithError:]', symObjAddr: 0xDBC, symBinAddr: 0x8410, symSize: 0x74 }
+  - { offset: 0x9A8FD, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer webSocket:didCloseWithCode:reason:wasClean:]', symObjAddr: 0xE30, symBinAddr: 0x8484, symSize: 0x98 }
+  - { offset: 0x9A983, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer webSocketDidFlushInput:]', symObjAddr: 0xEC8, symBinAddr: 0x851C, symSize: 0x4 }
+  - { offset: 0x9A9C4, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer webSocketDidFlushOutput:]', symObjAddr: 0xECC, symBinAddr: 0x8520, symSize: 0x4 }
+  - { offset: 0x9AA05, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer attachConnection:]', symObjAddr: 0xED0, symBinAddr: 0x8524, symSize: 0x1A8 }
+  - { offset: 0x9AA58, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer detatchConnection:]', symObjAddr: 0x1078, symBinAddr: 0x86CC, symSize: 0x1A0 }
+  - { offset: 0x9AAAB, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer disconnectConnectionGracefully:statusCode:description:headers:]', symObjAddr: 0x1218, symBinAddr: 0x886C, symSize: 0x2FC }
+  - { offset: 0x9AD42, size: 0x8, addend: 0x0, symName: '___83-[PSWebSocketServer disconnectConnectionGracefully:statusCode:description:headers:]_block_invoke', symObjAddr: 0x1514, symBinAddr: 0x8B68, symSize: 0x3C }
+  - { offset: 0x9ADB1, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40w, symObjAddr: 0x1550, symBinAddr: 0x8BA4, symSize: 0x30 }
+  - { offset: 0x9ADDA, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40w, symObjAddr: 0x1580, symBinAddr: 0x8BD4, symSize: 0x28 }
+  - { offset: 0x9ADF9, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer disconnectConnection:]', symObjAddr: 0x15A8, symBinAddr: 0x8BFC, symSize: 0xA0 }
+  - { offset: 0x9AE4C, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer pumpInput]', symObjAddr: 0x1648, symBinAddr: 0x8C9C, symSize: 0x644 }
+  - { offset: 0x9B10A, size: 0x8, addend: 0x0, symName: '___30-[PSWebSocketServer pumpInput]_block_invoke', symObjAddr: 0x1C8C, symBinAddr: 0x92E0, symSize: 0xC }
+  - { offset: 0x9B175, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer pumpOutput]', symObjAddr: 0x1C98, symBinAddr: 0x92EC, symSize: 0x2A4 }
+  - { offset: 0x9B1E7, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer stream:handleEvent:]', symObjAddr: 0x1F3C, symBinAddr: 0x9590, symSize: 0xA4 }
+  - { offset: 0x9B24B, size: 0x8, addend: 0x0, symName: '___40-[PSWebSocketServer stream:handleEvent:]_block_invoke', symObjAddr: 0x1FE0, symBinAddr: 0x9634, symSize: 0x188 }
+  - { offset: 0x9B2CF, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateDidStart]', symObjAddr: 0x21B8, symBinAddr: 0x97BC, symSize: 0x50 }
+  - { offset: 0x9B303, size: 0x8, addend: 0x0, symName: '___43-[PSWebSocketServer notifyDelegateDidStart]_block_invoke', symObjAddr: 0x2208, symBinAddr: 0x980C, symSize: 0x38 }
+  - { offset: 0x9B345, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateFailedToStart:]', symObjAddr: 0x2240, symBinAddr: 0x9844, symSize: 0x80 }
+  - { offset: 0x9B38A, size: 0x8, addend: 0x0, symName: '___49-[PSWebSocketServer notifyDelegateFailedToStart:]_block_invoke', symObjAddr: 0x22C0, symBinAddr: 0x98C4, symSize: 0x38 }
+  - { offset: 0x9B3DD, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateDidStop]', symObjAddr: 0x22F8, symBinAddr: 0x98FC, symSize: 0x50 }
+  - { offset: 0x9B411, size: 0x8, addend: 0x0, symName: '___42-[PSWebSocketServer notifyDelegateDidStop]_block_invoke', symObjAddr: 0x2348, symBinAddr: 0x994C, symSize: 0x38 }
+  - { offset: 0x9B453, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateWebSocketDidOpen:]', symObjAddr: 0x2380, symBinAddr: 0x9984, symSize: 0x80 }
+  - { offset: 0x9B498, size: 0x8, addend: 0x0, symName: '___52-[PSWebSocketServer notifyDelegateWebSocketDidOpen:]_block_invoke', symObjAddr: 0x2400, symBinAddr: 0x9A04, symSize: 0x38 }
+  - { offset: 0x9B4EB, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateWebSocket:didReceiveMessage:]', symObjAddr: 0x2438, symBinAddr: 0x9A3C, symSize: 0xB8 }
+  - { offset: 0x9B541, size: 0x8, addend: 0x0, symName: '___63-[PSWebSocketServer notifyDelegateWebSocket:didReceiveMessage:]_block_invoke', symObjAddr: 0x24F0, symBinAddr: 0x9AF4, symSize: 0x3C }
+  - { offset: 0x9B5A5, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateWebSocket:didFailWithError:]', symObjAddr: 0x258C, symBinAddr: 0x9B30, symSize: 0xB8 }
+  - { offset: 0x9B5FB, size: 0x8, addend: 0x0, symName: '___62-[PSWebSocketServer notifyDelegateWebSocket:didFailWithError:]_block_invoke', symObjAddr: 0x2644, symBinAddr: 0x9BE8, symSize: 0x3C }
+  - { offset: 0x9B65F, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateWebSocket:didCloseWithCode:reason:wasClean:]', symObjAddr: 0x2680, symBinAddr: 0x9C24, symSize: 0xCC }
+  - { offset: 0x9B6D3, size: 0x8, addend: 0x0, symName: '___78-[PSWebSocketServer notifyDelegateWebSocket:didCloseWithCode:reason:wasClean:]_block_invoke', symObjAddr: 0x274C, symBinAddr: 0x9CF0, symSize: 0x40 }
+  - { offset: 0x9B759, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateWebSocketDidFlushInput:]', symObjAddr: 0x278C, symBinAddr: 0x9D30, symSize: 0x80 }
+  - { offset: 0x9B79E, size: 0x8, addend: 0x0, symName: '___58-[PSWebSocketServer notifyDelegateWebSocketDidFlushInput:]_block_invoke', symObjAddr: 0x280C, symBinAddr: 0x9DB0, symSize: 0x7C }
+  - { offset: 0x9B7F1, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer notifyDelegateWebSocketDidFlushOutput:]', symObjAddr: 0x2888, symBinAddr: 0x9E2C, symSize: 0x80 }
+  - { offset: 0x9B836, size: 0x8, addend: 0x0, symName: '___59-[PSWebSocketServer notifyDelegateWebSocketDidFlushOutput:]_block_invoke', symObjAddr: 0x2908, symBinAddr: 0x9EAC, symSize: 0x7C }
+  - { offset: 0x9B889, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer askDelegateShouldAcceptConnection:request:response:]', symObjAddr: 0x2984, symBinAddr: 0x9F28, symSize: 0x18C }
+  - { offset: 0x9B92E, size: 0x8, addend: 0x0, symName: ___Block_byref_object_copy_, symObjAddr: 0x2B10, symBinAddr: 0xA0B4, symSize: 0x10 }
+  - { offset: 0x9B953, size: 0x8, addend: 0x0, symName: ___Block_byref_object_dispose_, symObjAddr: 0x2B20, symBinAddr: 0xA0C4, symSize: 0x8 }
+  - { offset: 0x9B9BC, size: 0x8, addend: 0x0, symName: '___72-[PSWebSocketServer askDelegateShouldAcceptConnection:request:response:]_block_invoke', symObjAddr: 0x2B28, symBinAddr: 0xA0CC, symSize: 0x264 }
+  - { offset: 0x9BB44, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48s56r64r, symObjAddr: 0x2D8C, symBinAddr: 0xA330, symSize: 0x54 }
+  - { offset: 0x9BB6D, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s56r64r, symObjAddr: 0x2DE0, symBinAddr: 0xA384, symSize: 0x48 }
+  - { offset: 0x9BB8C, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer executeWork:]', symObjAddr: 0x2E28, symBinAddr: 0xA3CC, symSize: 0xC }
+  - { offset: 0x9BBFB, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer executeWorkAndWait:]', symObjAddr: 0x2E34, symBinAddr: 0xA3D8, symSize: 0xC }
+  - { offset: 0x9BC6B, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer executeDelegate:]', symObjAddr: 0x2E40, symBinAddr: 0xA3E4, symSize: 0x1C }
+  - { offset: 0x9BCC7, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer executeDelegateAndWait:]', symObjAddr: 0x2E5C, symBinAddr: 0xA400, symSize: 0x1C }
+  - { offset: 0x9BD23, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer dealloc]', symObjAddr: 0x2E78, symBinAddr: 0xA41C, symSize: 0x78 }
+  - { offset: 0x9BD57, size: 0x8, addend: 0x0, symName: '___28-[PSWebSocketServer dealloc]_block_invoke', symObjAddr: 0x2EF0, symBinAddr: 0xA494, symSize: 0xC }
+  - { offset: 0x9BD99, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer delegate]', symObjAddr: 0x2EFC, symBinAddr: 0xA4A0, symSize: 0x18 }
+  - { offset: 0x9BDD0, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer setDelegate:]', symObjAddr: 0x2F14, symBinAddr: 0xA4B8, symSize: 0xC }
+  - { offset: 0x9BE11, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer delegateQueue]', symObjAddr: 0x2F20, symBinAddr: 0xA4C4, symSize: 0x8 }
+  - { offset: 0x9BE48, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer setDelegateQueue:]', symObjAddr: 0x2F28, symBinAddr: 0xA4CC, symSize: 0xC }
+  - { offset: 0x9BE89, size: 0x8, addend: 0x0, symName: '-[PSWebSocketServer .cxx_destruct]', symObjAddr: 0x2F34, symBinAddr: 0xA4D8, symSize: 0x74 }
+  - { offset: 0x9C8FD, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater initWithWindowBits:memoryLevel:]', symObjAddr: 0x0, symBinAddr: 0xA54C, symSize: 0x8C }
+  - { offset: 0x9C9B5, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater initWithWindowBits:memoryLevel:]', symObjAddr: 0x0, symBinAddr: 0xA54C, symSize: 0x8C }
+  - { offset: 0x9CA0C, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater begin:error:]', symObjAddr: 0x8C, symBinAddr: 0xA5D8, symSize: 0x68 }
+  - { offset: 0x9CA63, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater appendBytes:length:error:]', symObjAddr: 0xF4, symBinAddr: 0xA640, symSize: 0x80 }
+  - { offset: 0x9CB0A, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater end:]', symObjAddr: 0x174, symBinAddr: 0xA6C0, symSize: 0x50 }
+  - { offset: 0x9CB4D, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater reset]', symObjAddr: 0x1C4, symBinAddr: 0xA710, symSize: 0x74 }
+  - { offset: 0x9CBA9, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater ensureReady:]', symObjAddr: 0x238, symBinAddr: 0xA784, symSize: 0xB4 }
+  - { offset: 0x9CC52, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater dealloc]', symObjAddr: 0x2EC, symBinAddr: 0xA838, symSize: 0x44 }
+  - { offset: 0x9CC85, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDeflater .cxx_destruct]', symObjAddr: 0x330, symBinAddr: 0xA87C, symSize: 0x10 }
+  - { offset: 0x9CD28, size: 0x8, addend: 0x0, symName: _PSWebSocketUTF8DecoderDecode, symObjAddr: 0x0, symBinAddr: 0xA88C, symSize: 0x4C }
+  - { offset: 0x9CD42, size: 0x8, addend: 0x0, symName: _utf8_validator_table, symObjAddr: 0x4C, symBinAddr: 0x27540, symSize: 0x0 }
+  - { offset: 0x9CD6C, size: 0x8, addend: 0x0, symName: _PSWebSocketUTF8DecoderDecode, symObjAddr: 0x0, symBinAddr: 0xA88C, symSize: 0x4C }
+  - { offset: 0x9CDFF, size: 0x8, addend: 0x0, symName: '-[PSWebSocketFrame .cxx_destruct]', symObjAddr: 0x0, symBinAddr: 0xA8D8, symSize: 0xC }
+  - { offset: 0x9CE84, size: 0x8, addend: 0x0, symName: '+[PSWebSocketDriver errorWithCode:reason:]', symObjAddr: 0x226C, symBinAddr: 0xCB44, symSize: 0x110 }
+  - { offset: 0x9CEB0, size: 0x8, addend: 0x0, symName: '_errorWithCode:reason:.kStatusNames', symObjAddr: 0x4BB0, symBinAddr: 0x30590, symSize: 0x0 }
+  - { offset: 0x9D237, size: 0x8, addend: 0x0, symName: '-[PSWebSocketFrame .cxx_destruct]', symObjAddr: 0x0, symBinAddr: 0xA8D8, symSize: 0xC }
+  - { offset: 0x9D29A, size: 0x8, addend: 0x0, symName: '+[PSWebSocketDriver isWebSocketRequest:]', symObjAddr: 0xC, symBinAddr: 0xA8E4, symSize: 0x390 }
+  - { offset: 0x9D397, size: 0x8, addend: 0x0, symName: _PSHTTPHeaderFieldValues, symObjAddr: 0x39C, symBinAddr: 0xAC74, symSize: 0xCC }
+  - { offset: 0x9D3C0, size: 0x8, addend: 0x0, symName: '+[PSWebSocketDriver clientDriverWithRequest:]', symObjAddr: 0x468, symBinAddr: 0xAD40, symSize: 0x4C }
+  - { offset: 0x9D407, size: 0x8, addend: 0x0, symName: '+[PSWebSocketDriver serverDriverWithRequest:]', symObjAddr: 0x4B4, symBinAddr: 0xAD8C, symSize: 0x4C }
+  - { offset: 0x9D44E, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver initWithMode:request:]', symObjAddr: 0x500, symBinAddr: 0xADD8, symSize: 0xD0 }
+  - { offset: 0x9D4A5, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver start]', symObjAddr: 0x5D0, symBinAddr: 0xAEA8, symSize: 0x10 }
+  - { offset: 0x9D4D6, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver execute:maxLength:]', symObjAddr: 0x5E0, symBinAddr: 0xAEB8, symSize: 0xE0 }
+  - { offset: 0x9D55D, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver sendText:]', symObjAddr: 0x6C0, symBinAddr: 0xAF98, symSize: 0x48 }
+  - { offset: 0x9D5B0, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver sendBinary:]', symObjAddr: 0x708, symBinAddr: 0xAFE0, symSize: 0xC }
+  - { offset: 0x9D60B, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver sendCloseCode:reason:]', symObjAddr: 0x714, symBinAddr: 0xAFEC, symSize: 0xFC }
+  - { offset: 0x9D6E6, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver sendPing:]', symObjAddr: 0x810, symBinAddr: 0xB0E8, symSize: 0xC }
+  - { offset: 0x9D727, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver sendPong:]', symObjAddr: 0x81C, symBinAddr: 0xB0F4, symSize: 0xC }
+  - { offset: 0x9D768, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver writeHandshakeRequest]', symObjAddr: 0x828, symBinAddr: 0xB100, symSize: 0x3E4 }
+  - { offset: 0x9D986, size: 0x8, addend: 0x0, symName: __PSWebSocketLog, symObjAddr: 0xC0C, symBinAddr: 0xB4E4, symSize: 0x74 }
+  - { offset: 0x9DA5E, size: 0x8, addend: 0x0, symName: '___42-[PSWebSocketDriver writeHandshakeRequest]_block_invoke', symObjAddr: 0xC80, symBinAddr: 0xB558, symSize: 0x90 }
+  - { offset: 0x9DAD3, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver writeHandshakeResponse]', symObjAddr: 0xD10, symBinAddr: 0xB5E8, symSize: 0x31C }
+  - { offset: 0x9DC9D, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver writeMessageWithOpCode:data:]', symObjAddr: 0x102C, symBinAddr: 0xB904, symSize: 0x3C4 }
+  - { offset: 0x9DE94, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver readBytes:maxLength:error:]', symObjAddr: 0x13F0, symBinAddr: 0xBCC8, symSize: 0xB3C }
+  - { offset: 0x9E44A, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver processFramesAndDelegate:]', symObjAddr: 0x1F2C, symBinAddr: 0xC804, symSize: 0x340 }
+  - { offset: 0x9E51D, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver failWithErrorCode:reason:]', symObjAddr: 0x237C, symBinAddr: 0xCC54, symSize: 0x6C }
+  - { offset: 0x9E573, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver failWithError:]', symObjAddr: 0x23E8, symBinAddr: 0xCCC0, symSize: 0x5C }
+  - { offset: 0x9E5B8, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver pmdExtensionsHeaderComponents]', symObjAddr: 0x2444, symBinAddr: 0xCD1C, symSize: 0x160 }
+  - { offset: 0x9E608, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver pmdConfigureWithExtensionsHeaderComponents:]', symObjAddr: 0x25A4, symBinAddr: 0xCE7C, symSize: 0x39C }
+  - { offset: 0x9E689, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver acceptHeaderForKey:]', symObjAddr: 0x2940, symBinAddr: 0xD218, symSize: 0x104 }
+  - { offset: 0x9E742, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver base64EncodedData:]', symObjAddr: 0x2A44, symBinAddr: 0xD31C, symSize: 0x70 }
+  - { offset: 0x9E787, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver mode]', symObjAddr: 0x2AB4, symBinAddr: 0xD38C, symSize: 0x8 }
+  - { offset: 0x9E7BE, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver delegate]', symObjAddr: 0x2ABC, symBinAddr: 0xD394, symSize: 0x18 }
+  - { offset: 0x9E7F5, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver setDelegate:]', symObjAddr: 0x2AD4, symBinAddr: 0xD3AC, symSize: 0xC }
+  - { offset: 0x9E836, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver protocol]', symObjAddr: 0x2AE0, symBinAddr: 0xD3B8, symSize: 0x8 }
+  - { offset: 0x9E86D, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver setProtocol:]', symObjAddr: 0x2AE8, symBinAddr: 0xD3C0, symSize: 0xC }
+  - { offset: 0x9E8AE, size: 0x8, addend: 0x0, symName: '-[PSWebSocketDriver .cxx_destruct]', symObjAddr: 0x2AF4, symBinAddr: 0xD3CC, symSize: 0x68 }
+  - { offset: 0x9E8E1, size: 0x8, addend: 0x0, symName: ___PSHTTPHeaderFieldValues_block_invoke, symObjAddr: 0x2B5C, symBinAddr: 0xD434, symSize: 0x160 }
+  - { offset: 0x9EB61, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer init]', symObjAddr: 0x0, symBinAddr: 0xD594, symSize: 0x78 }
+  - { offset: 0x9EBDB, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer init]', symObjAddr: 0x0, symBinAddr: 0xD594, symSize: 0x78 }
+  - { offset: 0x9EC12, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer hasBytesAvailable]', symObjAddr: 0x78, symBinAddr: 0xD60C, symSize: 0x30 }
+  - { offset: 0x9EC49, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer bytesAvailable]', symObjAddr: 0xA8, symBinAddr: 0xD63C, symSize: 0x48 }
+  - { offset: 0x9EC80, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer appendData:]', symObjAddr: 0xF0, symBinAddr: 0xD684, symSize: 0x8 }
+  - { offset: 0x9ECC1, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer appendBytes:length:]', symObjAddr: 0xF8, symBinAddr: 0xD68C, symSize: 0x8 }
+  - { offset: 0x9ED10, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer compact]', symObjAddr: 0x100, symBinAddr: 0xD694, symSize: 0x8C }
+  - { offset: 0x9ED43, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer reset]', symObjAddr: 0x18C, symBinAddr: 0xD720, symSize: 0x10 }
+  - { offset: 0x9ED76, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer bytes]', symObjAddr: 0x19C, symBinAddr: 0xD730, symSize: 0x2C }
+  - { offset: 0x9EDAD, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer mutableBytes]', symObjAddr: 0x1C8, symBinAddr: 0xD75C, symSize: 0x2C }
+  - { offset: 0x9EDE4, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer data]', symObjAddr: 0x1F4, symBinAddr: 0xD788, symSize: 0x18 }
+  - { offset: 0x9EE1B, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer offset]', symObjAddr: 0x20C, symBinAddr: 0xD7A0, symSize: 0x8 }
+  - { offset: 0x9EE52, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer setOffset:]', symObjAddr: 0x214, symBinAddr: 0xD7A8, symSize: 0x8 }
+  - { offset: 0x9EE8F, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer compactionLength]', symObjAddr: 0x21C, symBinAddr: 0xD7B0, symSize: 0x8 }
+  - { offset: 0x9EEC6, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer setCompactionLength:]', symObjAddr: 0x224, symBinAddr: 0xD7B8, symSize: 0x8 }
+  - { offset: 0x9EF03, size: 0x8, addend: 0x0, symName: '-[PSWebSocketBuffer .cxx_destruct]', symObjAddr: 0x22C, symBinAddr: 0xD7C0, symSize: 0xC }
+  - { offset: 0x9EFBC, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC6sharedACvpZ', symObjAddr: 0xB9B0, symBinAddr: 0x3B1D8, symSize: 0x0 }
+  - { offset: 0x9F264, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC6shared_WZ', symObjAddr: 0x0, symBinAddr: 0xD7CC, symSize: 0x2C }
+  - { offset: 0x9F294, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC6sharedACvau', symObjAddr: 0x2C, symBinAddr: 0xD7F8, symSize: 0x40 }
+  - { offset: 0x9F319, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentCfETo', symObjAddr: 0xD64, symBinAddr: 0xE530, symSize: 0x4 }
+  - { offset: 0x9F344, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC8listeneryAC0eF6StatusOcSgvpfi', symObjAddr: 0xD68, symBinAddr: 0xE534, symSize: 0xC }
+  - { offset: 0x9F35C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC10netManager33_14E6DAD1012C7144E675E979A9D28E19LLAA019NetworkReachabilityG0CSgvpfi', symObjAddr: 0xD74, symBinAddr: 0xE540, symSize: 0x8 }
+  - { offset: 0x9F374, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC8overtime33_14E6DAD1012C7144E675E979A9D28E19LLSivpfi', symObjAddr: 0xD94, symBinAddr: 0xE548, symSize: 0x8 }
+  - { offset: 0x9F38C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectLoopSbvpfi', symObjAddr: 0xDA4, symBinAddr: 0xE550, symSize: 0x8 }
+  - { offset: 0x9F3A4, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13isServerStartSbvpfi', symObjAddr: 0xDB4, symBinAddr: 0xE558, symSize: 0x8 }
+  - { offset: 0x9F3BC, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC16cmdDelegateQueueSo17OS_dispatch_queueCvpfi', symObjAddr: 0xDEC, symBinAddr: 0xE560, symSize: 0x28 }
+  - { offset: 0x9F3D4, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC19connectionStartTime33_14E6DAD1012C7144E675E979A9D28E19LL10Foundation4DateVSgvpfi', symObjAddr: 0xE30, symBinAddr: 0xE588, symSize: 0x3C }
+  - { offset: 0x9F3EC, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC4dictSDySSyycGvpfi', symObjAddr: 0xE6C, symBinAddr: 0xE5C4, symSize: 0xC }
+  - { offset: 0x9F45C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentCMa', symObjAddr: 0x1268, symBinAddr: 0xE9A0, symSize: 0x20 }
+  - { offset: 0x9F470, size: 0x8, addend: 0x0, symName: '_$sSo17OS_dispatch_queueCMa', symObjAddr: 0x1288, symBinAddr: 0xE9C0, symSize: 0x44 }
+  - { offset: 0x9F484, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCSQWb', symObjAddr: 0x1338, symBinAddr: 0xEA70, symSize: 0x24 }
+  - { offset: 0x9F498, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCs25ExpressibleByArrayLiteralPWb', symObjAddr: 0x135C, symBinAddr: 0xEA94, symSize: 0x24 }
+  - { offset: 0x9F4AC, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs9OptionSetSCSYWb', symObjAddr: 0x13C0, symBinAddr: 0xEAF8, symSize: 0x24 }
+  - { offset: 0x9F4C0, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs9OptionSetSCs0E7AlgebraPWb', symObjAddr: 0x13E4, symBinAddr: 0xEB1C, symSize: 0x24 }
+  - { offset: 0x9F542, size: 0x8, addend: 0x0, symName: ___swift_instantiateConcreteTypeFromMangledName, symObjAddr: 0x1440, symBinAddr: 0xEB78, symSize: 0x44 }
+  - { offset: 0x9F57C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC6sharedACvgZ', symObjAddr: 0x6C, symBinAddr: 0xD838, symSize: 0x40 }
+  - { offset: 0x9F5C2, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC6sharedACvgZTo', symObjAddr: 0xAC, symBinAddr: 0xD878, symSize: 0x40 }
+  - { offset: 0x9F5DA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC6sharedACvgZTo', symObjAddr: 0xAC, symBinAddr: 0xD878, symSize: 0x40 }
+  - { offset: 0x9F60D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentCACyc33_34A1C86AB3EA1C059CB85ED9AFAEDD01LlfcTo', symObjAddr: 0xEC, symBinAddr: 0xD8B8, symSize: 0x3C }
+  - { offset: 0x9F67F, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVSQSCSQ2eeoiySbx_xtFZTW', symObjAddr: 0xE84, symBinAddr: 0xE5DC, symSize: 0x14 }
+  - { offset: 0x9F6C3, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACPxycfCTW', symObjAddr: 0xEC8, symBinAddr: 0xE60C, symSize: 0x8 }
+  - { offset: 0x9F70C, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP5unionyxxnFTW', symObjAddr: 0xED0, symBinAddr: 0xE614, symSize: 0x14 }
+  - { offset: 0x9F7A9, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP12intersectionyxxFTW', symObjAddr: 0xEE4, symBinAddr: 0xE628, symSize: 0x14 }
+  - { offset: 0x9F83E, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP19symmetricDifferenceyxxnFTW', symObjAddr: 0xEF8, symBinAddr: 0xE63C, symSize: 0x14 }
+  - { offset: 0x9F8DB, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP6insertySb8inserted_7ElementQz17memberAfterInserttAHnFTW', symObjAddr: 0xF0C, symBinAddr: 0xE650, symSize: 0x30 }
+  - { offset: 0x9FA48, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP6removey7ElementQzSgAGFTW', symObjAddr: 0xF3C, symBinAddr: 0xE680, symSize: 0x2C }
+  - { offset: 0x9FBD5, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP6update4with7ElementQzSgAHn_tFTW', symObjAddr: 0xF68, symBinAddr: 0xE6AC, symSize: 0x24 }
+  - { offset: 0x9FCC1, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP9formUnionyyxnFTW', symObjAddr: 0xF8C, symBinAddr: 0xE6D0, symSize: 0x14 }
+  - { offset: 0x9FD27, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP16formIntersectionyyxFTW', symObjAddr: 0xFA0, symBinAddr: 0xE6E4, symSize: 0x14 }
+  - { offset: 0x9FD8D, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP23formSymmetricDifferenceyyxnFTW', symObjAddr: 0xFB4, symBinAddr: 0xE6F8, symSize: 0x14 }
+  - { offset: 0x9FE02, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP11subtractingyxxFTW', symObjAddr: 0xFC8, symBinAddr: 0xE70C, symSize: 0x14 }
+  - { offset: 0x9FEAB, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP8isSubset2ofSbx_tFTW', symObjAddr: 0xFDC, symBinAddr: 0xE720, symSize: 0x14 }
+  - { offset: 0x9FF22, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP10isDisjoint4withSbx_tFTW', symObjAddr: 0xFF0, symBinAddr: 0xE734, symSize: 0x14 }
+  - { offset: 0x9FFDA, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP10isSuperset2ofSbx_tFTW', symObjAddr: 0x1004, symBinAddr: 0xE748, symSize: 0x14 }
+  - { offset: 0xA0074, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP7isEmptySbvgTW', symObjAddr: 0x1018, symBinAddr: 0xE75C, symSize: 0x10 }
+  - { offset: 0xA00DC, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACPyxqd__ncSTRd__7ElementQyd__AERtzlufCTW', symObjAddr: 0x1028, symBinAddr: 0xE76C, symSize: 0x18 }
+  - { offset: 0xA00F8, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs10SetAlgebraSCsACP8subtractyyxFTW', symObjAddr: 0x1040, symBinAddr: 0xE784, symSize: 0x14 }
+  - { offset: 0xA0189, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs25ExpressibleByArrayLiteralSCsACP05arrayG0x0fG7ElementQzd_tcfCTW', symObjAddr: 0x1060, symBinAddr: 0xE798, symSize: 0x3C }
+  - { offset: 0xA025A, size: 0x8, addend: 0x0, symName: '_$ss10SetAlgebraPs7ElementQz012ArrayLiteralC0RtzrlE05arrayE0xAFd_tcfCSo26SCNetworkReachabilityFlagsV_Tgq5Tf4gd_n', symObjAddr: 0x1408, symBinAddr: 0xEB40, symSize: 0x38 }
+  - { offset: 0xA027A, size: 0x8, addend: 0x0, symName: '_$ss10SetAlgebraPs7ElementQz012ArrayLiteralC0RtzrlE05arrayE0xAFd_tcfCSo26SCNetworkReachabilityFlagsV_Tgq5Tf4gd_n', symObjAddr: 0x1408, symBinAddr: 0xEB40, symSize: 0x38 }
+  - { offset: 0xA028E, size: 0x8, addend: 0x0, symName: '_$ss10SetAlgebraPs7ElementQz012ArrayLiteralC0RtzrlE05arrayE0xAFd_tcfCSo26SCNetworkReachabilityFlagsV_Tgq5Tf4gd_n', symObjAddr: 0x1408, symBinAddr: 0xEB40, symSize: 0x38 }
+  - { offset: 0xA02AE, size: 0x8, addend: 0x0, symName: '_$ss10SetAlgebraPs7ElementQz012ArrayLiteralC0RtzrlE05arrayE0xAFd_tcfCSo26SCNetworkReachabilityFlagsV_Tgq5Tf4gd_n', symObjAddr: 0x1408, symBinAddr: 0xEB40, symSize: 0x38 }
+  - { offset: 0xA02C2, size: 0x8, addend: 0x0, symName: '_$ss10SetAlgebraPs7ElementQz012ArrayLiteralC0RtzrlE05arrayE0xAFd_tcfCSo26SCNetworkReachabilityFlagsV_Tgq5Tf4gd_n', symObjAddr: 0x1408, symBinAddr: 0xEB40, symSize: 0x38 }
+  - { offset: 0xA02D6, size: 0x8, addend: 0x0, symName: '_$ss10SetAlgebraPs7ElementQz012ArrayLiteralC0RtzrlE05arrayE0xAFd_tcfCSo26SCNetworkReachabilityFlagsV_Tgq5Tf4gd_n', symObjAddr: 0x1408, symBinAddr: 0xEB40, symSize: 0x38 }
+  - { offset: 0xA02EA, size: 0x8, addend: 0x0, symName: '_$ss10SetAlgebraPs7ElementQz012ArrayLiteralC0RtzrlE05arrayE0xAFd_tcfCSo26SCNetworkReachabilityFlagsV_Tgq5Tf4gd_n', symObjAddr: 0x1408, symBinAddr: 0xEB40, symSize: 0x38 }
+  - { offset: 0xA03AA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC15isDeviceConnectSbyF', symObjAddr: 0x128, symBinAddr: 0xD8F4, symSize: 0x8C }
+  - { offset: 0xA03F7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC15isDeviceConnectSbyFTo', symObjAddr: 0x1B4, symBinAddr: 0xD980, symSize: 0xAC }
+  - { offset: 0xA044A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC9bleDevice0a3BleD00hG0CSgyF', symObjAddr: 0x260, symBinAddr: 0xDA2C, symSize: 0xC0 }
+  - { offset: 0xA04A6, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC9bleDevice0a3BleD00hG0CSgyFTo', symObjAddr: 0x320, symBinAddr: 0xDAEC, symSize: 0xE0 }
+  - { offset: 0xA0504, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC11getFileListyySi_SiSbtF', symObjAddr: 0x400, symBinAddr: 0xDBCC, symSize: 0xC0 }
+  - { offset: 0xA058C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC11getFileListyySi_SiSbtFTo', symObjAddr: 0x4C0, symBinAddr: 0xDC8C, symSize: 0xD4 }
+  - { offset: 0xA05E4, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC8syncFileyySi_S2iSbSitF', symObjAddr: 0x594, symBinAddr: 0xDD60, symSize: 0xDC }
+  - { offset: 0xA068E, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC8syncFileyySi_S2iSbSitFTo', symObjAddr: 0x670, symBinAddr: 0xDE3C, symSize: 0xEC }
+  - { offset: 0xA06FA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC12stopSyncFileyySi_SitF', symObjAddr: 0x75C, symBinAddr: 0xDF28, symSize: 0x4 }
+  - { offset: 0xA0715, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC12stopSyncFileyySi_SitFTo', symObjAddr: 0x760, symBinAddr: 0xDF2C, symSize: 0xC }
+  - { offset: 0xA073F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC10deleteFileyySi_SitF', symObjAddr: 0x76C, symBinAddr: 0xDF38, symSize: 0xB0 }
+  - { offset: 0xA07A7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC10deleteFileyySi_SitFTo', symObjAddr: 0x81C, symBinAddr: 0xDFE8, symSize: 0xBC }
+  - { offset: 0xA0809, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC9sessionIdSiyF', symObjAddr: 0x8D8, symBinAddr: 0xE0A4, symSize: 0xB8 }
+  - { offset: 0xA0863, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC9sessionIdSiyFTo', symObjAddr: 0x990, symBinAddr: 0xE15C, symSize: 0xDC }
+  - { offset: 0xA08CF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC13isDownloadingSbyF', symObjAddr: 0xA6C, symBinAddr: 0xE238, symSize: 0xB8 }
+  - { offset: 0xA0929, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC13isDownloadingSbyFTo', symObjAddr: 0xB24, symBinAddr: 0xE2F0, symSize: 0xD8 }
+  - { offset: 0xA0981, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC11isRecordingSbyF', symObjAddr: 0xBFC, symBinAddr: 0xE3C8, symSize: 0x8C }
+  - { offset: 0xA09BD, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC11isRecordingSbyFTo', symObjAddr: 0xC88, symBinAddr: 0xE454, symSize: 0xAC }
+  - { offset: 0xA09F7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentCfD', symObjAddr: 0xD34, symBinAddr: 0xE500, symSize: 0x30 }
+  - { offset: 0xA0A80, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVs9OptionSetSCsACP8rawValuex03RawG0Qz_tcfCTW', symObjAddr: 0xE78, symBinAddr: 0xE5D0, symSize: 0xC }
+  - { offset: 0xA0A94, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVSYSCSY8rawValuexSg03RawE0Qz_tcfCTW', symObjAddr: 0xEAC, symBinAddr: 0xE5F0, symSize: 0x10 }
+  - { offset: 0xA0AA8, size: 0x8, addend: 0x0, symName: '_$sSo26SCNetworkReachabilityFlagsVSYSCSY8rawValue03RawE0QzvgTW', symObjAddr: 0xEBC, symBinAddr: 0xE600, symSize: 0xC }
+  - { offset: 0xA0B30, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK5AgentC12stopSyncFileyySi_SitFTf4nnd_n', symObjAddr: 0x109C, symBinAddr: 0xE7D4, symSize: 0x1CC }
+  - { offset: 0xA1118, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK2eeoiySbAA26NetworkReachabilityManagerC0fG6StatusO_AFtF', symObjAddr: 0x19C, symBinAddr: 0xED70, symSize: 0x5C }
+  - { offset: 0xA116F, size: 0x8, addend: 0x0, symName: '_$sIegh_IeyBh_TR', symObjAddr: 0x990, symBinAddr: 0xF564, symSize: 0x2C }
+  - { offset: 0xA1187, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOSQAASQ2eeoiySbx_xtFZTW', symObjAddr: 0x9F0, symBinAddr: 0xF5C4, symSize: 0x58 }
+  - { offset: 0xA11D1, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOIegy_SgWOy', symObjAddr: 0xA48, symBinAddr: 0xF61C, symSize: 0x10 }
+  - { offset: 0xA11E5, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOIegy_SgWOe', symObjAddr: 0xA58, symBinAddr: 0xF62C, symSize: 0x10 }
+  - { offset: 0xA11F9, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerCMa', symObjAddr: 0xA68, symBinAddr: 0xF63C, symSize: 0x20 }
+  - { offset: 0xA120D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14startListeningSbyFyyYbcfU0_TA', symObjAddr: 0xB7C, symBinAddr: 0xF70C, symSize: 0x8 }
+  - { offset: 0xA1221, size: 0x8, addend: 0x0, symName: _block_copy_helper, symObjAddr: 0xB84, symBinAddr: 0xF714, symSize: 0x10 }
+  - { offset: 0xA1235, size: 0x8, addend: 0x0, symName: _block_destroy_helper, symObjAddr: 0xB94, symBinAddr: 0xF724, symSize: 0x8 }
+  - { offset: 0xA1249, size: 0x8, addend: 0x0, symName: '_$sSay8Dispatch0A13WorkItemFlagsVGMa', symObjAddr: 0xC20, symBinAddr: 0xF76C, symSize: 0x54 }
+  - { offset: 0xA125D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOSHAASQWb', symObjAddr: 0xC74, symBinAddr: 0xF7C0, symSize: 0x4 }
+  - { offset: 0xA1271, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOAESQAAWl', symObjAddr: 0xC78, symBinAddr: 0xF7C4, symSize: 0x40 }
+  - { offset: 0xA1285, size: 0x8, addend: 0x0, symName: ___swift_memcpy1_1, symObjAddr: 0xCB8, symBinAddr: 0xF804, symSize: 0xC }
+  - { offset: 0xA1299, size: 0x8, addend: 0x0, symName: ___swift_noop_void_return, symObjAddr: 0xCC4, symBinAddr: 0xF810, symSize: 0x4 }
+  - { offset: 0xA12AD, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOwet', symObjAddr: 0xCC8, symBinAddr: 0xF814, symSize: 0xA0 }
+  - { offset: 0xA12C1, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOwst', symObjAddr: 0xD68, symBinAddr: 0xF8B4, symSize: 0xB8 }
+  - { offset: 0xA12D5, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOwug', symObjAddr: 0xE20, symBinAddr: 0xF96C, symSize: 0x14 }
+  - { offset: 0xA12E9, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOwup', symObjAddr: 0xE34, symBinAddr: 0xF980, symSize: 0x4 }
+  - { offset: 0xA12FD, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOwui', symObjAddr: 0xE38, symBinAddr: 0xF984, symSize: 0x10 }
+  - { offset: 0xA1311, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC0eF6StatusOMa', symObjAddr: 0xE48, symBinAddr: 0xF994, symSize: 0x10 }
+  - { offset: 0xA1325, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOwet', symObjAddr: 0xE58, symBinAddr: 0xF9A4, symSize: 0x90 }
+  - { offset: 0xA1339, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOwst', symObjAddr: 0xEE8, symBinAddr: 0xFA34, symSize: 0xB0 }
+  - { offset: 0xA134D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOwug', symObjAddr: 0xF98, symBinAddr: 0xFAE4, symSize: 0x8 }
+  - { offset: 0xA1361, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOwui', symObjAddr: 0xFA4, symBinAddr: 0xFAEC, symSize: 0xC }
+  - { offset: 0xA1375, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOMa', symObjAddr: 0xFB0, symBinAddr: 0xFAF8, symSize: 0x10 }
+  - { offset: 0xA13E7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOSHAASH13_rawHashValue4seedS2i_tFTW', symObjAddr: 0xFC, symBinAddr: 0xECD0, symSize: 0x40 }
+  - { offset: 0xA1537, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeO21__derived_enum_equalsySbAE_AEtFZ', symObjAddr: 0x0, symBinAddr: 0xEBD4, symSize: 0x10 }
+  - { offset: 0xA1574, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeO4hash4intoys6HasherVz_tF', symObjAddr: 0x10, symBinAddr: 0xEBE4, symSize: 0x24 }
+  - { offset: 0xA15EE, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeO9hashValueSivg', symObjAddr: 0x34, symBinAddr: 0xEC08, symSize: 0x44 }
+  - { offset: 0xA16DA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOSQAASQ2eeoiySbx_xtFZTW', symObjAddr: 0x78, symBinAddr: 0xEC4C, symSize: 0x18 }
+  - { offset: 0xA1728, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOSHAASH9hashValueSivgTW', symObjAddr: 0x90, symBinAddr: 0xEC64, symSize: 0x44 }
+  - { offset: 0xA17EE, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14ConnectionTypeOSHAASH4hash4intoys6HasherVz_tFTW', symObjAddr: 0xD4, symBinAddr: 0xECA8, symSize: 0x28 }
+  - { offset: 0xA184B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC11isReachableSbvg', symObjAddr: 0x13C, symBinAddr: 0xED10, symSize: 0x34 }
+  - { offset: 0xA1873, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC17isReachableOnWWANSbvg', symObjAddr: 0x170, symBinAddr: 0xED44, symSize: 0x2C }
+  - { offset: 0xA18B4, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC023isReachableOnEthernetOrbC0Sbvg', symObjAddr: 0x1F8, symBinAddr: 0xEDCC, symSize: 0x2C }
+  - { offset: 0xA19A0, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC07networkF6StatusAC0efI0Ovg', symObjAddr: 0x224, symBinAddr: 0xEDF8, symSize: 0x6C }
+  - { offset: 0xA1A3E, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC13listenerQueueSo17OS_dispatch_queueCvg', symObjAddr: 0x290, symBinAddr: 0xEE64, symSize: 0x30 }
+  - { offset: 0xA1A52, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC13listenerQueueSo17OS_dispatch_queueCvs', symObjAddr: 0x2C0, symBinAddr: 0xEE94, symSize: 0x44 }
+  - { offset: 0xA1A66, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC13listenerQueueSo17OS_dispatch_queueCvM', symObjAddr: 0x304, symBinAddr: 0xEED8, symSize: 0x30 }
+  - { offset: 0xA1A7A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC13listenerQueueSo17OS_dispatch_queueCvM.resume.0', symObjAddr: 0x334, symBinAddr: 0xEF08, symSize: 0x4 }
+  - { offset: 0xA1A8E, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC8listeneryAC0eF6StatusOcSgvg', symObjAddr: 0x338, symBinAddr: 0xEF0C, symSize: 0x4C }
+  - { offset: 0xA1AA2, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC8listeneryAC0eF6StatusOcSgvs', symObjAddr: 0x384, symBinAddr: 0xEF58, symSize: 0x78 }
+  - { offset: 0xA1AB6, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC8listeneryAC0eF6StatusOcSgvM', symObjAddr: 0x3FC, symBinAddr: 0xEFD0, symSize: 0x30 }
+  - { offset: 0xA1ACA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC5flagsSo09SCNetworkF5FlagsVSgvg', symObjAddr: 0x42C, symBinAddr: 0xF000, symSize: 0x70 }
+  - { offset: 0xA1B0C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC13previousFlagsSo09SCNetworkfI0Vvg', symObjAddr: 0x49C, symBinAddr: 0xF070, symSize: 0x30 }
+  - { offset: 0xA1B20, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC13previousFlagsSo09SCNetworkfI0Vvs', symObjAddr: 0x4CC, symBinAddr: 0xF0A0, symSize: 0x3C }
+  - { offset: 0xA1B34, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC13previousFlagsSo09SCNetworkfI0VvM', symObjAddr: 0x508, symBinAddr: 0xF0DC, symSize: 0x30 }
+  - { offset: 0xA1B7F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC4hostACSgSS_tcfC', symObjAddr: 0x538, symBinAddr: 0xF10C, symSize: 0x94 }
+  - { offset: 0xA1C0F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerCACSgycfC', symObjAddr: 0x5CC, symBinAddr: 0xF1A0, symSize: 0x4 }
+  - { offset: 0xA1C30, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerCfd', symObjAddr: 0x5D0, symBinAddr: 0xF1A4, symSize: 0x38 }
+  - { offset: 0xA1C61, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerCfD', symObjAddr: 0x608, symBinAddr: 0xF1DC, symSize: 0x40 }
+  - { offset: 0xA1CCF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14startListeningSbyF', symObjAddr: 0x648, symBinAddr: 0xF21C, symSize: 0x26C }
+  - { offset: 0xA1D52, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14startListeningSbyFySo09SCNetworkF3Refa_So0jF5FlagsVSvSgtcfU_To', symObjAddr: 0x8B4, symBinAddr: 0xF488, symSize: 0xC }
+  - { offset: 0xA1D80, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14startListeningSbyFyyYbcfU0_', symObjAddr: 0x8C0, symBinAddr: 0xF494, symSize: 0xD0 }
+  - { offset: 0xA1E3F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC14startListeningSbyFySo09SCNetworkF3Refa_So0jF5FlagsVSvSgtcfU_Tf4dnn_n', symObjAddr: 0xFC0, symBinAddr: 0xFB08, symSize: 0xD0 }
+  - { offset: 0xA1F4A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerC13stopListeningyyF', symObjAddr: 0x9BC, symBinAddr: 0xF590, symSize: 0x34 }
+  - { offset: 0xA1FF5, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK26NetworkReachabilityManagerCACSgycfCTf4d_n', symObjAddr: 0xACC, symBinAddr: 0xF65C, symSize: 0xB0 }
+  - { offset: 0xA220E, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK11isLogOpenedSbvp', symObjAddr: 0x4D708, symBinAddr: 0x3B1E0, symSize: 0x0 }
+  - { offset: 0xA2228, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK8outBlockySScSgvp', symObjAddr: 0x4D710, symBinAddr: 0x3B1E8, symSize: 0x0 }
+  - { offset: 0xA2242, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC6sharedACvpZ', symObjAddr: 0x4D720, symBinAddr: 0x3B1F8, symSize: 0x0 }
+  - { offset: 0xA2B4D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC6sharedACvpZ', symObjAddr: 0x4D728, symBinAddr: 0x3B200, symSize: 0x0 }
+  - { offset: 0xA2C3E, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC14FileListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC6sharedADvpZ', symObjAddr: 0x124B0, symBinAddr: 0x3A450, symSize: 0x0 }
+  - { offset: 0xA2DD7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC6sharedACvau', symObjAddr: 0x0, symBinAddr: 0xFBDC, symSize: 0x40 }
+  - { offset: 0xA2E0C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK4mlogyySSF', symObjAddr: 0x40, symBinAddr: 0xFC1C, symSize: 0x15C }
+  - { offset: 0xA2EE3, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC6shared_WZ', symObjAddr: 0x19C, symBinAddr: 0xFD78, symSize: 0x30 }
+  - { offset: 0xA2F47, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC6sharedACvau', symObjAddr: 0x1080, symBinAddr: 0x10C38, symSize: 0x40 }
+  - { offset: 0xA2F9D, size: 0x8, addend: 0x0, symName: '_$ss5Error_pSgIegg_So7NSErrorCSgIeyBy_TR', symObjAddr: 0x2BB8, symBinAddr: 0x12744, symSize: 0x50 }
+  - { offset: 0xA306F, size: 0x8, addend: 0x0, symName: '_$sSaySSGIegg_So7NSArrayCIeyBy_TR', symObjAddr: 0x3338, symBinAddr: 0x12EC4, symSize: 0x58 }
+  - { offset: 0xA3092, size: 0x8, addend: 0x0, symName: '_$sSo7NSTimerCIeghg_ABIeyBhy_TR', symObjAddr: 0x4BC4, symBinAddr: 0x14750, symSize: 0x4C }
+  - { offset: 0xA30B5, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentCfETo', symObjAddr: 0x5484, symBinAddr: 0x15010, symSize: 0xD0 }
+  - { offset: 0xA30E4, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC14serverDidStartyyF', symObjAddr: 0x5554, symBinAddr: 0x150E0, symSize: 0x114 }
+  - { offset: 0xA31DD, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC14serverDidStartyyFTo', symObjAddr: 0x5668, symBinAddr: 0x151F4, symSize: 0x84 }
+  - { offset: 0xA3238, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22serverDidFailWithErroryys0J0_pF', symObjAddr: 0x56EC, symBinAddr: 0x15278, symSize: 0x370 }
+  - { offset: 0xA3419, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22serverDidFailWithErroryys0J0_pFTo', symObjAddr: 0x5AD0, symBinAddr: 0x1565C, symSize: 0x50 }
+  - { offset: 0xA3435, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13serverDidStopyyF', symObjAddr: 0x5B20, symBinAddr: 0x156AC, symSize: 0xE4 }
+  - { offset: 0xA3524, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13serverDidStopyyFTo', symObjAddr: 0x5C04, symBinAddr: 0x15790, symSize: 0x28 }
+  - { offset: 0xA3540, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13clientDidOpenyyF', symObjAddr: 0x5C2C, symBinAddr: 0x157B8, symSize: 0x100 }
+  - { offset: 0xA3616, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13clientDidOpenyyFTo', symObjAddr: 0x5D2C, symBinAddr: 0x158B8, symSize: 0x110 }
+  - { offset: 0xA36D1, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC20clientDidReceiveTextyySSF', symObjAddr: 0x5E3C, symBinAddr: 0x159C8, symSize: 0x88 }
+  - { offset: 0xA37B9, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC20clientDidReceiveTextyySSFTo', symObjAddr: 0x5EC4, symBinAddr: 0x15A50, symSize: 0xB0 }
+  - { offset: 0xA387F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC16clientDidReceiveyy10Foundation4DataVF', symObjAddr: 0x5F74, symBinAddr: 0x15B00, symSize: 0x388 }
+  - { offset: 0xA3ABD, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataV10PenWiFiSDKE12parsePduPackAD0hI0VSgyF', symObjAddr: 0x6494, symBinAddr: 0x16020, symSize: 0x20C }
+  - { offset: 0xA3BF5, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA9CommonErr33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x66A0, symBinAddr: 0x1622C, symSize: 0x438 }
+  - { offset: 0xA3DD1, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA9Handshake33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x6AD8, symBinAddr: 0x16664, symSize: 0x398 }
+  - { offset: 0xA3F8E, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA8SayHello33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x6E70, symBinAddr: 0x169FC, symSize: 0x244 }
+  - { offset: 0xA4117, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA4Ping33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x70B4, symBinAddr: 0x16C40, symSize: 0x504 }
+  - { offset: 0xA4345, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onabC5Close33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x75B8, symBinAddr: 0x17144, symSize: 0x570 }
+  - { offset: 0xA45EF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA4Tips33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x7B28, symBinAddr: 0x176B4, symSize: 0x2CC }
+  - { offset: 0xA47AF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA8FileList33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation4DataVSgtF', symObjAddr: 0x7DF4, symBinAddr: 0x17980, symSize: 0xA98 }
+  - { offset: 0xA4E2D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA8FileList33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation4DataVSgtFyyYbcfU0_', symObjAddr: 0xB3A0, symBinAddr: 0x1AF2C, symSize: 0x90 }
+  - { offset: 0xA4E7A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA14SyncFileStatus33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x888C, symBinAddr: 0x18418, symSize: 0x4B8 }
+  - { offset: 0xA511A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA12SyncFileData33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation0I0VtF', symObjAddr: 0x8D44, symBinAddr: 0x188D0, symSize: 0x738 }
+  - { offset: 0xA53FA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA12SyncFileData33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation0I0VtFyyYbcfU_', symObjAddr: 0xB430, symBinAddr: 0x1AFBC, symSize: 0xBC }
+  - { offset: 0xA548A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA12SyncFileData33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation0I0VtFyyYbcfU0_', symObjAddr: 0xB4EC, symBinAddr: 0x1B078, symSize: 0xC0 }
+  - { offset: 0xA5539, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA10FileDelete33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x947C, symBinAddr: 0x19008, symSize: 0x374 }
+  - { offset: 0xA56A8, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA12SyncFileStop33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGF', symObjAddr: 0x97F0, symBinAddr: 0x1937C, symSize: 0x3A4 }
+  - { offset: 0xA587F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onabC4Rate33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation4DataVSgtF', symObjAddr: 0x9B94, symBinAddr: 0x19720, symSize: 0x334 }
+  - { offset: 0xA59B1, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA4Logs33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation4DataVSgtF', symObjAddr: 0x9EC8, symBinAddr: 0x19A54, symSize: 0x408 }
+  - { offset: 0xA5B33, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC16clientDidReceiveyy10Foundation4DataVFTo', symObjAddr: 0xA2D0, symBinAddr: 0x19E5C, symSize: 0x74 }
+  - { offset: 0xA5B4F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22clientDidFailWithErroryys0J0_pF', symObjAddr: 0xA344, symBinAddr: 0x19ED0, symSize: 0x4E8 }
+  - { offset: 0xA5D03, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22clientDidFailWithErroryys0J0_pFyyYbcfU_', symObjAddr: 0xA82C, symBinAddr: 0x1A3B8, symSize: 0x64 }
+  - { offset: 0xA5D4F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22clientDidFailWithErroryys0J0_pFyyScMYccfU0_', symObjAddr: 0xA890, symBinAddr: 0x1A41C, symSize: 0xB0 }
+  - { offset: 0xA5D9B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22clientDidFailWithErroryys0J0_pFTo', symObjAddr: 0xA940, symBinAddr: 0x1A4CC, symSize: 0x50 }
+  - { offset: 0xA5DB7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC14clientDidClose8withCode6reason8wasCleanySi_SSSbtF', symObjAddr: 0xA990, symBinAddr: 0x1A51C, symSize: 0x740 }
+  - { offset: 0xA60AD, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC14clientDidClose8withCode6reason8wasCleanySi_SSSbtFyycfU0_', symObjAddr: 0xB0D0, symBinAddr: 0x1AC5C, symSize: 0xD0 }
+  - { offset: 0xA61BF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC14clientDidClose8withCode6reason8wasCleanySi_SSSbtFTo', symObjAddr: 0xB1A0, symBinAddr: 0x1AD2C, symSize: 0x74 }
+  - { offset: 0xA61FC, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC12appHandshake33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SitF', symObjAddr: 0xB214, symBinAddr: 0x1ADA0, symSize: 0x18C }
+  - { offset: 0xA6331, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC20isWebSocketConnectedSbyF', symObjAddr: 0xB6A4, symBinAddr: 0x1B230, symSize: 0xB0 }
+  - { offset: 0xA63DE, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC20isWebSocketConnectedSbyFTo', symObjAddr: 0xB754, symBinAddr: 0x1B2E0, symSize: 0x24 }
+  - { offset: 0xA63FA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC10appGetLogsyySbF', symObjAddr: 0xB778, symBinAddr: 0x1B304, symSize: 0x138 }
+  - { offset: 0xA64BB, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11sendCommond33_14E6DAD1012C7144E675E979A9D28E19LLyySi_SDySSypGSg10Foundation4DataVSgtF', symObjAddr: 0xB8B0, symBinAddr: 0x1B43C, symSize: 0x950 }
+  - { offset: 0xA6A51, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC03appbC4RateyySb_SitF', symObjAddr: 0xC200, symBinAddr: 0x1BD8C, symSize: 0x308 }
+  - { offset: 0xA6C71, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC03appbC4RateyySb_SitFTo', symObjAddr: 0xC508, symBinAddr: 0x1C094, symSize: 0x44 }
+  - { offset: 0xA6C8D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13appDeleteFileyySi_SitF', symObjAddr: 0xC54C, symBinAddr: 0x1C0D8, symSize: 0x1D0 }
+  - { offset: 0xA6DC8, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13appDeleteFileyySi_SitFTo', symObjAddr: 0xC71C, symBinAddr: 0x1C2A8, symSize: 0x44 }
+  - { offset: 0xA6DE4, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC15appStopSyncFileyySi_SitF', symObjAddr: 0xC760, symBinAddr: 0x1C2EC, symSize: 0x1D0 }
+  - { offset: 0xA6F1F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC15appStopSyncFileyySi_SitFTo', symObjAddr: 0xC930, symBinAddr: 0x1C4BC, symSize: 0x44 }
+  - { offset: 0xA6F3B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11appSyncFileyySi_S3itF', symObjAddr: 0xC974, symBinAddr: 0x1C500, symSize: 0x2F8 }
+  - { offset: 0xA716A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11appSyncFileyySi_S3itFTo', symObjAddr: 0xCC6C, symBinAddr: 0x1C7F8, symSize: 0x5C }
+  - { offset: 0xA7186, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC14appGetFileListyySi_SiSbtF', symObjAddr: 0xCCC8, symBinAddr: 0x1C854, symSize: 0x25C }
+  - { offset: 0xA733B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC14appGetFileListyySi_SiSbtFTo', symObjAddr: 0xCF24, symBinAddr: 0x1CAB0, symSize: 0x4C }
+  - { offset: 0xA7357, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC010getCurrentbC4NameSSSgyF', symObjAddr: 0xCF70, symBinAddr: 0x1CAFC, symSize: 0x4 }
+  - { offset: 0xA737A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC010getCurrentbC4NameSSSgyFTo', symObjAddr: 0xCF74, symBinAddr: 0x1CB00, symSize: 0x40 }
+  - { offset: 0xA73AD, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC6shared_WZ', symObjAddr: 0xCFB4, symBinAddr: 0x1CB40, symSize: 0x34 }
+  - { offset: 0xA73FF, size: 0x8, addend: 0x0, symName: '_$s8Dispatch0A13WorkItemFlagsVACs10SetAlgebraAAWl', symObjAddr: 0xCFE8, symBinAddr: 0x1CB74, symSize: 0x44 }
+  - { offset: 0xA7413, size: 0x8, addend: 0x0, symName: '_$sSay8Dispatch0A13WorkItemFlagsVGSayxGSTsWl', symObjAddr: 0xD070, symBinAddr: 0x1CBB8, symSize: 0x5C }
+  - { offset: 0xA7448, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC14FileListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC6shared_WZ', symObjAddr: 0xE1B0, symBinAddr: 0x1DCF8, symSize: 0x3C }
+  - { offset: 0xA7610, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectWifiyySS_SSSitFyyYbcfU0_TA', symObjAddr: 0xE6EC, symBinAddr: 0x1E234, symSize: 0x1C }
+  - { offset: 0xA7624, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC10disconnectyyFyyScMYccfU_TA', symObjAddr: 0xE770, symBinAddr: 0x1E274, symSize: 0x8 }
+  - { offset: 0xA7638, size: 0x8, addend: 0x0, symName: _block_copy_helper.10, symObjAddr: 0xE778, symBinAddr: 0x1E27C, symSize: 0x10 }
+  - { offset: 0xA764C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentCMa', symObjAddr: 0xE788, symBinAddr: 0x1E28C, symSize: 0x38 }
+  - { offset: 0xA766B, size: 0x8, addend: 0x0, symName: '_$ss29getContiguousArrayStorageType3fors01_bcD0CyxGmxm_tlF9PenBleSDK0H4FileC_Ttg5', symObjAddr: 0xE7C0, symBinAddr: 0x1E2C4, symSize: 0x54 }
+  - { offset: 0xA76A3, size: 0x8, addend: 0x0, symName: '_$ss22__RawDictionaryStorageC4findys10_HashTableV6BucketV6bucket_Sb5foundtxSHRzlFSS_Tg5', symObjAddr: 0xE814, symBinAddr: 0x1E318, symSize: 0x64 }
+  - { offset: 0xA76D0, size: 0x8, addend: 0x0, symName: '_$ss22__RawDictionaryStorageC4find_9hashValues10_HashTableV6BucketV6bucket_Sb5foundtx_SitSHRzlFSS_Tg5', symObjAddr: 0xE878, symBinAddr: 0x1E37C, symSize: 0xE0 }
+  - { offset: 0xA7774, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV20_consumeAndCreateNew14bufferIsUnique15minimumCapacity13growForAppendAByxGSb_SiSbtF9PenBleSDK0P4FileC_Tg5', symObjAddr: 0xE958, symBinAddr: 0x1E45C, symSize: 0x130 }
+  - { offset: 0xA7916, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV20_consumeAndCreateNew14bufferIsUnique15minimumCapacity13growForAppendAByxGSb_SiSbtFSnySiG_Tg5', symObjAddr: 0xEA88, symBinAddr: 0x1E58C, symSize: 0xF8 }
+  - { offset: 0xA7A7B, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV20_consumeAndCreateNew14bufferIsUnique15minimumCapacity13growForAppendAByxGSb_SiSbtFSi_Sis5Int16Vt_Tg5', symObjAddr: 0xEB80, symBinAddr: 0x1E684, symSize: 0x104 }
+  - { offset: 0xA7B88, size: 0x8, addend: 0x0, symName: '_$ss22_ContiguousArrayBufferV19_uninitializedCount15minimumCapacityAByxGSi_SitcfC9PenBleSDK0I4FileC_Tt1g5', symObjAddr: 0xEC84, symBinAddr: 0x1E788, symSize: 0x80 }
+  - { offset: 0xA7BFC, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV13_copyContents8subRange12initializingSpyxGSnySiG_AFtF9PenBleSDK0I4FileC_Tg5', symObjAddr: 0xED04, symBinAddr: 0x1E808, symSize: 0xF8 }
+  - { offset: 0xA7D29, size: 0x8, addend: 0x0, symName: '_$sSD8_VariantV8setValue_6forKeyyq_n_xtFSS_yycTg5', symObjAddr: 0xEDFC, symBinAddr: 0x1E900, symSize: 0xF0 }
+  - { offset: 0xA7E28, size: 0x8, addend: 0x0, symName: '_$sSD8_VariantV11removeValue6forKeyq_Sgx_tFSS_yycTg5', symObjAddr: 0xEEEC, symBinAddr: 0x1E9F0, symSize: 0xD4 }
+  - { offset: 0xA7ECC, size: 0x8, addend: 0x0, symName: '_$ss17_NativeDictionaryV7_insert2at3key5valueys10_HashTableV6BucketV_xnq_ntFSS_ypTg5', symObjAddr: 0xF0A0, symBinAddr: 0x1EBA4, symSize: 0x68 }
+  - { offset: 0xA7F54, size: 0x8, addend: 0x0, symName: '_$ss17_NativeDictionaryV4copyyyFSS_yycTg5', symObjAddr: 0xF108, symBinAddr: 0x1EC0C, symSize: 0x1D0 }
+  - { offset: 0xA7FF9, size: 0x8, addend: 0x0, symName: '_$ss17_NativeDictionaryV4copyyyFSS_ypTg5', symObjAddr: 0xF2D8, symBinAddr: 0x1EDDC, symSize: 0x1F4 }
+  - { offset: 0xA80B7, size: 0x8, addend: 0x0, symName: '_$ss17_NativeDictionaryV20_copyOrMoveAndResize8capacity12moveElementsySi_SbtFSS_yycTg5', symObjAddr: 0xF4CC, symBinAddr: 0x1EFD0, symSize: 0x32C }
+  - { offset: 0xA81AC, size: 0x8, addend: 0x0, symName: '_$ss17_NativeDictionaryV20_copyOrMoveAndResize8capacity12moveElementsySi_SbtFSS_ypTg5', symObjAddr: 0xF7F8, symBinAddr: 0x1F2FC, symSize: 0x328 }
+  - { offset: 0xA82B5, size: 0x8, addend: 0x0, symName: '_$ss17_NativeDictionaryV7_delete2atys10_HashTableV6BucketV_tFSS_yycTg5', symObjAddr: 0xFB20, symBinAddr: 0x1F624, symSize: 0x1B0 }
+  - { offset: 0xA83AC, size: 0x8, addend: 0x0, symName: '_$sSMsSkRzrlE4sort2byySb7ElementSTQz_ADtKXE_tKFs15ContiguousArrayVy9PenBleSDK0G4FileCG_Tg504$s10f12WiFiSDK0bC14i53ListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC11getG48FilesySay0aqD00qE0CGAF0Q6DeviceCSgFSbAH_AHtXEfU_Tf1cn_n', symObjAddr: 0xFCD0, symBinAddr: 0x1F7D4, symSize: 0x68 }
+  - { offset: 0xA84A8, size: 0x8, addend: 0x0, symName: '_$sSr15_stableSortImpl2byySbx_xtKXE_tKF9PenBleSDK0F4FileC_Tg504$s10e12WiFiSDK0bC14h53ListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC11getF48FilesySay0aqD00qE0CGAF0Q6DeviceCSgFSbAH_AHtXEfU_Tf1cn_n', symObjAddr: 0xFD38, symBinAddr: 0x1F83C, symSize: 0x100 }
+  - { offset: 0xA858F, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV19_getElementSlowPathyyXlSiF9PenBleSDK0H4FileC_Tg5', symObjAddr: 0xFE38, symBinAddr: 0x1F93C, symSize: 0x1AC }
+  - { offset: 0xA873C, size: 0x8, addend: 0x0, symName: '_$sSr15_stableSortImpl2byySbx_xtKXE_tKFySryxGz_SiztKXEfU_9PenBleSDK0F4FileC_Tg504$s10e12WiFiSDK0bC14h53ListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC11getF48FilesySay0aqD00qE0CGAF0Q6DeviceCSgFSbAH_AHtXEfU_Tf1nnncn_n', symObjAddr: 0xFFE4, symBinAddr: 0x1FAE8, symSize: 0x3D0 }
+  - { offset: 0xA8B78, size: 0x8, addend: 0x0, symName: '_$sSMsSKRzrlE14_insertionSort6within9sortedEnd2byySny5IndexSlQzG_AFSb7ElementSTQz_AItKXEtKFSry9PenBleSDK0J4FileCG_Tg504$s10i12WiFiSDK0bC14l53ListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC11getJ48FilesySay0aqD00qE0CGAF0Q6DeviceCSgFSbAH_AHtXEfU_Tf1nncn_n', symObjAddr: 0x103B4, symBinAddr: 0x1FEB8, symSize: 0xF4 }
+  - { offset: 0xA8D31, size: 0x8, addend: 0x0, symName: '_$sSr13_mergeTopRuns_6buffer2bySbSaySnySiGGz_SpyxGSbx_xtKXEtKF9PenBleSDK0G4FileC_Tg504$s10f12WiFiSDK0bC14i53ListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC11getG48FilesySay0aqD00qE0CGAF0Q6DeviceCSgFSbAH_AHtXEfU_Tf1nncn_n', symObjAddr: 0x104A8, symBinAddr: 0x1FFAC, symSize: 0x274 }
+  - { offset: 0xA908D, size: 0x8, addend: 0x0, symName: '_$sSr13_finalizeRuns_6buffer2bySbSaySnySiGGz_SpyxGSbx_xtKXEtKF9PenBleSDK0F4FileC_Tg504$s10e12WiFiSDK0bC14h53ListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC11getF48FilesySay0aqD00qE0CGAF0Q6DeviceCSgFSbAH_AHtXEfU_Tf1nncn_n', symObjAddr: 0x1071C, symBinAddr: 0x20220, symSize: 0x148 }
+  - { offset: 0xA91F0, size: 0x8, addend: 0x0, symName: '_$ss6_merge3low3mid4high6buffer2bySbSpyxG_A3GSbx_xtKXEtKlF9PenBleSDK0H4FileC_Tg504$s10g12WiFiSDK0bC14j53ListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC11getH48FilesySay0aqD00qE0CGAF0Q6DeviceCSgFSbAH_AHtXEfU_Tf1nnnnc_n', symObjAddr: 0x10864, symBinAddr: 0x20368, symSize: 0x2B8 }
+  - { offset: 0xA92F2, size: 0x8, addend: 0x0, symName: '_$ss12_ArrayBufferV20_consumeAndCreateNewAByxGyFSnySiG_Tgq5', symObjAddr: 0x10B1C, symBinAddr: 0x20620, symSize: 0x14 }
+  - { offset: 0xA9320, size: 0x8, addend: 0x0, symName: '_$sSa13_copyContents12initializings16IndexingIteratorVySayxGG_SitSryxG_tF9PenBleSDK0G4FileC_Tg5', symObjAddr: 0x10C28, symBinAddr: 0x20634, symSize: 0x160 }
+  - { offset: 0xA94F3, size: 0x8, addend: 0x0, symName: '_$ss22_ContiguousArrayBufferV20_consumeAndCreateNewAByxGyF9PenBleSDK0I4FileC_Tg5', symObjAddr: 0x10D88, symBinAddr: 0x20794, symSize: 0x14 }
+  - { offset: 0xA952B, size: 0x8, addend: 0x0, symName: '_$ss22_ContiguousArrayBufferV20_consumeAndCreateNew14bufferIsUnique15minimumCapacity13growForAppendAByxGSb_SiSbtF9PenBleSDK0Q4FileC_Tg5', symObjAddr: 0x10D9C, symBinAddr: 0x207A8, symSize: 0x124 }
+  - { offset: 0xA9617, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC17listNetworkChange33_14E6DAD1012C7144E675E979A9D28E19LLyyFyAA0G19ReachabilityManagerC0gQ6StatusOcfU_TA', symObjAddr: 0x10EE4, symBinAddr: 0x208F0, symSize: 0x8 }
+  - { offset: 0xA962B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22serverDidFailWithErroryys0J0_pFyyYbcfU_TA', symObjAddr: 0x10EEC, symBinAddr: 0x208F8, symSize: 0x1C }
+  - { offset: 0xA963F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7PduPackVSgWOs', symObjAddr: 0x10F08, symBinAddr: 0x20914, symSize: 0x38 }
+  - { offset: 0xA9653, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7PduPackVSgWOe', symObjAddr: 0x10F40, symBinAddr: 0x2094C, symSize: 0x44 }
+  - { offset: 0xA9667, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataVSgWOe', symObjAddr: 0x10F84, symBinAddr: 0x20990, symSize: 0x14 }
+  - { offset: 0xA967B, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataV15_RepresentationOWOe', symObjAddr: 0x10F98, symBinAddr: 0x209A4, symSize: 0x40 }
+  - { offset: 0xA968F, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataV15_RepresentationOWOy', symObjAddr: 0x10FD8, symBinAddr: 0x209E4, symSize: 0x40 }
+  - { offset: 0xA96A3, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22clientDidFailWithErroryys0J0_pFyyYbcfU_TA', symObjAddr: 0x11018, symBinAddr: 0x20A24, symSize: 0x8 }
+  - { offset: 0xA96B7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC22clientDidFailWithErroryys0J0_pFyyScMYccfU0_TA', symObjAddr: 0x11028, symBinAddr: 0x20A34, symSize: 0x10 }
+  - { offset: 0xA96CB, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC14clientDidClose8withCode6reason8wasCleanySi_SSSbtFyycfU0_TA', symObjAddr: 0x11038, symBinAddr: 0x20A44, symSize: 0x8 }
+  - { offset: 0xA96EA, size: 0x8, addend: 0x0, symName: '_$sIeyB_Ieg_TRTA', symObjAddr: 0x11040, symBinAddr: 0x20A4C, symSize: 0xC }
+  - { offset: 0xA971E, size: 0x8, addend: 0x0, symName: '_$sIeg_ytIegr_TRTA', symObjAddr: 0x11070, symBinAddr: 0x20A7C, symSize: 0x20 }
+  - { offset: 0xA9747, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC7execute5label_yycSS_yyXBtFyycfU_TA', symObjAddr: 0x11094, symBinAddr: 0x20AA0, symSize: 0x28 }
+  - { offset: 0xA9785, size: 0x8, addend: 0x0, symName: '_$sypWOb', symObjAddr: 0x110BC, symBinAddr: 0x20AC8, symSize: 0x10 }
+  - { offset: 0xA9799, size: 0x8, addend: 0x0, symName: ___swift_destroy_boxed_opaque_existential_0, symObjAddr: 0x110CC, symBinAddr: 0x20AD8, symSize: 0x20 }
+  - { offset: 0xA97E4, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC010getCurrentbC4NameSSSgyFTf4d_n', symObjAddr: 0x11304, symBinAddr: 0x20D10, symSize: 0x4C4 }
+  - { offset: 0xA9D0F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentCMU', symObjAddr: 0x119BC, symBinAddr: 0x213C8, symSize: 0x8 }
+  - { offset: 0xA9D23, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentCMr', symObjAddr: 0x119C4, symBinAddr: 0x213D0, symSize: 0xDC }
+  - { offset: 0xA9D37, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolCMa', symObjAddr: 0x11AF8, symBinAddr: 0x21504, symSize: 0x20 }
+  - { offset: 0xA9D4B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC9LogHelper33_14E6DAD1012C7144E675E979A9D28E19LLCMa', symObjAddr: 0x11B18, symBinAddr: 0x21524, symSize: 0x20 }
+  - { offset: 0xA9D5F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC10RateHelper33_14E6DAD1012C7144E675E979A9D28E19LLCMa', symObjAddr: 0x11B38, symBinAddr: 0x21544, symSize: 0x20 }
+  - { offset: 0xA9D73, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC14FileListHelper33_14E6DAD1012C7144E675E979A9D28E19LLCMa', symObjAddr: 0x11B58, symBinAddr: 0x21564, symSize: 0x20 }
+  - { offset: 0xA9D87, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC10RateHelper33_14E6DAD1012C7144E675E979A9D28E19LLC9onReceiveyySi_10Foundation4DataVtFyyYbcfU_TA', symObjAddr: 0x11B88, symBinAddr: 0x21594, symSize: 0xC }
+  - { offset: 0xA9D9B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC9LogHelper33_14E6DAD1012C7144E675E979A9D28E19LLC9onReceiveyySi_Si10Foundation4DataVSgtFyyYbcfU_TA', symObjAddr: 0x11B94, symBinAddr: 0x215A0, symSize: 0x8 }
+  - { offset: 0xA9DAF, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DateVSgWOc', symObjAddr: 0x11B9C, symBinAddr: 0x215A8, symSize: 0x48 }
+  - { offset: 0xA9DC3, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC21checkConnectionStatus33_14E6DAD1012C7144E675E979A9D28E19LLyyFyyYbcfU0_TA', symObjAddr: 0x11BEC, symBinAddr: 0x215F8, symSize: 0x20 }
+  - { offset: 0xA9DD7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC21checkConnectionStatus33_14E6DAD1012C7144E675E979A9D28E19LLyyFyyYbcfU_TA', symObjAddr: 0x11C0C, symBinAddr: 0x21618, symSize: 0x20 }
+  - { offset: 0xA9DEB, size: 0x8, addend: 0x0, symName: _block_destroy_helper.100, symObjAddr: 0x11C2C, symBinAddr: 0x21638, symSize: 0x8 }
+  - { offset: 0xA9E0A, size: 0x8, addend: 0x0, symName: '_$sSo8NSStringCIeyBy_SSIegg_TRTA', symObjAddr: 0x11CAC, symBinAddr: 0x216B8, symSize: 0x38 }
+  - { offset: 0xA9E33, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC13AgentProtocol_pSgXwWOh', symObjAddr: 0x11CE4, symBinAddr: 0x216F0, symSize: 0x24 }
+  - { offset: 0xA9E47, size: 0x8, addend: 0x0, symName: '_$sypWOc', symObjAddr: 0x11D08, symBinAddr: 0x21714, symSize: 0x3C }
+  - { offset: 0xA9E5B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA9CommonErr33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGFyyYbcfU_TA', symObjAddr: 0x11DA4, symBinAddr: 0x217B0, symSize: 0x24 }
+  - { offset: 0xA9E6F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA9Handshake33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGFyyYbcfU_TA', symObjAddr: 0x11DEC, symBinAddr: 0x217F8, symSize: 0x20 }
+  - { offset: 0xA9E83, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA4Ping33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGFyyYbcfU_TA', symObjAddr: 0x11E0C, symBinAddr: 0x21818, symSize: 0x24 }
+  - { offset: 0xA9E97, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onabC5Close33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGFyyYbcfU_TA', symObjAddr: 0x11E30, symBinAddr: 0x2183C, symSize: 0x20 }
+  - { offset: 0xA9EAB, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA4Tips33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGFyyYbcfU_TA', symObjAddr: 0x11E50, symBinAddr: 0x2185C, symSize: 0x20 }
+  - { offset: 0xA9EBF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA8FileList33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation4DataVSgtFyyYbcfU_TA', symObjAddr: 0x11E70, symBinAddr: 0x2187C, symSize: 0x20 }
+  - { offset: 0xA9ED3, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA8FileList33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation4DataVSgtFyyYbcfU0_TA', symObjAddr: 0x11E90, symBinAddr: 0x2189C, symSize: 0x8 }
+  - { offset: 0xA9EE7, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA14SyncFileStatus33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGFyyYbcfU_TA', symObjAddr: 0x11E98, symBinAddr: 0x218A4, symSize: 0x24 }
+  - { offset: 0xA9EFB, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA12SyncFileData33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation0I0VtFyyYbcfU0_TA', symObjAddr: 0x11F08, symBinAddr: 0x21914, symSize: 0x8 }
+  - { offset: 0xA9F0F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA10FileDelete33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGFyyYbcfU_TA', symObjAddr: 0x11F10, symBinAddr: 0x2191C, symSize: 0x24 }
+  - { offset: 0xA9F23, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA12SyncFileStop33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypGFyyYbcfU_TA', symObjAddr: 0x11F34, symBinAddr: 0x21940, symSize: 0x20 }
+  - { offset: 0xA9F37, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onabC4Rate33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation4DataVSgtFyyYbcfU_TA', symObjAddr: 0x11F54, symBinAddr: 0x21960, symSize: 0x20 }
+  - { offset: 0xA9F4B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC02onA4Logs33_14E6DAD1012C7144E675E979A9D28E19LLyySDySSypG_10Foundation4DataVSgtFyyYbcfU_TA', symObjAddr: 0x11F74, symBinAddr: 0x21980, symSize: 0x20 }
+  - { offset: 0xA9F5F, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DataVSgWOy', symObjAddr: 0x11F94, symBinAddr: 0x219A0, symSize: 0x14 }
+  - { offset: 0xA9F73, size: 0x8, addend: 0x0, symName: '_$s10Foundation4DateVSgWOd', symObjAddr: 0x11FF0, symBinAddr: 0x219FC, symSize: 0x48 }
+  - { offset: 0xA9F87, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC04findbC14ListAndConnect33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SSS2itFySaySSGcfU_yyScMYccfU_TA', symObjAddr: 0x120A0, symBinAddr: 0x21AAC, symSize: 0x14 }
+  - { offset: 0xA9F9B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC25startConnectionMonitoring33_14E6DAD1012C7144E675E979A9D28E19LL_7timeoutySS_SdtFySo7NSTimerCYbcfU_TA', symObjAddr: 0x120B4, symBinAddr: 0x21AC0, symSize: 0x8 }
+  - { offset: 0xA9FAF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC12listenToPort33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SitFyyScMYccfU1_TA', symObjAddr: 0x120FC, symBinAddr: 0x21B08, symSize: 0x34 }
+  - { offset: 0xAA004, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC12listenToPort33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SitFyyScMYccfU0_TA', symObjAddr: 0x12130, symBinAddr: 0x21B3C, symSize: 0x8 }
+  - { offset: 0xAA018, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC12listenToPort33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SitFyyYbcfU_TA', symObjAddr: 0x12138, symBinAddr: 0x21B44, symSize: 0x1C }
+  - { offset: 0xAA26B, size: 0x8, addend: 0x0, symName: '_$sSTsSQ7ElementRpzrlE8containsySbABFSaySSG_Tg5', symObjAddr: 0x3190, symBinAddr: 0x12D1C, symSize: 0xC4 }
+  - { offset: 0xAA823, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC6sharedACvgZ', symObjAddr: 0x1CC, symBinAddr: 0xFDA8, symSize: 0x40 }
+  - { offset: 0xAA869, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC6sharedACvgZTo', symObjAddr: 0x20C, symBinAddr: 0xFDE8, symSize: 0x40 }
+  - { offset: 0xAA881, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC6sharedACvgZTo', symObjAddr: 0x20C, symBinAddr: 0xFDE8, symSize: 0x40 }
+  - { offset: 0xAA8C5, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectLoopSbvgTo', symObjAddr: 0x24C, symBinAddr: 0xFE28, symSize: 0x44 }
+  - { offset: 0xAA8F8, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectLoopSbvg', symObjAddr: 0x290, symBinAddr: 0xFE6C, symSize: 0x40 }
+  - { offset: 0xAA93C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectLoopSbvsTo', symObjAddr: 0x2D0, symBinAddr: 0xFEAC, symSize: 0x50 }
+  - { offset: 0xAA978, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectLoopSbvs', symObjAddr: 0x320, symBinAddr: 0xFEFC, symSize: 0x4C }
+  - { offset: 0xAA9A1, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectLoopSbvM', symObjAddr: 0x36C, symBinAddr: 0xFF48, symSize: 0x40 }
+  - { offset: 0xAA9C6, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13isServerStartSbvg', symObjAddr: 0x3B0, symBinAddr: 0xFF88, symSize: 0x40 }
+  - { offset: 0xAA9E5, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC12isClientOpenSbvg', symObjAddr: 0x3F0, symBinAddr: 0xFFC8, symSize: 0x40 }
+  - { offset: 0xAAA04, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11wifiVersionSivg', symObjAddr: 0x430, symBinAddr: 0x10008, symSize: 0x40 }
+  - { offset: 0xAAA23, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13isHandshakeOkSbvg', symObjAddr: 0x470, symBinAddr: 0x10048, symSize: 0x40 }
+  - { offset: 0xAAA56, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9sessionIdSivgTo', symObjAddr: 0x4B0, symBinAddr: 0x10088, symSize: 0x44 }
+  - { offset: 0xAAA89, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9sessionIdSivg', symObjAddr: 0x4F4, symBinAddr: 0x100CC, symSize: 0x40 }
+  - { offset: 0xAAACD, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9sessionIdSivsTo', symObjAddr: 0x534, symBinAddr: 0x1010C, symSize: 0x50 }
+  - { offset: 0xAAB1C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13isDownloadingSbvgTo', symObjAddr: 0x584, symBinAddr: 0x1015C, symSize: 0x44 }
+  - { offset: 0xAAB4F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13isDownloadingSbvg', symObjAddr: 0x5C8, symBinAddr: 0x101A0, symSize: 0x40 }
+  - { offset: 0xAAB8E, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13isDownloadingSbvsTo', symObjAddr: 0x608, symBinAddr: 0x101E0, symSize: 0x50 }
+  - { offset: 0xAABDE, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC8delegateAA0bcE8Protocol_pSgvgTo', symObjAddr: 0x658, symBinAddr: 0x10230, symSize: 0x48 }
+  - { offset: 0xAAC11, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC8delegateAA0bcE8Protocol_pSgvg', symObjAddr: 0x6A0, symBinAddr: 0x10278, symSize: 0x44 }
+  - { offset: 0xAAC55, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC8delegateAA0bcE8Protocol_pSgvsTo', symObjAddr: 0x6E4, symBinAddr: 0x102BC, symSize: 0x58 }
+  - { offset: 0xAAC90, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC8delegateAA0bcE8Protocol_pSgvs', symObjAddr: 0x73C, symBinAddr: 0x10314, symSize: 0x5C }
+  - { offset: 0xAACB9, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC8delegateAA0bcE8Protocol_pSgvM', symObjAddr: 0x798, symBinAddr: 0x10370, symSize: 0x6C }
+  - { offset: 0xAACDE, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC8delegateAA0bcE8Protocol_pSgvM.resume.0', symObjAddr: 0x804, symBinAddr: 0x103DC, symSize: 0x6C }
+  - { offset: 0xAAD2A, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC16cmdDelegateQueueSo17OS_dispatch_queueCvgTo', symObjAddr: 0x870, symBinAddr: 0x10448, symSize: 0x48 }
+  - { offset: 0xAAD5D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC16cmdDelegateQueueSo17OS_dispatch_queueCvg', symObjAddr: 0x8B8, symBinAddr: 0x10490, symSize: 0x40 }
+  - { offset: 0xAADA1, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC16cmdDelegateQueueSo17OS_dispatch_queueCvsTo', symObjAddr: 0x8F8, symBinAddr: 0x104D0, symSize: 0x64 }
+  - { offset: 0xAADDC, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC16cmdDelegateQueueSo17OS_dispatch_queueCvs', symObjAddr: 0x95C, symBinAddr: 0x10534, symSize: 0x54 }
+  - { offset: 0xAAE05, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC16cmdDelegateQueueSo17OS_dispatch_queueCvM', symObjAddr: 0x9B0, symBinAddr: 0x10588, symSize: 0x40 }
+  - { offset: 0xAAE99, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9bleDevice0a3BleD00hG0CSgvgTo', symObjAddr: 0x9F0, symBinAddr: 0x105C8, symSize: 0x48 }
+  - { offset: 0xAAECC, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9bleDevice0a3BleD00hG0CSgvg', symObjAddr: 0xA38, symBinAddr: 0x10610, symSize: 0x4C }
+  - { offset: 0xAAF24, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9bleDevice0a3BleD00hG0CSgvsTo', symObjAddr: 0xA84, symBinAddr: 0x1065C, symSize: 0x8C }
+  - { offset: 0xAAF6F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9bleDevice0a3BleD00hG0CSgvs', symObjAddr: 0xB10, symBinAddr: 0x106E8, symSize: 0x70 }
+  - { offset: 0xAAFB5, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9bleDevice0a3BleD00hG0CSgvM', symObjAddr: 0xB80, symBinAddr: 0x10758, symSize: 0x44 }
+  - { offset: 0xAAFDA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC9bleDevice0a3BleD00hG0CSgvM.resume.0', symObjAddr: 0xBC4, symBinAddr: 0x1079C, symSize: 0x30 }
+  - { offset: 0xAB00F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentCACyc33_14E6DAD1012C7144E675E979A9D28E19Llfc', symObjAddr: 0xBF4, symBinAddr: 0x107CC, symSize: 0x18C }
+  - { offset: 0xAB034, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentCACyc33_14E6DAD1012C7144E675E979A9D28E19LlfcTo', symObjAddr: 0xD80, symBinAddr: 0x10958, symSize: 0x20 }
+  - { offset: 0xAB048, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC7openLogyySb_ySScSgtF', symObjAddr: 0xDA0, symBinAddr: 0x10978, symSize: 0x44 }
+  - { offset: 0xAB0A8, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC7openLogyySb_ySScSgtFTo', symObjAddr: 0xDE4, symBinAddr: 0x109BC, symSize: 0x70 }
+  - { offset: 0xAB222, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11clearIfNeed33_14E6DAD1012C7144E675E979A9D28E19LLyyF', symObjAddr: 0xE54, symBinAddr: 0x10A2C, symSize: 0x20C }
+  - { offset: 0xAB418, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC10listenPortyySS_SitF', symObjAddr: 0x10C0, symBinAddr: 0x10C78, symSize: 0x78 }
+  - { offset: 0xAB529, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC10listenPortyySS_SitFTo', symObjAddr: 0x1138, symBinAddr: 0x10CF0, symSize: 0xA0 }
+  - { offset: 0xAB667, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC12listenToPort33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SitF', symObjAddr: 0x11D8, symBinAddr: 0x10D90, symSize: 0x6FC }
+  - { offset: 0xAB87D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC12listenToPort33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SitFyyScMYccfU0_', symObjAddr: 0x18D4, symBinAddr: 0x1148C, symSize: 0x74 }
+  - { offset: 0xAB90C, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectWifiyySS_SSSitF', symObjAddr: 0x1974, symBinAddr: 0x11500, symSize: 0x354 }
+  - { offset: 0xABA80, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC11connectWifiyySS_SSSitFTo', symObjAddr: 0x1CC8, symBinAddr: 0x11854, symSize: 0x90 }
+  - { offset: 0xABB10, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC23checkAndConnectToTarget33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SSSitF', symObjAddr: 0x1D58, symBinAddr: 0x118E4, symSize: 0x5C4 }
+  - { offset: 0xABD49, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC23checkAndConnectToTarget33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SSSitFys5Error_pSgcfU0_', symObjAddr: 0x231C, symBinAddr: 0x11EA8, symSize: 0x89C }
+  - { offset: 0xAC186, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC04findbC14ListAndConnect33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SSS2itFySaySSGcfU_', symObjAddr: 0x2C08, symBinAddr: 0x12794, symSize: 0x588 }
+  - { offset: 0xAC3FC, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC04findbC14ListAndConnect33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SSS2itFySaySSGcfU_yyScMYccfU_', symObjAddr: 0x3254, symBinAddr: 0x12DE0, symSize: 0xE4 }
+  - { offset: 0xAC499, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC17listNetworkChange33_14E6DAD1012C7144E675E979A9D28E19LLyyF', symObjAddr: 0x3390, symBinAddr: 0x12F1C, symSize: 0xD4 }
+  - { offset: 0xAC529, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC17listNetworkChange33_14E6DAD1012C7144E675E979A9D28E19LLyyFyAA0G19ReachabilityManagerC0gQ6StatusOcfU_', symObjAddr: 0x3464, symBinAddr: 0x12FF0, symSize: 0x504 }
+  - { offset: 0xAC82D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC26checkIfNeedStartListenPort33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SSSitF', symObjAddr: 0x3968, symBinAddr: 0x134F4, symSize: 0x574 }
+  - { offset: 0xACAB0, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC26checkIfNeedStartListenPort33_14E6DAD1012C7144E675E979A9D28E19LLyySS_SSSitFyyScMYccfU_', symObjAddr: 0x3EDC, symBinAddr: 0x13A68, symSize: 0x98 }
+  - { offset: 0xACB23, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC19cancelNetworkListen33_14E6DAD1012C7144E675E979A9D28E19LLyyF', symObjAddr: 0x3F74, symBinAddr: 0x13B00, symSize: 0x114 }
+  - { offset: 0xACC18, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC12serverListen33_14E6DAD1012C7144E675E979A9D28E19LLyySiF', symObjAddr: 0x4088, symBinAddr: 0x13C14, symSize: 0x178 }
+  - { offset: 0xACDCF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC10disconnectyyF', symObjAddr: 0x4200, symBinAddr: 0x13D8C, symSize: 0x4BC }
+  - { offset: 0xAD055, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC10disconnectyyFyyScMYccfU_', symObjAddr: 0x46BC, symBinAddr: 0x14248, symSize: 0xD0 }
+  - { offset: 0xAD0C6, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC10disconnectyyFTo', symObjAddr: 0x478C, symBinAddr: 0x14318, symSize: 0x28 }
+  - { offset: 0xAD0DA, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13isConnectedToySbSSF', symObjAddr: 0x47B4, symBinAddr: 0x14340, symSize: 0xAC }
+  - { offset: 0xAD150, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC13isConnectedToySbSSFTo', symObjAddr: 0x4860, symBinAddr: 0x143EC, symSize: 0xDC }
+  - { offset: 0xAD1A9, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC30getConnectionStatusDescriptionSSyF', symObjAddr: 0x493C, symBinAddr: 0x144C8, symSize: 0xD4 }
+  - { offset: 0xAD27D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC30getConnectionStatusDescriptionSSyFTo', symObjAddr: 0x4A10, symBinAddr: 0x1459C, symSize: 0x58 }
+  - { offset: 0xAD291, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC05checkbC10Capability33_14E6DAD1012C7144E675E979A9D28E19LLSbyF', symObjAddr: 0x4A68, symBinAddr: 0x145F4, symSize: 0x108 }
+  - { offset: 0xAD36B, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC25startConnectionMonitoring33_14E6DAD1012C7144E675E979A9D28E19LL_7timeoutySS_SdtFySo7NSTimerCYbcfU_', symObjAddr: 0x4B70, symBinAddr: 0x146FC, symSize: 0x54 }
+  - { offset: 0xAD454, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC24stopConnectionMonitoring33_14E6DAD1012C7144E675E979A9D28E19LLyyF', symObjAddr: 0x4C10, symBinAddr: 0x1479C, symSize: 0xF0 }
+  - { offset: 0xAD540, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC21checkConnectionStatus33_14E6DAD1012C7144E675E979A9D28E19LLyyF', symObjAddr: 0x4D00, symBinAddr: 0x1488C, symSize: 0x68C }
+  - { offset: 0xAD925, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentCfD', symObjAddr: 0x5450, symBinAddr: 0x14FDC, symSize: 0x34 }
+  - { offset: 0xADA5F, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC6sharedACvgZ', symObjAddr: 0xD0CC, symBinAddr: 0x1CC14, symSize: 0x40 }
+  - { offset: 0xADA80, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC17executeIfNoCancel5labelySS_tF', symObjAddr: 0xD10C, symBinAddr: 0x1CC54, symSize: 0x130 }
+  - { offset: 0xADB31, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC7execute5label_yycSS_yyXBtF', symObjAddr: 0xD23C, symBinAddr: 0x1CD84, symSize: 0x110 }
+  - { offset: 0xADB72, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolC6cancel5labelySS_tF', symObjAddr: 0xD34C, symBinAddr: 0x1CE94, symSize: 0x80 }
+  - { offset: 0xADBC6, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolCfd', symObjAddr: 0xD3CC, symBinAddr: 0x1CF14, symSize: 0x1C }
+  - { offset: 0xADBF8, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK7GCDToolCfD', symObjAddr: 0xD3E8, symBinAddr: 0x1CF30, symSize: 0x24 }
+  - { offset: 0xADC55, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC9LogHelper33_14E6DAD1012C7144E675E979A9D28E19LLC9onReceiveyySi_Si10Foundation4DataVSgtF', symObjAddr: 0xD40C, symBinAddr: 0x1CF54, symSize: 0x590 }
+  - { offset: 0xADF1D, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC9LogHelper33_14E6DAD1012C7144E675E979A9D28E19LLC9onReceiveyySi_Si10Foundation4DataVSgtFyyYbcfU_', symObjAddr: 0xD99C, symBinAddr: 0x1D4E4, symSize: 0x120 }
+  - { offset: 0xADFB8, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC9LogHelper33_14E6DAD1012C7144E675E979A9D28E19LLCfD', symObjAddr: 0xDABC, symBinAddr: 0x1D604, symSize: 0x24 }
+  - { offset: 0xAE023, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC10RateHelper33_14E6DAD1012C7144E675E979A9D28E19LLC9onReceiveyySi_10Foundation4DataVtF', symObjAddr: 0xDAE0, symBinAddr: 0x1D628, symSize: 0x608 }
+  - { offset: 0xAE3A6, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC10RateHelper33_14E6DAD1012C7144E675E979A9D28E19LLC9onReceiveyySi_10Foundation4DataVtFyyYbcfU_', symObjAddr: 0xE0E8, symBinAddr: 0x1DC30, symSize: 0xB8 }
+  - { offset: 0xAE423, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC10RateHelper33_14E6DAD1012C7144E675E979A9D28E19LLCfD', symObjAddr: 0xE1A0, symBinAddr: 0x1DCE8, symSize: 0x10 }
+  - { offset: 0xAE484, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC14FileListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC9onReceiveySbSi_S2iSaySi_Sis5Int16VtGtF', symObjAddr: 0xE1EC, symBinAddr: 0x1DD34, symSize: 0x20C }
+  - { offset: 0xAE7AE, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC14FileListHelper33_14E6DAD1012C7144E675E979A9D28E19LLC11getBleFilesySay0aqD00qE0CGAF0Q6DeviceCSgF', symObjAddr: 0xE3F8, symBinAddr: 0x1DF40, symSize: 0x2D0 }
+  - { offset: 0xAEACF, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC14FileListHelper33_14E6DAD1012C7144E675E979A9D28E19LLCfD', symObjAddr: 0xE6C8, symBinAddr: 0x1E210, symSize: 0x24 }
+  - { offset: 0xAEB52, size: 0x8, addend: 0x0, symName: '_$s10PenWiFiSDK0bC5AgentC25startConnectionMonitoring33_14E6DAD1012C7144E675E979A9D28E19LL_7timeoutySS_SdtFTf4ndn_n', symObjAddr: 0x110EC, symBinAddr: 0x20AF8, symSize: 0x218 }
+...

@@ -57,9 +57,14 @@
     [UIApplication sharedApplication].applicationSupportsShakeToEdit = YES;
     [self becomeFirstResponder];
     
+    Boolean bDebug = NO;
+#if DEBUG
+    bDebug = YES;
+#endif
+    
     // Fill in test data
-    NSString *key = [PlaudDeviceAgent getTestAppKey];
-    NSString *secret = [PlaudDeviceAgent getTestAppSecret];
+    NSString *key = [PlaudDeviceAgent getTestAppKey:bDebug];
+    NSString *secret = [PlaudDeviceAgent getTestAppSecret:bDebug];
     
     if (key.length > 0) {
         self.appKeyTextField.text = key;

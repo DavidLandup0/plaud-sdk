@@ -28,6 +28,11 @@ class CloudSyncViewController: UIViewController {
         setupUI()
         loadFiles()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadFiles()
+    }
 
     private func setupUI() {
         // Set background color
@@ -148,20 +153,59 @@ class CloudSyncViewController: UIViewController {
     }
 
     private func getCurrentLanguage() -> String {
+        //return "zh"
+        
         let currentLanguage = Locale.current.languageCode ?? "en"
         return currentLanguage.hasPrefix("zh") ? "zh" : "en"
     }
 
     private func loadFiles() {
-        // Get documents directory
-        guard let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return
-        }
-
+        var allFiles: [URL] = []
+        
         do {
+            // Find .dat files in documentsDirectory (downloaded via Bluetooth)
+            if let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let documentsFiles = try fileManager.contentsOfDirectory(at: documentsDir, includingPropertiesForKeys: [.fileSizeKey, .creationDateKey])
+                let datFiles = documentsFiles.filter { $0.pathExtension == "dat" }
+                allFiles.append(contentsOf: datFiles)
+            }
+            
+            // Find .dat files in temporaryDirectory (downloaded via WiFi)
             let tempDir = FileManager.default.temporaryDirectory
-            let fileURLs = try fileManager.contentsOfDirectory(at: tempDir, includingPropertiesForKeys: [.fileSizeKey, .creationDateKey])
-            files = fileURLs.filter { $0.pathExtension == "dat" }
+            let tempFiles = try fileManager.contentsOfDirectory(at: tempDir, includingPropertiesForKeys: [.fileSizeKey, .creationDateKey])
+            let tempDatFiles = tempFiles.filter { $0.pathExtension == "dat" }
+            allFiles.append(contentsOf: tempDatFiles)
+            
+            // Remove duplicates (based on filename) and sort by modification time
+            var uniqueFiles: [String: URL] = [:]
+            for file in allFiles {
+                let fileName = file.lastPathComponent
+                // If there are duplicate filenames, keep the newer one
+                if let existingFile = uniqueFiles[fileName] {
+                    do {
+                        let existingDate = try existingFile.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate ?? Date.distantPast
+                        let currentDate = try file.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate ?? Date.distantPast
+                        if currentDate > existingDate {
+                            uniqueFiles[fileName] = file
+                        }
+                    } catch {
+                        uniqueFiles[fileName] = file
+                    }
+                } else {
+                    uniqueFiles[fileName] = file
+                }
+            }
+            
+            files = Array(uniqueFiles.values).sorted { file1, file2 in
+                do {
+                    let date1 = try file1.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate ?? Date.distantPast
+                    let date2 = try file2.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate ?? Date.distantPast
+                    return date1 > date2 // Sort by modification time in descending order
+                } catch {
+                    return false
+                }
+            }
+            
             tableView.reloadData()
         } catch {
             print("Error loading files: \(error)")
@@ -381,7 +425,7 @@ class CloudSyncViewController: UIViewController {
 
     private func startAIProcess(type _: String, for _: URL) {
         // Show AI processing progress
-        let progressAlert = UploadProgressAlertController(title: "AI Processing...")
+        let progressAlert = UploadProgressAlertController(title: NSLocalizedString("cloudsync.ai_processing", comment: ""))
         progressAlert.onCancel = {
             // TODO: Cancel AI processing
             progressAlert.dismiss(animated: true)
@@ -396,7 +440,7 @@ class CloudSyncViewController: UIViewController {
                 progressAlert.updateProgress(progress)
                 if progress >= 1.0 {
                     timer.invalidate()
-                    progressAlert.updateProgress(1.0, text: "AI Processing Complete")
+                    progressAlert.updateProgress(1.0, text: NSLocalizedString("cloudsync.ai_processing_complete", comment: ""))
                     progressAlert.setActionButtonAsConfirm()
                     progressAlert.onConfirm = {
                         progressAlert.dismiss(animated: true)
@@ -410,12 +454,12 @@ class CloudSyncViewController: UIViewController {
     }
 
     private func renameFile(_ fileURL: URL) {
-        let alert = UIAlertController(title: "Rename File", message: "Please enter the new file name", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("cloudsync.rename_file.title", comment: ""), message: NSLocalizedString("cloudsync.rename_file.message", comment: ""), preferredStyle: .alert)
         alert.addTextField { textField in
             textField.text = fileURL.deletingPathExtension().lastPathComponent
         }
 
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("common.confirm", comment: ""), style: .default) { _ in
             if let newName = alert.textFields?.first?.text, !newName.isEmpty {
                 let newURL = fileURL.deletingLastPathComponent().appendingPathComponent(newName).appendingPathExtension("dat")
                 do {
@@ -427,14 +471,14 @@ class CloudSyncViewController: UIViewController {
             }
         })
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("common.cancel", comment: ""), style: .cancel))
         present(alert, animated: true)
     }
 
     private func deleteFile(_ fileURL: URL) {
-        let alert = UIAlertController(title: "Delete File", message: "Are you sure you want to delete this file?", preferredStyle: .alert)
+        let alert = UIAlertController(title: NSLocalizedString("cloudsync.delete_file.title", comment: ""), message: NSLocalizedString("cloudsync.delete_file.message", comment: ""), preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cloudsync.delete_file.confirm", comment: ""), style: .destructive) { _ in
             do {
                 try self.fileManager.removeItem(at: fileURL)
                 self.loadFiles()
@@ -443,7 +487,7 @@ class CloudSyncViewController: UIViewController {
             }
         })
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("common.cancel", comment: ""), style: .cancel))
         present(alert, animated: true)
     }
 

@@ -610,7 +610,7 @@ extension PenBleSDK.JXFirmUpdater : PenBleSDK.OtaProtocol {
   @objc public func startScan()
   @objc public func startLoopScan()
   @objc public func stopScan()
-  @objc public func connectBleDevice(bleDevice: PenBleSDK.BleDevice, _ devToken: Swift.String? = nil, _ userName: Swift.String? = nil)
+  @objc public func connectBleDevice(bleDevice: PenBleSDK.BleDevice, _ deviceToken: Swift.String? = nil, _ userName: Swift.String? = nil)
   @objc public func disconnect()
   @objc public func isSNTempChecked() -> Swift.Bool
   @objc public func reCheckSNIfNeed()

@@ -118,7 +118,7 @@
     self.deviceAgent.delegate = self;
     
     [self showAppKeyPopupIfNeed];
-        
+    
     [self setupUI];
     [self setupConstraints];
     
@@ -147,8 +147,15 @@
     NSString *savedAppSecret = [defaults stringForKey:@"PlaudAppSecret"];
     
     if (savedAppKey && savedAppSecret) {
+#if DEBUG
+        //for test
+        //default bindToken can be overwritten when connecting device
+        [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:savedAppKey appSecret:savedAppSecret bindToken:@"123456789" extra:@{@"language": @"en", @"customDomain": @"platform-beta.plaud.ai"}];
+#elif
+        //default bindToken can be overwritten when connecting device
         [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:savedAppKey
                                     appSecret:savedAppSecret bindToken:@"123456789" extra:@{@"language": @"en"}]; //currently support en、zh
+#endif
         return NO;
     } else {
         // Show input dialog
@@ -174,9 +181,16 @@
     [defaults setObject:appSecret forKey:@"PlaudAppSecret"];
     [defaults synchronize];
     
-    // Initialize SDK
+#if DEBUG
+    //for test
+    //default bindToken can be overwritten when connecting device
+    [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:appKey appSecret:appSecret bindToken:@"123456789" extra:@{@"language": @"en", @"customDomain": @"platform-beta.plaud.ai"}];
+#else
+    //default bindToken can be overwritten when connecting device
     [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:appKey
                                 appSecret:appSecret bindToken:@"123456789" extra:@{@"language": @"en"}]; //currently support en、zh
+#endif
+    
 }
 
 - (void)appKeyInputDidCancel {
@@ -191,11 +205,11 @@
     self.titleLabel.minimumScaleFactor = 0.8;  // Minimum scale factor
     NSMutableAttributedString *titleText = [[NSMutableAttributedString alloc] initWithString:LocalizedString(@"main.title")];
     [titleText addAttribute:NSFontAttributeName
-                    value:[UIFont systemFontOfSize:32 weight:UIFontWeightBold]
-                    range:NSMakeRange(0, titleText.length)];
+                      value:[UIFont systemFontOfSize:32 weight:UIFontWeightBold]
+                      range:NSMakeRange(0, titleText.length)];
     [titleText addAttribute:NSForegroundColorAttributeName
-                    value:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]
-                    range:NSMakeRange(0, titleText.length)];
+                      value:[UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0]
+                      range:NSMakeRange(0, titleText.length)];
     self.titleLabel.attributedText = titleText;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.titleLabel];
@@ -205,11 +219,11 @@
     self.descriptionLabel.numberOfLines = 0;
     NSMutableAttributedString *descriptionText = [[NSMutableAttributedString alloc] initWithString:LocalizedString(@"main.description")];
     [descriptionText addAttribute:NSFontAttributeName
-                          value:[UIFont systemFontOfSize:16]
-                          range:NSMakeRange(0, descriptionText.length)];
+                            value:[UIFont systemFontOfSize:16]
+                            range:NSMakeRange(0, descriptionText.length)];
     [descriptionText addAttribute:NSForegroundColorAttributeName
-                          value:[UIColor colorWithRed:0.45 green:0.45 blue:0.45 alpha:1.0]
-                          range:NSMakeRange(0, descriptionText.length)];
+                            value:[UIColor colorWithRed:0.45 green:0.45 blue:0.45 alpha:1.0]
+                            range:NSMakeRange(0, descriptionText.length)];
     self.descriptionLabel.attributedText = descriptionText;
     self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.descriptionLabel];
@@ -255,7 +269,7 @@
         [self.startScanButton.heightAnchor constraintEqualToConstant:56],
         [self.startScanButton.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:24],
         [self.startScanButton.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-24],
-        [self.startScanButton.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-90] 
+        [self.startScanButton.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:-90]
     ]];
 }
 
@@ -271,13 +285,13 @@
     
     BOOL bluetoothAuthorizationStatus = [BluetoothChecker bluetoothAuthorizationStatus];
     if (!bluetoothAuthorizationStatus) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"bluetooth.permission.title", @"Bluetooth Permission")
-                                                                 message:NSLocalizedString(@"bluetooth.permission.message", @"Please confirm Bluetooth is enabled and authorized")
-                                                          preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"common.confirm", @"Confirm")
-                                                              style:UIAlertActionStyleDestructive
-                                                            handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"bluetooth.permission.title", @"Bluetooth Permission")
+                                                                       message:NSLocalizedString(@"bluetooth.permission.message", @"Please confirm Bluetooth is enabled and authorized")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"common.confirm", @"Confirm")
+                                                                style:UIAlertActionStyleDestructive
+                                                              handler:^(UIAlertAction * _Nonnull action) {
         }];
         
         [alert addAction:confirmAction];

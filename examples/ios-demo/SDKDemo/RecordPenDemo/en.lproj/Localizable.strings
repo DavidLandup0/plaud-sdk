@@ -1,6 +1,7 @@
 /* Common */
 "common.ok" = "OK";
 "common.cancel" = "Cancel";
+"common.confirm" = "Confirm";
 "common.back" = "Back";
 "common.done" = "Done";
 "common.error" = "Error";
@@ -23,6 +24,7 @@
 "workflow.progress.processing_combined" = "Processing...";
 "workflow.result.tab.transcription" = "Transcription";
 "workflow.result.tab.ai_analysis" = "AI Analysis";
+"workflow.result.tab.ai_summary" = "Summary";
 "workflow.result.ai.summary" = "Summary";
 "workflow.result.ai.clinical_report" = "Clinical Report";
 "workflow.result.ai.deal_analysis" = "Deal Analysis";
@@ -141,6 +143,10 @@
 "device.action.set_degree" = "Set Degree";
 "device.action.read_degree" = "Read Degree";
 "device.action.associate_user" = "Associate User";
+"device.action.open_device_wifi" = "Open Device WiFi";
+"device.action.wifi_fast_transfer" = "WiFi Fast Transfer";
+"device.action.close_device_wifi" = "Close Device WiFi";
+"device.action.device_name" = "Device Name";
 
 /* Device Status */
 "device.status.connecting" = "Connecting...";
@@ -178,6 +184,8 @@
 "device.status.vpu_sensitivity_changed" = "VPU Sensitivity Changed: {value=%d}";
 "device.status.mic_sensitivity_changed" = "Microphone Sensitivity Changed: {value=%d}";
 "device.status.uploading" = "Uploading...";
+"device.status.wifi_opening" = "Opening device WiFi...";
+"device.status.wifi_closing" = "Closing device WiFi...";
 
 /* Device Status - Record Stop Reasons */
 "device.status.record_stop_reason.1" = "Stopped from device";
@@ -220,6 +228,10 @@
 "device.dialog.associate_user.associate_fail" = "User associated failed";
 "device.dialog.associate_user.dissociate_success" = "User dissociated successfully";
 "device.dialog.associate_user.dissociate_fail" = "User dissociated failed";
+"device.dialog.device_name.title" = "Set Device Name";
+"device.dialog.device_name.placeholder" = "Please enter user name";
+"device.dialog.device_name.success" = "Device name set to: {name}";
+"device.dialog.device_name.empty_error" = "User name cannot be empty";
 
 /* Audio Player */
 "audio.player.title" = "Audio Player";
@@ -248,6 +260,208 @@
 "wifi.status.get_config" = "Get WiFi Configuration: {status=%d, ssid=%@}";
 "wifi.status.open" = "WiFi Open: {status=%d, name=%@, wholeName=%@, pass=%@}";
 "wifi.status.close" = "WiFi Close: {status=%d}";
+
+/* WiFi Errors and Setup */
+"wifi.error.recording_in_progress" = "Recording in progress, cannot enable WiFi";
+"wifi.error.udisk_mode_active" = "U-disk mode, cannot enable WiFi";
+"wifi.setup.message" = "To use WiFi fast transfer, please go to System Settings → Wi-Fi, connect to WiFi: {wifiName}, password: {wifiPass}";
+"wifi.setup.go_to_settings" = "Go to Settings";
+"wifi.connection.success" = "WiFi connected successfully: {ssid}";
+"wifi.connection.failed" = "WiFi connection failed: {ssid}";
+"wifi.functionality_unavailable" = "WiFi functionality unavailable";
+
+/* WiFi Interface */
+"wifi.connection.connect" = "Connect WiFi";
+"wifi.connection.disconnect" = "Disconnect WiFi";
+"wifi.rate.start_test" = "Start Speed Test";
+"wifi.rate.stop_test" = "Stop Speed Test";
+"wifi.device.get_logs" = "Get Device Logs";
+"wifi.device.get_current_wifi" = "Get Current WiFi";
+"wifi.file.get_list" = "Get File List";
+"wifi.file.delete" = "Delete File";
+"wifi.file.file_list_item" = "File %d: ID %d (%@)";
+"wifi.download.start_batch" = "Start Batch Download";
+"wifi.download.stop_batch" = "Stop Batch Download";
+"wifi.logs.clear" = "Clear Logs";
+
+/* WiFi Transfer UI */
+"wifi.transfer.title" = "WiFi Fast Transfer";
+"wifi.transfer.status" = "WiFi Transfer Status";
+"wifi.transfer.connection_status" = "WiFi Connection Status";
+"wifi.transfer.initial_status" = "WiFi connecting... \nAfter success, click \"Get File List\" to start";
+"wifi.transfer.logs_title" = "WiFi Transfer Logs";
+"wifi.transfer.bluetooth_not_connected" = "Bluetooth not connected, please wait for Bluetooth reconnection";
+"wifi.transfer.bluetooth_connected_opening_wifi" = "Bluetooth connected, opening device WiFi...";
+"wifi.transfer.wifi_disconnected" = "WiFi has been disconnected";
+"wifi.transfer.starting_interface" = "WiFi fast transfer interface started";
+"wifi.transfer.device_info" = "Device: %@";
+"wifi.transfer.wifi_connecting" = "Connecting WiFi...";
+"wifi.transfer.wifi_handshake_success" = "WiFi handshake successful, connection established";
+"wifi.transfer.wifi_handshake_pending" = "WiFi handshake successful, executing pending operations...";
+"wifi.transfer.disconnecting_wifi" = "Disconnecting WiFi connection...";
+"wifi.transfer.getting_wifi_info" = "Getting current WiFi information...";
+"wifi.transfer.current_wifi_name" = "Current WiFi name: %@";
+"wifi.transfer.not_connected_to_wifi" = "Not connected to WiFi or unable to get WiFi information";
+"wifi.transfer.wifi_not_connected" = "Not connected to WiFi";
+"wifi.transfer.connection_status_description" = "Connection status description: %@";
+"wifi.transfer.connected_to_device_wifi" = "Connected to device WiFi(%@): %@";
+"wifi.transfer.websocket_status" = "WebSocket connection status: %@";
+"wifi.transfer.yes" = "Yes";
+"wifi.transfer.no" = "No";
+"wifi.transfer.connected" = "Connected";
+"wifi.transfer.not_connected" = "Not connected";
+"wifi.transfer.wifi_not_connected_reconnecting" = "WiFi not connected, starting reconnection process...";
+"wifi.transfer.wifi_not_connected_reconnecting_status" = "WiFi not connected, reconnecting...";
+"wifi.transfer.bluetooth_not_connected_trying_reconnect" = "Bluetooth not connected, trying to reconnect Bluetooth...";
+"wifi.transfer.bluetooth_not_connected_reconnecting_status" = "Bluetooth not connected, reconnecting Bluetooth...";
+"wifi.transfer.bluetooth_connected_opening_wifi_status" = "Opening device WiFi...";
+"wifi.transfer.file_list_empty_getting" = "File list is empty, getting file list...";
+"wifi.transfer.select_file_to_delete" = "Select file to delete (total %d files)";
+"wifi.transfer.delete_file_start" = "Starting to delete file: SessionID %d";
+"wifi.transfer.select_file_to_sync" = "Select file to sync (total %d files)";
+"wifi.transfer.sync_file_start" = "Starting to sync file: SessionID %d";
+"wifi.transfer.select_file_to_stop_sync" = "Select file to stop syncing (total %d files)";
+"wifi.transfer.stop_sync_file" = "Stop syncing file: SessionID %d";
+"wifi.transfer.already_batch_downloading" = "Already in batch download, please do not repeat operation";
+"wifi.transfer.batch_downloading_status" = "Batch downloading...";
+"wifi.transfer.other_download_in_progress" = "Other download task in progress, please stop first";
+"wifi.transfer.other_download_status" = "Other download task in progress";
+"wifi.transfer.start_batch_download" = "Starting batch download of all files...";
+"wifi.transfer.preparing_batch_download" = "Getting file list, preparing for batch download...";
+"wifi.transfer.not_batch_downloading" = "Currently not in batch download";
+"wifi.transfer.not_batch_downloading_status" = "Currently not in batch download";
+"wifi.transfer.stopping_batch_download" = "Stopping batch download...";
+"wifi.transfer.stopping_batch_download_status" = "Stopping batch download...";
+"wifi.transfer.wifi_connected_continue" = "WiFi connected, continue operation";
+"wifi.transfer.logs_cleared" = "Logs cleared";
+
+/* WiFi Transfer File Operations */
+"wifi.transfer.file_list_received" = "Received file list - count: %d";
+"wifi.transfer.file_info" = "File %d: ID %d, size: %@";
+"wifi.transfer.no_files_in_device" = "No recording files in device";
+"wifi.transfer.no_files_status" = "No recording files in device";
+"wifi.transfer.files_available" = "Got %d files, ready for operations";
+"wifi.transfer.sync_file_status" = "Sync file status - sessionId: %d, status: %d";
+"wifi.transfer.syncing_file" = "Syncing file ID: %d";
+"wifi.transfer.sync_file_failed" = "Sync file failed ID: %d";
+"wifi.transfer.sync_file_data" = "Sync file data - ID: %d, received: %@MB";
+"wifi.transfer.downloading_file" = "Downloading file ID: %d";
+"wifi.transfer.file_save_path" = "File save path: %@";
+"wifi.transfer.data_transfer_complete" = "Data transfer complete";
+"wifi.transfer.current_file_complete_continue" = "Current file transfer complete";
+"wifi.transfer.continue_batch_download" = "Continue batch download...";
+"wifi.transfer.file_transfer_complete" = "File transfer complete";
+"wifi.transfer.saved_locally" = "Saved locally";
+"wifi.transfer.delete_file_result" = "Delete file result - sessionId: %d, status: %d";
+"wifi.transfer.file_delete_success" = "File delete success ID: %d";
+"wifi.transfer.file_delete_failed" = "File delete failed ID: %d";
+
+/* WiFi Transfer Download Complete */
+"wifi.transfer.download_complete_title" = "File Download Complete";
+"wifi.transfer.download_complete_message" = "File has been successfully saved locally, you can go to cloud sync interface to view and process files";
+"wifi.transfer.view_later" = "View Later";
+"wifi.transfer.go_view" = "Go View";
+
+/* WiFi Transfer Batch Download */
+"wifi.transfer.batch_progress" = "Batch download progress: %d%% (%d/%d) - Current file: ID %d (%@)";
+"wifi.transfer.batch_downloading_progress" = "Downloading %d/%d: File %d";
+"wifi.transfer.batch_total_progress" = "Total progress %d%% Current speed %@";
+"wifi.transfer.batch_progress_simple" = "Batch download progress %d/%d";
+"wifi.transfer.batch_detail_progress" = "Detail progress: Total files %d, current index %d, total progress %.2f%%";
+"wifi.transfer.batch_download_complete" = "Batch download complete!";
+"wifi.transfer.batch_download_success" = "Download success: %d files";
+"wifi.transfer.batch_download_failed" = "Download failed: %d files";
+"wifi.transfer.batch_complete_success_failed" = "Batch download complete: success %d, failed %d";
+"wifi.transfer.batch_complete_all_success" = "Batch download all success: %d files";
+"wifi.transfer.batch_download_stats" = "Download stats: Total files %d, success rate %.1f%%";
+"wifi.transfer.refreshing_file_list" = "Refreshing file list...";
+
+/* WiFi Transfer Batch Download Complete Dialog */
+"wifi.transfer.batch_complete_title" = "Batch Download Complete";
+"wifi.transfer.batch_complete_success_message" = "Successfully downloaded %d files!\nFiles have been saved locally, you can go to cloud sync interface to view and process.";
+"wifi.transfer.batch_complete_partial_message" = "Successfully downloaded %d files, failed %d files.\nSaved files can be viewed and processed in cloud sync interface.";
+
+/* WiFi Transfer Connection */
+"wifi.transfer.connection_failed" = "WiFi connection status: %@ - %@";
+"wifi.transfer.connection_success_status" = "Success";
+"wifi.transfer.connection_failed_status" = "Failed";
+"wifi.transfer.wifi_connected_status" = "WiFi connected: %@";
+"wifi.transfer.wifi_error" = "WiFi Error - cmd: %d, status: %d";
+"wifi.transfer.wifi_handshake_result" = "WiFi handshake result - status: %d";
+"wifi.transfer.wifi_power" = "WiFi Power - power: %d, voltage: %d";
+"wifi.transfer.file_list_failed" = "File List Failed - status: %d";
+"wifi.transfer.sync_file_stopped" = "Sync File Stopped - status: %d";
+"wifi.transfer.wifi_client_failed" = "WiFi Client Failed";
+"wifi.transfer.wifi_closed" = "WiFi Closed - status: %d";
+"wifi.transfer.rate_test_failed" = "Rate Test Failed - status: %d";
+"wifi.transfer.rate_test_result" = "Rate test - instant: %.2fKB/s, average: %.2fKB/s, loss: %.2f%%";
+"wifi.transfer.get_logs_failed" = "Get Logs Failed - status: %d";
+"wifi.transfer.received_logs" = "Received Logs - size: %d bytes";
+"wifi.transfer.received_empty_logs" = "Received Empty Logs";
+"wifi.transfer.wifi_tips_no_recording" = "Recording not supported in WiFi fast transfer mode %d";
+
+/* WiFi Transfer Status Updates */
+"wifi.transfer.bluetooth_disconnected" = "Bluetooth has been disconnected";
+"wifi.transfer.bluetooth_connected_success" = "Bluetooth connection successful";
+"wifi.transfer.websocket_connected" = "WebSocket connection established";
+"wifi.transfer.connection_established" = "WiFi connection established";
+"wifi.transfer.connection_lost" = "WiFi connection lost";
+
+/* WiFi Reconnection */
+"wifi.transfer.wifi_connection_unstable" = "WiFi connection unstable, attempting to reconnect...";
+"wifi.transfer.wifi_connection_unstable_status" = "Connection unstable, reconnecting...";
+"wifi.transfer.starting_reconnect" = "Starting WiFi reconnection...";
+"wifi.transfer.reconnecting_status" = "Reconnecting WiFi...";
+"wifi.transfer.wifi_reconnect_success" = "WiFi reconnection successful";
+"wifi.transfer.wifi_reconnect_success_status" = "WiFi reconnected successfully";
+"wifi.transfer.wifi_reconnected_ready" = "WiFi reconnected, ready for operations";
+"wifi.transfer.wifi_handshake_failed" = "WiFi handshake failed";
+
+/* WiFi Operation Messages */
+"wifi.transfer.operation_requires_connection" = "This operation requires stable WiFi connection. Please wait for reconnection to complete.";
+"wifi.transfer.connection_lost_during_operation" = "Connection lost during operation. Please try again after reconnection.";
+"wifi.transfer.batch_download_requires_stable_connection" = "Batch download requires stable WiFi connection. Please wait for reconnection to complete.";
+
+/* WiFi Speed Test */
+"wifi.transfer.speed_test_running" = "Speed Test Running";
+"wifi.transfer.speed_test_result" = "Instant: %.2f KB/s, Average: %.2f KB/s, Loss: %.2f%%";
+"wifi.transfer.speed_test_starting" = "Starting speed test...";
+"wifi.transfer.speed_test_starting_status" = "Initializing speed test...";
+"wifi.transfer.speed_test_stopping" = "Stopping speed test...";
+"wifi.transfer.speed_test_stopped_status" = "Speed test stopped";
+"wifi.transfer.speed_test_failed_status" = "Speed test failed";
+
+/* WiFi Transfer Download Progress */
+"wifi.transfer.sync_file_data_received" = "Sync file data - ID: %d, received: %@MB";
+"wifi.transfer.downloading_file_id" = "Downloading file ID: %d";
+"wifi.transfer.file_data_with_speed" = "%@MB (%@)";
+"wifi.transfer.file_save_path_log" = "File save path: %@";
+"wifi.transfer.batch_progress_log" = "Batch download progress: %d%% (%d/%d) - Current file: ID %d (%@)";
+"wifi.transfer.downloading_file_progress" = "Downloading %d/%d: File %d";
+"wifi.transfer.total_progress_with_speed" = "Total progress %d%% Current speed %@";
+"wifi.transfer.batch_progress_only" = "Batch download progress %d/%d";
+"wifi.transfer.total_progress_speed_only" = "Total progress %d%% Current speed %@";
+"wifi.transfer.detail_progress_log" = "Detail progress: Total files %d, current index %d, total progress %.2f%%";
+"wifi.transfer.batch_download_complete_log" = "Batch download complete!";
+"wifi.transfer.download_success_count" = "Download success: %d files";
+"wifi.transfer.download_failed_count" = "Download failed: %d files";
+"wifi.transfer.batch_complete_mixed_status" = "Batch download complete: success %d, failed %d";
+"wifi.transfer.batch_complete_success_status" = "Batch download all success: %d files";
+"wifi.transfer.all_files_success_log" = "All files downloaded successfully!";
+"wifi.transfer.download_statistics" = "Download stats: Total files %d, success rate %.1f%%";
+"wifi.transfer.data_complete" = "Data transfer complete";
+"wifi.transfer.current_file_complete" = "Current file transfer complete";
+"wifi.transfer.continue_batch" = "Continue batch download...";
+"wifi.transfer.file_complete" = "File transfer complete";
+"wifi.transfer.sync_file_status_log" = "Sync file status - sessionId: %d, status: %d";
+"wifi.transfer.syncing_file_status" = "Syncing file ID: %d";
+"wifi.transfer.sync_file_failed_status" = "Sync file failed ID: %d";
+"wifi.transfer.delete_file_result_log" = "Delete file result - sessionId: %d, status: %d";
+"wifi.transfer.file_delete_success_status" = "File delete success ID: %d";
+"wifi.transfer.file_delete_failed_status" = "File delete failed ID: %d";
+"wifi.transfer.rate_test_result_log" = "Rate test - instant: %.2fKB/s, average: %.2fKB/s, loss: %.2f%%";
+"wifi.transfer.ready_status" = "Ready";
+"wifi.transfer.log_count_status" = "Ready - Logs: %d/%d items";
 
 /* Language Options */
 "language.simplified_chinese" = "Simplified";
@@ -378,6 +592,15 @@
 
 "cloudsync.delete_synced.title" = "Delete Local Recordings";
 "cloudsync.delete_synced.message" = "Delete recordings that have been synced to the cloud?";
+
+/* CloudSync Operations */
+"cloudsync.ai_processing" = "AI Processing...";
+"cloudsync.ai_processing_complete" = "AI Processing Complete";
+"cloudsync.rename_file.title" = "Rename File";
+"cloudsync.rename_file.message" = "Please enter the new file name";
+"cloudsync.delete_file.title" = "Delete File";
+"cloudsync.delete_file.message" = "Are you sure you want to delete this file?";
+"cloudsync.delete_file.confirm" = "Delete";
 
 /* AI Process Menu */
 "menu.option.transcribe" = "Transcribe";

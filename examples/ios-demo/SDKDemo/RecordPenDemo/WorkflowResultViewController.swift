@@ -129,7 +129,7 @@ class WorkflowResultViewController: UIViewController {
         // SaaS style large bold title
         titleLabel = UILabel()
         titleLabel.text = NSLocalizedString("workflow.result.title", comment: "Result page title")
-        titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         titleLabel.textColor = .black
         titleLabel.textAlignment = .center
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

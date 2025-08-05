@@ -286,6 +286,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import Foundation;
 @import ObjectiveC;
 @import PenBleSDK;
+@import PenWiFiSDK;
 @import UIKit;
 #endif
 
@@ -345,9 +346,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (void)initSDKWithHostName:(NSString * _Nonnull)hostName appKey:(NSString * _Nonnull)appKey appSecret:(NSString * _Nonnull)appSecret bindToken:(NSString * _Nonnull)bindToken extra:(NSDictionary<NSString *, NSString *> * _Nonnull)extra SWIFT_METHOD_FAMILY(none);
-+ (NSString * _Nonnull)getTestAppKey SWIFT_WARN_UNUSED_RESULT;
-+ (NSString * _Nonnull)getTestAppSecret SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)getTestAppKey:(BOOL)beta SWIFT_WARN_UNUSED_RESULT;
++ (NSString * _Nonnull)getTestAppSecret:(BOOL)beta SWIFT_WARN_UNUSED_RESULT;
 - (void)depairWithClear:(BOOL)clear;
+- (void)setDeviceWiFiWithOpen:(BOOL)open;
 - (void)setDeviceBindingWithToken:(NSString * _Nonnull)token;
 /// Start scan
 /// @see        stopScan()
@@ -356,6 +358,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 /// End scan
 /// @see        startScan()
 - (void)stopScan;
+- (BOOL)isConnected SWIFT_WARN_UNUSED_RESULT;
 /// Connect bluetooth device
 /// \param bleDevice Wrapped bluetooth device
 ///
@@ -423,6 +426,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 /// Stop current recording
 /// @see    Callback bleRecordStop
 - (void)stopRecord;
+/// Set device name
+- (void)setDeviceName:(NSString * _Nonnull)name;
 - (NSInteger)getCurrentSessionID SWIFT_WARN_UNUSED_RESULT;
 /// Pause recording
 /// Resume through resumeRecord()
@@ -549,11 +554,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)onSyncIdleWifiTestResultWithIndex:(uint32_t)index result:(NSInteger)result rawCode:(NSInteger)rawCode;
 - (void)bleSyncWhenIdleEnabled:(NSInteger)value;
 - (void)bleUDiskErrWithFuncName:(NSString * _Nonnull)funcName;
+- (void)bleWiFiOpen:(NSInteger)status :(NSString * _Nonnull)wifiName :(NSString * _Nonnull)wholeName :(NSString * _Nonnull)wifiPass;
+- (void)bleDeviceNameWithName:(NSString * _Nullable)name;
 - (void)bleUpdatePowerLowErr;
 - (void)bleDeviceDisconnectErr;
 - (void)bleStateWithPowered:(BOOL)powered;
 - (void)bleHandshakeWaitWithTimeout:(NSInteger)timeout;
-- (void)bleDeviceNameWithName:(NSString * _Nullable)name;
 - (void)blePenTimeWithStamp:(NSInteger)stamp timezone:(NSInteger)timezone zoneMin:(NSInteger)zoneMin;
 - (void)blePasswordResetWithPassword:(NSInteger)password;
 - (void)bleBacklightDuration:(NSInteger)duration;
@@ -572,7 +578,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)bleStopRecordingAfterCharging:(NSInteger)value;
 - (void)bleAutoClear:(BOOL)open;
 - (void)bleVad:(BOOL)open;
-- (void)bleWiFiOpen:(NSInteger)status :(NSString * _Nonnull)wifiName :(NSString * _Nonnull)wholeName :(NSString * _Nonnull)wifiPass;
 - (void)bleWiFiClose:(NSInteger)status;
 - (void)bleSetWiFiSsidWithStatus:(NSInteger)status;
 - (void)bleGetWiFiSsidWithStatus:(NSInteger)status ssid:(NSString * _Nullable)ssid;
@@ -627,6 +632,10 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 ///
 - (void)blePenStateWithState:(NSInteger)state privacy:(NSInteger)privacy keyState:(NSInteger)keyState uDisk:(NSInteger)uDisk findMyToken:(NSInteger)findMyToken hasSndpKey:(NSInteger)hasSndpKey deviceAccessToken:(NSInteger)deviceAccessToken;
 @optional
+/// Device name
+/// \param name Device name
+///
+- (void)bleDeviceNameWithName:(NSString * _Nullable)name;
 /// Bluetooth device scan callback
 /// \param bleDevices Bluetooth device list
 ///
@@ -835,6 +844,16 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 ///
 - (void)onWifiSyncEnabled:(NSInteger)value;
 - (void)onCommonMsgChannelWithType:(NSInteger)type value:(NSInteger)value tips:(NSString * _Nonnull)tips;
+/// WiFi open notification
+/// \param status 0 normal, >1 forbidden to open 1 recording status, 2 U disk status
+///
+/// \param wifiName Recording pen hotspot name
+///
+/// \param wholeName Determine whether to append 4-digit sn suffix name
+///
+/// \param wifiPass Recording pen hotspot password
+///
+- (void)bleWiFiOpen:(NSInteger)status :(NSString * _Nonnull)wifiName :(NSString * _Nonnull)wholeName :(NSString * _Nonnull)wifiPass;
 @end
 
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK17PlaudFileUploader")
@@ -851,6 +870,241 @@ SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK14PlaudSDKLogger")
 @interface PlaudSDKLogger : NSObject
 + (void)logEvent:(NSString * _Nonnull)eventName parameters:(NSDictionary * _Nullable)parameters;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@protocol PlaudWiFiAgentProtocol;
+SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK14PlaudWiFiAgent")
+@interface PlaudWiFiAgent : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudWiFiAgent * _Nonnull shared;)
++ (PlaudWiFiAgent * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, weak) id <PlaudWiFiAgentProtocol> _Nullable delegate;
+/// Device information needs to be passed from Bluetooth module
+@property (nonatomic, strong) BleDevice * _Nullable bleDevice;
+/// Whether currently downloading file
+@property (nonatomic, readonly) BOOL isDownloading;
+/// Current sync file sessionId
+@property (nonatomic, readonly) NSInteger currentSessionId;
+/// Whether connection has been established
+@property (nonatomic, readonly) BOOL isConnected;
+/// Get current download speed (KB/s)
+@property (nonatomic, readonly) double currentDownloadSpeedKBps;
+/// Get formatted download speed string
+- (NSString * _Nonnull)getFormattedDownloadSpeed SWIFT_WARN_UNUSED_RESULT;
+/// Whether currently batch downloading
+@property (nonatomic, readonly) BOOL isDownloadingAll;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+/// Enable SDK debug logs or callback logs
+- (void)openLog:(BOOL)opened :(void (^ _Nullable)(NSString * _Nonnull))backBlock;
+/// Use this method for iOS 11.0 and below, will loop to check if connected to specified WiFi until timeout
+/// \param ssid WiFi name
+///
+/// \param overtimeSec Timeout duration, default 30 seconds
+///
+- (void)listenPort:(NSString * _Nonnull)ssid :(NSInteger)overtimeSec;
+/// Connect to specified WiFi using WiFi name and password
+/// iOS 11.0 and above use this method for direct WiFi connection, earlier versions need popup to guide user to settings for manual connection
+/// \param ssid WiFi name
+///
+/// \param passphrase Password
+///
+/// \param overtimeSec Timeout duration, default 60 seconds
+///
+- (void)connectWifi:(NSString * _Nonnull)ssid :(NSString * _Nonnull)passphrase :(NSInteger)overtimeSec SWIFT_AVAILABILITY(ios,introduced=11.0);
+/// Disconnect
+- (void)disconnect;
+/// Check if currently connected to specified WiFi
+/// \param ssid WiFi name
+///
+///
+/// returns:
+/// Whether connected
+- (BOOL)isConnectedTo:(NSString * _Nonnull)ssid SWIFT_WARN_UNUSED_RESULT;
+/// Get current connection status description
+///
+/// returns:
+/// Connection status description
+- (NSString * _Nonnull)getConnectionStatusDescription SWIFT_WARN_UNUSED_RESULT;
+/// Get current connected WiFi name
+- (NSString * _Nullable)getCurrentWiFiName SWIFT_WARN_UNUSED_RESULT;
+/// Get file list (app initiated cmd=11)
+/// \param uid Request uid, new requests will naturally override old requests
+///
+/// \param sessionId Starting sessionId
+///
+/// \param single Whether to only get current file information, default false
+///
+- (void)getFileList:(NSInteger)uid :(NSInteger)sessionId :(BOOL)single;
+/// File sync (cmd=12)
+/// \param sessionId Recording ID
+///
+/// \param start Start position (file offset, not time)
+///
+/// \param end End position (default 0, to end of file)
+///
+/// \param scene Recording scene, default 1
+///
+- (void)syncFile:(NSInteger)sessionId :(NSInteger)start :(NSInteger)end :(NSInteger)scene;
+/// Stop file sync (cmd=15)
+/// \param sessionId Recording ID
+///
+/// \param scene Scene, default 1
+///
+- (void)stopSyncFile:(NSInteger)sessionId :(NSInteger)scene;
+/// Delete file (cmd=14)
+/// \param sessionId Recording ID
+///
+/// \param scene Scene, default 1
+///
+- (void)deleteFile:(NSInteger)sessionId :(NSInteger)scene;
+/// Start downloading all files
+/// First get file list, then download one by one
+- (void)startDownloadAll;
+/// Stop downloading all files
+- (void)stopDownloadAll;
+/// Rate test (cmd=100)
+/// \param onOff Start or end
+///
+/// \param packSize Test package size
+///
+- (void)startRateTest:(BOOL)onOff :(NSInteger)packSize;
+/// Pen-side log retrieval (cmd=101)
+/// \param begin Start or end
+///
+- (void)getDeviceLogs:(BOOL)begin;
+/// Whether WebSocket connection has been successfully established (prerequisite for app to send requests)
+- (BOOL)isWebSocketConnected SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@interface PlaudWiFiAgent (SWIFT_EXTENSION(PlaudDeviceBasicSDK)) <WiFiAgentProtocol>
+- (void)wifiCommonErr:(NSInteger)cmd :(NSInteger)status;
+- (void)wifiHandshake:(NSInteger)status;
+- (void)wifiConnectionStatus:(NSString * _Nonnull)ssid :(BOOL)connected;
+- (void)wifiPower:(NSInteger)power :(NSInteger)voltage;
+- (void)wifiFileListFail:(NSInteger)status;
+- (void)wifiFileList:(NSArray<BleFile *> * _Nonnull)files;
+- (void)wifiSyncFile:(NSInteger)sessionId :(NSInteger)status;
+- (void)wifiSyncFileData:(NSInteger)sessionId :(NSInteger)offset :(NSInteger)count :(NSData * _Nonnull)binData;
+- (void)wifiDataComplete;
+- (void)wifiSyncFileStop:(NSInteger)status;
+- (void)wifiFileDelete:(NSInteger)sessionId :(NSInteger)status;
+- (void)wifiClientFail;
+- (void)wifiClose:(NSInteger)status;
+- (void)wifiRateFail:(NSInteger)status;
+- (void)wifiRate:(NSInteger)instantRate :(NSInteger)averageRate :(double)lossRate;
+- (void)wifiLogsFail:(NSInteger)status;
+- (void)wifiLogs:(NSData * _Nullable)logData;
+- (void)wifiTips:(NSInteger)tips;
+@end
+
+SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK22PlaudWiFiAgentProtocol_")
+@protocol PlaudWiFiAgentProtocol
+@optional
+/// Common error
+/// \param cmd Error command
+///
+/// \param status Error code
+///
+- (void)wifiCommonErr:(NSInteger)cmd :(NSInteger)status;
+/// Handshake result
+/// \param status 0 success, others failure
+///
+- (void)wifiHandshake:(NSInteger)status;
+/// WiFi connection status change
+/// \param ssid WiFi name
+///
+/// \param connected Whether connection succeeded
+///
+- (void)wifiConnectionStatus:(NSString * _Nonnull)ssid :(BOOL)connected;
+/// Battery level and voltage
+/// \param power Battery level, percentage
+///
+/// \param voltage Battery voltage, mv
+///
+- (void)wifiPower:(NSInteger)power :(NSInteger)voltage;
+/// Failed to get recording list
+/// \param status Error code
+///
+- (void)wifiFileListFail:(NSInteger)status;
+/// Get recording list
+/// \param files Recording list
+///
+- (void)wifiFileList:(NSArray<BleFile *> * _Nonnull)files;
+/// File sync–file status
+/// \param sessionId Recording ID
+///
+/// \param status Status
+///
+- (void)wifiSyncFile:(NSInteger)sessionId :(NSInteger)status;
+/// File sync–file data
+/// \param sessionId Recording ID
+///
+/// \param offset File offset (bytes)
+///
+/// \param count File length (bytes)
+///
+/// \param binData Data
+///
+- (void)wifiSyncFileData:(NSInteger)sessionId :(NSInteger)offset :(NSInteger)count :(NSData * _Nonnull)binData;
+/// A file download completed
+- (void)wifiDataComplete;
+/// File sync stop
+/// \param status Status 0 success
+///
+- (void)wifiSyncFileStop:(NSInteger)status;
+/// File deletion result
+/// \param sessionId Recording ID
+///
+/// \param status Deletion result 0 success, >0 failure reason
+///
+- (void)wifiFileDelete:(NSInteger)sessionId :(NSInteger)status;
+/// Client exception disconnect, waiting for reconnection
+/// Please set BleAgent.shared.setWiFiState(false)
+- (void)wifiClientFail;
+/// WiFi close notification
+/// \param status Status -1 is didFailWithError; -2 is timeout not connected; -3 NEHotspotConfigurationManager direct connection exception
+///
+- (void)wifiClose:(NSInteger)status;
+/// Rate test failed
+/// \param status Error code
+///
+- (void)wifiRateFail:(NSInteger)status;
+/// Rate test
+/// \param instantRate Instantaneous rate
+///
+/// \param averageRate Average rate
+///
+/// \param lossRate Packet loss rate
+///
+- (void)wifiRate:(NSInteger)instantRate :(NSInteger)averageRate :(double)lossRate;
+/// Failed to get pen-side logs
+/// \param status Error code
+///
+- (void)wifiLogsFail:(NSInteger)status;
+/// Pen-side logs
+/// \param logData Log data
+///
+- (void)wifiLogs:(NSData * _Nullable)logData;
+/// Pen sends tips to app
+/// \param tips 0 no tip, 1 pen recording key pressed
+///
+- (void)wifiTips:(NSInteger)tips;
+/// Batch download progress callback
+/// \param totalFiles Total number of files
+///
+/// \param currentFileIndex Current file index (starting from 1)
+///
+/// \param currentFile Currently downloading file
+///
+/// \param totalProgress Overall download progress (0.0-1.0)
+///
+- (void)wifiDownloadAllProgress:(NSInteger)totalFiles :(NSInteger)currentFileIndex :(BleFile * _Nullable)currentFile :(double)totalProgress;
+/// Batch download completed
+/// \param completedFiles Number of completed files
+///
+/// \param failedFiles Number of failed files
+///
+- (void)wifiDownloadAllCompleted:(NSInteger)completedFiles :(NSInteger)failedFiles;
 @end
 
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK19PlaudWifiAddingPage")
@@ -888,6 +1142,15 @@ SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK20PlaudWifiSettingPage")
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 @end
 
+/// // a base class of vc to write bottom view
+SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK15PresentBottomVC")
+@interface PresentBottomVC : UIViewController
+- (void)viewDidLoad;
+- (void)viewDidDisappear:(BOOL)animated;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK9TestAgent")
 @interface TestAgent : NSObject
 /// Singleton
@@ -897,6 +1160,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TestAgent * 
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 /// Whether device is connected (WiFi or Bluetooth)
 - (NSString * _Nonnull)testFunc SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class UIPresentationController;
+@interface UIViewController (SWIFT_EXTENSION(PlaudDeviceBasicSDK)) <UIViewControllerTransitioningDelegate>
+- (UIPresentationController * _Nullable)presentationControllerForPresentedViewController:(UIViewController * _Nonnull)presented presentingViewController:(UIViewController * _Nullable)presenting sourceViewController:(UIViewController * _Nonnull)source SWIFT_WARN_UNUSED_RESULT;
 @end
 
 #endif

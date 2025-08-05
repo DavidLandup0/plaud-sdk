@@ -122,6 +122,10 @@
 "device.action.set_degree" = "设置眼镜度数";
 "device.action.read_degree" = "读取眼镜度数";
 "device.action.associate_user" = "关联用户";
+"device.action.open_device_wifi" = "打开设备WiFi";
+"device.action.wifi_fast_transfer" = "WiFi快传";
+"device.action.close_device_wifi" = "关闭设备WiFi";
+"device.action.device_name" = "设备名称";
 
 /* Device Status */
 "device.status.connecting" = "设备连接中";
@@ -159,6 +163,8 @@
 "device.status.vpu_sensitivity_changed" = "VPU灵敏度改变：{value=%d}";
 "device.status.mic_sensitivity_changed" = "麦克风灵敏度改变：{value=%d}";
 "device.status.uploading" = "正在上传...";
+"device.status.wifi_opening" = "正在打开设备WiFi...";
+"device.status.wifi_closing" = "正在关闭设备WiFi...";
 "device.status.uploading_progress" = "正在上传... {progress}%";
 "device.status.upload_success" = "上传成功";
 "device.error.upload_failed" = "上传失败";
@@ -203,6 +209,10 @@
 "device.dialog.associate_user.associate_fail" = "用户关联失败";
 "device.dialog.associate_user.dissociate_success" = "用户解除关联成功";
 "device.dialog.associate_user.dissociate_fail" = "用户解除关联失败";
+"device.dialog.device_name.title" = "设置设备名称";
+"device.dialog.device_name.placeholder" = "请输入用户名称";
+"device.dialog.device_name.success" = "设备名称已设置为：{name}";
+"device.dialog.device_name.empty_error" = "用户名称不能为空";
 
 
 /* Audio Player */
@@ -226,6 +236,208 @@
 "wifi.status.get_config" = "获取WiFi配网：{status=%d, ssid=%@}";
 "wifi.status.open" = "开启WiFi：{status=%d, name=%@, wholeName=%@, pass=%@}";
 "wifi.status.close" = "关闭WiFi：{status=%d}";
+
+/* WiFi Errors and Setup */
+"wifi.error.recording_in_progress" = "正在录音，不能开启WiFi";
+"wifi.error.udisk_mode_active" = "U盘模式，不能开启WiFi";
+"wifi.setup.message" = "使用WiFi快传需要您跳转到系统设置→无线局域网，连接WiFi：{wifiName}，密码是：{wifiPass}";
+"wifi.setup.go_to_settings" = "去设置";
+"wifi.connection.success" = "WiFi 连接成功: {ssid}";
+"wifi.connection.failed" = "WiFi 连接失败: {ssid}";
+"wifi.functionality_unavailable" = "WiFi功能不可用";
+
+/* WiFi Interface */
+"wifi.connection.connect" = "连接WiFi";
+"wifi.connection.disconnect" = "断开WiFi";
+"wifi.rate.start_test" = "开始速度测试";
+"wifi.rate.stop_test" = "停止速度测试";
+"wifi.device.get_logs" = "获取设备日志";
+"wifi.device.get_current_wifi" = "获取当前WiFi";
+"wifi.file.get_list" = "获取文件列表";
+"wifi.file.delete" = "删除文件";
+"wifi.file.file_list_item" = "文件 %d: ID %d (%@)";
+"wifi.download.start_batch" = "开始批量下载";
+"wifi.download.stop_batch" = "停止批量下载";
+"wifi.logs.clear" = "清空日志";
+
+/* WiFi Transfer UI */
+"wifi.transfer.title" = "WiFi快传";
+"wifi.transfer.status" = "WiFi传输状态";
+"wifi.transfer.connection_status" = "WiFi 连接状态";
+"wifi.transfer.initial_status" = "WiFi连接中... \n成功后，点击\"获取文件列表\"开始";
+"wifi.transfer.logs_title" = "WiFi传输日志";
+"wifi.transfer.bluetooth_not_connected" = "蓝牙未连接，请等待蓝牙重连";
+"wifi.transfer.bluetooth_connected_opening_wifi" = "蓝牙已连接，正在开启设备WiFi...";
+"wifi.transfer.wifi_disconnected" = "WiFi 已经断开";
+"wifi.transfer.starting_interface" = "WiFi快传界面已启动";
+"wifi.transfer.device_info" = "设备: %@";
+"wifi.transfer.wifi_connecting" = "正在断开WiFi连接...";
+"wifi.transfer.wifi_handshake_success" = "WiFi握手成功，连接已建立";
+"wifi.transfer.wifi_handshake_pending" = "WiFi握手成功，执行待处理的操作...";
+"wifi.transfer.disconnecting_wifi" = "正在断开WiFi连接...";
+"wifi.transfer.getting_wifi_info" = "正在获取当前WiFi信息...";
+"wifi.transfer.current_wifi_name" = "当前WiFi名称: %@";
+"wifi.transfer.not_connected_to_wifi" = "未连接到WiFi或无法获取WiFi信息";
+"wifi.transfer.wifi_not_connected" = "未连接到WiFi";
+"wifi.transfer.connection_status_description" = "连接状态描述: %@";
+"wifi.transfer.connected_to_device_wifi" = "是否连接到设备WiFi(%@): %@";
+"wifi.transfer.websocket_status" = "WebSocket连接状态: %@";
+"wifi.transfer.yes" = "是";
+"wifi.transfer.no" = "否";
+"wifi.transfer.connected" = "已连接";
+"wifi.transfer.not_connected" = "未连接";
+"wifi.transfer.wifi_not_connected_reconnecting" = "WiFi未连接，开始重连流程...";
+"wifi.transfer.wifi_not_connected_reconnecting_status" = "WiFi未连接，正在重连...";
+"wifi.transfer.bluetooth_not_connected_trying_reconnect" = "蓝牙未连接，尝试重连蓝牙...";
+"wifi.transfer.bluetooth_not_connected_reconnecting_status" = "蓝牙未连接，正在重连蓝牙...";
+"wifi.transfer.bluetooth_connected_opening_wifi_status" = "正在开启设备WiFi...";
+"wifi.transfer.file_list_empty_getting" = "文件列表为空，正在获取文件列表...";
+"wifi.transfer.select_file_to_delete" = "选择要删除的文件 (共%d个)";
+"wifi.transfer.delete_file_start" = "开始删除文件: SessionID %d";
+"wifi.transfer.select_file_to_sync" = "选择要同步的文件 (共%d个)";
+"wifi.transfer.sync_file_start" = "开始同步文件: SessionID %d";
+"wifi.transfer.select_file_to_stop_sync" = "选择要停止同步的文件 (共%d个)";
+"wifi.transfer.stop_sync_file" = "停止同步文件: SessionID %d";
+"wifi.transfer.already_batch_downloading" = "已经在批量下载中，请勿重复操作";
+"wifi.transfer.batch_downloading_status" = "正在批量下载中...";
+"wifi.transfer.other_download_in_progress" = "有其他下载任务在进行，请先停止";
+"wifi.transfer.other_download_status" = "有其他下载任务在进行";
+"wifi.transfer.start_batch_download" = "开始批量下载所有文件...";
+"wifi.transfer.preparing_batch_download" = "正在获取文件列表，准备批量下载...";
+"wifi.transfer.not_batch_downloading" = "当前没有在批量下载";
+"wifi.transfer.not_batch_downloading_status" = "当前没有在批量下载";
+"wifi.transfer.stopping_batch_download" = "停止批量下载...";
+"wifi.transfer.stopping_batch_download_status" = "正在停止批量下载...";
+"wifi.transfer.wifi_connected_continue" = "WiFi已连接，继续操作";
+"wifi.transfer.logs_cleared" = "日志已清空";
+
+/* WiFi Transfer File Operations */
+"wifi.transfer.file_list_received" = "收到文件列表 - 数量: %d";
+"wifi.transfer.file_info" = "文件 %d: ID %d, 大小: %@";
+"wifi.transfer.no_files_in_device" = "设备中没有录音文件";
+"wifi.transfer.no_files_status" = "设备中没有录音文件";
+"wifi.transfer.files_available" = "已获取%d个文件，可进行操作";
+"wifi.transfer.sync_file_status" = "同步文件状态 - sessionId: %d, status: %d";
+"wifi.transfer.syncing_file" = "正在同步文件 ID: %d";
+"wifi.transfer.sync_file_failed" = "同步文件失败 ID: %d";
+"wifi.transfer.sync_file_data" = "同步文件数据 - ID: %d, 已接收: %@MB";
+"wifi.transfer.downloading_file" = "正在下载文件 ID: %d";
+"wifi.transfer.file_save_path" = "文件保存路径: %@";
+"wifi.transfer.data_transfer_complete" = "数据传输完成";
+"wifi.transfer.current_file_complete_continue" = "当前文件传输完成";
+"wifi.transfer.continue_batch_download" = "继续批量下载...";
+"wifi.transfer.file_transfer_complete" = "文件传输已完成";
+"wifi.transfer.saved_locally" = "已保存至本地";
+"wifi.transfer.delete_file_result" = "删除文件结果 - sessionId: %d, status: %d";
+"wifi.transfer.file_delete_success" = "文件删除成功 ID: %d";
+"wifi.transfer.file_delete_failed" = "文件删除失败 ID: %d";
+
+/* WiFi Transfer Download Complete */
+"wifi.transfer.download_complete_title" = "文件下载完成";
+"wifi.transfer.download_complete_message" = "文件已成功保存到本地，您可以前往云同步界面查看和处理文件";
+"wifi.transfer.view_later" = "稍后查看";
+"wifi.transfer.go_view" = "前往查看";
+
+/* WiFi Transfer Batch Download */
+"wifi.transfer.batch_progress" = "批量下载进度: %d%% (%d/%d) - 当前文件: ID %d (%@)";
+"wifi.transfer.batch_downloading_progress" = "正在下载 %d/%d: 文件 %d";
+"wifi.transfer.batch_total_progress" = "总进度 %d%% 当前下载速度 %@";
+"wifi.transfer.batch_progress_simple" = "批量下载进度 %d/%d";
+"wifi.transfer.batch_detail_progress" = "详细进度: 总文件数 %d, 当前索引 %d, 总进度 %.2f%%";
+"wifi.transfer.batch_download_complete" = "批量下载完成！";
+"wifi.transfer.batch_download_success" = "成功下载: %d 个文件";
+"wifi.transfer.batch_download_failed" = "下载失败: %d 个文件";
+"wifi.transfer.batch_complete_success_failed" = "批量下载完成：成功 %d，失败 %d";
+"wifi.transfer.batch_complete_all_success" = "批量下载全部成功：%d 个文件";
+"wifi.transfer.batch_download_stats" = "下载统计: 总文件 %d, 成功率 %.1f%%";
+"wifi.transfer.refreshing_file_list" = "正在刷新文件列表...";
+
+/* WiFi Transfer Batch Download Complete Dialog */
+"wifi.transfer.batch_complete_title" = "批量下载完成";
+"wifi.transfer.batch_complete_success_message" = "成功下载 %d 个文件！\n文件已保存到本地，您可以前往云同步界面查看和处理。";
+"wifi.transfer.batch_complete_partial_message" = "成功下载 %d 个文件，失败 %d 个文件。\n已保存的文件可在云同步界面查看和处理。";
+
+/* WiFi Transfer Connection */
+"wifi.transfer.connection_failed" = "WiFi连接状态: %@ - %@";
+"wifi.transfer.connection_success_status" = "成功";
+"wifi.transfer.connection_failed_status" = "失败";
+"wifi.transfer.wifi_connected_status" = "WiFi已连接: %@";
+"wifi.transfer.wifi_error" = "WiFi Error - cmd: %d, status: %d";
+"wifi.transfer.wifi_handshake_result" = "WiFi握手结果 - status: %d";
+"wifi.transfer.wifi_power" = "WiFi Power - power: %d, voltage: %d";
+"wifi.transfer.file_list_failed" = "File List Failed - status: %d";
+"wifi.transfer.sync_file_stopped" = "Sync File Stopped - status: %d";
+"wifi.transfer.wifi_client_failed" = "WiFi Client Failed";
+"wifi.transfer.wifi_closed" = "WiFi Closed - status: %d";
+"wifi.transfer.rate_test_failed" = "Rate Test Failed - status: %d";
+"wifi.transfer.rate_test_result" = "速率测试 - 瞬时: %.2fKB/s, 平均: %.2fKB/s, 丢包: %.2f%%";
+"wifi.transfer.get_logs_failed" = "Get Logs Failed - status: %d";
+"wifi.transfer.received_logs" = "Received Logs - size: %d bytes";
+"wifi.transfer.received_empty_logs" = "Received Empty Logs";
+"wifi.transfer.wifi_tips_no_recording" = "WiFi快传模式下不支持录音 %d";
+
+/* WiFi Transfer Status Updates */
+"wifi.transfer.bluetooth_disconnected" = "蓝牙已经断开";
+"wifi.transfer.bluetooth_connected_success" = "蓝牙连接成功";
+"wifi.transfer.websocket_connected" = "WebSocket连接已建立";
+"wifi.transfer.connection_established" = "WiFi连接已建立";
+"wifi.transfer.connection_lost" = "WiFi连接已断开";
+
+/* WiFi Reconnection */
+"wifi.transfer.wifi_connection_unstable" = "WiFi连接不稳定，正在尝试重连...";
+"wifi.transfer.wifi_connection_unstable_status" = "连接不稳定，正在重连...";
+"wifi.transfer.starting_reconnect" = "开始WiFi重连...";
+"wifi.transfer.reconnecting_status" = "正在重连WiFi...";
+"wifi.transfer.wifi_reconnect_success" = "WiFi重连成功";
+"wifi.transfer.wifi_reconnect_success_status" = "WiFi重连成功";
+"wifi.transfer.wifi_reconnected_ready" = "WiFi已重连，可进行操作";
+"wifi.transfer.wifi_handshake_failed" = "WiFi握手失败";
+
+/* WiFi Operation Messages */
+"wifi.transfer.operation_requires_connection" = "此操作需要稳定的WiFi连接，请等待重连完成后再试";
+"wifi.transfer.connection_lost_during_operation" = "操作过程中连接断开，请等待重连完成后重试";
+"wifi.transfer.batch_download_requires_stable_connection" = "批量下载需要稳定的WiFi连接，请等待重连完成后再试";
+
+/* WiFi Speed Test */
+"wifi.transfer.speed_test_running" = "测速进行中";
+"wifi.transfer.speed_test_result" = "瞬时: %.2f KB/s, 平均: %.2f KB/s, 丢包: %.2f%%";
+"wifi.transfer.speed_test_starting" = "开始测速...";
+"wifi.transfer.speed_test_starting_status" = "正在初始化测速...";
+"wifi.transfer.speed_test_stopping" = "停止测速...";
+"wifi.transfer.speed_test_stopped_status" = "测速已停止";
+"wifi.transfer.speed_test_failed_status" = "测速失败";
+
+/* WiFi Transfer Download Progress */
+"wifi.transfer.sync_file_data_received" = "同步文件数据 - ID: %d, 已接收: %@MB";
+"wifi.transfer.downloading_file_id" = "正在下载文件 ID: %d";
+"wifi.transfer.file_data_with_speed" = "%@MB (%@)";
+"wifi.transfer.file_save_path_log" = "文件保存路径: %@";
+"wifi.transfer.batch_progress_log" = "批量下载进度: %d%% (%d/%d) - 当前文件: ID %d (%@)";
+"wifi.transfer.downloading_file_progress" = "正在下载 %d/%d: 文件 %d";
+"wifi.transfer.total_progress_with_speed" = "总进度 %d%% 当前下载速度 %@";
+"wifi.transfer.batch_progress_only" = "批量下载进度 %d/%d";
+"wifi.transfer.total_progress_speed_only" = "总进度 %d%% 当前下载速度 %@";
+"wifi.transfer.detail_progress_log" = "详细进度: 总文件数 %d, 当前索引 %d, 总进度 %.2f%%";
+"wifi.transfer.batch_download_complete_log" = "批量下载完成！";
+"wifi.transfer.download_success_count" = "成功下载: %d 个文件";
+"wifi.transfer.download_failed_count" = "下载失败: %d 个文件";
+"wifi.transfer.batch_complete_mixed_status" = "批量下载完成：成功 %d，失败 %d";
+"wifi.transfer.batch_complete_success_status" = "批量下载全部成功：%d 个文件";
+"wifi.transfer.all_files_success_log" = "所有文件下载成功！";
+"wifi.transfer.download_statistics" = "下载统计: 总文件 %d, 成功率 %.1f%%";
+"wifi.transfer.data_complete" = "数据传输完成";
+"wifi.transfer.current_file_complete" = "当前文件传输完成";
+"wifi.transfer.continue_batch" = "继续批量下载...";
+"wifi.transfer.file_complete" = "文件传输已完成";
+"wifi.transfer.sync_file_status_log" = "同步文件状态 - sessionId: %d, status: %d";
+"wifi.transfer.syncing_file_status" = "正在同步文件 ID: %d";
+"wifi.transfer.sync_file_failed_status" = "同步文件失败 ID: %d";
+"wifi.transfer.delete_file_result_log" = "删除文件结果 - sessionId: %d, status: %d";
+"wifi.transfer.file_delete_success_status" = "文件删除成功 ID: %d";
+"wifi.transfer.file_delete_failed_status" = "文件删除失败 ID: %d";
+"wifi.transfer.rate_test_result_log" = "速率测试 - 瞬时: %.2fKB/s, 平均: %.2fKB/s, 丢包: %.2f%%";
+"wifi.transfer.ready_status" = "准备就绪";
+"wifi.transfer.log_count_status" = "准备就绪 - 日志: %d/%d 条";
 
 /* Language Options */
 "language.simplified_chinese" = "简体中文";
@@ -291,6 +503,15 @@
 
 "cloudsync.delete_synced.title" = "删除本地录音";
 "cloudsync.delete_synced.message" = "是否删除已同步到云端的录音？";
+
+/* CloudSync Operations */
+"cloudsync.ai_processing" = "AI处理中...";
+"cloudsync.ai_processing_complete" = "AI处理完成";
+"cloudsync.rename_file.title" = "重命名文件";
+"cloudsync.rename_file.message" = "请输入新的文件名";
+"cloudsync.delete_file.title" = "删除文件";
+"cloudsync.delete_file.message" = "确定要删除此文件吗？";
+"cloudsync.delete_file.confirm" = "删除";
 
 /* AI Process Menu */
 "menu.option.transcribe" = "转写";

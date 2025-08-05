@@ -1206,7 +1206,7 @@
         
         [self showToastWithMessage:NSLocalizedString(@"device.state.connecting", @"Device connecting")];
         self.currentDevice = device;
-        [self.deviceAgent connectBleDeviceWithBleDevice:device];
+        [self.deviceAgent connectBleDeviceWithBleDevice:device deviceToken:device.serialNumber];
     }
 }
 

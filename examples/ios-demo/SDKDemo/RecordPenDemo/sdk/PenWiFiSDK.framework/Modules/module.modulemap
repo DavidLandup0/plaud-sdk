@@ -1,0 +1,11 @@
+framework module PenWiFiSDK {
+  umbrella header "PenWiFiSdk.h"
+  export *
+
+  module * { export * }
+}
+
+module PenWiFiSDK.Swift {
+  header "PenWiFiSDK-Swift.h"
+  requires objc
+}
