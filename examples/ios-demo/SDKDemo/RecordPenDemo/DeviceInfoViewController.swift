@@ -1399,9 +1399,9 @@ extension DeviceInfoViewController: PlaudDeviceAgentProtocol {
         switch status {
         case 0:
             // WiFi opened successfully, navigate to transfer page and connect
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.navigateToWiFiTransferPage()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 self.connectToWiFi(wifiName, wifiPass)
+                self.navigateToWiFiTransferPage()
             }
         case 1:
             showToastWithMessage(NSLocalizedString("wifi.error.recording_in_progress", comment: ""))
@@ -1414,6 +1414,7 @@ extension DeviceInfoViewController: PlaudDeviceAgentProtocol {
             break
         }
     }
+    
     /// Connect to WiFi
     private func connectToWiFi(_ wifiName: String, _ wifiPass: String) {
         debugPrint("connectToWiFi name:\(wifiName), pass:\(wifiPass)")

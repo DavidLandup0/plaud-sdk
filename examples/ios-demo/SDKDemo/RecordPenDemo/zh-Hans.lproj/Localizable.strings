@@ -123,9 +123,9 @@
 "device.action.read_degree" = "读取眼镜度数";
 "device.action.associate_user" = "关联用户";
 "device.action.open_device_wifi" = "打开设备WiFi";
-"device.action.wifi_fast_transfer" = "WiFi快传";
+"device.action.wifi_fast_transfer" = "Wi-Fi快传";
 "device.action.close_device_wifi" = "关闭设备WiFi";
-"device.action.device_name" = "设备名称";
+"device.action.device_name" = "设置设备名称";
 
 /* Device Status */
 "device.status.connecting" = "设备连接中";
@@ -361,7 +361,7 @@
 "wifi.transfer.connection_failed" = "WiFi连接状态: %@ - %@";
 "wifi.transfer.connection_success_status" = "成功";
 "wifi.transfer.connection_failed_status" = "失败";
-"wifi.transfer.wifi_connected_status" = "WiFi已连接: %@";
+"wifi.transfer.wifi_connected_status" = "WiFi已连接，正在握手: %@";
 "wifi.transfer.wifi_error" = "WiFi Error - cmd: %d, status: %d";
 "wifi.transfer.wifi_handshake_result" = "WiFi握手结果 - status: %d";
 "wifi.transfer.wifi_power" = "WiFi Power - power: %d, voltage: %d";

@@ -144,9 +144,9 @@
 "device.action.read_degree" = "Read Degree";
 "device.action.associate_user" = "Associate User";
 "device.action.open_device_wifi" = "Open Device WiFi";
-"device.action.wifi_fast_transfer" = "WiFi Fast Transfer";
+"device.action.wifi_fast_transfer" = "Wi-Fi Fast-Transfer";
 "device.action.close_device_wifi" = "Close Device WiFi";
-"device.action.device_name" = "Device Name";
+"device.action.device_name" = "Set DeviceName";
 
 /* Device Status */
 "device.status.connecting" = "Connecting...";
@@ -264,7 +264,7 @@
 /* WiFi Errors and Setup */
 "wifi.error.recording_in_progress" = "Recording in progress, cannot enable WiFi";
 "wifi.error.udisk_mode_active" = "U-disk mode, cannot enable WiFi";
-"wifi.setup.message" = "To use WiFi fast transfer, please go to System Settings → Wi-Fi, connect to WiFi: {wifiName}, password: {wifiPass}";
+"wifi.setup.message" = "To use Wi-Fi fast-transfer, please go to System Settings → Wi-Fi, connect to WiFi: {wifiName}, password: {wifiPass}";
 "wifi.setup.go_to_settings" = "Go to Settings";
 "wifi.connection.success" = "WiFi connected successfully: {ssid}";
 "wifi.connection.failed" = "WiFi connection failed: {ssid}";
@@ -285,7 +285,7 @@
 "wifi.logs.clear" = "Clear Logs";
 
 /* WiFi Transfer UI */
-"wifi.transfer.title" = "WiFi Fast Transfer";
+"wifi.transfer.title" = "Wi-Fi Fast-Transfer";
 "wifi.transfer.status" = "WiFi Transfer Status";
 "wifi.transfer.connection_status" = "WiFi Connection Status";
 "wifi.transfer.initial_status" = "WiFi connecting... \nAfter success, click \"Get File List\" to start";
@@ -293,7 +293,7 @@
 "wifi.transfer.bluetooth_not_connected" = "Bluetooth not connected, please wait for Bluetooth reconnection";
 "wifi.transfer.bluetooth_connected_opening_wifi" = "Bluetooth connected, opening device WiFi...";
 "wifi.transfer.wifi_disconnected" = "WiFi has been disconnected";
-"wifi.transfer.starting_interface" = "WiFi fast transfer interface started";
+"wifi.transfer.starting_interface" = "Wi-Fi fast-transfer interface started";
 "wifi.transfer.device_info" = "Device: %@";
 "wifi.transfer.wifi_connecting" = "Connecting WiFi...";
 "wifi.transfer.wifi_handshake_success" = "WiFi handshake successful, connection established";
@@ -385,7 +385,7 @@
 "wifi.transfer.connection_failed" = "WiFi connection status: %@ - %@";
 "wifi.transfer.connection_success_status" = "Success";
 "wifi.transfer.connection_failed_status" = "Failed";
-"wifi.transfer.wifi_connected_status" = "WiFi connected: %@";
+"wifi.transfer.wifi_connected_status" = "WiFi connected, handshaking in progress: %@";
 "wifi.transfer.wifi_error" = "WiFi Error - cmd: %d, status: %d";
 "wifi.transfer.wifi_handshake_result" = "WiFi handshake result - status: %d";
 "wifi.transfer.wifi_power" = "WiFi Power - power: %d, voltage: %d";
@@ -398,7 +398,7 @@
 "wifi.transfer.get_logs_failed" = "Get Logs Failed - status: %d";
 "wifi.transfer.received_logs" = "Received Logs - size: %d bytes";
 "wifi.transfer.received_empty_logs" = "Received Empty Logs";
-"wifi.transfer.wifi_tips_no_recording" = "Recording not supported in WiFi fast transfer mode %d";
+"wifi.transfer.wifi_tips_no_recording" = "Recording not supported in Wi-Fi fast-transfer mode %d";
 
 /* WiFi Transfer Status Updates */
 "wifi.transfer.bluetooth_disconnected" = "Bluetooth has been disconnected";

@@ -635,7 +635,7 @@ class WiFiTransferTestViewController: UIViewController {
         //        // Get connection status description
         //        let statusDescription = PlaudWiFiAgent.shared.getConnectionStatusDescription()
         //        appendLog("📋 " + String(format: NSLocalizedString("wifi.transfer.connection_status_description", comment: ""), statusDescription))
-        //        
+        //
         //        // Check if connected to device WiFi
         //        let deviceWiFiName = device.name
         //        let isConnectedToDevice = PlaudWiFiAgent.shared.isConnectedTo(deviceWiFiName)
@@ -1154,8 +1154,8 @@ extension WiFiTransferTestViewController: PlaudWiFiAgentProtocol, PlaudDeviceAge
     /// Show file download completion alert
     private func showFileDownloadCompleteAlert() {
         let alert = UIAlertController(
-            title: NSLocalizedString("wifi.transfer.download_complete_title", comment: ""), 
-            message: NSLocalizedString("wifi.transfer.download_complete_message", comment: ""), 
+            title: NSLocalizedString("wifi.transfer.download_complete_title", comment: ""),
+            message: NSLocalizedString("wifi.transfer.download_complete_message", comment: ""),
             preferredStyle: .alert
         )
         
@@ -1500,5 +1500,4 @@ extension WiFiTransferTestViewController: PlaudWiFiAgentProtocol, PlaudDeviceAge
             updateStatusDisplay(NSLocalizedString("wifi.transfer.bluetooth_connected_success", comment: ""))
         }
     }
-    
 }

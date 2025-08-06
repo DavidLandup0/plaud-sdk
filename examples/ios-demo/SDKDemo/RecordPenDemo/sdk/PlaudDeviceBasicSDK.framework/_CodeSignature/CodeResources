@@ -56,7 +56,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ngHpg9ipqfNakB8LmPWygJnUCJw=
+			7eKsPNaSIAcNym99g5wuXRtx9to=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -65,14 +65,26 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YJwihiS7ECdNICNd0dokgltakgU=
+			SXP7ig80h/3EIPKq6B9dMryUPyE=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
+		<key>camera.png</key>
+		<data>
+		strbCYSjIaguASYHmNc34nA+E7o=
+		</data>
+		<key>gallery.png</key>
+		<data>
+		Ky7T4jio1kVCiPhlIPFaNCLL028=
+		</data>
 		<key>plaud_ai_data.txt</key>
 		<data>
 		ka+Py3CnSLpccrtN1aFwvFtl5Ec=
+		</data>
+		<key>whiteboard.png</key>
+		<data>
+		924osRcsZ3yKzSHfwXUzwEOLv8s=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -202,11 +214,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ngHpg9ipqfNakB8LmPWygJnUCJw=
+			7eKsPNaSIAcNym99g5wuXRtx9to=
 			</data>
 			<key>hash2</key>
 			<data>
-			dTC32uk+I2HFixEsneAD7w/QTeILDtprdILjTeP4fuE=
+			Djp7xTCLObgpLuSjCwrg2YMAdTQOyozOHNjrkq8S0/A=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -215,14 +227,36 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YJwihiS7ECdNICNd0dokgltakgU=
+			SXP7ig80h/3EIPKq6B9dMryUPyE=
 			</data>
 			<key>hash2</key>
 			<data>
-			SEvVGLmyY2YbzoMZm/uMkBjqDD9f415Cm5KDejLoQN8=
+			jkZoDeyd3/oUENASZbSVEORl53K2NmTmYtrf+wFgNhs=
 			</data>
 			<key>optional</key>
 			<true/>
+		</dict>
+		<key>camera.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			strbCYSjIaguASYHmNc34nA+E7o=
+			</data>
+			<key>hash2</key>
+			<data>
+			l/V6u0t41qfOxLQYODUSWRiVKWYqniw3aRF5MAoVmbg=
+			</data>
+		</dict>
+		<key>gallery.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Ky7T4jio1kVCiPhlIPFaNCLL028=
+			</data>
+			<key>hash2</key>
+			<data>
+			EN+ySD32cL/yVsMauME2TsapmzxWOGh357JMbrM6suI=
+			</data>
 		</dict>
 		<key>plaud_ai_data.txt</key>
 		<dict>
@@ -233,6 +267,17 @@
 			<key>hash2</key>
 			<data>
 			U2l4bAmm40GRd2I9mBcTaH7FRhI3h3CT31kan1c8D+8=
+			</data>
+		</dict>
+		<key>whiteboard.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			924osRcsZ3yKzSHfwXUzwEOLv8s=
+			</data>
+			<key>hash2</key>
+			<data>
+			mxoUspEYv4lK73FFQp/O/KrBMz1g6n3ShPzTZIiZexc=
 			</data>
 		</dict>
 	</dict>
