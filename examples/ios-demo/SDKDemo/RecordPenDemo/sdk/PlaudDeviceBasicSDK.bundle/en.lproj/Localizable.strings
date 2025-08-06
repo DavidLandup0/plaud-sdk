@@ -113,12 +113,12 @@
 "timeout" = "Timeout";
 
 // Workflow Task Types
-"audio_transcribe" = "Audio Transcription";
-"ai_summarize" = "AI Summary";
 "ai_etl" = "AI ETL";
 "audio_merge" = "Audio Merge";
 "custom" = "Custom";
 "unknown" = "Unknown";
+"audio_transcribe" = "Audio Transcription";
+"ai_summarize" = "AI Summary";
 
 // Workflow Errors
 "invalid_url" = "Invalid URL";

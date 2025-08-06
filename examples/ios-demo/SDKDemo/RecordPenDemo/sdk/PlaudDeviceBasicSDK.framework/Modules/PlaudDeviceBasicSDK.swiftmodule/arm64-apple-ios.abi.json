@@ -6453,10 +6453,7 @@
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
-        "moduleName": "PlaudDeviceBasicSDK",
-        "declAttributes": [
-          "RawDocComment"
-        ]
+        "moduleName": "PlaudDeviceBasicSDK"
       },
       {
         "kind": "Import",
@@ -49570,16 +49567,16 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Legency\/UI\/Mine\/RuntimeEvn_wechat.swift",
       "kind": "StringLiteral",
-      "offset": 223,
-      "length": 20,
-      "value": "\"wx18cd3571c194ecd4\""
+      "offset": 86,
+      "length": 2,
+      "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Legency\/UI\/Mine\/RuntimeEvn_wechat.swift",
       "kind": "StringLiteral",
-      "offset": 282,
-      "length": 34,
-      "value": "\"0c745bf4d9f6a52badeebd4a7daac3a9\""
+      "offset": 127,
+      "length": 2,
+      "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Legency\/UI\/BaseVC\/TestRecognizeSdkOfflineViewController.swift",

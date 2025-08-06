@@ -418,8 +418,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) WiFiAgent * 
 @end
 
 @interface WiFiAgent (SWIFT_EXTENSION(PenWiFiSDK))
-/// 获取当前连接的WiFi名称
-/// app需要添加Access WiFi Information权限(ios 12.0以后）
+/// Get current connected WiFi name
+/// App needs to add Access WiFi Information permission (iOS 12.0 and later)
 - (NSString * _Nullable)getCurrentWiFiName SWIFT_WARN_UNUSED_RESULT;
 @end
 
@@ -436,42 +436,42 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) WiFiAgent * 
 @end
 
 @interface WiFiAgent (SWIFT_EXTENSION(PenWiFiSDK))
-/// 是否已成功建立WebSocket连接（app可以发送请求的前提）
+/// Whether WebSocket connection is successfully established (prerequisite for app to send requests)
 - (BOOL)isWebSocketConnected SWIFT_WARN_UNUSED_RESULT;
-/// 速率测试（cmd=100）
-/// \param onOff 开始或结束
+/// Rate test (cmd=100)
+/// \param onOff Start or stop
 ///
-/// \param packSize 测试包大小
+/// \param packSize Test packet size
 ///
 - (void)appWiFiRate:(BOOL)onOff :(NSInteger)packSize;
-/// 删除文件（cmd=14）
-/// \param sessionId 录音id
+/// Delete file (cmd=14)
+/// \param sessionId Recording ID
 ///
-/// \param scene 场景，默认1
+/// \param scene Scene, default 1
 ///
 - (void)appDeleteFile:(NSInteger)sessionId :(NSInteger)scene;
-/// 停止文件同步（cmd=15）
-/// \param sessionId 录音id
+/// Stop file sync (cmd=15)
+/// \param sessionId Recording ID
 ///
-/// \param scene 场景，默认1
+/// \param scene Scene, default 1
 ///
 - (void)appStopSyncFile:(NSInteger)sessionId :(NSInteger)scene;
-/// 文件同步（cmd=12）
-/// \param sessionId 录音id
+/// File sync (cmd=12)
+/// \param sessionId Recording ID
 ///
-/// \param start 起始位置（是文件偏移量，不是时间）
+/// \param start Start position (file offset, not time)
 ///
-/// \param end 结束位置（默认0，到文件结束）
+/// \param end End position (default 0, to file end)
 ///
-/// \param scene 录音场景，默认1
+/// \param scene Recording scene, default 1
 ///
 - (void)appSyncFile:(NSInteger)sessionId :(NSInteger)start :(NSInteger)end :(NSInteger)scene;
-/// 获取文件列表（app发起 cmd=11）
-/// \param uid 请求的uid，新的请求会自然覆盖老的请求
+/// Get file list (app initiated cmd=11)
+/// \param uid Request UID, new requests will naturally override old requests
 ///
-/// \param sessionId 起始sessionId
+/// \param sessionId Starting sessionId
 ///
-/// \param single 是否仅获取当前文件信息，默认是否，
+/// \param single Whether to only get current file info, default false
 ///
 - (void)appGetFileList:(NSInteger)uid :(NSInteger)sessionId :(BOOL)single;
 @end

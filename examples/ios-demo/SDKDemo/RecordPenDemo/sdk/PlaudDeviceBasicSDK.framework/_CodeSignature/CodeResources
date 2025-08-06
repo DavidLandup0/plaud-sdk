@@ -22,11 +22,11 @@
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		vBigvvs5RrnHpDm62odoVnnGbHc=
+		yC9ltO/ld3jesJHRNtJS9cYvJHQ=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		UXvwWwNRL5GPcy8DGCh5D8amYUQ=
+		EiAR+eKJ25GM2vf+oMLt0ZRzUDc=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		v63l1cNAxxF8N+MZ21TT2APJUPY=
+		a/CRGQ4SqzThNoaxzyP3UyUhZnM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -56,7 +56,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7eKsPNaSIAcNym99g5wuXRtx9to=
+			ngHpg9ipqfNakB8LmPWygJnUCJw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -65,26 +65,14 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SXP7ig80h/3EIPKq6B9dMryUPyE=
+			YJwihiS7ECdNICNd0dokgltakgU=
 			</data>
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>camera.png</key>
-		<data>
-		strbCYSjIaguASYHmNc34nA+E7o=
-		</data>
-		<key>gallery.png</key>
-		<data>
-		Ky7T4jio1kVCiPhlIPFaNCLL028=
-		</data>
 		<key>plaud_ai_data.txt</key>
 		<data>
 		ka+Py3CnSLpccrtN1aFwvFtl5Ec=
-		</data>
-		<key>whiteboard.png</key>
-		<data>
-		924osRcsZ3yKzSHfwXUzwEOLv8s=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -126,22 +114,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vBigvvs5RrnHpDm62odoVnnGbHc=
+			yC9ltO/ld3jesJHRNtJS9cYvJHQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			ErDYwjhwIPL8p+pkkz1DMIdFYxYpWCftPLgfOIUNnLo=
+			NXUMMmJ7q8WnleCqRlcWo/8rNU6JeZ6e9D1mWhuCi88=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UXvwWwNRL5GPcy8DGCh5D8amYUQ=
+			EiAR+eKJ25GM2vf+oMLt0ZRzUDc=
 			</data>
 			<key>hash2</key>
 			<data>
-			C6vukWVeOzcQH6jebpIwSF+bpvxKE3VdVS4X5Bx2X2s=
+			W7QVYwLuqd3WHtpI6B94G9HnvgBLKv1Ka9TOreHG33U=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
@@ -181,11 +169,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			v63l1cNAxxF8N+MZ21TT2APJUPY=
+			a/CRGQ4SqzThNoaxzyP3UyUhZnM=
 			</data>
 			<key>hash2</key>
 			<data>
-			XAYsOd8SaO1c+H6y2RqlP71JF4IdxktnKFE8rNeEhbQ=
+			DR9hrqUwTUbUPugCOTcWDTfg66uvUwnVLj/9CMsXvhI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -214,11 +202,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7eKsPNaSIAcNym99g5wuXRtx9to=
+			ngHpg9ipqfNakB8LmPWygJnUCJw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Djp7xTCLObgpLuSjCwrg2YMAdTQOyozOHNjrkq8S0/A=
+			dTC32uk+I2HFixEsneAD7w/QTeILDtprdILjTeP4fuE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -227,36 +215,14 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SXP7ig80h/3EIPKq6B9dMryUPyE=
+			YJwihiS7ECdNICNd0dokgltakgU=
 			</data>
 			<key>hash2</key>
 			<data>
-			jkZoDeyd3/oUENASZbSVEORl53K2NmTmYtrf+wFgNhs=
+			SEvVGLmyY2YbzoMZm/uMkBjqDD9f415Cm5KDejLoQN8=
 			</data>
 			<key>optional</key>
 			<true/>
-		</dict>
-		<key>camera.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			strbCYSjIaguASYHmNc34nA+E7o=
-			</data>
-			<key>hash2</key>
-			<data>
-			l/V6u0t41qfOxLQYODUSWRiVKWYqniw3aRF5MAoVmbg=
-			</data>
-		</dict>
-		<key>gallery.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Ky7T4jio1kVCiPhlIPFaNCLL028=
-			</data>
-			<key>hash2</key>
-			<data>
-			EN+ySD32cL/yVsMauME2TsapmzxWOGh357JMbrM6suI=
-			</data>
 		</dict>
 		<key>plaud_ai_data.txt</key>
 		<dict>
@@ -267,17 +233,6 @@
 			<key>hash2</key>
 			<data>
 			U2l4bAmm40GRd2I9mBcTaH7FRhI3h3CT31kan1c8D+8=
-			</data>
-		</dict>
-		<key>whiteboard.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			924osRcsZ3yKzSHfwXUzwEOLv8s=
-			</data>
-			<key>hash2</key>
-			<data>
-			mxoUspEYv4lK73FFQp/O/KrBMz1g6n3ShPzTZIiZexc=
 			</data>
 		</dict>
 	</dict>
