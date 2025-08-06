@@ -2,13 +2,7 @@ package com.plaud.nicebuild.ui
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.widget.ImageButton
-import android.widget.ProgressBar
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,6 +14,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -59,15 +55,15 @@ class IntroFragment : Fragment() {
         Manifest.permission.ACCESS_FINE_LOCATION
     )
     private val PERMISSION_KEY = "ble_permissions"
-
+    
     private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var bleManager: BleManager
-
+    
     // Long press handler for language selection
     private val longPressHandler = Handler(Looper.getMainLooper())
     private var longPressRunnable: Runnable? = null
     private val LONG_PRESS_DURATION = 5000L // 5 seconds
-
+    
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -101,7 +97,7 @@ class IntroFragment : Fragment() {
         val allGranted = REQUIRED_PERMISSIONS.all {
             ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
         }
-
+        
         checkAndSyncLanguageConfig()
     }
 
@@ -142,7 +138,7 @@ class IntroFragment : Fragment() {
 
         return view
     }
-
+    
     private fun setupLongPressLanguageSelection(titleView: TextView) {
         titleView.setOnTouchListener { _, event ->
             when (event.action) {
@@ -161,7 +157,7 @@ class IntroFragment : Fragment() {
                 }
                 MotionEvent.ACTION_MOVE -> {
                     // Cancel long press if finger moves too much
-                    if (event.x < 0 || event.y < 0 ||
+                    if (event.x < 0 || event.y < 0 || 
                         event.x > titleView.width || event.y > titleView.height) {
                         longPressRunnable?.let {
                             longPressHandler.removeCallbacks(it)
@@ -173,37 +169,37 @@ class IntroFragment : Fragment() {
             }
         }
     }
-
+    
     private fun showAppKeySettingDialog() {
         val currentLanguageCode = LocaleHelper.getLanguage(requireContext())
         val config = LanguageConfigManager.getConfigForLanguage(currentLanguageCode)
-
+        
         // Determine what to show in the dialog
         val (currentAppKey, currentAppSecret) = AppKeyManager.getAppKeyPair(requireContext())
         val hasManuallySet = AppKeyManager.hasManuallySetAppKey(requireContext())
-
+        
         val defaultAppKey = config?.appKeyPairEnv?.appKey ?: ""
         val defaultAppSecret = config?.appKeyPairEnv?.appSecret ?: ""
-
+        
         // If user hasn't manually set, show default values
         // If user has manually set, show their cached values
         val displayAppKey = if (hasManuallySet) currentAppKey ?: "" else defaultAppKey
         val displayAppSecret = if (hasManuallySet) currentAppSecret ?: "" else defaultAppSecret
-
+        
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_set_app_key, null)
         val etAppKey = dialogView.findViewById<TextInputEditText>(R.id.et_app_key)
         val etAppSecret = dialogView.findViewById<TextInputEditText>(R.id.et_app_secret)
-
+        
         etAppKey.setText(displayAppKey)
         etAppSecret.setText(displayAppSecret)
-
+        
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.dialog_title_set_app_key))
             .setView(dialogView)
             .setPositiveButton(getString(R.string.dialog_btn_set)) { _, _ ->
                 val appKey = etAppKey.text?.toString()?.trim() ?: ""
                 val appSecret = etAppSecret.text?.toString()?.trim() ?: ""
-
+                
                 if (appKey.isNotEmpty() && appSecret.isNotEmpty()) {
                     AppKeyManager.saveAppKeyPair(requireContext(), appKey, appSecret)
                     bleManager.updateAppKey(appKey, appSecret)
@@ -223,7 +219,7 @@ class IntroFragment : Fragment() {
             .setNegativeButton(getString(R.string.dialog_btn_cancel), null)
             .show()
     }
-
+    
     private fun checkAndSyncLanguageConfig() {
         if (!LanguageConfigManager.isConfigSyncedWithLanguage(requireContext())) {
             val currentLanguageCode = LocaleHelper.getLanguage(requireContext())
@@ -248,13 +244,13 @@ class IntroFragment : Fragment() {
                 val currentLanguageCode = LocaleHelper.getLanguage(requireContext())
                 if (currentLanguageCode != language.code) {
                     LocaleHelper.setLocale(requireContext(), language.code)
-
+                    
                     val success = LanguageConfigManager.applyConfigForLanguage(
                         requireContext(),
                         language.code,
                         bleManager
                     )
-
+                    
                     if (success) {
                         requireActivity().recreate()
                     }
@@ -361,7 +357,7 @@ class IntroFragment : Fragment() {
         
         dialog.show()
     }
-
+    
     private fun showOptionSelectionDialog(options: Map<String, () -> Unit>, currentSelection: String?) {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.dialog_language_selection)
@@ -375,7 +371,7 @@ class IntroFragment : Fragment() {
         options.forEach { (text, action) ->
             val optionView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_item_selection, optionsContainer, false) as TextView
             optionView.text = text
-
+            
             if (text == currentSelection) {
                 optionView.typeface = Typeface.DEFAULT_BOLD
                 optionView.append("  ✓")
@@ -391,7 +387,7 @@ class IntroFragment : Fragment() {
         btnCancel.setOnClickListener { dialog.dismiss() }
         dialog.show()
     }
-
+    
     override fun onDestroy() {
         super.onDestroy()
         longPressRunnable?.let {

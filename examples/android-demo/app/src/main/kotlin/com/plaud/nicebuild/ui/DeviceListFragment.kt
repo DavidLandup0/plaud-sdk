@@ -33,6 +33,8 @@ class DeviceListFragment : Fragment() {
     private lateinit var bleCore: BleCore
     private var scanHandler: Handler? = null
     private var scanRunnable: Runnable? = null
+    private var connectionTimeoutHandler: Handler? = null
+    private var connectionTimeoutRunnable: Runnable? = null
     private lateinit var tvStatus: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,6 +102,8 @@ class DeviceListFragment : Fragment() {
         scanRunnable?.let { runnable ->
             scanHandler?.removeCallbacks(runnable)
         }
+        // Clean up connection timeout handler
+        connectionTimeoutRunnable?.let { connectionTimeoutHandler?.removeCallbacks(it) }
         LoadingDialog.hide()
         mainViewModel.updateDeviceList(emptyList())
     }
@@ -111,20 +115,54 @@ class DeviceListFragment : Fragment() {
 
         deviceAdapter.setOnItemClickListener { device ->
             if (!isAdded) return@setOnItemClickListener
+            
+            // Prevent duplicate clicks: check if loading
+            if (mainViewModel.isLoading.value == true) {
+                Log.d("DeviceListFragment", "Connection already in progress, ignoring click")
+                return@setOnItemClickListener
+            }
+            
+            Log.d("DeviceListFragment", "Starting connection to device: ${device.name}")
             mainViewModel.setLoading(true)
 
+            // Set connection timeout handler (30 seconds timeout)
+            connectionTimeoutHandler = Handler(Looper.getMainLooper())
+            connectionTimeoutRunnable = Runnable {
+                if (mainViewModel.isLoading.value == true) {
+                    Log.w("DeviceListFragment", "Connection timeout, re-enabling buttons")
+                    mainViewModel.setLoading(false)
+                    deviceAdapter.enableAllConnectButtons()
+                    if (isAdded) {
+                        Toast.makeText(requireContext(), getString(R.string.connection_timeout_retry), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            connectionTimeoutHandler?.postDelayed(connectionTimeoutRunnable!!, 30000L)
+
+            // Use background thread to handle connection, avoid blocking UI
             bleManager.connectDevice(device) { success, code, message ->
                 if (!isAdded) return@connectDevice
-                mainViewModel.setLoading(false)
                 
-                if (success) {
-                    Toast.makeText(requireContext(), getString(R.string.toast_connect_successful), Toast.LENGTH_SHORT).show()
-                    mainViewModel.setCurrentDevice(device)
-                    if (findNavController().currentDestination?.id != R.id.deviceFeatureFragment) {
-                        findNavController().navigate(R.id.action_deviceList_to_feature)
+                // Ensure UI updates are executed on main thread
+                requireActivity().runOnUiThread {
+                    // Clear timeout handler
+                    connectionTimeoutRunnable?.let { connectionTimeoutHandler?.removeCallbacks(it) }
+                    
+                    mainViewModel.setLoading(false)
+                    
+                    // Re-enable all connect buttons
+                    deviceAdapter.enableAllConnectButtons()
+                    
+                    if (success) {
+                        Toast.makeText(requireContext(), getString(R.string.toast_connect_successful), Toast.LENGTH_SHORT).show()
+                        mainViewModel.setCurrentDevice(device)
+                        if (findNavController().currentDestination?.id != R.id.deviceFeatureFragment) {
+                            findNavController().navigate(R.id.action_deviceList_to_feature)
+                        }
+                    } else {
+                        Log.e("DeviceListFragment", "Connection failed: code=$code, message=$message")
+                        Toast.makeText(requireContext(), getString(R.string.toast_connect_failed_with_reason, message ?: "", code ?: ""), Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(requireContext(), getString(R.string.toast_connect_failed_with_reason, message ?: "", code ?: ""), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -147,12 +185,6 @@ class DeviceListFragment : Fragment() {
     }
 
     private fun startScan() {
-        // HarmonyOS debug logs
-        Log.i("DeviceListFragment", "=== Starting Bluetooth scan debug ===")
-        Log.i("DeviceListFragment", "System brand: ${android.os.Build.BRAND}")
-        Log.i("DeviceListFragment", "System model: ${android.os.Build.MODEL}")
-        Log.i("DeviceListFragment", "Android version: ${android.os.Build.VERSION.RELEASE}")
-        
         if (!isAdded) return
         tvStatus.text = getString(R.string.fragment_device_list_scanning_status)
         scanRunnable?.let { scanHandler?.removeCallbacks(it) }
@@ -160,10 +192,6 @@ class DeviceListFragment : Fragment() {
 
         bleCore.startScan(true) { devices ->
             if (!isAdded) return@startScan
-            Log.i("DeviceListFragment", "Scan callback received device count: ${devices.size}")
-            devices.forEachIndexed { index, device ->
-                Log.i("DeviceListFragment", "Device $index: ${device.name} - ${device.serialNumber}")
-            }
             val sortedDevices = devices.sortedByDescending { it.rssi }
             mainViewModel.updateDeviceList(sortedDevices)
         }
@@ -171,7 +199,6 @@ class DeviceListFragment : Fragment() {
         scanHandler = Handler(Looper.getMainLooper())
         scanRunnable = Runnable {
             if (!isAdded) return@Runnable
-            Log.i("DeviceListFragment", "Scan timeout, stopping scan")
             bleCore.startScan(false)
         }
         scanHandler?.postDelayed(scanRunnable!!, 10_000)

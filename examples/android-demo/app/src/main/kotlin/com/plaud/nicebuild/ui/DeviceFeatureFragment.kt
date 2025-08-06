@@ -2,6 +2,7 @@ package com.plaud.nicebuild.ui
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +48,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import android.Manifest
 import android.content.pm.PackageManager
-import android.os.Environment
 import android.provider.Settings
 import com.plaud.nicebuild.utils.PermissionUtils
+import com.plaud.nicebuild.utils.WifiTransferPermissions
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.Button
@@ -87,6 +88,7 @@ class DeviceFeatureFragment : Fragment() {
     private lateinit var btnGetFileList: MaterialButton
     private lateinit var btnSetWifiDomain: MaterialButton
     private lateinit var btnWifiCloud: MaterialButton
+    private lateinit var btnWifiTransfer: MaterialButton
     private lateinit var btnBindCloud: MaterialButton
     private lateinit var btnUnbindCloud: MaterialButton
 
@@ -105,6 +107,7 @@ class DeviceFeatureFragment : Fragment() {
             }
         }
         // For modern storage, the check is handled in onResume after returning from settings
+        // For WiFi permissions, the check is handled by PermissionUtils callback
     }
 
     // Launcher for modern storage settings (Android >= 11)
@@ -159,6 +162,7 @@ class DeviceFeatureFragment : Fragment() {
         btnGetFileList = view.findViewById(R.id.btn_get_file_list)
         btnSetWifiDomain = view.findViewById(R.id.btn_set_wifi_domain)
         btnWifiCloud = view.findViewById(R.id.btn_wifi_cloud)
+        btnWifiTransfer = view.findViewById(R.id.btn_wifi_transfer)
         btnBindCloud = view.findViewById(R.id.btn_bind_cloud)
         btnUnbindCloud = view.findViewById(R.id.btn_unbind_cloud)
         
@@ -328,6 +332,7 @@ class DeviceFeatureFragment : Fragment() {
                         """.trimIndent()
 
                         showStatusDialog(formattedMessage)
+                        
 
                     } catch (e: Exception) {
                         Toast.makeText(requireContext(), getString(R.string.toast_parse_state_failed, e.message), Toast.LENGTH_SHORT).show()
@@ -350,7 +355,7 @@ class DeviceFeatureFragment : Fragment() {
         }
 
         btnSetWifiDomain.setOnClickListener {
-            val domain = "platform.plaud.cn"
+            val domain = NiceBuildSdk.getWifiSyncDomain()
             bleManager.setWifiSyncDomain(domain) { success ->
                 if (isAdded) { // Ensure fragment is still attached before updating UI
                     requireActivity().runOnUiThread {
@@ -396,6 +401,10 @@ class DeviceFeatureFragment : Fragment() {
             findNavController().navigate(R.id.action_feature_to_wifiCloud)
         }
 
+        btnWifiTransfer.setOnClickListener {
+            handleWifiTransferRequest()
+        }
+
         btnBindCloud.setOnClickListener {
             lifecycleScope.launch {
                 try {
@@ -434,6 +443,29 @@ class DeviceFeatureFragment : Fragment() {
                 }
             }
         }
+        
+        // Set up real-time sync UI components (if they exist)
+        setupRealTimeSyncUI()
+    }
+    
+    /**
+     * Set up real-time sync UI components and listeners
+     */
+    private fun setupRealTimeSyncUI() {
+        // Real-time sync functionality is automatically triggered through SDK, UI part is commented out for now
+        // Can add corresponding buttons in layout as needed
+        
+        /*
+        view?.findViewById<MaterialButton>(R.id.btn_start_real_time_sync)?.setOnClickListener {
+            // Need sessionId, can get from current recording status
+        }
+        
+        view?.findViewById<MaterialButton>(R.id.btn_stop_real_time_sync)?.setOnClickListener {
+            mainViewModel.stopRealTimeSync()
+        }
+        */
+        
+        Log.d(TAG, "Real-time sync functionality has been set up, will automatically start when device is recording")
     }
 
     @SuppressLint("SetTextI18n")
@@ -514,7 +546,24 @@ class DeviceFeatureFragment : Fragment() {
             val count = fileList?.size ?: 0
             tvFileCountEntry.text = getString(R.string.fragment_device_feature_files_count, count)
         }
+        
+
+        mainViewModel.connectionStatus.observe(viewLifecycleOwner) { status ->
+            Log.d(TAG, "Connection status: $status")
+        }
+        
+        mainViewModel.recordingStatus.observe(viewLifecycleOwner) { status ->
+            Log.d(TAG, "Recording status: $status")
+        }
+        
+        mainViewModel.batteryLevel.observe(viewLifecycleOwner) { level ->
+            // Update battery display
+            tvBattery.text = "$level%"
+            Log.d(TAG, "Battery level: $level%")
+        }
+        
     }
+    
 
     private fun updateButtonStates() {
         if (isRecording) {
@@ -545,10 +594,12 @@ class DeviceFeatureFragment : Fragment() {
             val isRecordingState = json.getInt("state").toLong() == Constants.DEVICE_STATUS_RECORDING
             val isPausedState = json.optBoolean("isPaused", false)
             val isUsbState = json.optInt("privacy", 0) == 0
+            val sessionId = json.optLong("sessionId", 0)
 
             this.isRecording = isRecordingState
             this.isPaused = isPausedState
             
+
             if (isAdded) {
                 switchUdiskMode.setOnCheckedChangeListener(null)
                 switchUdiskMode.isChecked = isUsbState
@@ -586,6 +637,7 @@ class DeviceFeatureFragment : Fragment() {
             if (Environment.isExternalStorageManager()) {
                  // We don't automatically navigate here, to avoid navigating just by switching apps.
                  // The user needs to click the button again to trigger the check.
+                 // This applies to both file list access and WiFi transfer storage permission
             }
         }
     }
@@ -689,6 +741,161 @@ class DeviceFeatureFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+
+
+    
+    /**
+     * Handle WiFi transfer request with comprehensive permission and prerequisite checking
+     */
+    private fun handleWifiTransferRequest() {
+        // Check all prerequisites
+        val prerequisiteResult = WifiTransferPermissions.checkTransferPrerequisites(requireContext())
+        val bleConnected = bleCore.isConnected()
+        
+        Log.i("DeviceFeatureFragment", "WiFi transfer prerequisite check:")
+        Log.i("DeviceFeatureFragment", "  - Has all permissions: ${prerequisiteResult.hasAllPermissions}")
+        Log.i("DeviceFeatureFragment", "  - WiFi enabled: ${prerequisiteResult.isWifiEnabled}")
+        Log.i("DeviceFeatureFragment", "  - Location enabled: ${prerequisiteResult.isLocationEnabled}")
+        Log.i("DeviceFeatureFragment", "  - Write settings permission: ${prerequisiteResult.hasWriteSettingsPermission}")
+        Log.i("DeviceFeatureFragment", "  - BLE connected: $bleConnected")
+        Log.i("DeviceFeatureFragment", "  - Can proceed: ${prerequisiteResult.canProceed && bleConnected}")
+        
+        if (!prerequisiteResult.hasAllPermissions) {
+            val missingPermissions = WifiTransferPermissions.getMissingPermissions(requireContext())
+            Log.i("DeviceFeatureFragment", "  - Missing permissions: ${missingPermissions.joinToString()}")
+        }
+        
+        if (prerequisiteResult.canProceed && bleConnected) {
+            // All prerequisites met, start transfer with auto download
+            Log.i("DeviceFeatureFragment", "All prerequisites met, starting WiFi transfer with auto download")
+            mainViewModel.startWifiTransfer(this@DeviceFeatureFragment)
+            return
+        }
+        
+        // Handle specific issues
+        when {
+            !prerequisiteResult.hasAllPermissions -> {
+                Log.i("DeviceFeatureFragment", "Missing permissions, requesting via PermissionUtils")
+                requestWifiPermissionsViaUtils()
+            }
+            
+            !prerequisiteResult.isWifiEnabled -> {
+                Log.i("DeviceFeatureFragment", "Showing WiFi settings dialog")
+                showWifiSettingsDialog()
+            }
+            
+            !prerequisiteResult.isLocationEnabled -> {
+                Log.i("DeviceFeatureFragment", "Showing location settings dialog")
+                showLocationSettingsDialog()
+            }
+            
+            !prerequisiteResult.hasWriteSettingsPermission -> {
+                Log.i("DeviceFeatureFragment", "Showing write settings permission dialog")
+                showWriteSettingsPermissionDialog()
+            }
+            
+            !bleConnected -> {
+                Log.w("DeviceFeatureFragment", "BLE not connected")
+                Toast.makeText(requireContext(), getString(R.string.wifi_transfer_device_not_connected), Toast.LENGTH_SHORT).show()
+            }
+            
+            else -> {
+                Log.w("DeviceFeatureFragment", "Unknown issue: ${prerequisiteResult.getErrorMessage()}")
+                Toast.makeText(requireContext(), prerequisiteResult.getErrorMessage() ?: getString(R.string.wifi_transfer_not_available), Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    
+    /**
+     * Request WiFi transfer permissions using standard PermissionUtils pattern
+     */
+    private fun requestWifiPermissionsViaUtils() {
+        Log.i("DeviceFeatureFragment", "Requesting WiFi transfer permissions")
+        
+        // First check if we need modern storage permission (Android 11+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+            Log.i("DeviceFeatureFragment", "Need storage permission for Android 11+")
+            showCustomPermissionDialog()
+            return
+        }
+        
+        // Build permission array based on Android version
+        val permissionsToRequest = mutableListOf<String>().apply {
+            // Location permissions (always required for WiFi scanning)
+            add(Manifest.permission.ACCESS_FINE_LOCATION)
+            add(Manifest.permission.ACCESS_COARSE_LOCATION)
+            
+            // Legacy storage permission (Android 10 and below)
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+                add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+            
+            // Android 13+ WiFi device permission
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                try {
+                    add(Manifest.permission.NEARBY_WIFI_DEVICES)
+                } catch (e: Exception) {
+                    Log.w("DeviceFeatureFragment", "NEARBY_WIFI_DEVICES permission not available: ${e.message}")
+                }
+            }
+        }.toTypedArray()
+        
+        Log.i("DeviceFeatureFragment", "Requesting permissions: ${permissionsToRequest.joinToString()}")
+        
+        // Use standard PermissionUtils pattern (same as scan and file list)
+        PermissionUtils.checkAndRequestPermissions(
+            requireActivity(),
+            permissionsToRequest,
+            requestPermissionLauncher,
+            "wifi_transfer_permissions"
+        ) {
+            Log.i("DeviceFeatureFragment", "All WiFi transfer permissions granted, retrying transfer")
+            handleWifiTransferRequest()
+        }
+    }
+    
+    /**
+     * Show WiFi settings dialog
+     */
+    private fun showWifiSettingsDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.wifi_transfer_wifi_required_title))
+            .setMessage(getString(R.string.wifi_transfer_wifi_required_message))
+            .setPositiveButton(getString(R.string.wifi_transfer_open_settings)) { _, _ ->
+                WifiTransferPermissions.openWifiSettings(requireContext())
+            }
+            .setNegativeButton(getString(R.string.wifi_transfer_cancel_permissions), null)
+            .show()
+    }
+    
+    /**
+     * Show location settings dialog
+     */
+    private fun showLocationSettingsDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.wifi_transfer_location_required_title))
+            .setMessage(getString(R.string.wifi_transfer_location_required_message))
+            .setPositiveButton(getString(R.string.wifi_transfer_open_settings)) { _, _ ->
+                WifiTransferPermissions.openLocationSettings(requireContext())
+            }
+            .setNegativeButton(getString(R.string.wifi_transfer_cancel_permissions), null)
+            .show()
+    }
+    
+    /**
+     * Show write settings permission dialog
+     */
+    private fun showWriteSettingsPermissionDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.wifi_transfer_write_settings_required_title))
+            .setMessage(getString(R.string.wifi_transfer_write_settings_required_message))
+            .setPositiveButton(getString(R.string.wifi_transfer_open_settings)) { _, _ ->
+                WifiTransferPermissions.openWriteSettingsPermission(requireContext())
+            }
+            .setNegativeButton(getString(R.string.wifi_transfer_cancel_permissions), null)
+            .show()
     }
 
     private fun navigateToFileList() {
