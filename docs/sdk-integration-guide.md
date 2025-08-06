@@ -35,7 +35,7 @@ This document provides guidance for integrating and using of the PLAUD SDK.
         - Update Wifi
         - Get Wifi list
         - Set cloud address
-       - Wifi Fast-Transfer
+      - Wifi Fast-Transfer
         - Open device wifi
         - Connect to device wifi
         - Get file list
@@ -812,5 +812,5 @@ b. Add the following entries to your App's entitlements file:
 
 - Bill of Materials
       *   Android: `plaud-sdk.aar`
-      *   iOS: `PenBleSDK.framework`, `PlaudDeviceBasicSDK.framework` 
+      *   iOS: `PenBleSDK.framework`, `PlaudDeviceBasicSDK.framework` ,`PenWiFiSDK.framework`
       *   DemoApp: SDK Demo  
