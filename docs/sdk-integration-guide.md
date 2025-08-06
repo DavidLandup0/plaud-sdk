@@ -805,7 +805,7 @@ b. Add the following entries to your App's entitlements file:
     @objc optional func wifiFileList(_ files: [BleFile])
 ```
 
-- Delete file
+- Delete file  
 
 ```code
     /// Delete file
