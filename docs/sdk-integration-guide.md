@@ -808,7 +808,7 @@ b. Add the following entries to your App's entitlements file:
 - Delete file  
 
 ```code
-    /// Delete file
+    /// Delete file 
     /// - Parameters:
     ///   - sessionId: Recording ID
     ///   - scene: Scene, default 1
