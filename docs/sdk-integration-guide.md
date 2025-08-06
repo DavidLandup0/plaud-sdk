@@ -452,6 +452,60 @@ agent.setWifiSyncDomain(String url, AgentCallback. OnRequest onRequest,
     SubmitResponse response = NiceBuildSdk.submit(fileId: String,workflows: List<Workflow>?,)
 ```
 
+#### Wifi Fast Transfer
+
+- Init and Start
+```code
+wifiAgent = NiceBuildSdk.getWifiAgent()
+wifiAgent.startWifiTransfer(sn, object : IWifiAgent.WifiTransferCallback {
+   
+})
+```
+
+- GetFileList After Wifi Ready
+```
+override fun onConnectionStateChanged(state: IWifiAgent.WifiConnectionState) {    
+    when (state) {
+        IWifiAgent.WifiConnectionState.READY -> {
+            // Automatically get file list when ready
+            val wifiAgent = NiceBuildSdk.getWifiAgent()
+            wifiAgent?.getFileList()
+        }
+    }
+}
+```
+- FileListReceived
+```code
+override fun onFileListReceived(files: List<IWifiAgent.WifiFileInfo>) {}
+```
+- Download After Handshake
+```code
+override fun onHandshakeCompleted(sessionId: String) {
+     val wifiAgent = NiceBuildSdk.getWifiAgent()
+    wifiAgent?.downloadAllFiles()
+}
+```
+- DownloadProgress Listen
+```code
+override fun onBatchDownloadProgress(currentIndex: Int, totalFiles: Int, currentFileName: String) {
+}
+```
+- DownloadCompleted Callback
+```code
+override fun onBatchDownloadCompleted(successCount: Int, failedCount: Int, results: List<IWifiAgent.BatchDownloadResult>) {
+}
+```
+- Reconnect After WifiTransfer
+```code
+override fun onWifiTransferStopped() {
+    clearWifiStatus()
+    // ble reconnection
+    bleCore.connectDevice(deviceAddress) {
+    }
+}
+```
+
+
 ### iOS Platform
 
 - Dependency Injection
