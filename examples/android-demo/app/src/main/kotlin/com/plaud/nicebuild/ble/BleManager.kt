@@ -15,6 +15,9 @@ import sdk.penblesdk.entity.BleDevice
 class BleManager private constructor(private val context: Context) {
 
     private val bleCore = BleCore.getInstance(context)
+    
+    // 自定义域名配置
+    private var customDomain: String? = null
 
     companion object {
         @Volatile
@@ -24,6 +27,15 @@ class BleManager private constructor(private val context: Context) {
             instance ?: synchronized(this) {
                 instance ?: BleManager(context.applicationContext).also { instance = it }
             }
+    }
+    
+    /**
+     * 设置自定义域名
+     * @param domain 自定义域名，可以是完整的URL或者只是域名部分
+     */
+    fun setCustomDomain(domain: String?) {
+        this.customDomain = domain
+        bleCore.setCustomDomain(domain)
     }
     
     fun connectDevice(

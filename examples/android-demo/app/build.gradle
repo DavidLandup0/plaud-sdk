@@ -105,6 +105,7 @@ repositories {
 }
 
 dependencies {
+//    implementation project(':libs')
     // Include SDK aar dependency
     implementation(name: 'plaud-sdk', ext: 'aar')
 

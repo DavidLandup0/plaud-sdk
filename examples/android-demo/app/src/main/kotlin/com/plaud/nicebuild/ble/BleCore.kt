@@ -36,6 +36,9 @@ class BleCore private constructor(private val context: Context) {
     private val TNT_CONNECTION_BLE_HANDSHAKETIMEOUT = 10000L
     private val bleDeviceList = mutableListOf<BleDevice>()
     private var bleAgentListener: BleAgentListener? = null
+    
+    // 自定义域名配置
+    private var customDomain: String? = null
     private var scanCallback: ((List<BleDevice>) -> Unit)? = null
     private var connectCallback: ((Boolean, String?, String?) -> Unit)? = null
     private var getDeviceStateCallback: ((String) -> Unit)? = null
@@ -71,6 +74,14 @@ class BleCore private constructor(private val context: Context) {
             }
         }
     }
+    
+    /**
+     * 设置自定义域名
+     * @param domain 自定义域名，可以是完整的URL或者只是域名部分
+     */
+    fun setCustomDomain(domain: String?) {
+        this.customDomain = domain
+    }
 
     init {
         setupBleAgentListener()
@@ -83,7 +94,8 @@ class BleCore private constructor(private val context: Context) {
                 appSecret ?: "",
                 listener,
                 "Plaud Demo",
-                null
+                null,
+                customDomain
             )
         }
     }
