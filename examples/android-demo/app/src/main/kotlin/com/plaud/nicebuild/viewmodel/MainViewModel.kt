@@ -134,6 +134,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 onResult(false, exception.message, null)
             }
         )
+        Log.d("MainViewModel", "startTime:${bleFile.startTime},endTime:${bleFile.endTime}")
 
         /*
         viewModelScope.launch(Dispatchers.IO) {
