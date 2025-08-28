@@ -156,6 +156,7 @@
 "device.status.unbind_success" = "Device unbinding successful";
 "device.status.downloading" = "Downloading";
 "device.status.download_complete" = "Download complete";
+"device.status.installing" = "Installing firmware";
 "device.status.record_stopped" = "Recording stopped, reason: {reason}";
 "device.status.record_paused" = "Recording paused";
 "device.status.record_resumed" = "Recording resumed";
@@ -186,6 +187,9 @@
 "device.status.uploading" = "Uploading...";
 "device.status.wifi_opening" = "Opening device WiFi...";
 "device.status.wifi_closing" = "Closing device WiFi...";
+
+"device.status.record_start_reason.1" = "started from device";
+"device.status.record_start_reason.2" = "started from app";
 
 /* Device Status - Record Stop Reasons */
 "device.status.record_stop_reason.1" = "Stopped from device";
@@ -438,7 +442,7 @@
 "wifi.transfer.file_save_path_log" = "File save path: %@";
 "wifi.transfer.batch_progress_log" = "Batch download progress: %d%% (%d/%d) - Current file: ID %d (%@)";
 "wifi.transfer.downloading_file_progress" = "Downloading %d/%d: File %d";
-"wifi.transfer.total_progress_with_speed" = "Total progress %d%% Current speed %@";
+"wifi.transfer.total_progress_with_speed" = "Total count progress %d%% Current speed %@";
 "wifi.transfer.batch_progress_only" = "Batch download progress %d/%d";
 "wifi.transfer.total_progress_speed_only" = "Total progress %d%% Current speed %@";
 "wifi.transfer.detail_progress_log" = "Detail progress: Total files %d, current index %d, total progress %.2f%%";
@@ -630,3 +634,26 @@
 "ai.toast.transcribe_wip" = "Transcribe feature is under development";
 "ai.toast.ai_etl_wip" = "Summary feature is under development";
 "ai.toast.transcribe_and_etl_wip" = "Transcribe+ETL feature is under development";
+
+/* Firmware Update */
+"device.action.check_update" = "Check Update";
+"device.status.checking_update" = "Checking...";
+"device.update.no_update_available" = "No update available";
+"device.update.check_failed" = "Update check failed";
+"device.update.available_title" = "Firmware Update Available";
+"device.update.available_message" = "New version %@ is available:\n%@";
+"device.update.download" = "Download";
+"device.update.downloading" = "Downloading firmware...";
+"device.update.downloading_progress" = "Downloading firmware... %d%%";
+"device.update.download_complete" = "Download complete";
+"device.update.download_failed" = "Download failed";
+"device.update.ready_title" = "Firmware Ready";
+"device.update.ready_message" = "Firmware update has been downloaded and is ready to install.";
+"device.update.install" = "Install";
+"device.update.install_later" = "Install Later";
+"device.update.install_instructions" = "Please follow the device instructions to complete the firmware update.";
+"device.update.installing_progress" = "Installing firmware... %d%%";
+"device.update.install_success" = "Firmware installation completed successfully";
+"device.update.install_failed" = "Installation failed: %@";
+"device.update.version_info_missing" = "Version information not available";
+"device.update.unexpected_downloaded_state" = "Unexpected download state in update check";

@@ -128,3 +128,22 @@
 "workflow_not_found" = "Workflow Not Found";
 "workflow_failed" = "Workflow Failed";
 "no_api_token" = "No API Token";
+
+// Update Manager
+"update.message.no_update_available" = "No update available";
+"update.message.user_cancelled" = "Update cancelled by user";
+"update.error.network" = "Network error: %@";
+"update.error.invalid_response" = "Invalid response from server";
+"update.error.download_failed" = "Download failed: %@";
+"update.error.file_system" = "File system error: %@";
+"update.error.no_update_available" = "No update available";
+"update.error.user_cancelled" = "Update cancelled by user";
+"update.error.unknown" = "Unknown error occurred";
+
+// Update Alerts
+"update.alert.title.force" = "Force Update";
+"update.alert.title.new_version" = "New Version Available";
+"update.alert.new_version" = "New Version: %@";
+"update.alert.ask_to_download" = "Download and install now?";
+"update.alert.action.remind_later" = "Remind Me Later";
+"update.alert.action.update_now" = "Update Now";

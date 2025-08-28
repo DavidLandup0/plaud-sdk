@@ -1174,7 +1174,7 @@
     [self updateViewsVisibility];
 }
 
-- (void)bleRecordStartWithSessionId:(NSInteger)sessionId start:(NSInteger)start status:(NSInteger)status scene:(NSInteger)scene startTime:(NSInteger)startTime
+- (void)bleRecordStartWithSessionId:(NSInteger)sessionId start:(NSInteger)start status:(NSInteger)status scene:(NSInteger)scene startTime:(NSInteger)startTime reason:(NSInteger)reason
 {
 }
 

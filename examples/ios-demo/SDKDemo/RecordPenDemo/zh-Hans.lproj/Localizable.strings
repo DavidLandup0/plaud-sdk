@@ -135,6 +135,7 @@
 "device.status.unbind_success" = "设备已解绑";
 "device.status.downloading" = "下载中";
 "device.status.download_complete" = "下载完成";
+"device.status.installing" = "固件安装中";
 "device.status.record_stopped" = "录音已结束，原因: {reason}";
 "device.status.record_paused" = "录音已暂停";
 "device.status.record_resumed" = "录音已恢复";
@@ -168,6 +169,9 @@
 "device.status.uploading_progress" = "正在上传... {progress}%";
 "device.status.upload_success" = "上传成功";
 "device.error.upload_failed" = "上传失败";
+
+"device.status.record_start_reason.1" = "设备端开始录音";
+"device.status.record_start_reason.2" = "APP端开始录音";
 
 /* Device Status - Record Stop Reasons */
 "device.status.record_stop_reason.1" = "设备端停止录音";
@@ -414,7 +418,7 @@
 "wifi.transfer.file_save_path_log" = "文件保存路径: %@";
 "wifi.transfer.batch_progress_log" = "批量下载进度: %d%% (%d/%d) - 当前文件: ID %d (%@)";
 "wifi.transfer.downloading_file_progress" = "正在下载 %d/%d: 文件 %d";
-"wifi.transfer.total_progress_with_speed" = "总进度 %d%% 当前下载速度 %@";
+"wifi.transfer.total_progress_with_speed" = "总数量进度 %d%% 当前下载速度 %@";
 "wifi.transfer.batch_progress_only" = "批量下载进度 %d/%d";
 "wifi.transfer.total_progress_speed_only" = "总进度 %d%% 当前下载速度 %@";
 "wifi.transfer.detail_progress_log" = "详细进度: 总文件数 %d, 当前索引 %d, 总进度 %.2f%%";
@@ -578,3 +582,26 @@
 "workflow.result.empty.ai_analysis" = "无AI分析内容。";
 "workflow.result.empty.ai_summary" = "暂无AI总结内容。";
 "workflow.result.empty.general" = "此工作流无可用内容。";
+
+/* Firmware Update */
+"device.action.check_update" = "检查更新";
+"device.status.checking_update" = "检查中...";
+"device.update.no_update_available" = "暂无可用更新";
+"device.update.check_failed" = "更新检查失败";
+"device.update.available_title" = "固件更新可用";
+"device.update.available_message" = "新版本 %@ 可用：\n%@";
+"device.update.download" = "下载";
+"device.update.downloading" = "正在下载固件...";
+"device.update.downloading_progress" = "正在下载固件... %d%%";
+"device.update.download_complete" = "下载完成";
+"device.update.download_failed" = "下载失败";
+"device.update.ready_title" = "固件准备就绪";
+"device.update.ready_message" = "固件更新已下载完成，可以开始安装。";
+"device.update.install" = "安装";
+"device.update.install_later" = "稍后安装";
+"device.update.install_instructions" = "请根据设备提示完成固件更新。";
+"device.update.installing_progress" = "正在安装固件... %d%%";
+"device.update.install_success" = "固件安装成功完成";
+"device.update.install_failed" = "安装失败：%@";
+"device.update.version_info_missing" = "版本信息不可用";
+"device.update.unexpected_downloaded_state" = "更新检查中出现意外的下载状态";

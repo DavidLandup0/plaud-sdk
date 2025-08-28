@@ -122,10 +122,10 @@ class ProgressAlertController: UIViewController {
         NSLayoutConstraint.activate([
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            containerView.widthAnchor.constraint(greaterThanOrEqualToConstant: 280), // Minimum width
-            containerView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -40), // Maximum width
-            containerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 20),
-            containerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -20),
+            containerView.widthAnchor.constraint(greaterThanOrEqualToConstant: 320), // Increased minimum width
+            containerView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -32), // Smaller margins
+            containerView.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 16),
+            containerView.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -16),
 
             closeButton.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12),
             closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
@@ -171,9 +171,9 @@ class ProgressAlertController: UIViewController {
     func updateProgress(_ progress: Float, text: String? = nil) {
         progressView.progress = progress
         if let text = text {
-            progressLabel.text = String(format: NSLocalizedString("progress.alert.progress_format", comment: ""), text, Int(progress * 100))
+            progressLabel.text = text
         } else {
-            progressLabel.text = String(format: NSLocalizedString("progress.alert.progress_only", comment: ""), Int(progress * 100))
+            progressLabel.text = "\(Int(progress * 100))%"
         }
 
         if Int(progress * 100) == 100 {
@@ -194,5 +194,11 @@ class ProgressAlertController: UIViewController {
 
     func setCancelButtonTitle(_ title: String) {
         cancelButton.setTitle(title, for: .normal)
+    }
+    
+    /// Hide upload button for scenarios where only cancel is needed (like firmware installation)
+    func hideUploadButton() {
+        uploadButton.isHidden = true
+        buttonStackView.layoutIfNeeded()
     }
 }

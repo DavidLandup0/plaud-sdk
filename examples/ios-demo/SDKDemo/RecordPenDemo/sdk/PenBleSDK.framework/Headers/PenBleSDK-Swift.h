@@ -708,8 +708,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BleAgent * _
 /// \param fileSize Upgrade package size (bytes)
 ///
 /// \param crc Checksum
-/// @see    CallbackbleFotaResult
-/// @see    CallbackbleFotaPackReq
+/// @see    Callback bleFotaResult
+/// @see    Callback bleFotaPackReq
 ///
 - (void)pushFotaInfo:(NSInteger)uid :(NSString * _Nonnull)fromVersion :(NSString * _Nonnull)toVersion :(NSInteger)thirdVersion :(NSInteger)fileSize :(NSInteger)crc;
 /// Notify recording pen of version upgrade
@@ -732,6 +732,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BleAgent * _
 ///
 - (void)pushFotaInfo:(NSInteger)uid :(NSInteger)fromVersion :(NSString * _Nonnull)fromVersionType :(NSInteger)toVersion :(NSString * _Nonnull)toVersionType :(NSInteger)thirdVersion :(NSInteger)fileSize :(NSInteger)crc;
 /// Tell recording pen file has been sent completely
+/// to skip
 /// \param uid Identifier, distinguish commands
 ///
 /// \param status 0 normal end, 1 user exit, 0XFF unknown reason

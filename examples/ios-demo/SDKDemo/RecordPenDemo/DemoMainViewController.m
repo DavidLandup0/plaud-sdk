@@ -147,11 +147,11 @@
     NSString *savedAppSecret = [defaults stringForKey:@"PlaudAppSecret"];
     
     if (savedAppKey && savedAppSecret) {
-#if DEBUG
+#if DEBUG && 0
         //for test
         //default bindToken can be overwritten when connecting device
         [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:savedAppKey appSecret:savedAppSecret bindToken:@"123456789" extra:@{@"language": @"en", @"customDomain": @"platform-beta.plaud.ai"}];
-#elif
+#else
         //default bindToken can be overwritten when connecting device
         [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:savedAppKey
                                     appSecret:savedAppSecret bindToken:@"123456789" extra:@{@"language": @"en"}]; //currently support en、zh
@@ -181,7 +181,7 @@
     [defaults setObject:appSecret forKey:@"PlaudAppSecret"];
     [defaults synchronize];
     
-#if DEBUG
+#if DEBUG && 0
     //for test
     //default bindToken can be overwritten when connecting device
     [self.deviceAgent initSDKWithHostName:@"DemoApp" appKey:appKey appSecret:appSecret bindToken:@"123456789" extra:@{@"language": @"en", @"customDomain": @"platform-beta.plaud.ai"}];

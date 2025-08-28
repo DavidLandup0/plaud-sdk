@@ -5,11 +5,17 @@ class WiFiTransferTestViewController: UIViewController {
     
     private var toastView: UIView?
     private var toastLabel: UILabel?
+    private var wifiName:String?
+    private var wifiPass:String?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         PlaudWiFiAgent.shared.delegate = self
         PlaudDeviceAgent.shared.delegate = self
+        
+        if let name = self.wifiName, let pass = self.wifiPass {
+            self.connectToWiFi(name, pass)
+        }
     }
     
     // MARK: - UI Components
@@ -1337,9 +1343,13 @@ extension WiFiTransferTestViewController: PlaudWiFiAgentProtocol, PlaudDeviceAge
     }
     
     func bleWiFiOpen(_ status: Int, _ wifiName: String, _ wholeName: String, _ wifiPass: String) {
+        self.wifiName = wifiName
+        self.wifiPass = wifiPass
+        
         if status == 0 {
             PlaudWiFiAgent.shared.bleDevice = BleAgent.shared.bleDevice
         }
+        
         self.onWiFiOpen(status, wifiName, wholeName, wifiPass)
     }
     

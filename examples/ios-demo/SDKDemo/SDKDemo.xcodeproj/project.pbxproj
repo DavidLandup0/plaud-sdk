@@ -507,7 +507,7 @@
 				CODE_SIGN_ENTITLEMENTS = RecordPenDemo/RecordPenDemo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 83GA966S9H;
+				DEVELOPMENT_TEAM = W8JQQJQR29;
 				ENABLE_TESTABILITY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)/**",
@@ -523,7 +523,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = ai.plaud.ios.sdk;
+				PRODUCT_BUNDLE_IDENTIFIER = ai.plaud.ios.plaud.sdk.showcase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RecordPenDemo/SDKDemo-Bridging-Header.h";

@@ -20,6 +20,9 @@ import UIKit
     private var wifiOpening = false
     private var manualGet: Bool = false
     
+    // Firmware update properties
+    // Note: currentVersionInfo removed - version info is now passed directly through method parameters
+    
     // Basic information area
     private let infoContainerView: UIView = {
         let view = UIView()
@@ -71,8 +74,14 @@ import UIKit
     
     private let deviceNameLabel = InfoItemView(title: NSLocalizedString("device.info.name", comment: ""))
     private let snLabel = InfoItemView(title: NSLocalizedString("device.info.sn", comment: ""))
-    // Firmware version
-    private let firmwareLabel = InfoItemView(title: NSLocalizedString("device.info.firmware", comment: ""))
+    // Firmware info view with embedded update button
+    private lazy var firmwareInfoView: FirmwareInfoView = {
+        let view = FirmwareInfoView(title: NSLocalizedString("device.info.firmware", comment: ""))
+        view.onUpdateButtonTapped = { [weak self] in
+            self?.firmwareUpdateButtonTapped()
+        }
+        return view
+    }()
     private let storageLabel = InfoItemView(title: NSLocalizedString("device.info.storage", comment: ""))
     private let batteryLabel = InfoItemView(title: NSLocalizedString("device.info.battery", comment: ""))
     
@@ -307,7 +316,7 @@ import UIKit
         let stackView = UIStackView(arrangedSubviews: [
             deviceNameLabel,
             snLabel,
-            firmwareLabel,
+            firmwareInfoView,
             storageLabel,
             batteryLabel,
             udiskAccessStackView,
@@ -431,7 +440,7 @@ import UIKit
     private func updateDeviceInfo() {
         deviceNameLabel.setValue(device.name)
         snLabel.setValue(device.serialNumber)
-        firmwareLabel.setValue(device.wholeVersion())
+        firmwareInfoView.setValue(device.wholeVersion())
         storageLabel.setValue("-- GB / -- GB")
         batteryLabel.setValue("--")
     }
@@ -501,7 +510,11 @@ import UIKit
             navigateToWiFiTransferPage()
         } else {
             // WiFi not connected, open device WiFi first
-            deviceAgent.setDeviceWiFi(open: true)
+            if deviceAgent.isConnected() {
+                deviceAgent.setDeviceWiFi(open: true)
+            } else {
+                navigateToWiFiTransferPage()
+            }
         }
     }
     
@@ -570,6 +583,7 @@ import UIKit
                         PlaudFileUploader.shared.uploadRecording(
                             sn: bleFile.sn,
                             sessionId: bleFile.sessionId,
+                            duration: Double(bleFile.duration()),
                             onProgress: { progress in
                                 // Update upload progress
                                 DispatchQueue.main.async {
@@ -724,28 +738,32 @@ import UIKit
         
         toastLabel = UILabel()
         toastLabel?.textColor = .white
-        toastLabel?.font = .systemFont(ofSize: 15)
+        toastLabel?.font = .systemFont(ofSize: 14) // Slightly smaller font for better readability
         toastLabel?.textAlignment = .center
-        toastLabel?.numberOfLines = 0
+        toastLabel?.numberOfLines = 0 // Allow unlimited lines
+        toastLabel?.lineBreakMode = .byWordWrapping // Wrap by words for better readability
         toastLabel?.translatesAutoresizingMaskIntoConstraints = false
         toastView?.addSubview(toastLabel!)
         
         NSLayoutConstraint.activate([
             toastView!.centerXAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerXAnchor),
             toastView!.centerYAnchor.constraint(equalTo: UIApplication.shared.keyWindow!.centerYAnchor),
-            toastView!.widthAnchor.constraint(lessThanOrEqualToConstant: 280),
-            toastView!.leadingAnchor.constraint(greaterThanOrEqualTo: UIApplication.shared.keyWindow!.leadingAnchor, constant: 40),
-            toastView!.trailingAnchor.constraint(lessThanOrEqualTo: UIApplication.shared.keyWindow!.trailingAnchor, constant: -40),
+            toastView!.widthAnchor.constraint(lessThanOrEqualToConstant: 320), // Increased from 280
+            toastView!.leadingAnchor.constraint(greaterThanOrEqualTo: UIApplication.shared.keyWindow!.leadingAnchor, constant: 24), // Reduced margin from 40
+            toastView!.trailingAnchor.constraint(lessThanOrEqualTo: UIApplication.shared.keyWindow!.trailingAnchor, constant: -24), // Reduced margin from 40
             
-            toastLabel!.topAnchor.constraint(equalTo: toastView!.topAnchor, constant: 12),
-            toastLabel!.leadingAnchor.constraint(equalTo: toastView!.leadingAnchor, constant: 16),
-            toastLabel!.trailingAnchor.constraint(equalTo: toastView!.trailingAnchor, constant: -16),
-            toastLabel!.bottomAnchor.constraint(equalTo: toastView!.bottomAnchor, constant: -12),
+            toastLabel!.topAnchor.constraint(equalTo: toastView!.topAnchor, constant: 16), // Increased padding
+            toastLabel!.leadingAnchor.constraint(equalTo: toastView!.leadingAnchor, constant: 20), // Increased padding
+            toastLabel!.trailingAnchor.constraint(equalTo: toastView!.trailingAnchor, constant: -20), // Increased padding
+            toastLabel!.bottomAnchor.constraint(equalTo: toastView!.bottomAnchor, constant: -16), // Increased padding
         ])
     }
     
     func showToastWithMessage(_ message: String) {
         guard !message.isEmpty else { return }
+        
+        // Optimize message for display
+        let optimizedMessage = optimizeMessageForToast(message)
         
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -763,24 +781,65 @@ import UIKit
                 UIView.animate(withDuration: 0.15, animations: {
                     self.toastView?.alpha = 0.0
                 }) { _ in
-                    self.showNewToast(message)
+                    self.showNewToast(optimizedMessage)
                 }
             } else {
-                self.showNewToast(message)
+                self.showNewToast(optimizedMessage)
             }
         }
     }
     
+    /// Optimize message text for toast display
+    private func optimizeMessageForToast(_ message: String) -> String {
+        let maxLength = 120 // Maximum characters for optimal display
+        
+        // If message is short enough, return as is
+        if message.count <= maxLength {
+            return message
+        }
+        
+        // For longer messages, try to find a good break point
+        let truncated = String(message.prefix(maxLength))
+        
+        // Try to break at the last sentence or phrase
+        if let lastPeriod = truncated.lastIndex(of: "."),
+           truncated.distance(from: lastPeriod, to: truncated.endIndex) < 10 {
+            return String(truncated[...lastPeriod])
+        }
+        
+        // Try to break at the last comma
+        if let lastComma = truncated.lastIndex(of: ","),
+           truncated.distance(from: lastComma, to: truncated.endIndex) < 20 {
+            return String(truncated[...lastComma])
+        }
+        
+        // Try to break at the last space to avoid cutting words
+        if let lastSpace = truncated.lastIndex(of: " "),
+           truncated.distance(from: lastSpace, to: truncated.endIndex) < 15 {
+            return String(truncated[..<lastSpace]) + "..."
+        }
+        
+        // If no good break point, just truncate and add ellipsis
+        return String(message.prefix(maxLength - 3)) + "..."
+    }
+    
     private func showNewToast(_ message: String) {
         toastLabel?.text = message
-        toastLabel?.sizeToFit()
+        
+        // Calculate display duration based on text length
+        let baseDisplayTime: TimeInterval = 2.0
+        let extraTimePerCharacter: TimeInterval = 0.05
+        let maxDisplayTime: TimeInterval = 6.0
+        
+        let textLength = message.count
+        let calculatedDisplayTime = min(baseDisplayTime + TimeInterval(textLength) * extraTimePerCharacter, maxDisplayTime)
         
         // Show animation
         UIView.animate(withDuration: 0.25, animations: {
             self.toastView?.alpha = 1.0
         }) { _ in
-            // Auto hide after 2 seconds
-            self.perform(#selector(self.hideToast), with: nil, afterDelay: 2.0)
+            // Auto hide after calculated time
+            self.perform(#selector(self.hideToast), with: nil, afterDelay: calculatedDisplayTime)
         }
     }
     
@@ -1007,6 +1066,318 @@ import UIKit
         alert.addAction(cancelAction)
         present(alert, animated: true)
     }
+    
+    // MARK: - Firmware Update
+    
+    /// Firmware installation validation result
+    private struct FirmwareValidationResult {
+        let isValid: Bool
+        let errorMessage: String
+    }
+    
+    /// Validate conditions required for firmware installation
+    /// - Returns: Validation result with success flag and error message
+    private func validateFirmwareInstallationConditions() -> FirmwareValidationResult {
+        debugPrint("[DeviceInfo] Validating firmware installation conditions")
+        
+        // 1. Check battery level (must be higher than 40%)
+        let batteryLevel = device.power
+        debugPrint("[DeviceInfo] Battery level: \(batteryLevel)%")
+        if batteryLevel < 40 {
+            let message = String(format: "Battery level too low (%d%%). Please charge to at least 40%% before updating firmware.", batteryLevel)
+            debugPrint("[DeviceInfo] ❌ Battery level too low: \(batteryLevel)%")
+            return FirmwareValidationResult(isValid: false, errorMessage: message)
+        }
+        
+        // 2. Check if device is in U-disk mode
+        let isInUDiskMode = device.uDisk == 1
+        debugPrint("[DeviceInfo] U-disk mode: \(isInUDiskMode)")
+        if isInUDiskMode {
+            let message = "Cannot update firmware while device is in U-disk mode. Please disable U-disk mode first."
+            debugPrint("[DeviceInfo] ❌ Device is in U-disk mode")
+            return FirmwareValidationResult(isValid: false, errorMessage: message)
+        }
+        
+        // 3. Check if device is recording
+        let isRecording = deviceAgent.checkIsRecording()
+        debugPrint("[DeviceInfo] Is recording: \(isRecording)")
+        if isRecording {
+            let message = "Cannot update firmware while device is recording. Please stop recording first."
+            debugPrint("[DeviceInfo] ❌ Device is currently recording")
+            return FirmwareValidationResult(isValid: false, errorMessage: message)
+        }
+        
+        // 4. Check if device is syncing files
+        let isSyncing = deviceAgent.checkIsDownloading()
+        debugPrint("[DeviceInfo] Is syncing: \(isSyncing)")
+        if isSyncing {
+            let message = "Cannot update firmware while device is syncing files. Please wait for sync to complete."
+            debugPrint("[DeviceInfo] ❌ Device is currently syncing files")
+            return FirmwareValidationResult(isValid: false, errorMessage: message)
+        }
+        
+        debugPrint("[DeviceInfo] ✅ All firmware installation conditions are met")
+        return FirmwareValidationResult(isValid: true, errorMessage: "")
+    }
+    
+    @objc private func firmwareUpdateButtonTapped() {
+        checkForFirmwareUpdate()
+    }
+    
+    private func checkForFirmwareUpdate() {
+        // Show checking update status
+        firmwareInfoView.setUpdateButtonTitle(NSLocalizedString("device.status.checking_update", comment: ""))
+        firmwareInfoView.setUpdateButtonEnabled(false)
+        firmwareInfoView.setUpdateButtonLoading(true)
+        
+        let model = String(device.projectCode)
+        let snType = PlaudFileUploader.calculateSnType(sn: device.serialNumber)
+        
+        let versionType = "V"
+        
+        //        #if DEBUG
+        //        #if DISABLE_CUSTOM_DOMAIN
+        //        #else
+        //        versionType = "T"
+        //        #endif
+        //        #endif
+        
+        // Use checkLatestVersion to only check for updates, not download
+        PlaudDeviceAgent.shared.checkLatestVersion(model: model, snType: snType, versionType: versionType) { [weak self] status in
+            DispatchQueue.main.async {
+                self?.handleUpdateCheckResult(status)
+            }
+        }
+    }
+    
+    private func handleUpdateCheckResult(_ status: UpdateStatus) {
+        // Restore button status
+        firmwareInfoView.setUpdateButtonTitle(NSLocalizedString("device.action.check_update", comment: ""))
+        firmwareInfoView.setUpdateButtonEnabled(true)
+        firmwareInfoView.setUpdateButtonLoading(false)
+        
+        switch status {
+        case .checking:
+            // Checking status is already displayed on UI
+            break
+            
+        case .available(let versionInfo):
+            showUpdateAvailableDialog(versionInfo: versionInfo)
+            
+        case .notAvailable:
+            showToastWithMessage(NSLocalizedString("device.update.no_update_available", comment: ""))
+            
+        case .downloading(let progress):
+            // This should not directly go to download state, but handle for completeness
+            let progressPercent = Int(progress * 100)
+            let progressMessage = String(format: NSLocalizedString("device.update.downloading_progress", comment: ""), progressPercent)
+            showToastWithMessage(progressMessage)
+            
+        case .downloaded(let localPath):
+            // This should not occur when only checking for updates
+            debugPrint("[DeviceInfo] ⚠️ Unexpected .downloaded status in update check result")
+            showToastWithMessage(NSLocalizedString("device.update.unexpected_downloaded_state", comment: ""))
+            
+        case .failed(let error):
+            showToastWithMessage(NSLocalizedString("device.update.check_failed", comment: "") + ": \(error.localizedDescription)")
+        }
+    }
+    
+    private func showUpdateAvailableDialog(versionInfo: LatestVersionResponse) {
+        let title = NSLocalizedString("device.update.available_title", comment: "")
+        let message = String(format: NSLocalizedString("device.update.available_message", comment: ""),
+                             versionInfo.version_number,
+                             versionInfo.version_description)
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let downloadAction = UIAlertAction(title: NSLocalizedString("device.update.download", comment: ""), style: .default) { [weak self] _ in
+            self?.startFirmwareDownload(versionInfo: versionInfo)
+        }
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("common.cancel", comment: ""), style: .cancel)
+        
+        alert.addAction(downloadAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+    
+    private func startFirmwareDownload(versionInfo: LatestVersionResponse) {
+        // Show initial download message
+        showToastWithMessage(NSLocalizedString("device.update.downloading", comment: ""))
+        
+        // Track last progress to avoid too frequent updates
+        var lastProgressPercent = -1
+        firmwareInfoView.setUpdateButtonEnabled(false)
+        firmwareInfoView.setUpdateButtonLoading(true)
+        firmwareInfoView.setUpdateStatus(prefix: NSLocalizedString("device.status.downloading", comment: ""))
+        
+        // Start download
+        PlaudDeviceAgent.shared.downloadUpdate(versionInfo: versionInfo) { [weak self] status in
+            DispatchQueue.main.async {
+                switch status {
+                case .downloading(let progress):
+                    let progressPercent = Int(progress * 100)
+                    
+                    debugPrint("[DeviceInfo] downloading firmware progress \(progressPercent)%")
+                    
+                    // Show toast every 1% progress or at 100%
+                    if progressPercent > lastProgressPercent {
+                        lastProgressPercent = progressPercent
+                        let progressMessage = String(format: NSLocalizedString("device.update.downloading_progress", comment: ""), progressPercent)
+                        //self?.showToastWithMessage(progressMessage)
+                        self?.firmwareInfoView.setUpdateProgress(percent: progressPercent)
+                    }
+                    
+                case .downloaded(let localPath):
+                    self?.showToastWithMessage(NSLocalizedString("device.update.download_complete", comment: ""))
+                    self?.firmwareInfoView.setUpdateButtonLoading(false)
+                    self?.firmwareInfoView.setUpdateButtonEnabled(true)
+                    self?.firmwareInfoView.setUpdateButtonTitle(NSLocalizedString("device.update.install", comment: ""))
+                    // Wait a moment before showing the install dialog
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self?.showUpdateDownloadedDialog(localPath: localPath, versionInfo: versionInfo)
+                    }
+                    
+                case .failed(let error):
+                    // Use SDK bundle localized string to avoid missing key display
+                    let prefix = "device.update.download_failed".plaudLocalized
+                    self?.showToastWithMessage("\(prefix): \(error.localizedDescription)")
+                    self?.firmwareInfoView.setUpdateButtonLoading(false)
+                    self?.firmwareInfoView.setUpdateButtonEnabled(true)
+                    self?.firmwareInfoView.setUpdateButtonTitle(NSLocalizedString("device.action.check_update", comment: ""))
+                    
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
+    private func showUpdateDownloadedDialog(localPath: String, versionInfo: LatestVersionResponse) {
+        let title = NSLocalizedString("device.update.ready_title", comment: "")
+        let message = NSLocalizedString("device.update.ready_message", comment: "")
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let installAction = UIAlertAction(title: NSLocalizedString("device.update.install", comment: ""), style: .default) { [weak self] _ in
+            self?.installFirmwareUpdate(localPath: localPath, versionInfo: versionInfo)
+        }
+        
+        let laterAction = UIAlertAction(title: NSLocalizedString("device.update.install_later", comment: ""), style: .cancel)
+        
+        alert.addAction(installAction)
+        alert.addAction(laterAction)
+        present(alert, animated: true)
+    }
+    
+    private func installFirmwareUpdate(localPath: String, versionInfo: LatestVersionResponse) {
+        // Construct target version string
+        let toVersion = "\(versionInfo.version_code)"
+        
+        debugPrint("[DeviceInfo] Installing firmware update")
+        debugPrint("[DeviceInfo] Local path: \(localPath)")
+        debugPrint("[DeviceInfo] Target version: \(toVersion)")
+        debugPrint("[DeviceInfo] Version info: \(versionInfo)")
+        
+        // Validate firmware installation conditions     before proceeding
+        let validationResult = validateFirmwareInstallationConditions()
+        if !validationResult.isValid {
+            showToastWithMessage(validationResult.errorMessage)
+            return
+        }
+        
+        // Show installation progress dialog
+        let installProgressAlert = ProgressAlertController(title: "Installing Firmware")
+        
+        // Hide upload button for firmware installation
+        installProgressAlert.hideUploadButton()
+        
+        // Set initial progress
+        installProgressAlert.updateProgress(0.0, text: "Preparing installation...")
+        
+        installProgressAlert.onCancel = { [weak self] in
+            
+            PlaudDeviceAgent.shared.cancelFirmwareInstallation()
+            
+            // Reset firmware info view state
+            self?.firmwareInfoView.setUpdateButtonLoading(false)
+            self?.firmwareInfoView.setUpdateButtonEnabled(true)
+            self?.firmwareInfoView.setUpdateButtonTitle("Check for Update")
+            
+            // Note: ProgressAlertController already calls dismiss() before this callback
+        }
+        present(installProgressAlert, animated: true)
+        
+        // Show initial toast instructions
+        //showToastWithMessage("Installing firmware update. Please keep device connected.")
+        firmwareInfoView.setUpdateButtonEnabled(false)
+        firmwareInfoView.setUpdateButtonLoading(true)
+        firmwareInfoView.setUpdateStatus(prefix: "Installing")
+        
+        // Use the backward compatible firmware installation method with progress callback
+        PlaudDeviceAgent.shared.installFirmwareUpdate(
+            path: localPath,
+            toVersion: toVersion,
+            device: device,
+            progressCallback: { [weak self] progress in
+                DispatchQueue.main.async {
+                    // Update installation progress dialog
+                    let progressText = String(format: "Installing firmware... %d%%", progress)
+                    
+                    // Update the progress alert dialog
+                    if let progressAlert = self?.presentedViewController as? ProgressAlertController {
+                        progressAlert.updateProgress(Float(progress) / 100.0, text: progressText)
+                    }
+                    
+                    // Also update firmware info view progress
+                    self?.firmwareInfoView.setUpdateProgress(percent: progress, prefix: "Installing")
+                    
+                    // Show toast for major progress milestones
+                    if progress % 25 == 0 && progress > 0 {
+                        //self?.showToastWithMessage(progressText)
+                    }
+                }
+            },
+            completion: { [weak self] success, errorMessage in
+                DispatchQueue.main.async {
+                    // Dismiss the progress dialog
+                    if let progressAlert = self?.presentedViewController as? ProgressAlertController {
+                        progressAlert.dismiss(animated: true)
+                    }
+                    
+                    if success {
+                        self?.showToastWithMessage("Firmware installation completed successfully")
+                        self?.firmwareInfoView.setUpdateButtonLoading(false)
+                        self?.firmwareInfoView.setUpdateButtonEnabled(true)
+                        self?.firmwareInfoView.setUpdateButtonTitle(NSLocalizedString("device.action.check_update", comment: ""))
+                    } else {
+                        let errorMsg = errorMessage ?? "Unknown error"
+                        let formattedMessage = "Firmware installation failed: \(errorMsg)"
+                        self?.showToastWithMessage(formattedMessage)
+                        self?.firmwareInfoView.setUpdateButtonLoading(false)
+                        self?.firmwareInfoView.setUpdateButtonEnabled(true)
+                        self?.firmwareInfoView.setUpdateButtonTitle(NSLocalizedString("device.action.check_update", comment: ""))
+                    }
+                }
+            }
+        )
+        
+    }
+    
+    private func showDownloadProgress(_ progress: Float) {
+        let progressPercent = Int(progress * 100)
+        
+        // Update button text to show download progress
+        let progressText = String(format: "%.1f%%", progress * 100)
+        firmwareInfoView.setUpdateButtonTitle(progressText)
+        
+        // Also show toast for significant progress updates
+        if progressPercent % 20 == 0 || progressPercent == 100 {
+            let progressMessage = String(format: NSLocalizedString("device.update.downloading_progress", comment: ""), progressPercent)
+            //showToastWithMessage(progressMessage)
+        }
+    }
 }
 
 // MARK: - InfoItemView
@@ -1058,6 +1429,168 @@ class InfoItemView: UIView {
     
     func setValue(_ value: String) {
         valueLabel.text = value
+    }
+}
+
+// MARK: - FirmwareInfoView
+
+class FirmwareInfoView: UIView {
+    var onUpdateButtonTapped: (() -> Void)?
+    private var statusPrefix: String = ""
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 13)
+        label.textColor = UIColor(red: 0.45, green: 0.45, blue: 0.45, alpha: 1.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let valueLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.textColor = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private let updateButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle(NSLocalizedString("device.action.check_update", comment: ""), for: .normal)
+        button.setTitleColor(UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0), for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 13, weight: .medium)
+        button.contentHorizontalAlignment = .right
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.numberOfLines = 1
+        button.titleLabel?.lineBreakMode = .byTruncatingHead
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.titleLabel?.minimumScaleFactor = 0.8
+        return button
+    }()
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.color = UIColor(red: 0.0, green: 0.5, blue: 1.0, alpha: 1.0)
+        indicator.transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
+        indicator.hidesWhenStopped = true
+        indicator.isHidden = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.layer.shadowColor = UIColor.black.withAlphaComponent(0.12).cgColor
+        indicator.layer.shadowOpacity = 1.0
+        indicator.layer.shadowRadius = 1.5
+        indicator.layer.shadowOffset = CGSize(width: 0, height: 1)
+        return indicator
+    }()
+    
+    init(title: String) {
+        super.init(frame: .zero)
+        titleLabel.text = title
+        setupUI()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
+        addSubview(titleLabel)
+        addSubview(valueLabel)
+        addSubview(updateButton)
+        
+        ///updateButton.isHidden = true
+        
+        // Place the activity indicator inside the button so it sits close to the title text
+        updateButton.addSubview(activityIndicator)
+        
+        // Ensure the button text never gets truncated by the value label
+        updateButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+        updateButton.setContentHuggingPriority(.required, for: .horizontal)
+        valueLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        valueLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
+        updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            // Title label at the top
+            titleLabel.topAnchor.constraint(equalTo: topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: updateButton.leadingAnchor, constant: -8),
+            
+            // Value label below title
+            valueLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
+            valueLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            valueLabel.trailingAnchor.constraint(lessThanOrEqualTo: updateButton.leadingAnchor, constant: -8),
+            valueLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            // Update button aligned with value label
+            updateButton.centerYAnchor.constraint(equalTo: valueLabel.centerYAnchor),
+            updateButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            updateButton.heightAnchor.constraint(equalToConstant: 24),
+            updateButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 150)
+        ])
+        
+        // Pin the indicator to the left of the button title to avoid excessive spacing
+        if let titleLabel = updateButton.titleLabel {
+            NSLayoutConstraint.activate([
+                activityIndicator.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+                activityIndicator.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -6)
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                activityIndicator.centerYAnchor.constraint(equalTo: updateButton.centerYAnchor),
+                activityIndicator.trailingAnchor.constraint(equalTo: updateButton.leadingAnchor, constant: -6)
+            ])
+        }
+    }
+    
+    @objc private func updateButtonTapped() {
+        onUpdateButtonTapped?()
+    }
+    
+    func setValue(_ value: String) {
+        valueLabel.text = value
+    }
+    
+    func setUpdateButtonTitle(_ title: String) {
+        updateButton.setTitle(title, for: .normal)
+    }
+    
+    func setUpdateButtonEnabled(_ enabled: Bool) {
+        updateButton.isEnabled = enabled
+    }
+    
+    func setUpdateButtonLoading(_ loading: Bool) {
+        if loading {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
+    func setUpdateStatus(prefix: String) {
+        statusPrefix = prefix
+        updateButton.setTitle(prefix, for: .normal)
+    }
+    
+    func setUpdateProgress(percent: Int, prefix: String? = nil) {
+        let clamped = max(0, min(100, percent))
+        let textPrefix = (prefix ?? statusPrefix)
+        let title = textPrefix.isEmpty ? String(format: "%d%%", clamped) : String(format: "%@ %d%%", textPrefix, clamped)
+        updateButton.setTitle(title, for: .normal)
+        pulseUpdateButton()
+    }
+    
+    private func pulseUpdateButton() {
+        UIView.animate(withDuration: 0.08, animations: {
+            self.updateButton.transform = CGAffineTransform(scaleX: 1.05, y: 1.05)
+        }) { _ in
+            UIView.animate(withDuration: 0.08) {
+                self.updateButton.transform = .identity
+            }
+        }
     }
 }
 
@@ -1231,9 +1764,12 @@ extension DeviceInfoViewController: PlaudDeviceAgentProtocol {
         }
     }
     
-    func bleRecordStart(sessionId: Int, start: Int, status: Int, scene: Int, startTime: Int) {
+    func bleRecordStart(sessionId: Int, start: Int, status: Int, scene: Int, startTime: Int, reason: Int) {
         debugPrint("DeviceInfoViewController - bleRecordStart: sessionId=\(sessionId), start=\(start), status=\(status), scene=\(scene), startTime=\(startTime)")
-        showToastWithMessage(NSLocalizedString("device.status.record_started", comment: "").replacingOccurrences(of: "{id}", with: "\(sessionId)"))
+        
+        let reasonStr = NSLocalizedString("device.status.record_start_reason.\(reason)", comment: "")
+        
+        showToastWithMessage(NSLocalizedString("device.status.record_started", comment: "").replacingOccurrences(of: "{id}", with: "\(sessionId)") + " " + reasonStr)
     }
     
     func onCommonMsgChannel(type _: Int, value _: Int, tips: String) {

@@ -11,7 +11,7 @@ class CloudSyncViewController: UIViewController {
     private let device: BleDevice
     private var refreshControl: UIRefreshControl?
     private var uploadedFiles: Set<String> = []
-    private var fileIDMapping: [String: String] = [:] // Store filename to file_id mapping
+    private var  fileIDMapping: [String: String] = [:] // Store filename to file_id mapping
 
     init(device: BleDevice) {
         self.device = device
@@ -224,38 +224,53 @@ class CloudSyncViewController: UIViewController {
         // Get file name without extension
         let fileName = url.deletingPathExtension().lastPathComponent
 
-        // Upload file using PlaudFileUploader
-        PlaudFileUploader.shared.device = device
-        PlaudFileUploader.shared.uploadRecording(
-            sn: device.serialNumber,
-            sessionId: Int(fileName) ?? 0,
-            onProgress: { progress in
-                DispatchQueue.main.async {
+        // Get file size to calculate duration
+        do {
+            let fileAttributes = try FileManager.default.attributesOfItem(atPath: url.path)
+            let fileSize = fileAttributes[.size] as? Int64 ?? 0
+            let duration = BleFile.calculateDuration(Int(fileSize), PlaudDeviceAgent.shared.bleAgent?.bleDevice?.channels ?? 2, PlaudDeviceAgent.shared.bleAgent?.bleDevice?.isOgg ?? false, PlaudDeviceAgent.shared.bleAgent!.isMusic ? 4 : 0)
+            
+            // Upload file using PlaudFileUploader
+            PlaudFileUploader.shared.device = device
+            PlaudFileUploader.shared.uploadRecording(
+                sn: device.serialNumber,
+                sessionId: Int(fileName) ?? 0,
+                duration: Double(duration),
+                onProgress: { progress in
                     uploadProgressAlert.updateProgress(Float(progress))
-                }
-            },
-            onSuccess: { [weak self] response in
-                DispatchQueue.main.async {
-                    self?.uploadedFiles.insert(fileName)
-                    uploadProgressAlert.updateProgress(1.0, text: NSLocalizedString("upload.progress.success", comment: ""))
-                    uploadProgressAlert.setActionButtonAsConfirm()
-                    uploadProgressAlert.onConfirm = {
-                        uploadProgressAlert.dismiss(animated: true)
+                },
+                onSuccess: { [weak self] response in
+                    DispatchQueue.main.async {
+                        self?.uploadedFiles.insert(fileName)
+                        uploadProgressAlert.updateProgress(1.0, text: NSLocalizedString("upload.progress.success", comment: ""))
+                        uploadProgressAlert.setActionButtonAsConfirm()
+                        uploadProgressAlert.onConfirm = {
+                            uploadProgressAlert.dismiss(animated: true)
+                        }
+                        self?.tableView.reloadData()
+                        self?.processUpdateSuccessResult(response: .success(response), fileName: fileName)
                     }
-                    self?.tableView.reloadData()
-                    self?.processUpdateSuccessResult(response: .success(response), fileName: fileName)
-                }
-            },
-            onFailure: { [weak self] error in
-                DispatchQueue.main.async {
-                    uploadProgressAlert.updateProgress(0.0, text: NSLocalizedString("upload.progress.failed", comment: ""))
-                    uploadProgressAlert.setActionButtonAsConfirm()
-                    uploadProgressAlert.onConfirm = {
-                        uploadProgressAlert.dismiss(animated: true)
+                },
+                onFailure: { [weak self] error in
+                    DispatchQueue.main.async {
+                        uploadProgressAlert.updateProgress(0.0, text: NSLocalizedString("upload.progress.failed", comment: ""))
+                        uploadProgressAlert.setActionButtonAsConfirm()
+                        uploadProgressAlert.onConfirm = {
+                            uploadProgressAlert.dismiss(animated: true)
+                        }
                     }
+                }
+            )
+        } catch {
+            // Handle file size calculation error
+            DispatchQueue.main.async {
+                uploadProgressAlert.updateProgress(0.0, text: NSLocalizedString("upload.progress.failed", comment: ""))
+                uploadProgressAlert.setActionButtonAsConfirm()
+                uploadProgressAlert.onConfirm = {
+                    uploadProgressAlert.dismiss(animated: true)
                 }
             }
-        )
+        }
     }
 
     private func processUpdateSuccessResult(response: Result<[String: Any], Error>, fileName: String) {

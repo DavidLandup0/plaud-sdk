@@ -58,8 +58,15 @@
     [self becomeFirstResponder];
     
     Boolean bDebug = NO;
+    //#if DEBUG
+    //#ifdef DISABLE_CUSTOM_DOMAIN
+    //#else
+    //    bDebug = YES;
+    //#endif
+    //#endif
+    
 #if DEBUG
-    bDebug = YES;
+    //bDebug = YES;
 #endif
     
     // Fill in test data
@@ -177,20 +184,20 @@
     
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:fullText];
     [attributedString addAttribute:NSFontAttributeName
-                           value:[UIFont systemFontOfSize:13]
-                           range:NSMakeRange(0, fullText.length)];
+                             value:[UIFont systemFontOfSize:13]
+                             range:NSMakeRange(0, fullText.length)];
     [attributedString addAttribute:NSForegroundColorAttributeName
-                           value:[UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0]
-                           range:NSMakeRange(0, fullText.length)];
+                             value:[UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0]
+                             range:NSMakeRange(0, fullText.length)];
     [attributedString addAttribute:NSParagraphStyleAttributeName
-                           value:paragraphStyle
-                           range:NSMakeRange(0, fullText.length)];
+                             value:paragraphStyle
+                             range:NSMakeRange(0, fullText.length)];
     
     // Add link for email address
     NSRange emailRange = [fullText rangeOfString:emailAddress];
     [attributedString addAttribute:NSLinkAttributeName
-                           value:[NSString stringWithFormat:@"mailto:%@", emailAddress]
-                           range:emailRange];
+                             value:[NSString stringWithFormat:@"mailto:%@", emailAddress]
+                             range:emailRange];
     
     self.hintTextView.attributedText = attributedString;
     self.hintTextView.textAlignment = NSTextAlignmentLeft;
@@ -286,11 +293,11 @@
     textField.layer.cornerRadius = 8;
     
     // Set placeholder color
-    textField.attributedPlaceholder = [[NSAttributedString alloc] 
-        initWithString:placeholder 
-        attributes:@{
-            NSForegroundColorAttributeName: [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0]
-        }];
+    textField.attributedPlaceholder = [[NSAttributedString alloc]
+                                       initWithString:placeholder
+                                       attributes:@{
+        NSForegroundColorAttributeName: [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1.0]
+    }];
     
     textField.translatesAutoresizingMaskIntoConstraints = NO;
     return textField;
@@ -313,11 +320,11 @@
     } else {
         // Show error alert
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:LocalizedString(@"common.warning")
-                                                                     message:LocalizedString(@"auth.input.empty")
-                                                              preferredStyle:UIAlertControllerStyleAlert];
+                                                                       message:LocalizedString(@"auth.input.empty")
+                                                                preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:LocalizedString(@"common.ok")
-                                                 style:UIAlertActionStyleDefault
-                                               handler:nil]];
+                                                  style:UIAlertActionStyleDefault
+                                                handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
@@ -337,11 +344,11 @@
     return YES;
 }
 
-    // Detect shake start
+// Detect shake start
 - (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake) {
-//        // Fill in test data
+        //        // Fill in test data
     }
 }
 
-@end 
+@end
