@@ -129,3 +129,22 @@
 "workflow_not_found" = "工作流未找到";
 "workflow_failed" = "工作流失败";
 "no_api_token" = "无API令牌";
+
+// Update Manager
+"update.message.no_update_available" = "暂无可用更新";
+"update.message.user_cancelled" = "用户已取消更新";
+"update.error.network" = "网络错误：%@";
+"update.error.invalid_response" = "服务器响应无效";
+"update.error.download_failed" = "下载失败：%@";
+"update.error.file_system" = "文件系统错误：%@";
+"update.error.no_update_available" = "暂无可用更新";
+"update.error.user_cancelled" = "用户已取消更新";
+"update.error.unknown" = "发生未知错误";
+
+// Update Alerts
+"update.alert.title.force" = "强制更新";
+"update.alert.title.new_version" = "发现新版本";
+"update.alert.new_version" = "新版本: %@";
+"update.alert.ask_to_download" = "是否立即下载更新？";
+"update.alert.action.remind_later" = "稍后提醒";
+"update.alert.action.update_now" = "立即更新";

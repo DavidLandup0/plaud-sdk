@@ -315,6 +315,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer * _Nonnull)_ error:(NSError * _Nullable)error;
 @end
 
+/// Latest version response model
+SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK21LatestVersionResponse")
+@interface LatestVersionResponse : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class NSCoder;
 @class NSString;
 @class NSBundle;
@@ -341,6 +348,8 @@ SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK16PlaudDeviceAgent")
 @interface PlaudDeviceAgent : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceAgent * _Nonnull shared;)
 + (PlaudDeviceAgent * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, strong) BleDevice * _Nullable recentConnectDevice;
+@property (nonatomic, readonly) NSInteger sceneFlag;
 @property (nonatomic, weak) id <PlaudDeviceAgentProtocol> _Nullable delegate;
 /// Current recording file or sync (download) file sessionId
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -418,6 +427,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 ///
 - (void)setUDiskModeOnOff:(BOOL)onOff;
 - (BOOL)checkIsRecording SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)checkIsDownloading SWIFT_WARN_UNUSED_RESULT;
 /// Start recording
 /// If recording starts successfully, need to call syncFile to sync file yourself
 /// Can display real-time recording duration through sync file offset
@@ -518,6 +528,48 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)clearSDKCredentials;
 @end
 
+@interface PlaudDeviceAgent (SWIFT_EXTENSION(PlaudDeviceBasicSDK)) <FirmUpdateProtocol>
+/// Data push progress
+- (void)otaPushProgressWithProgress:(NSInteger)progress;
+/// Data push rate
+- (void)otaPushSpeedWithSpeed:(double)speed avgSpeed:(double)avgSpeed;
+/// Upgrade exception
+- (void)otaPushErrWithStatus:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
+/// Data push completion
+- (void)otaPushFinish;
+@end
+
+@interface PlaudDeviceAgent (SWIFT_EXTENSION(PlaudDeviceBasicSDK))
+/// Show update confirmation alert
+/// \param versionInfo version information
+///
+/// \param completion user selection callback
+///
+- (void)showUpdateConfirmationWithVersionInfo:(LatestVersionResponse * _Nonnull)versionInfo completion:(void (^ _Nonnull)(BOOL))completion;
+/// Simplified check for latest version for Objective-C
+/// \param model Device model (required)
+///
+/// \param snType Device type, options: note, notepin, notepro, other, default: notepin
+///
+/// \param versionType Version type, options: T, G, V, default: V
+///
+/// \param hasUpdate Callback with update available flag and version info
+///
+/// \param failure Failure callback with error message
+///
+- (void)checkLatestVersionForModel:(NSString * _Nonnull)model snType:(NSString * _Nonnull)snType versionType:(NSString * _Nonnull)versionType hasUpdate:(void (^ _Nonnull)(BOOL, LatestVersionResponse * _Nullable))hasUpdate failure:(void (^ _Nonnull)(NSString * _Nonnull))failure;
+/// Simplified download update for Objective-C
+/// \param versionInfo Version information to download
+///
+/// \param progress Progress callback with percentage (0.0 to 1.0)
+///
+/// \param success Success callback with local file path
+///
+/// \param failure Failure callback with error message
+///
+- (void)downloadUpdateForVersion:(LatestVersionResponse * _Nonnull)versionInfo progress:(void (^ _Nonnull)(float))progress success:(void (^ _Nonnull)(NSString * _Nonnull))success failure:(void (^ _Nonnull)(NSString * _Nonnull))failure;
+@end
+
 @class BleFile;
 @class NSData;
 @interface PlaudDeviceAgent (SWIFT_EXTENSION(PlaudDeviceBasicSDK)) <BleAgentProtocol>
@@ -556,6 +608,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)bleUDiskErrWithFuncName:(NSString * _Nonnull)funcName;
 - (void)bleWiFiOpen:(NSInteger)status :(NSString * _Nonnull)wifiName :(NSString * _Nonnull)wholeName :(NSString * _Nonnull)wifiPass;
 - (void)bleDeviceNameWithName:(NSString * _Nullable)name;
+- (void)bleFotaResultWithUid:(NSInteger)uid status:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
+- (void)bleFotaPackReqWithUid:(NSInteger)uid start:(NSInteger)start end:(NSInteger)end;
+- (void)bleFotaPackFinWithUid:(NSInteger)uid status:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
+- (void)bleOtaDataSendFail;
+- (void)bleRateWithLossRate:(double)lossRate rate:(NSInteger)rate instantRate:(NSInteger)instantRate;
 - (void)bleUpdatePowerLowErr;
 - (void)bleDeviceDisconnectErr;
 - (void)bleStateWithPowered:(BOOL)powered;
@@ -588,11 +645,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)bleSetLedStateOnOff:(NSInteger)onOff;
 - (void)bleMarkingWithSessionId:(NSInteger)sessionId status:(NSInteger)status markList:(NSArray<NSNumber *> * _Nonnull)markList;
 - (void)bleAnglesWithPitchAngle:(float)pitchAngle rollbackAngle:(float)rollbackAngle yawAngle:(float)yawAngle;
-- (void)bleFotaResultWithUid:(NSInteger)uid status:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
-- (void)bleFotaPackReqWithUid:(NSInteger)uid start:(NSInteger)start end:(NSInteger)end;
-- (void)bleFotaPackFinWithUid:(NSInteger)uid status:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
-- (void)bleOtaDataSendFail;
-- (void)bleRateWithLossRate:(double)lossRate rate:(NSInteger)rate instantRate:(NSInteger)instantRate;
 - (void)blePrivacyWithPrivacy:(NSInteger)privacy;
 - (void)bleClearAllFileWithStatus:(NSInteger)status;
 - (void)bleAlarmRecWithStart:(NSInteger)start duration:(NSInteger)duration repeatMode:(NSInteger)repeatMode;
@@ -600,6 +652,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)onResetFindmyResultWithResult:(NSInteger)result;
 - (void)onSetSoundPlusTokenResultWithLicenseKey:(NSString * _Nonnull)licenseKey;
 - (void)onGetSDFlashCIDResultWithCid:(NSString * _Nonnull)cid;
+- (void)installFirmwareUpdateWithPath:(NSString * _Nonnull)path toVersion:(NSString * _Nonnull)toVersion device:(BleDevice * _Nonnull)device progressCallback:(void (^ _Nullable)(NSInteger))progressCallback completion:(void (^ _Nonnull)(BOOL, NSString * _Nullable))completion;
+- (void)cancelFirmwareInstallationWithStatus:(NSInteger)status;
+- (void)cancelFirmwareInstallation;
 @end
 
 SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
@@ -697,7 +752,7 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 ///
 /// \param startTime Start time
 ///
-- (void)bleRecordStartWithSessionId:(NSInteger)sessionId start:(NSInteger)start status:(NSInteger)status scene:(NSInteger)scene startTime:(NSInteger)startTime;
+- (void)bleRecordStartWithSessionId:(NSInteger)sessionId start:(NSInteger)start status:(NSInteger)status scene:(NSInteger)scene startTime:(NSInteger)startTime reason:(NSInteger)reason;
 /// End recording callback
 /// \param sessionId Recording file unique id, 0 timezone timestamp, to convert to phone current timestamp need to subtract timezone
 ///
@@ -854,6 +909,40 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 /// \param wifiPass Recording pen hotspot password
 ///
 - (void)bleWiFiOpen:(NSInteger)status :(NSString * _Nonnull)wifiName :(NSString * _Nonnull)wholeName :(NSString * _Nonnull)wifiPass;
+/// OTA notification
+/// \param uid Identifier
+///
+/// \param status Status 0 normal, 1. upgrade failed 2. version information mismatch 3. FLASH write failed 4. file too large 5. too many attempts 6. U disk mode; 7. recording in progress; 8. U disk insufficient remaining space; 9. working; 10. G101 glasses only allow upgrade in charging mode; 11. G101 glasses insufficient battery; 12. G101 glasses received upgrade protocol and preparing to adjust to OTA_MODE; 255: mode incorrect (recording pen not in recording mode, specific to Heili three-way switch)
+///
+/// \param errmsg Protocol version 4, if upgrade successful, returns upgraded version here; if failed, still returns error message.
+///
+- (void)bleFotaResultWithUid:(NSInteger)uid status:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
+/// OTA package request, recording pen requests to send upgrade package data
+/// \param uid Identifier
+///
+/// \param start Start position (bytes)
+///
+/// \param end End position (bytes)
+///
+- (void)bleFotaPackReqWithUid:(NSInteger)uid start:(NSInteger)start end:(NSInteger)end;
+/// OTA package reception completed
+/// \param uid Identifier
+///
+/// \param status Status 0 normal, 1. upgrade failed 2. version information mismatch 3. FLASH write failed 4. file too large 5. too many attempts 6. U disk mode; 7. recording in progress; 8. U disk insufficient remaining space
+///
+/// \param errmsg Protocol version 4, if upgrade successful, returns upgraded version here; if failed, still returns error message.
+///
+- (void)bleFotaPackFinWithUid:(NSInteger)uid status:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
+/// OTA data send failed
+- (void)bleOtaDataSendFail;
+/// Bluetooth transmission rate callback
+/// \param lossRate Packet loss rate
+///
+/// \param rate Average rate, bytes/S
+///
+/// \param instantRate Real-time rate
+///
+- (void)bleRateWithLossRate:(double)lossRate rate:(NSInteger)rate instantRate:(NSInteger)instantRate;
 @end
 
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK17PlaudFileUploader")
@@ -863,7 +952,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudFileUpl
 @property (nonatomic, strong) BleDevice * _Nullable device;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-- (void)uploadRecordingWithSn:(NSString * _Nonnull)sn sessionId:(NSInteger)sessionId onProgress:(void (^ _Nonnull)(double))onProgress onSuccess:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))onSuccess onFailure:(void (^ _Nonnull)(NSError * _Nonnull))onFailure;
+- (void)uploadRecordingWithSn:(NSString * _Nonnull)sn sessionId:(NSInteger)sessionId duration:(double)duration onProgress:(void (^ _Nonnull)(double))onProgress onSuccess:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))onSuccess onFailure:(void (^ _Nonnull)(NSError * _Nonnull))onFailure;
++ (NSString * _Nonnull)calculateSnTypeWithSn:(NSString * _Nonnull)sn SWIFT_WARN_UNUSED_RESULT;
 @end
 
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK14PlaudSDKLogger")
