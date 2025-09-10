@@ -14800,6 +14800,39 @@
           },
           {
             "kind": "Function",
+            "name": "bleSetActive",
+            "printedName": "bleSetActive(status:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(pl)PlaudDeviceAgentProtocol(im)bleSetActiveWithStatus:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB13AgentProtocolP12bleSetActive6statusySi_tF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "genericSig": "<τ_0_0 where τ_0_0 : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
+            "sugared_genericSig": "<Self where Self : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
+            "protocolReq": true,
+            "objc_name": "bleSetActiveWithStatus:",
+            "declAttributes": [
+              "Optional",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "bleRate",
             "printedName": "bleRate(lossRate:rate:instantRate:)",
             "children": [
@@ -16068,6 +16101,35 @@
             "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)startRecord",
             "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC11startRecordyyF",
             "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setDeviceActive",
+            "printedName": "setDeviceActive(status:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)setDeviceActiveWithStatus:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC03setB6Active6statusySi_tF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "setDeviceActiveWithStatus:",
             "declAttributes": [
               "AccessControl",
               "ObjC",
@@ -19045,6 +19107,36 @@
           },
           {
             "kind": "Function",
+            "name": "bleSetActive",
+            "printedName": "bleSetActive(status:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)bleSetActiveWithStatus:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC12bleSetActive6statusySi_tF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "bleSetActiveWithStatus:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "bleUpdatePowerLowErr",
             "printedName": "bleUpdatePowerLowErr()",
             "children": [
@@ -20158,36 +20250,6 @@
             "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC11bleAlarmRec5start8duration10repeatModeySi_S2itF",
             "moduleName": "PlaudDeviceBasicSDK",
             "objc_name": "bleAlarmRecWithStart:duration:repeatMode:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "bleSetActive",
-            "printedName": "bleSetActive(status:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Int",
-                "printedName": "Swift.Int",
-                "usr": "s:Si"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)bleSetActiveWithStatus:",
-            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC12bleSetActive6statusySi_tF",
-            "moduleName": "PlaudDeviceBasicSDK",
-            "objc_name": "bleSetActiveWithStatus:",
             "declAttributes": [
               "Dynamic",
               "ObjC",
@@ -56704,105 +56766,105 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 13696,
+      "offset": 13804,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 13745,
+      "offset": 13853,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Array",
-      "offset": 13836,
+      "offset": 13944,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 13955,
+      "offset": 14063,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 14028,
+      "offset": 14136,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 14056,
+      "offset": 14164,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 14087,
+      "offset": 14195,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 14210,
+      "offset": 14318,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 15580,
+      "offset": 15688,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 16148,
+      "offset": 16256,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 16542,
+      "offset": 16650,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 17007,
+      "offset": 17115,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 17481,
+      "offset": 17589,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 29677,
+      "offset": 29970,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 46571,
+      "offset": 46907,
       "length": 1,
       "value": "1"
     },

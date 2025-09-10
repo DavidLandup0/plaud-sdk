@@ -611,6 +611,7 @@ public struct AnyCodable : Swift.Codable {
   @objc optional func bleFotaPackReq(uid: Swift.Int, start: Swift.Int, end: Swift.Int)
   @objc optional func bleFotaPackFin(uid: Swift.Int, status: Swift.Int, errmsg: Swift.String?)
   @objc optional func bleOtaDataSendFail()
+  @objc optional func bleSetActive(status: Swift.Int)
   @objc optional func bleRate(lossRate: Swift.Double, rate: Swift.Int, instantRate: Swift.Int)
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class PlaudDeviceAgent : ObjectiveC.NSObject {
@@ -653,6 +654,7 @@ public struct AnyCodable : Swift.Codable {
   @objc public func checkIsRecording() -> Swift.Bool
   @objc public func checkIsDownloading() -> Swift.Bool
   @objc public func startRecord()
+  @objc public func setDeviceActive(status: Swift.Int)
   @objc public func stopRecord()
   @objc public func setDeviceName(_ name: Swift.String)
   @objc public func getCurrentSessionID() -> Swift.Int
@@ -713,6 +715,7 @@ extension PlaudDeviceBasicSDK.PlaudDeviceAgent : PenBleSDK.BleAgentProtocol {
   @objc dynamic public func bleFotaPackFin(uid: Swift.Int, status: Swift.Int, errmsg: Swift.String?)
   @objc dynamic public func bleOtaDataSendFail()
   @objc dynamic public func bleRate(lossRate: Swift.Double, rate: Swift.Int, instantRate: Swift.Int)
+  @objc dynamic public func bleSetActive(status: Swift.Int)
   @objc dynamic public func bleUpdatePowerLowErr()
   @objc dynamic public func bleDeviceDisconnectErr()
   @objc dynamic public func bleState(powered: Swift.Bool)
@@ -748,7 +751,6 @@ extension PlaudDeviceBasicSDK.PlaudDeviceAgent : PenBleSDK.BleAgentProtocol {
   @objc dynamic public func blePrivacy(privacy: Swift.Int)
   @objc dynamic public func bleClearAllFile(status: Swift.Int)
   @objc dynamic public func bleAlarmRec(start: Swift.Int, duration: Swift.Int, repeatMode: Swift.Int)
-  @objc dynamic public func bleSetActive(status: Swift.Int)
   @objc dynamic public func onResetFindmyResult(result: Swift.Int)
   @objc dynamic public func onSetSoundPlusTokenResult(licenseKey: Swift.String)
   @objc dynamic public func onGetSDFlashCIDResult(cid: Swift.String)

@@ -433,6 +433,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 /// Can display real-time recording duration through sync file offset
 /// @see    Callback bleRecordStart
 - (void)startRecord;
+/// Wake/sleep setting
+/// 0: sleep; 1: wake
+- (void)setDeviceActiveWithStatus:(NSInteger)status;
 /// Stop current recording
 /// @see    Callback bleRecordStop
 - (void)stopRecord;
@@ -613,6 +616,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)bleFotaPackFinWithUid:(NSInteger)uid status:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
 - (void)bleOtaDataSendFail;
 - (void)bleRateWithLossRate:(double)lossRate rate:(NSInteger)rate instantRate:(NSInteger)instantRate;
+- (void)bleSetActiveWithStatus:(NSInteger)status;
 - (void)bleUpdatePowerLowErr;
 - (void)bleDeviceDisconnectErr;
 - (void)bleStateWithPowered:(BOOL)powered;
@@ -648,7 +652,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)blePrivacyWithPrivacy:(NSInteger)privacy;
 - (void)bleClearAllFileWithStatus:(NSInteger)status;
 - (void)bleAlarmRecWithStart:(NSInteger)start duration:(NSInteger)duration repeatMode:(NSInteger)repeatMode;
-- (void)bleSetActiveWithStatus:(NSInteger)status;
 - (void)onResetFindmyResultWithResult:(NSInteger)result;
 - (void)onSetSoundPlusTokenResultWithLicenseKey:(NSString * _Nonnull)licenseKey;
 - (void)onGetSDFlashCIDResultWithCid:(NSString * _Nonnull)cid;
@@ -935,6 +938,9 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 - (void)bleFotaPackFinWithUid:(NSInteger)uid status:(NSInteger)status errmsg:(NSString * _Nullable)errmsg;
 /// OTA data send failed
 - (void)bleOtaDataSendFail;
+/// Wake/sleep setting
+/// 0: sleep; 1: wake
+- (void)bleSetActiveWithStatus:(NSInteger)status;
 /// Bluetooth transmission rate callback
 /// \param lossRate Packet loss rate
 ///
