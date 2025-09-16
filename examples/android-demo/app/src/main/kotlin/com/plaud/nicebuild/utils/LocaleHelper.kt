@@ -9,7 +9,8 @@ import java.util.Locale
 
 enum class AppLanguage(val code: String, val displayName: String) {
     ENGLISH("en", "English"),
-    CHINESE("zh", "Chinese");
+    CHINESE("zh", "Chinese"),
+    TEST("test", "Test Environment");
 
     companion object {
         val DEFAULT = ENGLISH

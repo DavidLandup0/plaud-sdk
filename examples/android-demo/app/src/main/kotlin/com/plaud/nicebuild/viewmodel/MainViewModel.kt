@@ -90,7 +90,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val framesCount = bytePosition / OPUS_FRAME_SIZE_MONO
         return (framesCount * OPUS_FRAME_DURATION_MS) / 1000.0
     }
-    
+
 
     fun setLoading(loading: Boolean) {
         _isLoading.postValue(loading)

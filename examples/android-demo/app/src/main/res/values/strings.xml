@@ -10,8 +10,13 @@
     <string name="fragment_device_list_rescan_button">Rescan</string>
     <string name="fragment_device_feature_title">Device Info</string>
     <string name="fragment_device_feature_serial_label">SN: %1$s</string>
+    <string name="fragment_device_feature_firmware_label">Firmware: %1$s</string>
     <string name="fragment_device_feature_battery_label">Battery: %1$s</string>
     <string name="fragment_device_feature_storage_label">Storage: %1$s</string>
+    <string name="action_check_update">Check Update</string>
+    <string name="no_update_available">Already latest: %1$s</string>
+    <string name="update_available_format">Current %1$s → Latest %2$s</string>
+    <string name="update_check_failed">Failed to check update</string>
     <string name="fragment_device_feature_storage_usage">%1$dMB / %2$dMB</string>
     <string name="fragment_device_feature_storage_full">Storage Full</string>
     <string name="fragment_device_feature_record_status_idle">Status: Idle</string>
@@ -345,7 +350,95 @@
     <!-- Dialog cancel button -->
     <string name="dialog_cancel_button">Cancel</string>
     
+    <!-- Common buttons -->
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
+    
     <!-- Privacy Policy -->
     <string name="privacy_policy">Privacy Policy</string>
     <string name="privacy_policy_url">https://app.plaud.ai/privacy</string>
+    
+    <!-- Firmware Update -->
+    <string name="firmware_update_checking">Checking...</string>
+    <string name="firmware_update_available_title">Firmware Update Available</string>
+    <string name="firmware_update_available_message">Current version: %1$s\nLatest version: %2$s\n\nUpdate description:\n%3$s</string>
+    <string name="firmware_update_no_update_title">No Update Available</string>
+    <string name="firmware_update_no_update_message">Your device is already running the latest firmware version: %1$s</string>
+    <string name="firmware_update_download">Download</string>
+    <string name="firmware_update_downloading">Downloading firmware...</string>
+    <string name="firmware_update_download_complete">Download complete</string>
+    <string name="firmware_update_download_failed">Download failed</string>
+    <string name="firmware_update_install_ready_title">Ready to Install</string>
+    <string name="firmware_update_install_ready_message">Firmware download completed. Install version %1$s now?</string>
+    <string name="firmware_update_install">Install Now</string>
+    <string name="firmware_update_install_later">Install Later</string>
+    <string name="firmware_update_installing">Installing firmware...</string>
+    <string name="firmware_update_install_success">Firmware update completed successfully</string>
+    <string name="firmware_update_install_failed">Installation failed: %1$s</string>
+    <string name="firmware_update_install_instructions">Please ensure device is connected and has sufficient battery</string>
+    <string name="firmware_update_check_failed">Failed to check for updates: %1$s</string>
+    <string name="firmware_update_network_error">Network error, please check your connection</string>
+    <string name="firmware_update_file_integrity_error">File integrity verification failed</string>
+    <string name="firmware_update_device_not_connected">Device not connected</string>
+    <string name="firmware_update_low_battery">Device battery too low for update</string>
+    <string name="firmware_update_error_low_battery">Battery level too low (%1$d%%). Please charge to at least 40%% before updating firmware.</string>
+    <string name="firmware_update_error_udisk_mode">Cannot update firmware while device is in U-disk mode. Please disable U-disk mode first.</string>
+    <string name="firmware_update_error_recording">Cannot update firmware while device is recording. Please stop recording first.</string>
+    <string name="firmware_update_api_not_available">Firmware update feature not yet available</string>
+    
+    <!-- Firmware update progress messages -->
+    <string name="firmware_update_downloading_progress">Downloading firmware...</string>
+    <string name="firmware_update_installing_progress">Installing firmware...</string>
+    <string name="firmware_update_checking_progress">Checking updates...</string>
+    <string name="firmware_update_download_detail">Downloaded %1$dKB / %2$dKB</string>
+    <string name="firmware_update_install_preparing">Preparing installation...</string>
+    <string name="firmware_update_install_verifying_file">Verifying firmware file...</string>
+    <string name="firmware_update_install_transferring">Transferring firmware to device...</string>
+    <string name="firmware_update_install_writing">Writing firmware data...</string>
+    <string name="firmware_update_install_verifying">Verifying installation...</string>
+    <string name="firmware_update_install_complete">Installation complete</string>
+    <string name="firmware_update_transfer_complete_waiting">Firmware transfer completed, waiting for device confirmation...</string>
+    <string name="firmware_update_device_restarting">Device restarting for upgrade, please wait for reconnection...</string>
+    <string name="firmware_update_reconnecting_device">Reconnecting to device...</string>
+    <string name="firmware_update_waiting_upgrade_result">Waiting for upgrade result...</string>
+    
+    <!-- Firmware update error messages -->
+    <string name="firmware_update_error_network_connection">Unable to retrieve version information, please check network connection</string>
+    <string name="firmware_update_error_sdk_not_initialized">Bluetooth SDK not initialized</string>
+    <string name="firmware_update_error_agent_not_initialized">Bluetooth agent not initialized</string>
+    <string name="firmware_update_error_agent_type_incorrect">Bluetooth agent type incorrect</string>
+    <string name="firmware_update_error_device_not_connected">Device not connected, please connect device first</string>
+    <string name="firmware_update_error_transfer_in_progress">Firmware transfer in progress, please wait for completion</string>
+    <string name="firmware_update_error_download_failed">Download failed</string>
+    <string name="firmware_update_error_install_failed">Installation failed</string>
+    <string name="firmware_update_error_user_interrupt">User interrupted transfer</string>
+    <string name="firmware_update_install_cancelled">Firmware installation cancelled</string>
+    <string name="firmware_update_error_file_not_exists">Firmware file does not exist</string>
+    <string name="firmware_update_error_file_error">Firmware file error</string>
+    <string name="firmware_update_error_bt_disconnect">Bluetooth connection disconnected</string>
+    <string name="firmware_update_error_device_upgrade_fail">Device upgrade failed</string>
+    <string name="firmware_update_error_transfer_failed">Firmware transfer failed: %1$s</string>
+    <string name="firmware_update_error_md5_mismatch">MD5 verification failed - Expected: %1$s, Actual: %2$s</string>
+    <string name="firmware_update_error_http_failed">Download failed: HTTP %1$d</string>
+    
+    <!-- Firmware update status messages -->
+    <string name="firmware_update_status_checking_device">Checking device firmware update: %1$s</string>
+    <string name="firmware_update_status_device_info">Device model: %1$s, snType: %2$s, Current version: %3$s</string>
+    <string name="firmware_update_status_check_complete">Update check complete - Current version: %1$s, Latest version: %2$s, Has update: %3$s</string>
+    <string name="firmware_update_status_download_start">Starting firmware download: %1$s</string>
+    <string name="firmware_update_status_file_exists_skip">File already exists and MD5 matches, skipping download</string>
+    <string name="firmware_update_status_file_exists_redownload">File already exists but MD5 does not match, re-downloading</string>
+    <string name="firmware_update_status_install_start">Starting firmware installation: %1$s</string>
+    <string name="firmware_update_status_transfer_start">Starting firmware transfer: %1$s</string>
+    <string name="firmware_update_status_transfer_progress">Firmware transfer progress: %1$d%%</string>
+    <string name="firmware_update_status_transfer_speed">Transfer speed: %1$sKB/s, Average speed: %2$sKB/s</string>
+    <string name="firmware_update_status_transfer_complete">Firmware transfer complete</string>
+    <string name="firmware_update_status_transfer_failed">Firmware transfer failed: %1$s</string>
+    <string name="firmware_update_status_download_complete">Firmware download complete, MD5 verification passed</string>
+    <string name="firmware_update_status_operation_cancelled">Current firmware update operation cancelled</string>
+    <string name="firmware_update_detail_transfer_progress">Transfer progress: %1$d%%</string>
+    <string name="firmware_update_detail_transfer_chunk">Sending data chunk: %1$d bytes</string>
+    
+    <!-- Firmware update protection mechanism messages -->
+    <string name="firmware_update_error_retry_limit">Device detected frequent upgrade attempts and has activated protection mechanism. Please wait 10-15 minutes before retrying, or restart the device.</string>
 </resources>

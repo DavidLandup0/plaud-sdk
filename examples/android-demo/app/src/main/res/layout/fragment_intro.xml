@@ -42,6 +42,16 @@
             android:layout_marginTop="32dp"
             android:text="@string/button_set_app_key" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_export_logs"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="导出日志"
+            android:textColor="#FF9800"
+            android:strokeColor="#FF9800" />
+
     </LinearLayout>
 
     <!-- Start scan button -->

@@ -25,6 +25,7 @@
     <color name="success">#34C759</color> <!-- Success color (iOS Green) -->
 
     <color name="system_blue">#007AFF</color>
+    <color name="system_blue_ripple">#33007AFF</color>
     <color name="system_red">#FF3B30</color>
     <color name="system_red_ripple">#33FF3B30</color>
     <color name="divider">#E5E5EA</color>

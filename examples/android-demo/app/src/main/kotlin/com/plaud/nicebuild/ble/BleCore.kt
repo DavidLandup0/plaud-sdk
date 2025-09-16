@@ -58,6 +58,9 @@ class BleCore private constructor(private val context: Context) {
     private var currentRetryToken: String? = null
     private var connectTimeoutHandler: Handler? = null
     
+    // 缓存最近一次连接使用的 token
+    private var lastToken: String? = null
+    
     // Scan log deduplication related variables
     private val deviceLogTimeMap = mutableMapOf<String, Long>()
     private val SCAN_LOG_INTERVAL = 5000L // Don't repeat log for same device within 5 seconds
@@ -272,6 +275,9 @@ class BleCore private constructor(private val context: Context) {
     ) {
         Log.i(TAG, "Starting to connect device: $serialNumber")
 
+        // 缓存当前使用的 token
+        lastToken = token
+
         if (isConnecting) {
             Log.e(TAG, "Connection in progress, rejecting new connection request")
             callback(false, "-1", context.getString(R.string.connect_error_connecting_in_progress))
@@ -352,6 +358,13 @@ class BleCore private constructor(private val context: Context) {
             Log.e(TAG, "Error getting current connected device: ${e.message}", e)
             null
         }
+    }
+
+    /**
+     * 获取上一次连接使用的 token
+     */
+    fun getLastToken(): String? {
+        return lastToken
     }
 
     private fun handleConnectTimeout(callback: (Boolean, String?, String?) -> Unit) {

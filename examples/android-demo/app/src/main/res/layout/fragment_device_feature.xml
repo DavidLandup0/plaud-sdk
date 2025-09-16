@@ -86,6 +86,39 @@
                             android:textAppearance="?attr/textAppearanceBodyLarge"
                             android:textSize="16sp" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/tv_firmware"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/fragment_device_feature_firmware_label"
+                                android:textAppearance="?attr/textAppearanceBodyLarge"
+                                android:textSize="16sp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_check_update"
+                                style="@style/Widget.App.Button.Outlined"
+                                android:layout_width="wrap_content"
+                                android:layout_height="32dp"
+                                android:minHeight="32dp"
+                                android:minWidth="0dp"
+                                android:layout_marginStart="12dp"
+                                android:text="@string/action_check_update"
+                                android:textColor="@color/accent"
+                                app:strokeColor="@color/accent"
+                                android:textSize="12sp"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:paddingHorizontal="12dp" />
+                        </LinearLayout>
+
                         <TextView
                             android:id="@+id/tv_battery"
                             android:layout_width="match_parent"

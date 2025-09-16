@@ -36,6 +36,11 @@ object LanguageConfigManager {
             appKeyPairEnv = AppKeyPairEnv.US_PROD,
             serverEnvironment = ServerEnvironment.US_PROD,
             displayName = "US Environment"
+        ),
+        AppLanguage.TEST.code to LanguageConfig(
+            appKeyPairEnv = AppKeyPairEnv.COMMON_TEST,
+            serverEnvironment = ServerEnvironment.COMMON_TEST,
+            displayName = "Common Test Environment"
         )
     )
     
@@ -47,7 +52,7 @@ object LanguageConfigManager {
     }
     
     /**
-     * Apply configuration for language code - now only switches domain, sets default AppKey only if user hasn't manually set one
+     * Apply configuration for language code - switches domain and resets AppKey to environment default
      * @param context Context
      * @param languageCode Language code
      * @param bleManager BLE manager instance
@@ -72,28 +77,23 @@ object LanguageConfigManager {
             // 1. Always switch server environment
             NiceBuildSdk.switchEnvironment(config.serverEnvironment)
             
-            // 2. Only set AppKey if user hasn't manually set one
-            if (!AppKeyManager.hasManuallySetAppKey(context)) {
-                AppKeyManager.saveAppKeyPairAsDefault(
-                    context, 
-                    config.appKeyPairEnv.appKey, 
-                    config.appKeyPairEnv.appSecret
-                )
-                
-                // Update BLE manager with default AppKey
-                bleManager.updateAppKey(
-                    config.appKeyPairEnv.appKey, 
-                    config.appKeyPairEnv.appSecret
-                )
-            } else {
-                // If user has manually set AppKey, use existing ones
-                val (appKey, appSecret) = AppKeyManager.getAppKeyPair(context)
-                if (appKey != null && appSecret != null) {
-                    bleManager.updateAppKey(appKey, appSecret)
-                }
-            }
+            // 2. Environment switch always resets to default AppKey (clear manual setting flag)
+            AppKeyManager.clearManuallySetFlag(context)
             
-            // 3. Show success message
+            // 3. Set environment default AppKey
+            AppKeyManager.saveAppKeyPairAsDefault(
+                context, 
+                config.appKeyPairEnv.appKey, 
+                config.appKeyPairEnv.appSecret
+            )
+            
+            // 4. Update BLE manager with environment default AppKey
+            bleManager.updateAppKey(
+                config.appKeyPairEnv.appKey, 
+                config.appKeyPairEnv.appSecret
+            )
+            
+            // 5. Show success message
             Toast.makeText(
                 context,
                 context.getString(R.string.toast_language_config_applied, config.displayName),

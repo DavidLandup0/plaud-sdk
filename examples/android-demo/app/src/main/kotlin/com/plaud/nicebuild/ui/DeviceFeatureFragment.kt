@@ -41,6 +41,10 @@ import android.widget.CompoundButton
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import sdk.NiceBuildSdk
+import com.plaud.nicebuild.data.*
+import com.plaud.nicebuild.manager.FirmwareUpdateManager
+import com.plaud.nicebuild.ui.dialogs.FirmwareUpdateDialogs
+import com.plaud.nicebuild.ui.dialogs.FirmwareUpdateProgressDialog
 import com.google.android.material.appbar.MaterialToolbar
 import android.content.Intent
 import android.net.Uri
@@ -67,11 +71,13 @@ class DeviceFeatureFragment : Fragment() {
     private var isExpanded = true
     private val timeoutHandler = Handler(Looper.getMainLooper())
     private var timeoutRunnable: Runnable? = null
+    private var currentBatteryLevel: Int = 0
 
     // Views
     private lateinit var deviceInfoContent: View
     private lateinit var btnExpand: ImageButton
     private lateinit var tvSn: TextView
+    private lateinit var tvFirmware: TextView
     private lateinit var tvBattery: TextView
     private lateinit var tvStorage: TextView
     private lateinit var layoutFileListEntry: View
@@ -91,8 +97,14 @@ class DeviceFeatureFragment : Fragment() {
     private lateinit var btnWifiTransfer: MaterialButton
     private lateinit var btnBindCloud: MaterialButton
     private lateinit var btnUnbindCloud: MaterialButton
+    private lateinit var btnCheckUpdate: MaterialButton
 
     private var uDiskSwitchListener: CompoundButton.OnCheckedChangeListener? = null
+    
+    // 固件更新相关
+    private lateinit var firmwareUpdateManager: FirmwareUpdateManager
+    private var downloadProgressDialog: FirmwareUpdateProgressDialog? = null
+    private var installProgressDialog: FirmwareUpdateProgressDialog? = null
     
     // Unified launcher for all permissions
     private val requestPermissionLauncher = registerForActivityResult(
@@ -122,6 +134,7 @@ class DeviceFeatureFragment : Fragment() {
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         bleManager = BleManager.getInstance(requireContext())
         bleCore = BleCore.getInstance(requireContext())
+        firmwareUpdateManager = FirmwareUpdateManager.getInstance(requireContext())
         // Handle physical back button
         requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -144,6 +157,8 @@ class DeviceFeatureFragment : Fragment() {
         btnExpand = view.findViewById(R.id.btn_expand)
         deviceInfoTitleLayout = view.findViewById(R.id.device_info_title_layout)
         tvSn = view.findViewById(R.id.tv_sn)
+        tvFirmware = view.findViewById(R.id.tv_firmware)
+        btnCheckUpdate = view.findViewById(R.id.btn_check_update)
         tvBattery = view.findViewById(R.id.tv_battery)
         tvStorage = view.findViewById(R.id.tv_storage)
         tvRecordStatus = view.findViewById(R.id.tv_record_status)
@@ -211,6 +226,8 @@ class DeviceFeatureFragment : Fragment() {
         mainViewModel.currentDevice.value?.let { device ->
             currentdevice = device
             tvSn.text = getString(R.string.fragment_device_feature_serial_label, device.serialNumber)
+            val versionName = device.versionName ?: "--"
+            tvFirmware.text = getString(R.string.fragment_device_feature_firmware_label, versionName)
         }
 
         // Get battery level
@@ -218,6 +235,16 @@ class DeviceFeatureFragment : Fragment() {
             requireActivity().runOnUiThread {
                 tvBattery.text = getString(R.string.fragment_device_feature_battery_label, batteryText)
                 Log.d(TAG, "Battery: $batteryText")
+                
+                try {
+                    val regex = Regex("(\\d+)%")
+                    val matchResult = regex.find(batteryText)
+                    currentBatteryLevel = matchResult?.groupValues?.get(1)?.toInt() ?: 0
+                    Log.d(TAG, "Parsed battery level: $currentBatteryLevel%")
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to parse battery level from: $batteryText", e)
+                    currentBatteryLevel = 0
+                }
             }
         }
         
@@ -352,6 +379,10 @@ class DeviceFeatureFragment : Fragment() {
 
         layoutFileListEntry.setOnClickListener {
             checkAndRequestStoragePermission()
+        }
+
+        btnCheckUpdate.setOnClickListener {
+            handleFirmwareUpdate()
         }
 
         btnSetWifiDomain.setOnClickListener {
@@ -624,6 +655,23 @@ class DeviceFeatureFragment : Fragment() {
                      mainViewModel.updateFileList(fileList)
                  }
             }
+            
+            bleCore.getBatteryState { batteryText ->
+                requireActivity().runOnUiThread {
+                    tvBattery.text = getString(R.string.fragment_device_feature_battery_label, batteryText)
+                    
+                    try {
+                        val regex = Regex("(\\d+)%")
+                        val matchResult = regex.find(batteryText)
+                        currentBatteryLevel = matchResult?.groupValues?.get(1)?.toInt() ?: 0
+                        Log.d(TAG, "Updated battery level in onResume: $currentBatteryLevel%")
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Failed to parse battery level in onResume: $batteryText", e)
+                        currentBatteryLevel = 0
+                    }
+                }
+            }
+            
             // Initial state sync without toast
             bleCore.getDeviceState { state ->
                 requireActivity().runOnUiThread {
@@ -642,15 +690,7 @@ class DeviceFeatureFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        // Restore default status bar color and appearance
-        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
-        @Suppress("DEPRECATION")
-        activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
-        timeoutRunnable?.let { timeoutHandler.removeCallbacks(it) }
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -900,5 +940,268 @@ class DeviceFeatureFragment : Fragment() {
 
     private fun navigateToFileList() {
         findNavController().navigate(R.id.action_deviceFeature_to_fileList)
+    }
+    
+    /**
+     * 处理固件更新流程
+     */
+    private fun handleFirmwareUpdate() {
+        val device = mainViewModel.currentDevice.value
+        if (device == null) {
+            Toast.makeText(requireContext(), getString(R.string.firmware_update_device_not_connected), Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        // 显示检查更新的提示
+        btnCheckUpdate.text = getString(R.string.firmware_update_checking)
+        btnCheckUpdate.isEnabled = false
+        
+        // 检查固件更新
+        firmwareUpdateManager.checkForUpdate(device, object : SimpleFirmwareUpdateCallback() {
+            override fun onUpdateCheckResult(result: Result<FirmwareUpdateInfo>) {
+                if (!isAdded) return
+                
+                requireActivity().runOnUiThread {
+                    // 恢复按钮状态
+                    btnCheckUpdate.text = getString(R.string.action_check_update)
+                    btnCheckUpdate.isEnabled = true
+                    
+                    result.fold(
+                        onSuccess = { updateInfo ->
+                            showUpdateCheckResult(updateInfo)
+                        },
+                        onFailure = { error ->
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.firmware_update_check_failed, error.message ?: "Unknown error"),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    )
+                }
+            }
+        })
+    }
+    
+    /**
+     * 显示更新检查结果
+     */
+    private fun showUpdateCheckResult(updateInfo: FirmwareUpdateInfo) {
+        FirmwareUpdateDialogs.showUpdateConfirmDialog(
+            context = requireContext(),
+            updateInfo = updateInfo,
+            onConfirm = {
+                if (updateInfo.hasUpdate) {
+                    startFirmwareDownload(updateInfo)
+                }
+            },
+            onCancel = {
+                // 用户取消更新
+            }
+        )
+    }
+    
+    /**
+     * 开始下载固件
+     */
+    private fun startFirmwareDownload(updateInfo: FirmwareUpdateInfo) {
+        // 显示下载进度对话框
+        downloadProgressDialog = FirmwareUpdateProgressDialog(
+            context = requireContext(),
+            title = getString(R.string.firmware_update_downloading_progress),
+            cancellable = true
+        ).apply {
+            onCancel = {
+                firmwareUpdateManager.cancel()
+                dismiss()
+            }
+            show()
+        }
+        
+        // 开始下载
+        firmwareUpdateManager.downloadFirmware(updateInfo, object : SimpleFirmwareUpdateCallback() {
+            override fun onDownloadProgress(progress: UpdateProgress) {
+                if (!isAdded) return
+                
+                requireActivity().runOnUiThread {
+                    downloadProgressDialog?.updateProgress(progress)
+                }
+            }
+            
+            override fun onDownloadComplete(result: FirmwareDownloadResult) {
+                if (!isAdded) return
+                
+                requireActivity().runOnUiThread {
+                    downloadProgressDialog?.dismiss()
+                    downloadProgressDialog = null
+                    
+                    if (result.success && result.file != null) {
+                        showInstallConfirmation(updateInfo, result.file!!)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.firmware_update_download_failed) + ": " + (result.error ?: "Unknown error"),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        })
+    }
+    
+    /**
+     * 显示安装确认对话框
+     */
+    private fun showInstallConfirmation(updateInfo: FirmwareUpdateInfo, firmwareFile: java.io.File) {
+        FirmwareUpdateDialogs.showInstallConfirmDialog(
+            context = requireContext(),
+            updateInfo = updateInfo,
+            onConfirm = {
+                startFirmwareInstallation(firmwareFile, updateInfo)
+            },
+            onCancel = {
+                // 用户选择稍后安装
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.firmware_update_download_complete),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        )
+    }
+    
+    private data class FirmwareValidationResult(
+        val isValid: Boolean,
+        val errorMessage: String
+    )
+    
+
+    private fun validateFirmwareInstallationConditions(): FirmwareValidationResult {
+        Log.d(TAG, "Validating firmware installation conditions")
+        
+        val device = mainViewModel.currentDevice.value
+        if (device == null) {
+            Log.e(TAG, "❌ Device not available for validation")
+            return FirmwareValidationResult(false, getString(R.string.firmware_update_device_not_connected))
+        }
+        
+        Log.d(TAG, "Battery level: ${currentBatteryLevel}%")
+        if (currentBatteryLevel < 40) {
+            val message = getString(R.string.firmware_update_error_low_battery, currentBatteryLevel)
+            Log.e(TAG, "❌ Battery level too low: ${currentBatteryLevel}%")
+            return FirmwareValidationResult(false, message)
+        }
+        
+        val isInUDiskMode = switchUdiskMode.isChecked
+        Log.d(TAG, "U-disk mode: $isInUDiskMode")
+        if (isInUDiskMode) {
+            val message = getString(R.string.firmware_update_error_udisk_mode)
+            Log.e(TAG, "❌ Device is in U-disk mode")
+            return FirmwareValidationResult(false, message)
+        }
+        
+        if (isRecording) {
+            val message = getString(R.string.firmware_update_error_recording)
+            Log.e(TAG, "❌ Device is currently recording")
+            return FirmwareValidationResult(false, message)
+        }
+
+        //4： todo：check is downloading
+
+        Log.d(TAG, "✅ All firmware installation conditions are met")
+        return FirmwareValidationResult(true, "")
+    }
+    
+    /**
+     * 开始安装固件
+     */
+    private fun startFirmwareInstallation(firmwareFile: java.io.File, updateInfo: FirmwareUpdateInfo) {
+        val device = mainViewModel.currentDevice.value
+        if (device == null) {
+            Toast.makeText(requireContext(), getString(R.string.firmware_update_device_not_connected), Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        val validationResult = validateFirmwareInstallationConditions()
+        if (!validationResult.isValid) {
+            Toast.makeText(requireContext(), validationResult.errorMessage, Toast.LENGTH_LONG).show()
+            return
+        }
+        
+        installProgressDialog = FirmwareUpdateProgressDialog(
+            context = requireContext(),
+            title = getString(R.string.firmware_update_installing_progress),
+            cancellable = true
+        ).apply {
+            onCancel = {
+                firmwareUpdateManager.cancel()
+                dismiss()
+                
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.firmware_update_install_cancelled),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            show()
+        }
+        
+        firmwareUpdateManager.installFirmware(firmwareFile, device, updateInfo, object : SimpleFirmwareUpdateCallback() {
+            override fun onInstallProgress(progress: UpdateProgress) {
+                if (!isAdded) return
+                
+                Log.i("DeviceFeature", "【Fragment进度】接收到UI进度更新: ${progress.progress}%")
+                
+                requireActivity().runOnUiThread {
+                    Log.d("DeviceFeature", "【Fragment UI】准备更新UI进度: ${progress.progress}%")
+                    installProgressDialog?.updateProgress(progress)
+                    Log.d("DeviceFeature", "【Fragment UI】UI进度更新完成: ${progress.progress}%")
+                }
+            }
+            
+            override fun onInstallComplete(result: FirmwareInstallResult) {
+                if (!isAdded) return
+                
+                requireActivity().runOnUiThread {
+                    installProgressDialog?.dismiss()
+                    installProgressDialog = null
+                    
+                    if (result.success) {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.firmware_update_install_success),
+                            Toast.LENGTH_LONG
+                        ).show()
+                        
+                        // 更新设备信息显示
+                        loadDeviceInfo()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.firmware_update_install_failed, result.error ?: "Unknown error"),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        })
+    }
+    
+    override fun onDestroyView() {
+        super.onDestroyView()
+        
+        // 清理固件更新相关资源
+        firmwareUpdateManager.cancel()
+        downloadProgressDialog?.dismiss()
+        installProgressDialog?.dismiss()
+        downloadProgressDialog = null
+        installProgressDialog = null
+        
+        // 恢复默认状态栏颜色和外观
+        activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+        @Suppress("DEPRECATION")
+        activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+        timeoutRunnable?.let { timeoutHandler.removeCallbacks(it) }
     }
 }

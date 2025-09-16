@@ -48,6 +48,10 @@ class WifiManager private constructor(private val context: Context) : IWifiAgent
     private val _statusMessage = MutableLiveData<String>()
     val statusMessage: LiveData<String> = _statusMessage
     
+    // 🚀 WiFi传输优化：添加传输时间跟踪
+    private var transferStartTime: Long = 0L
+    private var lastTransferDuration: Long = 0L
+    
     private val _fileTransferCompleted = MutableLiveData<FileTransferCompletedEvent>()
     val fileTransferCompleted: LiveData<FileTransferCompletedEvent> = _fileTransferCompleted
     
@@ -320,73 +324,451 @@ class WifiManager private constructor(private val context: Context) : IWifiAgent
         _errorMessage.postValue(message)
     }
     
-    override fun onWifiTransferStopped() {
-        Log.i(TAG, "WiFi transfer stopped normally, initiating BLE reconnection...")
+    // 🚀 WiFi传输优化：智能等待策略 (增强版)
+    private fun calculateOptimalWaitTime(): Long {
+        val transferDuration = lastTransferDuration
         
-        // Use coroutine to handle BLE reconnection for normal WiFi transfer completion
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                Log.i(TAG, "Waiting for device to completely exit WiFi mode after normal transfer...")
-
-                // Wait longer for normal transfer since device needs to clean up transfer state
-                delay(15000) // 15 seconds wait for device to cleanly exit WiFi mode
+        // 基础等待时间
+        val baseWaitTime = when {
+            transferDuration <= 0 -> 20000L              // 未知时长：20秒 (增加5秒)
+            transferDuration < 60000 -> 25000L           // <1分钟：25秒 (增加10秒)
+            transferDuration < 180000 -> 35000L          // 1-3分钟：35秒 (增加10秒)
+            transferDuration < 300000 -> 45000L          // 3-5分钟：45秒 (增加10秒)
+            transferDuration < 600000 -> 55000L          // 5-10分钟：55秒 (增加10秒)
+            else -> 70000L                               // >10分钟：70秒 (增加10秒)
+        }
+        
+        Log.i(TAG, "Transfer duration: ${transferDuration}ms, calculated base wait time: ${baseWaitTime}ms")
+        return baseWaitTime
+    }
+    
+    // 🚀 关键修复：全面的app状态清理
+    private suspend fun performCompleteStateCleanup() {
+        Log.w(TAG, "🧹 Performing complete app state cleanup...")
+        
+        try {
+            // 1. 清理WiFi相关状态
+            Log.d(TAG, "Cleaning WiFi states...")
+            isActive = false
+            currentSessionId = ""
+            
+            withContext(Dispatchers.Main) {
+                _connectionState.postValue(IWifiAgent.WifiConnectionState.NONE)
+                _transferProgress.postValue(TransferProgress(0L, 0, 0.0f, 0L, 0L, null))
+                _errorMessage.postValue("")
+            }
+            
+            // 2. 强制清理BLE Agent状态
+            Log.d(TAG, "Forcing BLE Agent state cleanup...")
+            val bleCore = BleCore.getInstance(context)
+            
+            // 强制断开现有连接（如果有的话）
+            if (bleCore.isConnected()) {
+                Log.d(TAG, "Force disconnecting existing BLE connection...")
+                bleCore.disconnectDevice()
+                delay(2000) // 等待断开完成
+            }
+            
+            // 3. 清理网络状态（通过SDK）
+            Log.d(TAG, "Cleaning network and WiFi states...")
+            val wifiAgent = NiceBuildSdk.getWifiAgent()
+            wifiAgent?.let { agent ->
+                // 确保WiFi agent完全停止
+                if (agent.isTransferActive()) {
+                    Log.d(TAG, "Force stopping WiFi transfer...")
+                    agent.stopWifiTransfer()
+                    delay(1000)
+                }
+            }
+            
+            // 4. 重置传输计时器
+            transferStartTime = 0L
+            lastTransferDuration = 0L
+            
+            // 5. 强制垃圾回收，释放可能的内存引用
+            Log.d(TAG, "Triggering garbage collection...")
+            System.gc()
+            delay(500)
+            
+            Log.i(TAG, "✅ Complete state cleanup finished")
+            
+        } catch (e: Exception) {
+            Log.e(TAG, "Error during state cleanup: ${e.message}", e)
+        }
+    }
+    
+    // 🚀 新增：BLE特定状态重置
+    private suspend fun performBleSpecificReset(): Boolean {
+        Log.w(TAG, "🔧 Performing BLE-specific state reset...")
+        
+        try {
+            val bleCore = BleCore.getInstance(context)
+            
+            // 1. 确保完全断开
+            if (bleCore.isConnected()) {
+                Log.d(TAG, "BLE still connected, forcing disconnect...")
+                bleCore.disconnectDevice()
                 
+                // 等待并验证断开
+                var attempts = 0
+                while (bleCore.isConnected() && attempts < 10) {
+                    delay(1000)
+                    attempts++
+                    Log.d(TAG, "Waiting for BLE disconnect... attempt ${attempts}/10")
+                }
+                
+                if (bleCore.isConnected()) {
+                    Log.w(TAG, "BLE disconnect timeout, but proceeding anyway")
+                } else {
+                    Log.i(TAG, "BLE successfully disconnected after ${attempts} seconds")
+                }
+            }
+            
+            // 2. 额外等待确保BLE stack完全重置
+            Log.d(TAG, "Waiting for BLE stack reset...")
+            delay(3000)
+            
+            // 3. 验证设备信息可用性
+            val currentDevice = bleCore.getCurrentDevice()
+            if (currentDevice != null) {
+                Log.i(TAG, "Device info available: ${currentDevice.serialNumber}")
+                return true
+            } else {
+                Log.w(TAG, "Device info not available after BLE reset")
+                return false
+            }
+            
+        } catch (e: Exception) {
+            Log.e(TAG, "Error during BLE-specific reset: ${e.message}", e)
+            return false
+        }
+    }
+    
+    // 🚀 新增：深度设备恢复策略
+    private suspend fun performDeepDeviceRecovery(): Boolean {
+        Log.w(TAG, "🔧 Entering deep device recovery mode...")
+        
+        withContext(Dispatchers.Main) {
+            _statusMessage.postValue("Device needs deep recovery, please wait...")
+        }
+        
+        // 首先进行完整的状态清理
+        performCompleteStateCleanup()
+        
+        // 深度恢复等待 - 额外30秒让设备完全重置BLE状态
+        val deepRecoveryTime = 30000L
+        Log.i(TAG, "Applying deep recovery wait: ${deepRecoveryTime}ms")
+        delay(deepRecoveryTime)
+        
+        // 执行BLE特定状态重置
+        Log.i(TAG, "Performing BLE-specific reset...")
+        withContext(Dispatchers.Main) {
+            _statusMessage.postValue("Resetting BLE connection state...")
+        }
+        
+        val bleResetSuccess = performBleSpecificReset()
+        if (!bleResetSuccess) {
+            Log.w(TAG, "BLE reset had issues, but continuing...")
+        }
+        
+        // 尝试更激进的设备检测
+        return waitForDeviceDeepReady()
+    }
+    
+    // 🚀 深度设备就绪检测
+    private suspend fun waitForDeviceDeepReady(): Boolean {
+        Log.i(TAG, "Starting deep device readiness check...")
+        
+        val bleCore = BleCore.getInstance(context)
+        val maxAttempts = 15 // 增加到15次检测
+        val checkInterval = 3000L // 增加到3秒间隔
+        
+        repeat(maxAttempts) { attempt ->
+            delay(checkInterval)
+            
+            try {
+                val currentDevice = bleCore.getCurrentDevice()
+                if (currentDevice != null) {
+                    Log.i(TAG, "Device appears ready in deep check after ${(attempt + 1) * checkInterval / 1000} seconds")
+                    
+                    // 深度检测：额外等待更长时间确保稳定
+                    delay(5000) // 5秒确认期
+                    return true
+                }
+            } catch (e: Exception) {
+                Log.d(TAG, "Device not ready in deep check at attempt ${attempt + 1}: ${e.message}")
+            }
+        }
+        
+        Log.w(TAG, "Deep device readiness check timed out after ${maxAttempts * checkInterval / 1000} seconds")
+        return false
+    }
+    
+    // 🚀 WiFi传输优化：设备状态检测
+    private suspend fun waitForDeviceReady(): Boolean {
+        Log.i(TAG, "Checking device ready status before reconnection...")
+        
+        val bleCore = BleCore.getInstance(context)
+        val maxAttempts = 10
+        val checkInterval = 2000L // 2秒间隔
+        
+        repeat(maxAttempts) { attempt ->
+            delay(checkInterval)
+            
+            try {
+                // 尝试获取设备状态来检测是否就绪
+                val currentDevice = bleCore.getCurrentDevice()
+                if (currentDevice != null) {
+                    // 设备信息可用，可能已经就绪
+                    Log.i(TAG, "Device appears ready after ${(attempt + 1) * checkInterval / 1000} seconds")
+                    
+                    // 额外等待1秒确保稳定
+                    delay(1000)
+                    return true
+                }
+            } catch (e: Exception) {
+                Log.d(TAG, "Device not ready yet at attempt ${attempt + 1}: ${e.message}")
+            }
+        }
+        
+        Log.w(TAG, "Device readiness check timed out after ${maxAttempts * checkInterval / 1000} seconds")
+        return false // 超时，但不阻止重连尝试
+    }
+    
+    // 🚀 WiFi传输优化：增强重连策略 (支持深度恢复)
+    private suspend fun performSmartReconnection(): Boolean {
+        val bleCore = BleCore.getInstance(context)
+        val currentDevice = bleCore.getCurrentDevice()
+        
+        if (currentDevice == null) {
+            Log.e(TAG, "No device available for reconnection")
+            return false
+        }
+        
+        if (bleCore.isConnected()) {
+            Log.i(TAG, "BLE already connected after WiFi transfer")
+            return true
+        }
+        
+        Log.i(TAG, "Starting smart BLE reconnection...")
+        
+        // 根据传输复杂度调整重连策略
+        val transferComplexity = when {
+            lastTransferDuration < 60000 -> "LIGHT"
+            lastTransferDuration < 300000 -> "MEDIUM"  
+            else -> "HEAVY"
+        }
+        
+        val maxAttempts = when (transferComplexity) {
+            "LIGHT" -> 3
+            "MEDIUM" -> 4
+            "HEAVY" -> 5
+            else -> 3
+        }
+        
+        val retryDelay = when (transferComplexity) {
+            "LIGHT" -> 3000L
+            "MEDIUM" -> 5000L
+            "HEAVY" -> 7000L
+            else -> 5000L
+        }
+        
+        Log.i(TAG, "Using $transferComplexity strategy: $maxAttempts attempts, ${retryDelay}ms delay")
+        
+        // Phase 1: 常规智能重连
+        repeat(maxAttempts) { attempt ->
+            if (attempt > 0) {
+                Log.i(TAG, "Waiting ${retryDelay}ms before reconnection attempt ${attempt + 1}...")
+                delay(retryDelay)
+            }
+            
+            Log.i(TAG, "BLE reconnection attempt ${attempt + 1}/$maxAttempts")
+            
+            val success = suspendCoroutine<Boolean> { continuation ->
+                bleCore.connectDevice(
+                    currentDevice.serialNumber,
+                    currentDevice.serialNumber
+                ) { success, code, message ->
+                    Log.i(TAG, "Reconnection attempt ${attempt + 1} result: success=$success, code=$code, message=$message")
+                    continuation.resume(success)
+                }
+            }
+            
+            if (success) {
+                // 等待握手完成
+                delay(3000)
+                if (bleCore.isConnected()) {
+                    Log.i(TAG, "✅ Smart reconnection successful on attempt ${attempt + 1}")
+                    return true
+                } else {
+                    Log.w(TAG, "Reconnection appeared successful but connection lost immediately")
+                }
+            }
+        }
+        
+        Log.w(TAG, "⚠️ Regular smart reconnection failed, trying enhanced state cleanup...")
+        
+        // Phase 2: 中等强度状态清理和重试
+        withContext(Dispatchers.Main) {
+            _statusMessage.postValue("Performing enhanced state cleanup...")
+        }
+        
+        // 执行BLE特定重置
+        val bleResetSuccess = performBleSpecificReset()
+        if (bleResetSuccess) {
+            Log.i(TAG, "🔄 Attempting one more reconnection after BLE reset...")
+            
+            // 单次重连尝试
+            val success = suspendCoroutine<Boolean> { continuation ->
                 val bleCore = BleCore.getInstance(context)
                 val currentDevice = bleCore.getCurrentDevice()
+                if (currentDevice != null) {
+                    bleCore.connectDevice(
+                        currentDevice.serialNumber,
+                        currentDevice.serialNumber
+                    ) { success, code, message ->
+                        Log.i(TAG, "BLE reset reconnection result: success=$success, code=$code, message=$message")
+                        continuation.resume(success)
+                    }
+                } else {
+                    continuation.resume(false)
+                }
+            }
+            
+            if (success) {
+                delay(3000)
+                if (BleCore.getInstance(context).isConnected()) {
+                    Log.i(TAG, "🎉 BLE reset reconnection successful!")
+                    return true
+                }
+            }
+        }
+        
+        Log.w(TAG, "⚠️ Enhanced cleanup failed, trying deep recovery mode...")
+        
+        // Phase 3: 深度恢复模式
+        withContext(Dispatchers.Main) {
+            _statusMessage.postValue("Entering deep recovery mode...")
+        }
+        
+        val deepRecoverySuccess = performDeepDeviceRecovery()
+        if (!deepRecoverySuccess) {
+            Log.e(TAG, "❌ Deep device recovery failed")
+            return false
+        }
+        
+        // Phase 4: 深度恢复后的重连尝试
+        Log.i(TAG, "🔄 Attempting reconnection after deep recovery...")
+        withContext(Dispatchers.Main) {
+            _statusMessage.postValue("Reconnecting after deep recovery...")
+        }
+        
+        // 深度恢复后使用更保守的重连策略
+        repeat(2) { attempt ->
+            if (attempt > 0) {
+                Log.i(TAG, "Waiting 5000ms before deep recovery reconnection attempt ${attempt + 1}...")
+                delay(5000) // 更长的等待间隔
+            }
+            
+            Log.i(TAG, "Deep recovery BLE reconnection attempt ${attempt + 1}/2")
+            
+            val success = suspendCoroutine<Boolean> { continuation ->
+                bleCore.connectDevice(
+                    currentDevice.serialNumber,
+                    currentDevice.serialNumber
+                ) { success, code, message ->
+                    Log.i(TAG, "Deep recovery reconnection attempt ${attempt + 1} result: success=$success, code=$code, message=$message")
+                    continuation.resume(success)
+                }
+            }
+            
+            if (success) {
+                // 深度恢复后等待更长时间
+                delay(5000)
+                if (bleCore.isConnected()) {
+                    Log.i(TAG, "🎉 Deep recovery reconnection successful on attempt ${attempt + 1}")
+                    return true
+                } else {
+                    Log.w(TAG, "Deep recovery reconnection appeared successful but connection lost immediately")
+                }
+            }
+        }
+        
+        Log.e(TAG, "❌ All reconnection strategies failed (regular + enhanced cleanup + deep recovery)")
+        return false
+    }
+    
+    override fun onWifiTransferStopped() {
+        Log.i(TAG, "WiFi transfer stopped normally, initiating smart BLE reconnection...")
+        
+        // 🚀 计算传输持续时间
+        if (transferStartTime > 0) {
+            lastTransferDuration = System.currentTimeMillis() - transferStartTime
+            Log.i(TAG, "Transfer completed in ${lastTransferDuration}ms (${lastTransferDuration / 1000}s)")
+        } else {
+            lastTransferDuration = 0L
+            Log.w(TAG, "Transfer start time not recorded, using default recovery strategy")
+        }
+        
+        // Use coroutine to handle smart BLE reconnection
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // 🚀 Phase 1: 智能等待策略
+                val optimalWaitTime = calculateOptimalWaitTime()
+                Log.i(TAG, "Applying intelligent wait strategy: ${optimalWaitTime}ms")
                 
-                if (currentDevice != null && !bleCore.isConnected()) {
-                    Log.i(TAG, "Starting BLE reconnection after normal WiFi transfer...")
-                    
-                    withContext(Dispatchers.Main) {
-                        _statusMessage.postValue("Reconnecting BLE after WiFi transfer...")
-                    }
-                    
-                    var reconnectionSuccess = false
-                    
-                    for (attempt in 1..3) {
-                        Log.i(TAG, "BLE reconnection attempt $attempt/3 after normal transfer")
-                        
-                        val result = suspendCoroutine<Boolean> { continuation ->
-                            bleCore.connectDevice(
-                                currentDevice.serialNumber, 
-                                currentDevice.serialNumber
-                            ) { success, code, message ->
-                                Log.i(TAG, "BLE reconnection attempt $attempt result: success=$success, code=$code, message=$message")
-                                continuation.resume(success)
-                            }
-                        }
-                        
-                        if (result) {
-                            delay(3000) // Wait for handshake
-                            if (bleCore.isConnected()) {
-                                reconnectionSuccess = true
-                                Log.i(TAG, "BLE reconnection successful on attempt $attempt")
-                                break
-                            }
-                        }
-                        
-                        if (attempt < 3) {
-                            delay(5000) // 5s wait between attempts
-                        }
-                    }
-                    
+                withContext(Dispatchers.Main) {
+                    _statusMessage.postValue("Device recovery in progress (${optimalWaitTime / 1000}s)...")
+                }
+                
+                delay(optimalWaitTime)
+                
+                // 🚀 Phase 2: 先进行状态清理
+                Log.i(TAG, "Performing preliminary state cleanup...")
+                withContext(Dispatchers.Main) {
+                    _statusMessage.postValue("Cleaning up app states...")
+                }
+                
+                performCompleteStateCleanup()
+                
+                // 🚀 Phase 3: 设备状态检测
+                Log.i(TAG, "Starting device readiness check...")
+                withContext(Dispatchers.Main) {
+                    _statusMessage.postValue("Checking device status...")
+                }
+                
+                val deviceReady = waitForDeviceReady()
+                if (deviceReady) {
+                    Log.i(TAG, "Device readiness confirmed")
+                } else {
+                    Log.w(TAG, "Device readiness uncertain, proceeding with reconnection anyway")
+                }
+                
+                // 🚀 Phase 4: 智能重连策略
+                withContext(Dispatchers.Main) {
+                    _statusMessage.postValue("Reconnecting BLE after WiFi transfer...")
+                }
+                
+                val reconnectionSuccess = performSmartReconnection()
+                
+                withContext(Dispatchers.Main) {
                     if (reconnectionSuccess) {
                         _statusMessage.postValue("BLE reconnected successfully")
+                        Log.i(TAG, "🎉 Smart WiFi transfer recovery completed successfully!")
                     } else {
                         _statusMessage.postValue("BLE reconnection failed - please manually reconnect")
+                        Log.e(TAG, "😞 Smart WiFi transfer recovery failed")
                     }
-                    
-                } else if (bleCore.isConnected()) {
-                    Log.i(TAG, "BLE already connected after WiFi transfer")
-                    _statusMessage.postValue("BLE connection maintained")
-                } else {
-                    Log.w(TAG, "No device info available for BLE reconnection")
-                    _statusMessage.postValue("No device available for reconnection")
                 }
                 
             } catch (e: Exception) {
-                Log.e(TAG, "Error during normal BLE reconnection: ${e.message}", e)
-                _statusMessage.postValue("BLE reconnection error: ${e.message}")
+                Log.e(TAG, "Error during smart BLE reconnection: ${e.message}", e)
+                withContext(Dispatchers.Main) {
+                    _statusMessage.postValue("BLE reconnection error: ${e.message}")
+                }
+            } finally {
+                // 重置传输时间
+                transferStartTime = 0L
             }
         }
     }
@@ -504,6 +886,11 @@ class WifiManager private constructor(private val context: Context) : IWifiAgent
     // Implementation of new batch download callbacks
     override fun onBatchDownloadStarted(totalFiles: Int) {
         Log.i(TAG, "Batch download started: $totalFiles files")
+        
+        // 🚀 记录传输开始时间
+        transferStartTime = System.currentTimeMillis()
+        Log.i(TAG, "Recording transfer start time: $transferStartTime")
+        
         _batchDownloadStatus.postValue(
             BatchDownloadStatus(
                 isActive = true,

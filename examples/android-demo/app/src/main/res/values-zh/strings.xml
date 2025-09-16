@@ -10,8 +10,13 @@
     <string name="fragment_device_list_rescan_button">重新扫描</string>
     <string name="fragment_device_feature_title">设备信息</string>
     <string name="fragment_device_feature_serial_label">序列号：%1$s</string>
+    <string name="fragment_device_feature_firmware_label">固件版本：%1$s</string>
     <string name="fragment_device_feature_battery_label">电量：%1$s</string>
     <string name="fragment_device_feature_storage_label">存储空间：%1$s</string>
+    <string name="action_check_update">检查更新</string>
+    <string name="no_update_available">已是最新版本：%1$s</string>
+    <string name="update_available_format">当前 %1$s → 最新 %2$s</string>
+    <string name="update_check_failed">检查更新失败</string>
     <string name="fragment_device_feature_storage_usage">%1$dMB / %2$dMB</string>
     <string name="fragment_device_feature_storage_full">存储已满</string>
     <string name="fragment_device_feature_record_status_idle">录音状态：空闲</string>
@@ -356,4 +361,92 @@
     
     <!-- Privacy Policy -->
     <string name="privacy_policy">隐私政策</string>
+    
+    <!-- 通用按钮 -->
+    <string name="common_ok">确定</string>
+    <string name="common_cancel">取消</string>
+    
+    <!-- 固件更新 -->
+    <string name="firmware_update_checking">正在检查更新...</string>
+    <string name="firmware_update_available_title">有可用的固件更新</string>
+    <string name="firmware_update_available_message">当前版本：%1$s\n最新版本：%2$s\n\n更新说明：\n%3$s</string>
+    <string name="firmware_update_no_update_title">无可用更新</string>
+    <string name="firmware_update_no_update_message">您的设备已经是最新版本：%1$s</string>
+    <string name="firmware_update_download">下载</string>
+    <string name="firmware_update_downloading">正在下载固件...</string>
+    <string name="firmware_update_download_complete">下载完成</string>
+    <string name="firmware_update_download_failed">下载失败</string>
+    <string name="firmware_update_install_ready_title">准备安装</string>
+    <string name="firmware_update_install_ready_message">固件下载完成，现在安装版本 %1$s？</string>
+    <string name="firmware_update_install">立即安装</string>
+    <string name="firmware_update_install_later">稍后安装</string>
+    <string name="firmware_update_installing">正在安装固件...</string>
+    <string name="firmware_update_install_success">固件更新成功完成</string>
+    <string name="firmware_update_install_failed">安装失败：%1$s</string>
+    <string name="firmware_update_install_instructions">请确保设备已连接并有足够的电量</string>
+    <string name="firmware_update_check_failed">检查更新失败：%1$s</string>
+    <string name="firmware_update_network_error">网络错误，请检查您的连接</string>
+    <string name="firmware_update_file_integrity_error">文件完整性验证失败</string>
+    <string name="firmware_update_device_not_connected">设备未连接</string>
+    <string name="firmware_update_low_battery">设备电量过低，无法进行更新</string>
+    <string name="firmware_update_error_low_battery">电量过低（%1$d%%），请充电至40%%以上再进行固件更新。</string>
+    <string name="firmware_update_error_udisk_mode">设备处于U盘模式时无法更新固件，请先关闭U盘模式。</string>
+    <string name="firmware_update_error_recording">设备正在录音时无法更新固件，请先停止录音。</string>
+    <string name="firmware_update_api_not_available">固件更新功能尚未可用</string>
+    
+    <!-- 固件更新进度消息 -->
+    <string name="firmware_update_downloading_progress">正在下载固件...</string>
+    <string name="firmware_update_installing_progress">正在安装固件...</string>
+    <string name="firmware_update_checking_progress">正在检查更新...</string>
+    <string name="firmware_update_download_detail">已下载 %1$dKB / %2$dKB</string>
+    <string name="firmware_update_install_preparing">准备安装...</string>
+    <string name="firmware_update_install_verifying_file">验证固件文件...</string>
+    <string name="firmware_update_install_transferring">传输固件到设备...</string>
+    <string name="firmware_update_install_writing">写入固件数据...</string>
+    <string name="firmware_update_install_verifying">验证安装...</string>
+    <string name="firmware_update_install_complete">安装完成</string>
+    <string name="firmware_update_transfer_complete_waiting">固件传输完成，等待设备确认...</string>
+    <string name="firmware_update_device_restarting">设备重启升级中，请等待重新连接...</string>
+    <string name="firmware_update_reconnecting_device">正在重新连接设备...</string>
+    <string name="firmware_update_waiting_upgrade_result">等待升级结果...</string>
+    
+    <!-- 固件更新错误消息 -->
+    <string name="firmware_update_error_network_connection">无法获取版本信息，请检查网络连接</string>
+    <string name="firmware_update_error_sdk_not_initialized">蓝牙SDK未初始化</string>
+    <string name="firmware_update_error_agent_not_initialized">蓝牙代理未初始化</string>
+    <string name="firmware_update_error_agent_type_incorrect">蓝牙代理类型不正确</string>
+    <string name="firmware_update_error_device_not_connected">设备未连接，请先连接设备</string>
+    <string name="firmware_update_error_transfer_in_progress">固件推送正在进行中，请等待完成</string>
+    <string name="firmware_update_error_download_failed">下载失败</string>
+    <string name="firmware_update_error_install_failed">安装失败</string>
+    <string name="firmware_update_error_user_interrupt">用户中断传输</string>
+    <string name="firmware_update_install_cancelled">固件安装已取消</string>
+    <string name="firmware_update_error_file_not_exists">固件文件不存在</string>
+    <string name="firmware_update_error_file_error">固件文件错误</string>
+    <string name="firmware_update_error_bt_disconnect">蓝牙连接断开</string>
+    <string name="firmware_update_error_device_upgrade_fail">设备升级失败</string>
+    <string name="firmware_update_error_transfer_failed">固件传输失败：%1$s</string>
+    <string name="firmware_update_error_md5_mismatch">MD5校验失败 - 期望：%1$s，实际：%2$s</string>
+    <string name="firmware_update_error_http_failed">下载失败：HTTP %1$d</string>
+    
+    <!-- 固件更新状态消息 -->
+    <string name="firmware_update_status_checking_device">开始检查设备固件更新：%1$s</string>
+    <string name="firmware_update_status_device_info">设备模型：%1$s，snType：%2$s，当前版本：%3$s</string>
+    <string name="firmware_update_status_check_complete">检查更新完成 - 当前版本：%1$s，最新版本：%2$s，有更新：%3$s</string>
+    <string name="firmware_update_status_download_start">开始下载固件：%1$s</string>
+    <string name="firmware_update_status_file_exists_skip">文件已存在且MD5匹配，跳过下载</string>
+    <string name="firmware_update_status_file_exists_redownload">文件已存在但MD5不匹配，重新下载</string>
+    <string name="firmware_update_status_install_start">开始安装固件：%1$s</string>
+    <string name="firmware_update_status_transfer_start">开始固件传输：%1$s</string>
+    <string name="firmware_update_status_transfer_progress">固件传输进度：%1$d%%</string>
+    <string name="firmware_update_status_transfer_speed">传输速度：%1$sKB/s，平均速度：%2$sKB/s</string>
+    <string name="firmware_update_status_transfer_complete">固件传输完成</string>
+    <string name="firmware_update_status_transfer_failed">固件传输失败：%1$s</string>
+    <string name="firmware_update_status_download_complete">固件下载完成，MD5校验通过</string>
+    <string name="firmware_update_status_operation_cancelled">已取消当前固件更新操作</string>
+    <string name="firmware_update_detail_transfer_progress">传输进度：%1$d%%</string>
+    <string name="firmware_update_detail_transfer_chunk">发送数据块：%1$d 字节</string>
+    
+    <!-- 固件更新保护机制消息 -->
+    <string name="firmware_update_error_retry_limit">设备检测到频繁升级尝试，已启动保护机制。请等待10-15分钟后重试，或重启设备。</string>
 </resources>

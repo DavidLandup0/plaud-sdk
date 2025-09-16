@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/dialog_modern_bg"
+    android:layout_margin="8dp">
+
+    <!-- 标题区域 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:layout_centerInParent="true"
+            android:paddingEnd="40dp"
+            android:paddingStart="12dp"
+            android:lineSpacingExtra="2dp"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+        <!-- 关闭图标 -->
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_close"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="6dp"
+            android:contentDescription="@string/action_close"
+            android:alpha="0.7" />
+
+    </RelativeLayout>
+
+    <!-- 状态消息 -->
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="sans-serif"
+        android:lineSpacingExtra="1dp"
+        android:visibility="gone" />
+
+    <!-- 进度显示区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/progress_container_bg"
+        android:padding="20dp">
+
+        <!-- 进度百分比 -->
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:textSize="32sp"
+            android:textColor="@color/system_blue"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp" />
+
+        <!-- 进度条 -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:progressTint="@color/system_blue"
+            android:progressBackgroundTint="@color/background_secondary"
+            android:max="100"
+            android:layout_marginBottom="8dp" />
+
+        <!-- 详细信息 -->
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:alpha="0.8"
+            android:minHeight="0dp" />
+
+    </LinearLayout>
+
+    <!-- 按钮区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- 取消按钮 -->
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:text="@string/common_cancel"
+            android:textColor="@color/system_blue"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@android:color/transparent"
+            app:strokeColor="@color/system_blue"
+            app:strokeWidth="1dp"
+            app:rippleColor="@color/system_blue_ripple" />
+
+        <!-- 动作按钮（默认隐藏） -->
+        <Button
+            android:id="@+id/btn_action"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:text="@string/common_ok"
+            android:backgroundTint="@color/system_blue"
+            android:visibility="gone"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

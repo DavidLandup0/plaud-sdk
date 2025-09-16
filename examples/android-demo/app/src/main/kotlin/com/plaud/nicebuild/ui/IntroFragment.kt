@@ -47,6 +47,12 @@ import com.plaud.nicebuild.viewmodel.MainViewModel
 import sdk.ServerEnvironment
 import sdk.models.AppKeyPairEnv
 import androidx.activity.result.contract.ActivityResultContracts
+import android.content.Intent
+import android.app.ProgressDialog
+import androidx.core.content.FileProvider
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers
+import java.io.File
 
 class IntroFragment : Fragment() {
     private val REQUIRED_PERMISSIONS = arrayOf(
@@ -124,6 +130,11 @@ class IntroFragment : Fragment() {
         val btnSetAppKey = view.findViewById<MaterialButton>(R.id.btn_set_app_key)
         btnSetAppKey.setOnClickListener {
             showAppKeySettingDialog()
+        }
+
+        val btnExportLogs = view.findViewById<MaterialButton>(R.id.btn_export_logs)
+        btnExportLogs.setOnClickListener {
+            exportLogsWithProgress()
         }
 
         // Set up long press on title for language selection
@@ -392,6 +403,102 @@ class IntroFragment : Fragment() {
         super.onDestroy()
         longPressRunnable?.let {
             longPressHandler.removeCallbacks(it)
+        }
+    }
+
+    /**
+     * 带进度提示的日志导出
+     */
+    private fun exportLogsWithProgress() {
+        val progressDialog = ProgressDialog(requireContext()).apply {
+            setMessage("正在导出日志...")
+            setCancelable(false)
+            show()
+        }
+        
+        lifecycleScope.launch {
+            try {
+                val plaudFile = withContext(kotlinx.coroutines.Dispatchers.IO) {
+                    // 使用NiceBuildSdk的公开接口
+                    NiceBuildSdk.exportLog(requireContext())
+                }
+                
+                progressDialog.dismiss()
+                
+                if (plaudFile != null) {
+                    showExportSuccessDialog(plaudFile)
+                } else {
+                    showNoLogsDialog()
+                }
+                
+            } catch (e: Exception) {
+                progressDialog.dismiss()
+                showExportErrorDialog(e)
+            }
+        }
+    }
+    
+    private fun showExportSuccessDialog(plaudFile: File) {
+        val fileSize = plaudFile.length() / 1024.0 / 1024.0 // MB
+        
+        AlertDialog.Builder(requireContext())
+            .setTitle("日志导出成功")
+            .setMessage("文件: ${plaudFile.name}\n大小: ${"%.2f".format(fileSize)} MB\n路径: ${plaudFile.parent}\n\n是否发送给SDK团队？")
+            .setPositiveButton("发送") { _, _ ->
+                shareLogFile(plaudFile)
+            }
+            .setNegativeButton("稍后") { _, _ ->
+                Toast.makeText(requireContext(), "日志文件已保存到缓存目录", Toast.LENGTH_LONG).show()
+            }
+            .show()
+    }
+    
+    private fun showNoLogsDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("无日志可导出")
+            .setMessage("当前没有日志文件可以导出。请先使用SDK功能产生一些日志。")
+            .setPositiveButton("确定", null)
+            .show()
+    }
+    
+    private fun showExportErrorDialog(exception: Exception) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("导出失败")
+            .setMessage("日志导出失败：${exception.message}")
+            .setPositiveButton("确定", null)
+            .show()
+    }
+    
+    private fun shareLogFile(plaudFile: File) {
+        try {
+            val uri = FileProvider.getUriForFile(
+                requireContext(),
+                "${requireContext().packageName}.fileprovider",
+                plaudFile
+            )
+            
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "application/octet-stream"
+                putExtra(Intent.EXTRA_STREAM, uri)
+                putExtra(Intent.EXTRA_SUBJECT, "Plaud SDK 日志文件")
+                putExtra(Intent.EXTRA_TEXT, buildString {
+                    appendLine("您好，")
+                    appendLine()
+                    appendLine("在使用Plaud SDK时遇到问题，请帮忙分析这个日志文件。")
+                    appendLine()
+                    appendLine("问题描述：[请描述具体问题]")
+                    appendLine("发生时间：${java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date())}")
+                    appendLine()
+                    appendLine("谢谢！")
+                })
+                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            }
+            
+            startActivity(Intent.createChooser(shareIntent, "发送日志文件"))
+            
+        } catch (e: Exception) {
+            Log.e("IntroFragment", "分享文件失败", e)
+            Toast.makeText(requireContext(), "分享失败: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 } 

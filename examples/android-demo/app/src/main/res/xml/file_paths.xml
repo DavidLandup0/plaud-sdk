@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cache directory for temporary .plaud files -->
+    <cache-path name="cache" path="." />
+    <!-- External files directory for log files -->
+    <external-files-path name="external_files" path="." />
+    <!-- External files directory for plaud_sdk_logs specifically -->
+    <external-files-path name="plaud_logs" path="plaud_sdk_logs" />
+</paths>
+

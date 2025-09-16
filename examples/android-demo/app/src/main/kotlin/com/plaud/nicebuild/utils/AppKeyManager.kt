@@ -47,4 +47,13 @@ object AppKeyManager {
         val appSecret = prefs.getString(KEY_APP_SECRET, null)
         return Pair(appKey, appSecret)
     }
+    
+    /**
+     * 清除手动设置标记（用于环境切换时重置状态）
+     */
+    fun clearManuallySetFlag(context: Context) {
+        val editor = getPreferences(context).edit()
+        editor.remove(KEY_MANUALLY_SET)
+        editor.apply()
+    }
 } 

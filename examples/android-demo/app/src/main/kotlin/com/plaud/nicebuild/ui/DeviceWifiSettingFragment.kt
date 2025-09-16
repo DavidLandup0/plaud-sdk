@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,8 +71,19 @@ class DeviceWifiSettingFragment : Fragment() {
             // Edit mode
             forgetButton.visibility = View.VISIBLE
             BleCore.getInstance(requireContext()).getWifiInfo(wifiIndex) { info ->
-                wifiNameEdit.setText(info?.getSSID() ?: "")
-                wifiPwdEdit.setText(info?.getPwd() ?: "")
+                Log.d("wifi", "getWifiInfo callback received, info is null: ${info == null}")
+                if (info != null) {
+                    val ssid = info.getSSID()
+                    Log.d("wifi", "About to call getPwd()...")
+                    val pwd = info.getPwd()
+                    Log.d("wifi", "Retrieved WiFi info - SSID: [$ssid], Password: [$pwd]")
+                    wifiNameEdit.setText(ssid)
+                    wifiPwdEdit.setText(pwd)
+                } else {
+                    Log.e("wifi", "GetWifiInfo returned null response!")
+                    wifiNameEdit.setText("")
+                    wifiPwdEdit.setText("")
+                }
             }
         }
         
