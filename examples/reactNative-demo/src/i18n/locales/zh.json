@@ -1,0 +1,96 @@
+{
+  "common": {
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "ok": "确定",
+    "error": "错误",
+    "success": "成功",
+    "loading": "加载中...",
+    "retry": "重试",
+    "back": "返回",
+    "next": "下一步",
+    "done": "完成"
+  },
+  
+  "welcome": {
+    "title": "Plaud SDK App",
+    "subtitle": "连接你的世界",
+    "initializing": "初始化中...",
+    "getting_started": "开始使用",
+    "scan_devices": "扫描设备"
+  },
+  
+  "environment": {
+    "title": "环境设置",
+    "current": "当前环境",
+    "switch_success": "环境切换成功",
+    "switch_error": "环境切换失败",
+    "environments": {
+      "development": "美国生产环境",
+      "test": "通用测试环境",
+      "production": "中国生产环境"
+    }
+  },
+  
+  "bluetooth": {
+    "scanning": "正在扫描设备...",
+    "scan_error": "扫描失败",
+    "no_devices": "未找到设备",
+    "device_found": "发现设备",
+    "connecting": "连接中...",
+    "connected": "已连接",
+    "disconnected": "已断开",
+    "connection_failed": "连接失败",
+    "retry_connection": "重新连接",
+    "device_info": "设备信息"
+  },
+  
+  "device": {
+    "name": "设备名称",
+    "serial_number": "序列号",
+    "mac_address": "MAC地址",
+    "firmware_version": "固件版本",
+    "battery_level": "电池电量",
+    "storage_info": "存储信息",
+    "free_space": "可用空间",
+    "total_space": "总空间",
+    "used_space": "已用空间",
+    "getting_info": "获取设备信息中..."
+  },
+  
+  "recording": {
+    "start": "开始录音",
+    "stop": "停止录音",
+    "recording": "录音中...",
+    "paused": "已暂停",
+    "stopped": "已停止",
+    "duration": "时长",
+    "file_size": "文件大小",
+    "recording_failed": "录音失败",
+    "device_recording": "设备正在录音",
+    "phone_recording": "手机正在录音"
+  },
+  
+  "permissions": {
+    "bluetooth_required": "需要蓝牙权限",
+    "location_required": "蓝牙扫描需要位置权限",
+    "microphone_required": "录音需要麦克风权限",
+    "storage_required": "需要存储权限",
+    "grant_permission": "授予权限",
+    "permission_denied": "权限被拒绝"
+  },
+  
+  "errors": {
+    "sdk_init_failed": "SDK初始化失败",
+    "connection_timeout": "连接超时",
+    "device_not_found": "设备未找到",
+    "already_connected": "设备已连接",
+    "not_connected": "设备未连接",
+    "recording_in_progress": "录音正在进行中",
+    "no_recording": "没有正在进行的录音",
+    "file_not_found": "文件未找到",
+    "network_error": "网络错误",
+    "unknown_error": "发生未知错误"
+  }
+}

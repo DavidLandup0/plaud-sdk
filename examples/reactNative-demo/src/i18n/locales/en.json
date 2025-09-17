@@ -1,0 +1,147 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "ok": "OK",
+    "error": "Error",
+    "success": "Success",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "back": "Back",
+    "next": "Next",
+    "done": "Done",
+    "failed": "Failed",
+    "delete": "Delete",
+    "notice": "Notice",
+    "set": "Set",
+    "under_development": "Feature under development..."
+  },
+  
+  "welcome": {
+    "title": "Plaud SDK App",
+    "subtitle": "Bluetooth Recording Device Connection and Management Tool",
+    "initializing": "Initializing...",
+    "getting_started": "Getting Started",
+    "scan_devices": "Start Scanning Devices"
+  },
+  
+  "environment": {
+    "title": "Environment Settings",
+    "current": "Current Environment",
+    "switch_success": "Environment switched successfully",
+    "switch_error": "Failed to switch environment",
+    "environments": {
+      "development": "US Production Environment",
+      "test": "Common Test Environment", 
+      "production": "China Production Environment"
+    }
+  },
+  
+  "bluetooth": {
+    "scanning": "Scanning for devices...",
+    "scan_error": "Scan failed",
+    "no_devices": "No devices found",
+    "device_found": "Unknown Device",
+    "connecting": "Connect",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "connection_failed": "Connection failed",
+    "retry_connection": "Retry Connection",
+    "device_info": "Device List"
+  },
+  
+  "device": {
+    "name": "Device Name",
+    "serial_number": "Serial Number",
+    "mac_address": "MAC Address",
+    "firmware_version": "Firmware Version",
+    "firmware": "Firmware Version",
+    "battery_level": "Battery Level",
+    "battery": "Battery Level",
+    "storage_info": "Storage Information",
+    "storage": "Storage Space",
+    "free_space": "Free Space",
+    "total_space": "Total Space",
+    "used_space": "Used Space",
+    "getting_info": "Getting device info...",
+    "details": "Device Details",
+    "info": "Device Information",
+    "check_update": "Check Update",
+    "usb_mode": "USB Disk Mode",
+    "functions": "Device Functions",
+    "get_status": "Get Status",
+    "get_files": "Get Files",
+    "wifi_domain": "WiFi Domain",
+    "wifi_cloud": "WiFi Cloud",
+    "wifi_transfer": "WiFi Transfer",
+    "bind_cloud": "Bind Cloud",
+    "unbind_cloud": "Unbind Cloud",
+    "unbind": "Unbind Device",
+    "disconnect": "Disconnect",
+    "mic_gain": "Microphone Gain",
+    "set_mic_gain": "Set Microphone Gain",
+    "gain_value": "Gain Value"
+  },
+  
+  "recording": {
+    "start": "Start Recording",
+    "stop": "Stop Recording", 
+    "recording": "Recording...",
+    "paused": "Paused",
+    "stopped": "Stopped",
+    "duration": "Duration",
+    "file_size": "File Size",
+    "recording_failed": "Recording failed",
+    "device_recording": "Device is recording",
+    "phone_recording": "Phone is recording",
+    "control": "Recording Control",
+    "status": "Status",
+    "pause": "Pause Recording",
+    "resume": "Resume Recording"
+  },
+  
+  "files": {
+    "title": "Recording Files",
+    "files_count": "files",
+    "no_files": "No recording files",
+    "refresh": "Refresh",
+    "select": "Select",
+    "cancel": "Cancel",
+    "select_all": "Select All",
+    "deselect_all": "Deselect All",
+    "clear_all": "Clear All",
+    "downloading": "Downloading...",
+    "converting": "Converting...",
+    "session_id": "Session ID",
+    "scenes": {
+      "meeting": "🎯",
+      "classroom": "📚", 
+      "interview": "🎤",
+      "music": "🎵",
+      "memo": "📝"
+    }
+  },
+  
+  "permissions": {
+    "bluetooth_required": "Bluetooth permission is required",
+    "location_required": "Location permission is required for Bluetooth scanning",
+    "microphone_required": "Microphone permission is required for recording",
+    "storage_required": "Storage permission is required",
+    "grant_permission": "Grant Permission",
+    "permission_denied": "Permission denied"
+  },
+  
+  "errors": {
+    "sdk_init_failed": "SDK initialization failed",
+    "connection_timeout": "Connection timeout",
+    "device_not_found": "Device not found",
+    "already_connected": "Device already connected",
+    "not_connected": "Device not connected",
+    "recording_in_progress": "Recording already in progress",
+    "no_recording": "No recording in progress",
+    "file_not_found": "File not found",
+    "network_error": "Network error",
+    "unknown_error": "Unknown error occurred"
+  }
+}

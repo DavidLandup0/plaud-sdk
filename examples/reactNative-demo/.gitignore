@@ -1,0 +1,131 @@
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+**/.xcode.env.local
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+.kotlin/
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+# Bundle artifact
+*.jsbundle
+
+# Ruby / CocoaPods
+**/Pods/
+/vendor/bundle/
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*
+
+# testing
+/coverage
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# iOS Generated/Build files
+ios/Frameworks/
+*.xcworkspace/xcuserdata/
+*.xcworkspace/contents.xcworkspacedata.bak
+
+# iOS SDK Frameworks (these are large binary files that should not be in Git)
+ios/Frameworks/*.framework/
+ios/Frameworks/*.xcframework/
+ios/**/*.framework
+ios/**/*.xcframework
+
+# Xcode project files that get regenerated or are duplicates
+*.xcodeproj/project.pbxproj.bak
+*-Bridging-Header*.h
+*Bridging-Header*.h
+
+# Duplicate/backup directories created by Xcode
+**/PlaudSDK\ 2/
+**/PlaudSDK*/PlaudSDK/
+ios/ReactNativeDemo/PlaudSDK/
+
+# React Native generated files
+metro.config.js.bak
+.expo/
+
+# iOS temporary files
+ios/**/.DS_Store
+**/*.pbxproj.orig
+**/*.xcscheme.orig
+
+# Xcode generated projects and workspaces
+ios/Objective-C\ Bridging\ Header.xcodeproj/
+ios/Objective-C\ Bridging\ Header.xcworkspace/
+**/Objective-C\ Bridging\ Header.*
+
+# Duplicate PlaudSDK files (should only be in ios/PlaudSDK/)
+ios/PlaudBluetoothModule.*
+ios/PlaudEnvironmentModule.*
+ios/PlaudFileManagerModule.*
+ios/PlaudPermissionModule.*
+ios/PlaudReactPackage.*
+ios/PlaudRecordingModule.*
+ios/PlaudSDKModule.*
+ios/PlaudUploadModule.*
+
+# Metro logs
+metro.log
+metro.log.*
+
+# CocoaPods generated files
+ios/Podfile.lock
+**/Podfile.lock.bak
+
+# Xcode workspace content changes
+ios/**/*.xcworkspace/contents.xcworkspacedata
