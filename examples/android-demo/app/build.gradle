@@ -140,4 +140,6 @@ dependencies {
 
     // For Markdown rendering
     implementation "io.noties.markwon:core:4.6.2"
+
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
 }
