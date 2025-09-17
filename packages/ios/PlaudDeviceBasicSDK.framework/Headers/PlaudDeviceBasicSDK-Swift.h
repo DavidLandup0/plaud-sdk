@@ -315,15 +315,31 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer * _Nonnull)_ error:(NSError * _Nullable)error;
 @end
 
+@class NSString;
 /// Latest version response model
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK21LatestVersionResponse")
 @interface LatestVersionResponse : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull type;
+@property (nonatomic, readonly, copy) NSString * _Nonnull model;
+@property (nonatomic, readonly, copy) NSString * _Nonnull version_type;
+@property (nonatomic, readonly, copy) NSString * _Nonnull version_code;
+@property (nonatomic, readonly, copy) NSString * _Nonnull version_number;
+@property (nonatomic, readonly, copy) NSString * _Nonnull version_description;
+@property (nonatomic, readonly) BOOL is_force;
+@property (nonatomic, readonly) BOOL is_strong_guidance;
+@property (nonatomic, readonly, copy) NSString * _Nullable file_md5;
+@property (nonatomic, readonly, copy) NSString * _Nonnull download_url;
+/// Compatibility property: version number (mapped to version_number)
+@property (nonatomic, readonly, copy) NSString * _Nonnull version;
+/// Compatibility property: release notes (mapped to version_description)
+@property (nonatomic, readonly, copy) NSString * _Nullable release_notes;
+/// Compatibility property: force update (mapped to is_force)
+@property (nonatomic, readonly) BOOL force_update;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @class NSCoder;
-@class NSString;
 @class NSBundle;
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK30PlaudAudioPlayerViewController")
 @interface PlaudAudioPlayerViewController : UIViewController <AVAudioPlayerDelegate>
@@ -433,6 +449,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 /// Can display real-time recording duration through sync file offset
 /// @see    Callback bleRecordStart
 - (void)startRecord;
+- (void)setCommonSettingWithSetting:(NSInteger)setting;
 /// Wake/sleep setting
 /// 0: sleep; 1: wake
 - (void)setDeviceActiveWithStatus:(NSInteger)status;
@@ -617,6 +634,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 - (void)bleOtaDataSendFail;
 - (void)bleRateWithLossRate:(double)lossRate rate:(NSInteger)rate instantRate:(NSInteger)instantRate;
 - (void)bleSetActiveWithStatus:(NSInteger)status;
+- (void)bleCommonSetting:(NSInteger)setting;
 - (void)bleUpdatePowerLowErr;
 - (void)bleDeviceDisconnectErr;
 - (void)bleStateWithPowered:(BOOL)powered;
@@ -941,6 +959,7 @@ SWIFT_PROTOCOL("_TtP19PlaudDeviceBasicSDK24PlaudDeviceAgentProtocol_")
 /// Wake/sleep setting
 /// 0: sleep; 1: wake
 - (void)bleSetActiveWithStatus:(NSInteger)status;
+- (void)bleCommonSettingWithSetting:(NSInteger)setting;
 /// Bluetooth transmission rate callback
 /// \param lossRate Packet loss rate
 ///

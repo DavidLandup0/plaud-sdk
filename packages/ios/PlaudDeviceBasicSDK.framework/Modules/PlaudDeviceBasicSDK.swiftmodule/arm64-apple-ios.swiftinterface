@@ -612,6 +612,7 @@ public struct AnyCodable : Swift.Codable {
   @objc optional func bleFotaPackFin(uid: Swift.Int, status: Swift.Int, errmsg: Swift.String?)
   @objc optional func bleOtaDataSendFail()
   @objc optional func bleSetActive(status: Swift.Int)
+  @objc optional func bleCommonSetting(setting: Swift.Int)
   @objc optional func bleRate(lossRate: Swift.Double, rate: Swift.Int, instantRate: Swift.Int)
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class PlaudDeviceAgent : ObjectiveC.NSObject {
@@ -654,6 +655,7 @@ public struct AnyCodable : Swift.Codable {
   @objc public func checkIsRecording() -> Swift.Bool
   @objc public func checkIsDownloading() -> Swift.Bool
   @objc public func startRecord()
+  @objc public func setCommonSetting(setting: Swift.Int)
   @objc public func setDeviceActive(status: Swift.Int)
   @objc public func stopRecord()
   @objc public func setDeviceName(_ name: Swift.String)
@@ -716,6 +718,7 @@ extension PlaudDeviceBasicSDK.PlaudDeviceAgent : PenBleSDK.BleAgentProtocol {
   @objc dynamic public func bleOtaDataSendFail()
   @objc dynamic public func bleRate(lossRate: Swift.Double, rate: Swift.Int, instantRate: Swift.Int)
   @objc dynamic public func bleSetActive(status: Swift.Int)
+  @objc dynamic public func bleCommonSetting(_ setting: Swift.Int)
   @objc dynamic public func bleUpdatePowerLowErr()
   @objc dynamic public func bleDeviceDisconnectErr()
   @objc dynamic public func bleState(powered: Swift.Bool)
@@ -781,25 +784,25 @@ extension UIKit.UIDevice {
   @_Concurrency.MainActor @preconcurrency public static func getOSInfo() -> Swift.String
 }
 @objc public class LatestVersionResponse : ObjectiveC.NSObject, Swift.Codable {
-  final public let type: Swift.String
-  final public let model: Swift.String
-  final public let version_type: Swift.String
-  final public let version_code: Swift.String
-  final public let version_number: Swift.String
-  final public let version_description: Swift.String
-  final public let is_force: Swift.Bool
-  final public let is_strong_guidance: Swift.Bool
-  final public let file_md5: Swift.String?
-  final public let download_url: Swift.String
+  @objc final public let type: Swift.String
+  @objc final public let model: Swift.String
+  @objc final public let version_type: Swift.String
+  @objc final public let version_code: Swift.String
+  @objc final public let version_number: Swift.String
+  @objc final public let version_description: Swift.String
+  @objc final public let is_force: Swift.Bool
+  @objc final public let is_strong_guidance: Swift.Bool
+  @objc final public let file_md5: Swift.String?
+  @objc final public let download_url: Swift.String
   public init(type: Swift.String, model: Swift.String, version_type: Swift.String, version_code: Swift.String, version_number: Swift.String, version_description: Swift.String, is_force: Swift.Bool, is_strong_guidance: Swift.Bool, file_md5: Swift.String?, download_url: Swift.String)
-  public var version: Swift.String {
-    get
+  @objc public var version: Swift.String {
+    @objc get
   }
-  public var release_notes: Swift.String? {
-    get
+  @objc public var release_notes: Swift.String? {
+    @objc get
   }
-  public var force_update: Swift.Bool {
-    get
+  @objc public var force_update: Swift.Bool {
+    @objc get
   }
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws

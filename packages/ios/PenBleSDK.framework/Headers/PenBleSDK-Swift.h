@@ -478,6 +478,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BleAgent * _
 /// @see    CallbackbleBacklightDuration
 ///
 - (void)setBacklightDurationWithType:(NSInteger)type;
+/// setCommonSetting
+/// CommonSetting
+/// @see    bleCommonSetting
+- (void)setCommonSettingWithSetting:(NSInteger)setting;
 /// Read backlight brightness
 /// Used for screen non-multi-key projects e.g. P23R1.
 /// @see    setBacklightBright
@@ -1023,6 +1027,7 @@ SWIFT_PROTOCOL("_TtP9PenBleSDK16BleAgentProtocol_")
 /// \param password Initial password after reset
 ///
 - (void)blePasswordResetWithPassword:(NSInteger)password;
+- (void)bleCommonSetting:(NSInteger)setting;
 /// Read or set backlight duration callback
 /// \param duration Duration enumeration 0: 10 seconds 1: 20 seconds 2: 30 seconds 4: Always on
 ///
