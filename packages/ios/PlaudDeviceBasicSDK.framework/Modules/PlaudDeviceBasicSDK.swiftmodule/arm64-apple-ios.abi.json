@@ -16143,7 +16143,7 @@
           {
             "kind": "Function",
             "name": "setCommonSetting",
-            "printedName": "setCommonSetting(setting:)",
+            "printedName": "setCommonSetting(type:setting:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -16155,13 +16155,19 @@
                 "name": "Int",
                 "printedName": "Swift.Int",
                 "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)setCommonSettingWithSetting:",
-            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC16setCommonSetting7settingySi_tF",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)setCommonSettingWithType:setting:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC16setCommonSetting4type7settingySi_SitF",
             "moduleName": "PlaudDeviceBasicSDK",
-            "objc_name": "setCommonSettingWithSetting:",
+            "objc_name": "setCommonSettingWithType:setting:",
             "declAttributes": [
               "AccessControl",
               "ObjC"
@@ -56979,14 +56985,14 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 30169,
+      "offset": 30192,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 47222,
+      "offset": 47245,
       "length": 1,
       "value": "1"
     },

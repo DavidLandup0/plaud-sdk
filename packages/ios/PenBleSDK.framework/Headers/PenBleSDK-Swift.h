@@ -481,7 +481,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BleAgent * _
 /// setCommonSetting
 /// CommonSetting
 /// @see    bleCommonSetting
-- (void)setCommonSettingWithSetting:(NSInteger)setting;
+- (void)setCommonSettingWithType:(NSInteger)type setting:(NSInteger)setting;
 /// Read backlight brightness
 /// Used for screen non-multi-key projects e.g. P23R1.
 /// @see    setBacklightBright

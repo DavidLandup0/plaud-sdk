@@ -623,7 +623,7 @@ extension PenBleSDK.JXFirmUpdater : PenBleSDK.OtaProtocol {
   @objc public func appResetPassword()
   @objc public func readBacklightDuration()
   @objc public func setBacklightDuration(type: Swift.Int)
-  @objc public func setCommonSetting(setting: Swift.Int)
+  @objc public func setCommonSetting(type: Swift.Int, setting: Swift.Int)
   public func setBacklight(duration: PenBleSDK.BacklightDuration)
   @objc public func readBacklightBright()
   @objc public func setBacklightBright(type: Swift.Int)

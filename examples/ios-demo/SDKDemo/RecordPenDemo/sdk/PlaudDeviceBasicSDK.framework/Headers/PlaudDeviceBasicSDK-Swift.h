@@ -449,7 +449,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudDeviceA
 /// Can display real-time recording duration through sync file offset
 /// @see    Callback bleRecordStart
 - (void)startRecord;
-- (void)setCommonSettingWithSetting:(NSInteger)setting;
+- (void)setCommonSettingWithType:(NSInteger)type setting:(NSInteger)setting;
 /// Wake/sleep setting
 /// 0: sleep; 1: wake
 - (void)setDeviceActiveWithStatus:(NSInteger)status;

@@ -655,7 +655,7 @@ public struct AnyCodable : Swift.Codable {
   @objc public func checkIsRecording() -> Swift.Bool
   @objc public func checkIsDownloading() -> Swift.Bool
   @objc public func startRecord()
-  @objc public func setCommonSetting(setting: Swift.Int)
+  @objc public func setCommonSetting(type: Swift.Int, setting: Swift.Int)
   @objc public func setDeviceActive(status: Swift.Int)
   @objc public func stopRecord()
   @objc public func setDeviceName(_ name: Swift.String)
