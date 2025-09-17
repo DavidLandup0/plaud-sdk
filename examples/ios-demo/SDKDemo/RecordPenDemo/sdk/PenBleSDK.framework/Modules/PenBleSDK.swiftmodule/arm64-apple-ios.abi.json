@@ -14525,6 +14525,36 @@
           },
           {
             "kind": "Function",
+            "name": "bleCommonSetting",
+            "printedName": "bleCommonSetting(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PenBleSDK@objc(pl)BleAgentProtocol(im)bleCommonSetting:",
+            "mangledName": "$s9PenBleSDK0B13AgentProtocolP16bleCommonSettingyySiF",
+            "moduleName": "PenBleSDK",
+            "genericSig": "<τ_0_0 where τ_0_0 : PenBleSDK.BleAgentProtocol>",
+            "sugared_genericSig": "<Self where Self : PenBleSDK.BleAgentProtocol>",
+            "protocolReq": true,
+            "declAttributes": [
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "bleBacklightDuration",
             "printedName": "bleBacklightDuration(_:)",
             "children": [
@@ -19613,6 +19643,35 @@
             "mangledName": "$s9PenBleSDK0B5AgentC20setBacklightDuration4typeySi_tF",
             "moduleName": "PenBleSDK",
             "objc_name": "setBacklightDurationWithType:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setCommonSetting",
+            "printedName": "setCommonSetting(setting:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PenBleSDK@objc(cs)BleAgent(im)setCommonSettingWithSetting:",
+            "mangledName": "$s9PenBleSDK0B5AgentC16setCommonSetting7settingySi_tF",
+            "moduleName": "PenBleSDK",
+            "objc_name": "setCommonSettingWithSetting:",
             "declAttributes": [
               "AccessControl",
               "ObjC",
@@ -39213,497 +39272,497 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "Array",
-      "offset": 24123,
+      "offset": 24170,
       "length": 47,
       "value": "[\"recorder.timotech.cn\", \"foreign.timotech.cn\"]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 24263,
+      "offset": 24310,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 24387,
+      "offset": 24434,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 24490,
+      "offset": 24537,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 24614,
+      "offset": 24661,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "Array",
-      "offset": 24671,
+      "offset": 24718,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "Array",
-      "offset": 24744,
+      "offset": 24791,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "StringLiteral",
-      "offset": 25371,
+      "offset": 25418,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 25490,
+      "offset": 25537,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 25543,
+      "offset": 25590,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 25593,
+      "offset": 25640,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 25678,
+      "offset": 25725,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 25734,
+      "offset": 25781,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 25852,
+      "offset": 25899,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 25947,
+      "offset": 25994,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 25989,
+      "offset": 26036,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 26092,
+      "offset": 26139,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 26153,
+      "offset": 26200,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 26248,
+      "offset": 26295,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 26366,
+      "offset": 26413,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 26490,
+      "offset": 26537,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 26744,
+      "offset": 26791,
       "length": 3,
       "value": "500"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "StringLiteral",
-      "offset": 26870,
+      "offset": 26917,
       "length": 19,
       "value": "\"writeWithResponse\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 27044,
+      "offset": 27091,
       "length": 6,
       "value": "30000"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 27187,
+      "offset": 27234,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 27240,
+      "offset": 27287,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 27279,
+      "offset": 27326,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "Array",
-      "offset": 27691,
+      "offset": 27738,
       "length": 644,
       "value": "[\"WbOY5\/rYgwHmPLuFB9MV5alJE0nOwdHZDEUcTmMrph3w9NfBcnZfBw==\", \"vsHP3ebfGMxw8REL1r9hyLf1ebPhmEltf47\/Ev3l6mb\/xe0gEtOM0g==\", \"AXoojPLLzNXsmpzq3WoZKJYWdJuoePQg79CMUg\/WPje6Ae24YMu3Tg==\", \"iofM89gEH0s4CYKZz\/LaJlstY4Xg31Kllf6Q5QNXB1q5hhmSdIBgCA==\", \"OdyGVY8i\/J02ujDpR8BuCU0u2xlzPlHh6WSVR4AImINaT0f9ALYbpA==\", \"H+aaRmjm\/q+dh9Mv8NkdQZsA10gWHCpPJ4J6D4sCeMIMhUOdJIXfKg==\", \"gHdEUckBJETKkXY4WspejbrIkTNjcLZ6qD6PYHDbhXNtun1bAUMbbw==\", \"oyQdem5379\/03K2sC0sT7WDUgrWeUK7bPUZl5Z7Zazsv4zRQ1QiMJw==\", \"OPCY9Mx2vpp2FnKdGUEoA838LDXtJeJkRi95VJpq6Tg=\"]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 28448,
+      "offset": 28495,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 28545,
+      "offset": 28592,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 29458,
+      "offset": 29505,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 45498,
+      "offset": 45545,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 70843,
+      "offset": 71401,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 74407,
+      "offset": 74965,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 78267,
+      "offset": 78825,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 79654,
+      "offset": 80212,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 80890,
+      "offset": 81448,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 83472,
+      "offset": 84030,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 83801,
+      "offset": 84359,
       "length": 2,
       "value": "80"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 86576,
+      "offset": 87134,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 113668,
+      "offset": 114226,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 131899,
+      "offset": 132508,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 131994,
+      "offset": 132603,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132060,
+      "offset": 132669,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132078,
+      "offset": 132687,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132127,
+      "offset": 132736,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132130,
+      "offset": 132739,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132147,
+      "offset": 132756,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132149,
+      "offset": 132758,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132152,
+      "offset": 132761,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132860,
+      "offset": 133469,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 132865,
+      "offset": 133474,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "Array",
-      "offset": 132935,
+      "offset": 133544,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 135233,
+      "offset": 135842,
       "length": 4,
       "value": "3600"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 135257,
+      "offset": 135866,
       "length": 4,
       "value": "3600"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 135263,
+      "offset": 135872,
       "length": 2,
       "value": "60"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 135436,
+      "offset": 136045,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 135503,
+      "offset": 136112,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 135568,
+      "offset": 136177,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 135631,
+      "offset": 136240,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 135681,
+      "offset": 136290,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 137440,
+      "offset": 138049,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 137458,
+      "offset": 138067,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "Array",
-      "offset": 137491,
+      "offset": 138100,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 138101,
+      "offset": 138710,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 138129,
+      "offset": 138738,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 138155,
+      "offset": 138764,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "Array",
-      "offset": 138188,
+      "offset": 138797,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 139256,
+      "offset": 139865,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 139275,
+      "offset": 139884,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleAgent.swift",
       "kind": "Array",
-      "offset": 139307,
+      "offset": 139916,
       "length": 2,
       "value": "[]"
     },

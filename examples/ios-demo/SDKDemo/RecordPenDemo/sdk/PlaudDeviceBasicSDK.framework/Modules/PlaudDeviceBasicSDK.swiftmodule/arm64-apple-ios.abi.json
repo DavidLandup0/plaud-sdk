@@ -14833,6 +14833,38 @@
           },
           {
             "kind": "Function",
+            "name": "bleCommonSetting",
+            "printedName": "bleCommonSetting(setting:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(pl)PlaudDeviceAgentProtocol(im)bleCommonSettingWithSetting:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB13AgentProtocolP16bleCommonSetting7settingySi_tF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "genericSig": "<τ_0_0 where τ_0_0 : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
+            "sugared_genericSig": "<Self where Self : PlaudDeviceBasicSDK.PlaudDeviceAgentProtocol>",
+            "protocolReq": true,
+            "objc_name": "bleCommonSettingWithSetting:",
+            "declAttributes": [
+              "Optional",
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "bleRate",
             "printedName": "bleRate(lossRate:rate:instantRate:)",
             "children": [
@@ -16105,6 +16137,34 @@
               "AccessControl",
               "ObjC",
               "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setCommonSetting",
+            "printedName": "setCommonSetting(setting:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)setCommonSettingWithSetting:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC16setCommonSetting7settingySi_tF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "setCommonSettingWithSetting:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -19127,6 +19187,36 @@
             "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC12bleSetActive6statusySi_tF",
             "moduleName": "PlaudDeviceBasicSDK",
             "objc_name": "bleSetActiveWithStatus:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "bleCommonSetting",
+            "printedName": "bleCommonSetting(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@PlaudDeviceBasicSDK@objc(cs)PlaudDeviceAgent(im)bleCommonSetting:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0aB5AgentC16bleCommonSettingyySiF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "bleCommonSetting:",
             "declAttributes": [
               "Dynamic",
               "ObjC",
@@ -25153,13 +25243,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC4typeSSvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)type",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC4typeSSvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -25177,12 +25268,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC4typeSSvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)type",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC4typeSSvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25201,13 +25293,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC5modelSSvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)model",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC5modelSSvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25226,12 +25319,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC5modelSSvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)model",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC5modelSSvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25250,13 +25344,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC12version_typeSSvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)version_type",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC12version_typeSSvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25275,12 +25370,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC12version_typeSSvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)version_type",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC12version_typeSSvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25299,13 +25395,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC12version_codeSSvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)version_code",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC12version_codeSSvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25324,12 +25421,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC12version_codeSSvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)version_code",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC12version_codeSSvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25348,13 +25446,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC14version_numberSSvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)version_number",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC14version_numberSSvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25373,12 +25472,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC14version_numberSSvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)version_number",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC14version_numberSSvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25397,13 +25497,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC19version_descriptionSSvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)version_description",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC19version_descriptionSSvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25422,12 +25523,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC19version_descriptionSSvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)version_description",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC19version_descriptionSSvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25446,13 +25548,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC8is_forceSbvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)is_force",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC8is_forceSbvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25471,12 +25574,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC8is_forceSbvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)is_force",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC8is_forceSbvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25495,13 +25599,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC18is_strong_guidanceSbvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)is_strong_guidance",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC18is_strong_guidanceSbvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25520,12 +25625,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC18is_strong_guidanceSbvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)is_strong_guidance",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC18is_strong_guidanceSbvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25552,13 +25658,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC8file_md5SSSgvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)file_md5",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC8file_md5SSSgvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25585,12 +25692,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC8file_md5SSSgvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)file_md5",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC8file_md5SSSgvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25609,13 +25717,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC12download_urlSSvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)download_url",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC12download_urlSSvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -25634,12 +25743,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC12download_urlSSvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)download_url",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC12download_urlSSvg",
                 "moduleName": "PlaudDeviceBasicSDK",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -25748,11 +25858,12 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC7versionSSvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)version",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC7versionSSvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "accessors": [
@@ -25769,9 +25880,12 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC7versionSSvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)version",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC7versionSSvg",
                 "moduleName": "PlaudDeviceBasicSDK",
+                "declAttributes": [
+                  "ObjC"
+                ],
                 "accessorKind": "get"
               }
             ]
@@ -25797,11 +25911,12 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC13release_notesSSSgvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)release_notes",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC13release_notesSSSgvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "accessors": [
@@ -25826,9 +25941,12 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC13release_notesSSSgvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)release_notes",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC13release_notesSSSgvg",
                 "moduleName": "PlaudDeviceBasicSDK",
+                "declAttributes": [
+                  "ObjC"
+                ],
                 "accessorKind": "get"
               }
             ]
@@ -25846,11 +25964,12 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC12force_updateSbvp",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(py)force_update",
             "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC12force_updateSbvp",
             "moduleName": "PlaudDeviceBasicSDK",
             "declAttributes": [
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "accessors": [
@@ -25867,9 +25986,12 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:19PlaudDeviceBasicSDK21LatestVersionResponseC12force_updateSbvg",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)LatestVersionResponse(im)force_update",
                 "mangledName": "$s19PlaudDeviceBasicSDK21LatestVersionResponseC12force_updateSbvg",
                 "moduleName": "PlaudDeviceBasicSDK",
+                "declAttributes": [
+                  "ObjC"
+                ],
                 "accessorKind": "get"
               }
             ]
@@ -56766,105 +56888,105 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 13804,
+      "offset": 13864,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 13853,
+      "offset": 13913,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Array",
-      "offset": 13944,
+      "offset": 14004,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 14063,
+      "offset": 14123,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 14136,
+      "offset": 14196,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 14164,
+      "offset": 14224,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "StringLiteral",
-      "offset": 14195,
+      "offset": 14255,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 14318,
+      "offset": 14378,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 15688,
+      "offset": 15748,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 16256,
+      "offset": 16316,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 16650,
+      "offset": 16710,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 17115,
+      "offset": 17175,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 17589,
+      "offset": 17649,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 29970,
+      "offset": 30169,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 46907,
+      "offset": 47222,
       "length": 1,
       "value": "1"
     },
@@ -57886,28 +58008,28 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent+UpdateManager.swift",
       "kind": "StringLiteral",
-      "offset": 4557,
+      "offset": 4635,
       "length": 9,
       "value": "\"notepin\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent+UpdateManager.swift",
       "kind": "StringLiteral",
-      "offset": 4598,
+      "offset": 4676,
       "length": 3,
       "value": "\"V\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent+UpdateManager.swift",
       "kind": "StringLiteral",
-      "offset": 15173,
+      "offset": 15251,
       "length": 9,
       "value": "\"notepin\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent+UpdateManager.swift",
       "kind": "StringLiteral",
-      "offset": 15214,
+      "offset": 15292,
       "length": 3,
       "value": "\"V\""
     },
