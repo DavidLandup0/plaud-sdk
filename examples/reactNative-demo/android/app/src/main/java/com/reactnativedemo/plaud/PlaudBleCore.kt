@@ -45,7 +45,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 移除连接状态监听器
+     * Remove connection state listener
      */
     fun removeConnectionListener(listener: (Boolean, String?) -> Unit) {
         synchronized(connectionListeners) {
@@ -55,7 +55,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 通知所有连接监听器
+     * Notify all connection listeners
      */
     private fun notifyConnectionListeners(isConnected: Boolean, deviceId: String?) {
         synchronized(connectionListeners) {
@@ -82,7 +82,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 初始化SDK
+     * Initialize SDK
      */
     fun initSdk(appKey: String? = null, appSecret: String? = null, environment: String? = null, forceReinit: Boolean = false): Boolean {
         return try {
@@ -103,9 +103,9 @@ class PlaudBleCore private constructor(private val context: Context) {
                 isInitialized = false // Reset state for re-initialization
             }
             
-            // 如果提供了参数，则使用参数；否则从配置获取
+            // Use provided parameters if available, otherwise get from configuration
             val envConfig = if (appKey != null && appSecret != null && environment != null) {
-                // 使用传入的参数构造临时配置
+                // Build temporary configuration using provided parameters
                 val envDisplayName = when (environment) {
                     "US_PROD" -> "US Production Environment"
                     "US_TEST" -> "US Test Environment" 
@@ -116,17 +116,17 @@ class PlaudBleCore private constructor(private val context: Context) {
                 PlaudEnvironmentConfig.EnvConfig(
                     name = environment,
                     displayName = envDisplayName,
-                    baseUrl = "", // baseUrl不影响SDK初始化，只用于switchEnvironment
+                    baseUrl = "", // baseUrl doesn't affect SDK initialization, only used for switchEnvironment
                     appKey = appKey,
                     appSecret = appSecret
                 )
             } else {
-                // 从原生配置获取
+                // Get from native configuration
                 try {
                     PlaudEnvironmentConfig.getCurrentConfig(context)
                 } catch (e: Exception) {
                     Log.w(TAG, "Failed to get environment config, using default: ${e.message}")
-                    // 使用默认测试环境配置
+                    // Use default test environment configuration
                     PlaudEnvironmentConfig.EnvConfig(
                         name = "test",
                         displayName = "Common Test Environment",
@@ -140,20 +140,20 @@ class PlaudBleCore private constructor(private val context: Context) {
             val finalAppKey = envConfig.appKey
             val finalAppSecret = envConfig.appSecret
             
-            // 确定要切换到的服务器环境
+            // Determine the server environment to switch to
             val serverEnvironment = when (environment ?: envConfig.name) {
                 "US_TEST" -> sdk.ServerEnvironment.US_TEST
                 "COMMON_TEST" -> sdk.ServerEnvironment.COMMON_TEST
                 "CHINA_PROD" -> sdk.ServerEnvironment.CHINA_PROD
                 "US_PROD" -> sdk.ServerEnvironment.US_PROD
                 else -> {
-                    // 如果没有明确的environment参数，根据baseUrl判断
+                    // If no explicit environment parameter, determine by baseUrl
                     when (envConfig.baseUrl) {
                         "https://dev-api-us-test.plaud.work" -> sdk.ServerEnvironment.US_TEST
                         "https://platform-beta.plaud.ai" -> sdk.ServerEnvironment.COMMON_TEST
                         "https://platform.plaud.cn" -> sdk.ServerEnvironment.CHINA_PROD
                         "https://platform.plaud.ai" -> sdk.ServerEnvironment.US_PROD
-                        else -> sdk.ServerEnvironment.CHINA_PROD // 默认
+                        else -> sdk.ServerEnvironment.CHINA_PROD // default
                     }
                 }
             }
@@ -168,7 +168,7 @@ class PlaudBleCore private constructor(private val context: Context) {
                 override fun scanBleDeviceReceiver(device: BleDevice) {
                     Log.d(TAG, "Scan result: ${device.name} - SN: ${device.serialNumber} - MAC: ${device.macAddress}")
                     
-                    // 缓存发现的设备信息，用于连接时使用
+                    // Cache discovered device information for connection use
                     discoveredDevices[device.serialNumber] = device
                     Log.d(TAG, "Cached device: ${device.serialNumber}")
                     
@@ -180,17 +180,17 @@ class PlaudBleCore private constructor(private val context: Context) {
                     when (status) {
                         BluetoothStatus.CONNECTED -> {
                             Log.i(TAG, "✅ Device fully connected and handshake completed: $sn")
-                            // 通知所有监听器
+                            // Notify all listeners
                             onConnectionStateChange?.invoke(true, sn)
                             notifyConnectionListeners(true, sn)
                         }
                         BluetoothStatus.CONNECTING -> {
                             Log.i(TAG, "🔄 Device connecting or handshaking: $sn")
-                            // 不触发连接状态变化，等待真正的CONNECTED
+                            // Don't trigger connection state change, wait for actual CONNECTED
                         }
                         BluetoothStatus.DISCONNECTED -> {
                             Log.i(TAG, "❌ Device disconnected: $sn")
-                            // 通知所有监听器
+                            // Notify all listeners
                             onConnectionStateChange?.invoke(false, sn)
                             notifyConnectionListeners(false, sn)
                         }
@@ -200,10 +200,10 @@ class PlaudBleCore private constructor(private val context: Context) {
                     }
                 }
                 
-                // 实现必需的抽象方法
+                // Implement required abstract methods
                 override fun bleConnectFail(p0: String?, p1: sdk.penblesdk.Constants.ConnectBleFailed) {
                     Log.w(TAG, "BLE connect failed: $p0, reason: $p1")
-                    // 连接失败时触发回调
+                    // Trigger callback when connection fails
                     onConnectionStateChange?.invoke(false, p0)
                     notifyConnectionListeners(false, p0)
                 }
@@ -247,14 +247,14 @@ class PlaudBleCore private constructor(private val context: Context) {
                 override fun deviceStatusRsp(p0: String?, p1: sdk.penblesdk.entity.bean.ble.response.GetStateRsp) {
                     Log.i(TAG, "📱 Device status response: device=$p0, state=${p1.stateCode}, sessionId=${p1.sessionId}")
                     
-                    // 提取存储信息 - 先简单处理，后面再找到正确的属性
+                    // Extract storage info - simple processing first, find correct properties later
                     try {
                         val storageInfo = mutableMapOf<String, Any>()
                         
-                        // 临时使用假数据，等找到正确的属性后再替换
-                        // TODO: 找到GetStateRsp中存储相关的正确属性名
-                        val freeSpace = 1000L * 1024 * 1024 // 临时：1GB
-                        val totalSpace = 8000L * 1024 * 1024 // 临时：8GB
+                        // Temporarily use fake data, replace when correct properties are found
+                        // TODO: Find correct storage-related property names in GetStateRsp
+                        val freeSpace = 1000L * 1024 * 1024 // Temporary: 1GB
+                        val totalSpace = 8000L * 1024 * 1024 // Temporary: 8GB
                         val usedSpace = totalSpace - freeSpace
                         
                         storageInfo["freeMB"] = freeSpace / (1024 * 1024)
@@ -290,7 +290,7 @@ class PlaudBleCore private constructor(private val context: Context) {
             Log.d(TAG, "Post-switching to environment: ${serverEnvironment.name}")
             NiceBuildSdk.switchEnvironment(serverEnvironment)
             
-            // SDK初始化成功，环境已在初始化前切换
+            // SDK initialization successful, environment switched before initialization
             Log.d(TAG, "SDK initialization completed with environment: ${serverEnvironment.name}")
             Log.d(TAG, "Environment parameter: $environment")
             Log.d(TAG, "Config baseUrl: ${envConfig.baseUrl}")
@@ -305,7 +305,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 获取认证和权限
+     * Get authentication and permissions
      */
     suspend fun getAuthAndPermission(appKey: String, appSecret: String): Boolean {
         return try {
@@ -317,7 +317,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 检查是否已登录
+     * Check if logged in
      */
     fun isLoggedIn(): Boolean {
         return try {
@@ -329,7 +329,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 登出
+     * Logout
      */
     fun logout() {
         try {
@@ -340,7 +340,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 开始扫描设备
+     * Start scanning devices
      */
     fun startScan(): Boolean {
         return try {
@@ -351,7 +351,7 @@ class PlaudBleCore private constructor(private val context: Context) {
             
             Log.d(TAG, "Starting BLE device scan...")
             
-            // 使用TntAgent的BLE代理来开始扫描
+            // Use TntAgent's BLE agent to start scanning
             val bleAgent = TntAgent.getInstant().bleAgent
             val success = bleAgent.scanBle(true) { errorCode ->
                 Log.e(TAG, "Scan error: $errorCode")
@@ -371,13 +371,13 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 停止扫描
+     * Stop scanning
      */
     fun stopScan(): Boolean {
         return try {
             Log.d(TAG, "Stopping BLE device scan...")
             
-            // 使用TntAgent的BLE代理来停止扫描
+            // Use TntAgent's BLE proxy to stop scanning
             val bleAgent = TntAgent.getInstant().bleAgent
             val success = bleAgent.scanBle(false) { errorCode ->
                 Log.e(TAG, "Stop scan error: $errorCode")
@@ -397,7 +397,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 连接设备
+     * Connect device
      */
     fun connectDevice(serialNumber: String, token: String, callback: (Boolean, String?) -> Unit) {
         try {
@@ -410,10 +410,10 @@ class PlaudBleCore private constructor(private val context: Context) {
             Log.i(TAG, "🚀 Connecting to device: $serialNumber")
             Log.i(TAG, "🔑 Using token: $token (length: ${token.length})")
             
-            // 停止扫描
+            // Stop scanning
             stopScan()
             
-            // 从缓存中获取设备信息
+            // Get device information from cache
             val device = discoveredDevices[serialNumber]
             if (device == null) {
                 Log.e(TAG, "Device not found in scan results: $serialNumber")
@@ -428,53 +428,53 @@ class PlaudBleCore private constructor(private val context: Context) {
             
             Log.i(TAG, "🔌 Starting BLE connection process...")
             
-            // 设置连接状态监听
+            // Set connection state listener
             var connectionCallback: ((Boolean, String?) -> Unit)? = callback
             
-            // 创建临时连接监听器
+            // Create temporary connection listener
             lateinit var tempConnectionListener: (Boolean, String?) -> Unit
             tempConnectionListener = { isConnected, deviceId ->
                 Log.d(TAG, "Temp connection listener: isConnected=$isConnected, deviceId='$deviceId'")
                 if (isConnected) {
-                    // 连接成功，不管设备ID是否匹配（因为某些情况下设备ID可能为空）
+                    // Connection successful, regardless of device ID match (device ID may be empty in some cases)
                     Log.i(TAG, "Device connected and handshake completed: $serialNumber")
                     connectionCallback?.invoke(true, null)
-                    connectionCallback = null // 防止重复调用
-                    // 移除临时监听器
+                    connectionCallback = null // Prevent duplicate calls
+                    // Remove temporary listener
                     removeConnectionListener(tempConnectionListener)
                 } else if (!isConnected) {
                     Log.w(TAG, "Device disconnected")
                     connectionCallback?.invoke(false, "Connection lost")
                     connectionCallback = null
-                    // 移除临时监听器
+                    // Remove temporary listener
                     removeConnectionListener(tempConnectionListener)
                 }
             }
             
-            // 添加临时监听器
+            // Add temporary listener
             addConnectionListener(tempConnectionListener)
             
-            // 使用TntAgent的BLE代理进行连接
+            // Use TntAgent's BLE proxy for connection
             val bleAgent = TntAgent.getInstant().bleAgent
             bleAgent.connectionBLE(
                 device,
                 token,      // bindToken
                 null,       // devToken
                 null,       // userName
-                10000L,     // connectTimeout: 10秒
-                30000L      // handshakeTimeout: 30秒
+                10000L,     // connectTimeout: 10 seconds
+                30000L      // handshakeTimeout: 30 seconds
             )
             
             Log.i(TAG, "BLE connection initiated for device: $serialNumber")
             
-            // 设置连接超时
+            // Set connection timeout
             android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                 if (connectionCallback != null) {
                     Log.w(TAG, "Connection timeout for device: $serialNumber")
                     connectionCallback?.invoke(false, "Connection timeout")
                     connectionCallback = null
                 }
-            }, 15000L) // 15秒超时
+            }, 15000L) // 15 seconds timeout
             
         } catch (e: Exception) {
             Log.e(TAG, "Failed to connect device", e)
@@ -483,33 +483,33 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 断开设备连接
+     * Disconnect device
      */
     fun disconnectDevice(callback: (Boolean, String?) -> Unit) {
         try {
             Log.d(TAG, "Disconnecting device")
             
-            // 使用TntAgent的BLE代理进行断开连接
+            // Use TntAgent's BLE agent to disconnect
             val bleAgent = TntAgent.getInstant().bleAgent
             bleAgent.disconnectBle()
             
             Log.i(TAG, "Device disconnection initiated")
             
-            // 监听断开连接状态
+            // Monitor disconnection status
             onConnectionStateChange = { isConnected, deviceId ->
                 Log.d(TAG, "Disconnect state changed: isConnected=$isConnected")
                 if (!isConnected) {
                     Log.i(TAG, "Device disconnected successfully")
                     callback(true, null)
-                    onConnectionStateChange = null // 清除监听
+                    onConnectionStateChange = null // Clear listener
                 }
             }
             
-            // 设置断开连接超时
+            // Set disconnect timeout
             android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                 Log.i(TAG, "Disconnect operation completed (timeout)")
-                callback(true, null) // 断开连接即使超时也认为成功
-            }, 5000L) // 5秒超时
+                callback(true, null) // Disconnect is considered successful even if timeout
+            }, 5000L) // 5 second timeout
             
         } catch (e: Exception) {
             Log.e(TAG, "Failed to disconnect device", e)
@@ -518,7 +518,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 检查是否已连接
+     * Check if device is connected
      */
     fun isDeviceConnected(): Boolean {
         return try {
@@ -526,7 +526,7 @@ class PlaudBleCore private constructor(private val context: Context) {
                 return false
             }
             
-            // 使用TntAgent的BLE代理检查连接状态
+            // Use TntAgent's BLE agent to check connection status
             val bleAgent = TntAgent.getInstant().bleAgent
             val isConnected = bleAgent.isConnected()
             
@@ -539,7 +539,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 获取设备状态（电池、存储等信息）
+     * Get device status (battery, storage and other information)
      */
     fun getDeviceStatus() {
         try {
@@ -564,7 +564,7 @@ class PlaudBleCore private constructor(private val context: Context) {
                 object : sdk.penblesdk.entity.AgentCallback.OnResponse<sdk.penblesdk.entity.bean.ble.response.GetStateRsp> {
                     override fun onCallback(response: sdk.penblesdk.entity.bean.ble.response.GetStateRsp?) {
                         Log.d(TAG, "📱 Get device status response received: $response")
-                        // deviceStatusRsp 会自动被调用，无需手动处理
+                        // deviceStatusRsp will be called automatically, no need for manual handling
                     }
                 },
                 object : sdk.penblesdk.entity.AgentCallback.OnError {
@@ -579,13 +579,13 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 手动触发电池信息更新（用于测试）
+     * Manually trigger battery info update (for testing)
      */
     fun triggerBatteryInfo() {
         try {
             Log.d(TAG, "🔋 Manually triggering battery info...")
-            // 模拟电池信息（等找到实际API后替换）
-            val fakeLevel = (70..90).random() // 随机70-90%
+            // Simulate battery info (replace when actual API is found)
+            val fakeLevel = (70..90).random() // Random 70-90%
             onBatteryInfoUpdated?.invoke("", fakeLevel)
             Log.d(TAG, "🔋 Fake battery info triggered: $fakeLevel%")
         } catch (e: Exception) {
@@ -594,7 +594,7 @@ class PlaudBleCore private constructor(private val context: Context) {
     }
     
     /**
-     * 获取真实的存储信息（使用正确的API）
+     * Get real storage information (using correct API)
      */
     fun getRealStorageInfo() {
         try {
@@ -610,7 +610,7 @@ class PlaudBleCore private constructor(private val context: Context) {
             }
             
             Log.d(TAG, "💾 Getting real storage info...")
-            // 使用简化的getStorage方法，就像原生项目一样
+            // Use simplified getStorage method, just like in native project
             bleAgent.getStorage({ success ->
                 Log.d(TAG, "💾 Get storage request sent: success=$success")
             }, { response ->

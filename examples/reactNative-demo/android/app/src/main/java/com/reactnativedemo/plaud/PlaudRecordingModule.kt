@@ -19,7 +19,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
         private var instance: PlaudRecordingModule? = null
         
         /**
-         * 直接同步录音状态（解决模块获取问题）
+         * Directly sync recording state (solve module acquisition issues)
          */
         fun syncRecordingState(isRecording: Boolean, sessionId: Long?) {
             instance?.let { module ->
@@ -34,15 +34,15 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     init {
-        // 设置实例引用
+        // Set instance reference
         instance = this
-        // 不要在这里直接设置监听器，避免与PlaudBluetoothModule冲突
+        // Don't set listeners here directly to avoid conflicts with PlaudBluetoothModule
         bleCore = PlaudBleCore.getInstance(reactApplicationContext)
     }
 
 
     /**
-     * 发送事件到React Native
+     * Send event to React Native
      */
     private fun sendEvent(eventName: String, params: WritableMap?) {
         reactApplicationContext
@@ -51,7 +51,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 开始录音
+     * Start recording
      */
     @ReactMethod
     fun startRecord(serialNumber: String, token: String, promise: Promise) {
@@ -59,13 +59,13 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
             Log.i(TAG, "🎙️ Request to start recording - checking local state...")
             Log.d(TAG, "Current local recording state: $isRecording")
             
-            // 简单检查本地状态
+            // Simple check of local state
             if (isRecording) {
                 promise.reject("ALREADY_RECORDING", "Already recording")
                 return
             }
 
-            // 直接开始录音，依赖录音事件来同步状态
+            // Start recording directly, rely on recording events to sync state
             performStartRecord(promise)
 
         } catch (e: Exception) {
@@ -75,7 +75,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
     
     /**
-     * 执行实际的录音开始操作
+     * Execute actual recording start operation
      */
     private fun performStartRecord(promise: Promise) {
         try {
@@ -83,7 +83,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
             
             val bleAgent = TntAgent.getInstant().bleAgent
             
-            // 使用场景1（会议）作为默认场景
+            // Use scenario 1 (meeting) as default scenario
             val scene = 1
             
             bleAgent.startRecord(
@@ -101,7 +101,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
                             val sessionId = response.sessionId
                             
                             if (status == 0 || status == 4) {
-                                // 录音成功开始
+                                // Recording started successfully
                                 isRecording = true
                                 Log.i(TAG, "✅ Recording started successfully, sessionId: $sessionId")
                                 
@@ -112,11 +112,11 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
                                     putString("message", "Recording started successfully")
                                 })
                                 
-                                // 发送录音开始事件（应用主动发起）
+                                // Send recording start event (initiated by app)
                                 sendEvent("onRecordingStarted", Arguments.createMap().apply {
                                     putString("sessionId", sessionId.toString())
                                     putLong("timestamp", System.currentTimeMillis())
-                                    putString("source", "app") // 标识来源是应用
+                                    putString("source", "app") // Identify source as app
                                 })
                             } else {
                                 Log.w(TAG, "❌ Recording start failed, status: $status")
@@ -143,7 +143,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 停止录音
+     * Stop recording
      */
     @ReactMethod
     fun stopRecord(serialNumber: String, promise: Promise) {
@@ -151,13 +151,13 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
             Log.i(TAG, "🛑 Request to stop recording - checking local state...")
             Log.d(TAG, "Current local recording state: $isRecording")
             
-            // 简单检查本地状态
+            // Simple check of local state
             if (!isRecording) {
                 promise.reject("NOT_RECORDING", "Not currently recording")
                 return
             }
 
-            // 直接停止录音，依赖录音事件来同步状态
+            // Stop recording directly, rely on recording events to sync state
             performStopRecord(promise)
 
         } catch (e: Exception) {
@@ -167,7 +167,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
     
     /**
-     * 执行实际的录音停止操作
+     * Execute actual recording stop operation
      */
     private fun performStopRecord(promise: Promise) {
         try {
@@ -175,7 +175,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
             
             val bleAgent = TntAgent.getInstant().bleAgent
             
-            // 使用场景1（会议）
+            // Use scenario 1 (meeting)
             val scene = 1
             
             bleAgent.stopRecord(
@@ -194,7 +194,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
                             val fileExist = response.isFileExist
                             val fileSize = response.fileSize
                             
-                            // 只要收到RecordStopRsp就认为录音成功停止（参考原生demo处理方式）
+                            // Consider recording successfully stopped when RecordStopRsp is received (refer to native demo)
                             isRecording = false
                             Log.i(TAG, "✅ Recording stopped successfully, sessionId: $sessionId, reason: $reason, fileExist: $fileExist, fileSize: $fileSize")
                             
@@ -207,11 +207,11 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
                                 putString("message", "Recording stopped successfully")
                             })
                             
-                            // 发送录音结束事件（应用主动发起）
+                            // Send recording end event (initiated by app)
                             sendEvent("onRecordingStopped", Arguments.createMap().apply {
                                 putString("sessionId", sessionId.toString())
                                 putLong("timestamp", System.currentTimeMillis())
-                                putString("source", "app") // 标识来源是应用
+                                putString("source", "app") // Identify source as app
                                 putBoolean("fileExist", fileExist)
                                 putLong("fileSize", fileSize)
                             })
@@ -236,7 +236,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 智能录音切换 - 根据设备当前状态自动判断开始或停止录音
+     * Smart recording toggle - automatically decide to start or stop recording based on current device state
      */
     @ReactMethod
     fun toggleRecording(deviceId: String, options: ReadableMap?, promise: Promise) {
@@ -245,7 +245,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
             
             val bleAgent = TntAgent.getInstant().bleAgent
             
-            // 获取设备当前状态
+            // Get current device state
             bleAgent.getState(
                 object : AgentCallback.OnRequest {
                     override fun onCallback(success: Boolean) {
@@ -255,18 +255,18 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
                 object : AgentCallback.OnResponse<sdk.penblesdk.entity.bean.ble.response.GetStateRsp> {
                     override fun onCallback(response: sdk.penblesdk.entity.bean.ble.response.GetStateRsp?) {
                         if (response != null) {
-                            val deviceRecording = response.keyStateCode == 4L // 4表示正在录音
+                            val deviceRecording = response.keyStateCode == 4L // 4 indicates recording
                             Log.i(TAG, "🎯 Device state: ${if (deviceRecording) "RECORDING" else "IDLE"} (keyState: ${response.keyStateCode})")
                             
-                            // 同步本地状态
+                            // Sync local state
                             isRecording = deviceRecording
                             
                             if (deviceRecording) {
-                                // 设备正在录音 → 执行停止录音
+                                // Device is recording → execute stop recording
                                 Log.i(TAG, "🛑 Device is recording, will STOP recording")
                                 performStopRecord(promise)
                             } else {
-                                // 设备空闲 → 执行开始录音
+                                // Device is idle → execute start recording
                                 Log.i(TAG, "▶️ Device is idle, will START recording")
                                 performStartRecord(promise)
                             }
@@ -299,7 +299,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 开始录音的便捷方法（兼容性）
+     * Convenient method for start recording (compatibility)
      */
     @ReactMethod
     fun startRecording(deviceId: String, options: ReadableMap?, promise: Promise) {
@@ -307,7 +307,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 停止录音的便捷方法（兼容性）
+     * Convenient method for stop recording (compatibility)
      */
     @ReactMethod
     fun stopRecording(promise: Promise) {
@@ -315,7 +315,7 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取录音状态
+     * Get recording status
      */
     @ReactMethod
     fun getRecordingStatus(promise: Promise) {
@@ -329,14 +329,14 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 开始实时录音同步（JS端兼容方法）
+     * Start real-time recording sync (JS compatibility method)
      */
     @ReactMethod
     fun startRealTimeSync(sessionId: Int, options: ReadableMap?, promise: Promise) {
         try {
             Log.d(TAG, "Starting real-time sync for session: $sessionId")
             
-            // 直接调用真实的录音开始方法
+            // Directly call the real recording start method
             startRecord("", "", promise)
 
         } catch (e: Exception) {
@@ -346,14 +346,14 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 停止实时录音同步（JS端兼容方法）
+     * Stop real-time recording sync (JS compatibility method)
      */
     @ReactMethod
     fun stopRealTimeSync(promise: Promise) {
         try {
             Log.d(TAG, "Stopping real-time sync")
             
-            // 直接调用真实的录音停止方法
+            // Directly call the real recording stop method
             stopRecord("", promise)
 
         } catch (e: Exception) {
@@ -363,47 +363,47 @@ class PlaudRecordingModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 处理来自PlaudBluetoothModule转发的录音事件
-     * 用于同步录音状态
+     * Handle recording events forwarded from PlaudBluetoothModule
+     * Used to sync recording state
      */
     fun handleRecordingStateChange(isRecording: Boolean, sessionId: Long?) {
         Log.d(TAG, "📱 Received recording state change from device: isRecording=$isRecording, sessionId=$sessionId")
         
-        // 同步本地状态
+        // Sync local state
         this.isRecording = isRecording
         
         if (isRecording) {
-            // 设备开始录音
+            // Device starts recording
             sendEvent("onRecordingStarted", Arguments.createMap().apply {
                 putString("sessionId", sessionId?.toString())
                 putLong("timestamp", System.currentTimeMillis())
-                putString("source", "device") // 标识来源是设备按键
+                putString("source", "device") // Identify source as device button
             })
             Log.d(TAG, "✅ Device started recording - state synced")
         } else {
-            // 设备结束录音
+            // Device ends recording
             sendEvent("onRecordingStopped", Arguments.createMap().apply {
                 putString("sessionId", sessionId?.toString())
                 putLong("timestamp", System.currentTimeMillis())
-                putString("source", "device") // 标识来源是设备按键
+                putString("source", "device") // Identify source as device button
             })
             Log.d(TAG, "✅ Device stopped recording - state synced")
         }
     }
 
     /**
-     * 添加事件监听器方法
+     * Add event listener method
      */
     @ReactMethod
     fun addListener(eventName: String) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 
     /**
-     * 移除事件监听器方法
+     * Remove event listener method
      */
     @ReactMethod
     fun removeListeners(count: Int) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 }

@@ -44,14 +44,14 @@ RCT_EXPORT_MODULE(PlaudRecording);
         _isRecording = NO;
         _isPaused = NO;
         
-        // 不直接设置delegate，而是监听通知
-        // 注册设备状态更新通知
+        // Don't set delegate directly, but listen to notifications
+        // Register device status update notifications
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(handleDeviceStateChanged:) 
                                                      name:@"PlaudDeviceStateUpdated" 
                                                    object:nil];
         
-        // 注册专门的录音状态通知
+        // Register dedicated recording status notifications
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(handleRecordingStarted:) 
                                                      name:@"PlaudRecordingStarted" 
@@ -100,7 +100,7 @@ RCT_EXPORT_MODULE(PlaudRecording);
             RCTLogInfo(@"🍎 [Recording] Received device state notification - keyState:%ld state:%ld privacy:%ld", 
                       (long)keyState, (long)state, (long)privacy);
             
-            // 使用相同的逻辑处理录音状态
+            // Use same logic to handle recording status
             [self handleRecordingStateChange:keyState];
         }
     }
@@ -108,15 +108,15 @@ RCT_EXPORT_MODULE(PlaudRecording);
 
 - (void)handleRecordingStateChange:(NSInteger)keyState
 {
-    // 根据keyState判断录音状态
-    // 需要确认实际的keyState值对应的状态
+    // Determine recording status based on keyState
+    // Need to confirm actual keyState values corresponding to status
     RCTLogInfo(@"🎙️ [Recording] Processing keyState: %ld, current isRecording: %@, isPaused: %@", 
               (long)keyState, self.isRecording ? @"YES" : @"NO", self.isPaused ? @"YES" : @"NO");
     
     if (keyState == 2) {
-        // 正在录音
+        // Currently recording
         if (!self.isRecording) {
-            // 从空闲开始录音
+            // Start recording from idle
             self.isRecording = YES;
             self.isPaused = NO;
             [self sendEventWithName:@"onRecordingStarted" body:@{
@@ -127,7 +127,7 @@ RCT_EXPORT_MODULE(PlaudRecording);
             }];
             RCTLogInfo(@"🎙️ Recording started event sent");
         } else if (self.isPaused) {
-            // 从暂停恢复录音
+            // Resume recording from pause
             self.isPaused = NO;
             [self sendEventWithName:@"onRecordingResumed" body:@{
                 @"success": @YES,
@@ -139,7 +139,7 @@ RCT_EXPORT_MODULE(PlaudRecording);
             RCTLogInfo(@"🎙️ Recording resumed event sent");
         }
     } else if (keyState == 1) {
-        // 录音暂停
+        // Recording paused
         if (self.isRecording && !self.isPaused) {
             self.isPaused = YES;
             [self sendEventWithName:@"onRecordingPaused" body:@{
@@ -152,7 +152,7 @@ RCT_EXPORT_MODULE(PlaudRecording);
             RCTLogInfo(@"⏸️ Recording paused event sent");
         }
     } else if (keyState == 0) {
-        // 空闲状态（录音结束）
+        // Idle state (recording ended)
         if (self.isRecording) {
             NSNumber *sessionId = self.currentSessionId;
             self.isRecording = NO;
@@ -168,7 +168,7 @@ RCT_EXPORT_MODULE(PlaudRecording);
             RCTLogInfo(@"🛑 Recording stopped event sent");
         }
     } else {
-        // 处理未知的keyState值
+        // Handle unknown keyState values
         RCTLogInfo(@"🎙️ [Recording] Unknown keyState: %ld - no action taken", (long)keyState);
     }
 }
@@ -516,6 +516,6 @@ RCT_EXPORT_METHOD(getRecordingStatus:(RCTPromiseResolveBlock)resolve
     [self sendEventWithName:@"onRecordingProgress" body:progressData];
 }
 
-// 注意：原来的delegate方法已被移除，现在通过通知机制接收录音状态变化
+// Note: Original delegate methods have been removed, now receive recording status changes through notification mechanism
 
 @end

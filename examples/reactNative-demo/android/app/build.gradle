@@ -86,15 +86,15 @@ android {
         versionCode 1
         versionName "1.0"
 
-        // 支持ABI架构
+        // Supported ABI architectures
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a"
         }
     }
 
-    // 打包选项
+    // Packaging options
     packagingOptions {
-        // 解决重复JNI库文件冲突
+        // Resolve duplicate JNI library file conflicts
         pickFirst '**/libc++_shared.so'
         pickFirst '**/libjsc.so'
         pickFirst '**/libfbjni.so'
@@ -137,10 +137,10 @@ dependencies {
         implementation jscFlavor
     }
 
-    // Plaud SDK依赖
+    // Plaud SDK dependencies
     implementation files('libs/plaud-sdk.aar')
     
-    // Android核心依赖
+    // Android core dependencies
     implementation 'androidx.annotation:annotation:1.5.0'
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -148,29 +148,29 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.6.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.4'
     
-    // 蓝牙和位置服务
+    // Bluetooth and location services
     implementation "com.google.android.gms:play-services-location:21.2.0"
     
-    // Firebase依赖 (SDK需要)
+    // Firebase dependencies (required by SDK)
     implementation platform('com.google.firebase:firebase-bom:32.1.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-config-ktx'
     
-    // 网络依赖
+    // Network dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
     
-    // 协程支持
+    // Coroutine support
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     
-    // 日志依赖
+    // Logging dependencies
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.github.tony19:logback-android:2.0.0'
     implementation 'org.slf4j:slf4j-api:1.7.32'
     
-    // 加密支持
+    // Encryption support
     implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
     
     // WebSocket

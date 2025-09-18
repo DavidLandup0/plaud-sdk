@@ -80,7 +80,7 @@ RCT_EXPORT_METHOD(setEnvironment:(NSString *)envName
     if ([environment isEqualToString:ENV_DEVELOPMENT]) {
         return @{
             @"name": ENV_DEVELOPMENT,
-            @"displayName": @"美国生产环境",
+            @"displayName": @"US Production Environment",
             @"baseUrl": @"https://platform.plaud.ai",
             @"appKey": @"plaud-rVDQilOD-1749538697969",
             @"appSecret": @"oCQjl2U5TQxOHvd1sMLNJ3qIzNgbcZbh"
@@ -88,7 +88,7 @@ RCT_EXPORT_METHOD(setEnvironment:(NSString *)envName
     } else if ([environment isEqualToString:ENV_TEST]) {
         return @{
             @"name": ENV_TEST,
-            @"displayName": @"测试环境",
+            @"displayName": @"Test Environment",
             @"baseUrl": @"https://platform-test.plaud.ai",
             @"appKey": @"plaud-test-key",
             @"appSecret": @"plaud-test-secret"
@@ -96,7 +96,7 @@ RCT_EXPORT_METHOD(setEnvironment:(NSString *)envName
     } else if ([environment isEqualToString:ENV_PRODUCTION]) {
         return @{
             @"name": ENV_PRODUCTION,
-            @"displayName": @"生产环境",
+            @"displayName": @"Production Environment",
             @"baseUrl": @"https://platform.plaud.ai",
             @"appKey": @"plaud-prod-key",
             @"appSecret": @"plaud-prod-secret"
@@ -106,7 +106,7 @@ RCT_EXPORT_METHOD(setEnvironment:(NSString *)envName
     // Default to development
     return @{
         @"name": ENV_DEVELOPMENT,
-        @"displayName": @"开发环境",
+        @"displayName": @"Development Environment",
         @"baseUrl": @"https://platform-dev.plaud.ai",
         @"appKey": @"plaud-dev-key",
         @"appSecret": @"plaud-dev-secret"

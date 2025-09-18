@@ -14,7 +14,7 @@ class PlaudUploadModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 发送事件到React Native
+     * Send event to React Native
      */
     private fun sendEvent(eventName: String, params: WritableMap?) {
         reactApplicationContext
@@ -23,14 +23,14 @@ class PlaudUploadModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 上传文件到云端
+     * Upload file to cloud
      */
     @ReactMethod
     fun uploadFile(filePath: String, options: ReadableMap?, promise: Promise) {
         try {
             Log.d(TAG, "Uploading file: $filePath")
             
-            // TODO: 实现文件上传逻辑
+            // TODO: Implement file upload logic
             
             promise.resolve(Arguments.createMap().apply {
                 putBoolean("success", true)
@@ -45,19 +45,19 @@ class PlaudUploadModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 添加事件监听器方法
+     * Add event listener method
      */
     @ReactMethod
     fun addListener(eventName: String) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 
     /**
-     * 移除事件监听器方法
+     * Remove event listener method
      */
     @ReactMethod
     fun removeListeners(count: Int) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 }
 

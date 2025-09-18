@@ -13,20 +13,20 @@
 @interface PlaudBluetoothModule () <PlaudDeviceAgentProtocol>
 @property (nonatomic, strong) NSMutableArray<BleDevice *> *discoveredDevices;
 @property (nonatomic, strong) BleDevice *connectedDevice;
-@property (nonatomic, strong) BleDevice *connectingDevice; // 正在连接的设备
+@property (nonatomic, strong) BleDevice *connectingDevice; // Currently connecting device
 @property (nonatomic, assign) BOOL isScanning;
-// 实时设备状态缓存
+// Real-time device status cache
 @property (nonatomic, strong) NSMutableDictionary *deviceStateInfo;
 @property (nonatomic, strong) NSMutableDictionary *storageInfo;
 @property (nonatomic, strong) NSMutableDictionary *batteryInfo;
 
-// 连接完成状态跟踪
+// Connection completion status tracking
 @property (nonatomic, assign) BOOL hasReceivedDeviceState;
 @property (nonatomic, assign) BOOL hasReceivedBatteryInfo;
 @property (nonatomic, assign) BOOL hasReceivedStorageInfo;
 @property (nonatomic, assign) BOOL hasReceivedFileList;
 
-// 私有方法声明
+// Private method declarations
 - (NSDictionary *)deviceToDictionary:(BleDevice *)device;
 - (void)fetchAllDeviceInfoAfterConnection;
 - (void)checkConnectionCompletionStatus;
@@ -67,18 +67,18 @@ RCT_EXPORT_MODULE(PlaudBluetooth);
 {
     self = [super init];
     if (self) {
-        // 不在初始化时设置delegate，将在startScan时设置
+        // Don't set delegate during initialization, will set during startScan
         _discoveredDevices = [NSMutableArray array];
         _isScanning = NO;
         _connectedDevice = nil;
         _connectingDevice = nil;
         
-        // 初始化实时状态缓存
+        // Initialize real-time status cache
         _deviceStateInfo = [[NSMutableDictionary alloc] init];
         _storageInfo = [[NSMutableDictionary alloc] init];
         _batteryInfo = [[NSMutableDictionary alloc] init];
         
-        // 初始化连接完成状态标志
+        // Initialize connection completion status flag
         [self resetConnectionCompletionFlags];
     }
     return self;
@@ -106,7 +106,7 @@ RCT_EXPORT_METHOD(startScan:(NSDictionary *)options
             // Clear previous results
             [self.discoveredDevices removeAllObjects];
             
-            // 关键修复：设置当前模块为唯一delegate
+            // Key fix: set current module as unique delegate
             [PlaudDeviceAgent shared].delegate = self;
             RCTLogInfo(@"🍎 Set PlaudBluetoothModule as PRIMARY DELEGATE for all events");
             NSLog(@"[RN] 📱 Bluetooth module set as primary delegate");
@@ -227,13 +227,13 @@ RCT_EXPORT_METHOD(refreshDeviceInfo:(RCTPromiseResolveBlock)resolve
                 return;
             }
             
-            // 主动获取设备状态信息
+            // Actively get device status information
             [[PlaudDeviceAgent shared] getState];
             
-            // 主动获取存储信息
+            // Actively get storage information
             [[PlaudDeviceAgent shared] getStorage];
             
-            // 主动获取充电状态信息
+            // Actively get charging status information
             [[PlaudDeviceAgent shared] getChargingState];
             
             resolve(@{
@@ -275,7 +275,7 @@ RCT_EXPORT_METHOD(connectDevice:(NSString *)deviceId
             [PlaudDeviceAgent shared].delegate = self;
             RCTLogInfo(@"🍎 Set PlaudBluetoothModule as delegate for connection");
             
-            // 保存正在连接的设备引用
+            // Save reference to connecting device
             self.connectingDevice = targetDevice;
             RCTLogInfo(@"🍎 Saved connecting device: %@", targetDevice.serialNumber);
             
@@ -402,7 +402,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
 
 #pragma mark - PlaudDeviceAgentProtocol
 
-// 录音开始回调 - 参考原生demo的确切方法签名
+// Recording start callback - refer to native demo exact method signature
 - (void)bleRecordStartWithSessionId:(NSInteger)sessionId 
                               start:(NSInteger)start 
                              status:(NSInteger)status 
@@ -413,7 +413,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     NSLog(@"[RN] 🎙️ Recording started - sessionId:%ld scene:%ld reason:%ld", 
           (long)sessionId, (long)scene, (long)reason);
     
-    // 发送录音开始通知
+    // Send recording start notification
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudRecordingStarted" 
                                                         object:nil
                                                       userInfo:@{
@@ -426,7 +426,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
                                                           @"timestamp": @([[NSDate date] timeIntervalSince1970] * 1000)
                                                       }];
     
-    // 测试事件发送
+    // Test event sending
     [self sendEventWithName:@"onRecordingStart" body:@{
         @"sessionId": @(sessionId),
         @"start": @(start),
@@ -446,7 +446,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     NSLog(@"[RN] 🛑 Recording stopped - sessionId:%ld reason:%ld fileExist:%@", 
           (long)sessionId, (long)reason, fileExist ? @"YES" : @"NO");
     
-    // 发送录音结束通知
+    // Send recording end notification
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudRecordingStopped" 
                                                         object:nil
                                                       userInfo:@{
@@ -466,7 +466,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     NSLog(@"[RN] ⏸️ Recording paused - sessionId:%ld reason:%ld", 
           (long)sessionId, (long)reason);
     
-    // 发送录音暂停通知
+    // Send recording pause notification
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudRecordingPaused" 
                                                         object:nil
                                                       userInfo:@{
@@ -487,7 +487,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     NSLog(@"[RN] ▶️ Recording resumed - sessionId:%ld scene:%ld", 
           (long)sessionId, (long)scene);
     
-    // 发送录音恢复通知
+    // Send recording resume notification
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudRecordingResumed" 
                                                         object:nil
                                                       userInfo:@{
@@ -528,7 +528,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     RCTLogInfo(@"🍎 Connection state changed: %ld", (long)state);
     
     if (state == 1) { // Connected
-        // 使用我们保存的连接设备，如果没有则尝试从SDK获取
+        // Use our saved connected device, try to get from SDK if none
         if (!self.connectingDevice) {
             self.connectedDevice = [PlaudDeviceAgent shared].recentConnectDevice;
             RCTLogInfo(@"🍎 Using SDK recentConnectDevice as fallback");
@@ -538,10 +538,10 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
         
         RCTLogInfo(@"🍎 Connection established for device: %@", self.connectedDevice.serialNumber ?: @"unknown");
         
-        // 通知其他模块设备已连接（即使设备对象为nil也通知，让其他模块知道连接状态）
+        // Notify other modules device connected (notify even if device object is nil, let other modules know connection status)
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudDeviceConnected" object:self.connectedDevice];
         
-        // 创建设备信息字典，确保不返回nil
+        // Create device info dictionary, ensure not returning nil
         NSDictionary *deviceDict = [self deviceToDictionary:self.connectedDevice];
         if (!deviceDict) {
             deviceDict = @{
@@ -552,7 +552,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
             };
         }
         
-        // 立即发送连接成功事件
+        // Immediately send connection success event
         [self sendEventWithName:@"onDeviceConnected" body:@{
             @"success": @YES,
             @"connected": @YES,
@@ -567,15 +567,15 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
         
         NSLog(@"[RN] ✅ Device connected successfully, waiting for device state callback...");
         
-        // 重置连接完成标志，为新连接准备
+        // Reset connection completion flag, prepare for new connection
         [self resetConnectionCompletionFlags];
         
     } else if (state == 0 || state == 2) { // Disconnected or Failed
         BleDevice *lastDevice = self.connectedDevice;
         self.connectedDevice = nil;
-        self.connectingDevice = nil; // 清理连接中的设备引用
+        self.connectingDevice = nil; // Clean up connecting device reference
         
-        // 通知其他模块设备已断开
+        // Notify other modules device disconnected
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudDeviceDisconnected" object:nil];
         
         [self sendEventWithName:@"onDeviceDisconnected" body:@{
@@ -592,7 +592,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     }
 }
 
-// 设备状态回调 - 参考原生demo的DeviceInfoViewController实现
+// Device status callback - refer to native demo DeviceInfoViewController implementation
 - (void)blePenStateWithState:(NSInteger)state 
                     privacy:(NSInteger)privacy 
                    keyState:(NSInteger)keyState 
@@ -605,10 +605,10 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
                (long)state, (long)privacy, (long)keyState, (long)uDisk, 
                (long)findMyToken, (long)hasSndpKey, (long)deviceAccessToken);
     
-    // 每次状态变化时检查delegate
+    // Check delegate on every status change
     [self checkDelegateStatusNow];
     
-    // 更新设备状态缓存
+    // Update device status cache
     [self.deviceStateInfo setObject:@{
         @"state": @(state),
         @"privacy": @(privacy),
@@ -617,25 +617,25 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
         @"findMyToken": @(findMyToken),
         @"hasSndpKey": @(hasSndpKey),
         @"deviceAccessToken": @(deviceAccessToken),
-        @"usbDiskMode": @(uDisk == 1), // USB磁盘模式
-        @"usbAccessEnabled": @(privacy == 0), // USB访问权限
+        @"usbDiskMode": @(uDisk == 1), // USB disk mode
+        @"usbAccessEnabled": @(privacy == 0), // USB access permission
         @"timestamp": @([[NSDate date] timeIntervalSince1970] * 1000)
     } forKey:@"deviceState"];
     
-    // 通知其他模块设备状态更新，传递完整的状态信息
+    // Notify other modules device status update, pass complete status info
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudDeviceStateUpdated" 
                                                         object:nil
                                                       userInfo:self.deviceStateInfo[@"deviceState"]];
     
-    // 发送设备状态事件到JS端
+    // Send device status event to JS side
     dispatch_async(dispatch_get_main_queue(), ^{
         [self sendEventWithName:@"onDeviceStateChanged" body:self.deviceStateInfo[@"deviceState"]];
     });
     
-    // 设置设备状态已接收标志
+    // Set device status received flag
     self.hasReceivedDeviceState = YES;
     
-    // 当设备状态回调触发时，说明设备已经完全初始化，现在可以安全获取其他信息
+    // When device status callback triggers, device is fully initialized, now safe to get other info
     if (self.connectedDevice && !self.hasReceivedBatteryInfo && !self.hasReceivedStorageInfo) {
         NSLog(@"[RN] 📡 Device state received, now fetching battery and storage info...");
         [self fetchAllDeviceInfoAfterConnection];
@@ -644,7 +644,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     [self checkConnectionCompletionStatus];
 }
 
-// 存储信息回调
+// Storage info callback
 - (void)bleStorageWithTotal:(NSInteger)total free:(NSInteger)free duration:(NSInteger)duration
 {
     RCTLogInfo(@"🍎 ✅ Storage info callback triggered - total:%ld free:%ld duration:%ld", (long)total, (long)free, (long)duration);
@@ -652,7 +652,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     NSInteger usedSpace = total - free;
     double usagePercent = total > 0 ? (double)usedSpace / total * 100.0 : 0.0;
     
-    // 更新存储信息缓存
+    // Update storage info cache
     [self.storageInfo setObject:@{
         @"totalSpace": @(total),
         @"freeSpace": @(free), 
@@ -665,41 +665,41 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
         @"timestamp": @([[NSDate date] timeIntervalSince1970] * 1000)
     } forKey:@"storage"];
     
-    // 通知其他模块存储信息更新
+    // Notify other modules storage info update
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudStorageInfoUpdated" object:self.storageInfo[@"storage"]];
     
-    // 发送存储信息事件到JS端
+    // Send storage info event to JS side
     dispatch_async(dispatch_get_main_queue(), ^{
         [self sendEventWithName:@"onStorageInfoUpdated" body:self.storageInfo[@"storage"]];
     });
     
-    // 设置存储信息已接收标志
+    // Set storage info received flag
     self.hasReceivedStorageInfo = YES;
     [self checkConnectionCompletionStatus];
 }
 
-// 电池电量变化回调
+// Battery level change callback
 - (void)blePowerChangeWithPower:(NSInteger)power oldPower:(NSInteger)oldPower
 {
     RCTLogInfo(@"🍎 Battery power change - power:%ld oldPower:%ld", (long)power, (long)oldPower);
     
-    // 获取当前充电状态（从之前的信息中）
+    // Get current charging status (from previous info)
     BOOL isCharging = [self.batteryInfo[@"battery"][@"isCharging"] boolValue];
     
-    // 更新电池信息缓存
+    // Update battery info cache
     [self updateBatteryInfo:power isCharging:isCharging];
 }
 
-// 充电状态回调
+// Charging status callback
 - (void)bleChargingStateWithIsCharging:(BOOL)isCharging level:(NSInteger)level
 {
     RCTLogInfo(@"🍎 ✅ Charging state callback triggered - isCharging:%@ level:%ld", isCharging ? @"YES" : @"NO", (long)level);
     
-    // 更新电池信息缓存
+    // Update battery info cache
     [self updateBatteryInfo:level isCharging:isCharging];
 }
 
-// 文件列表回调 - 与文件管理模块共享数据
+// File list callback - share data with file management module
 - (void)bleFileListWithBleFiles:(NSArray<BleFile *> *)bleFiles
 {
     RCTLogInfo(@"🍎 [BluetoothModule] File list received: %lu files", (unsigned long)bleFiles.count);
@@ -709,18 +709,18 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
         return;
     }
     
-    // 使用通知中心通知文件管理模块更新文件列表
+    // Use notification center to notify file management module update file list
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudFileListUpdated" object:bleFiles];
     
-    // 发送文件列表更新事件
+    // Send file list update event
     NSMutableArray *filesArray = [NSMutableArray array];
     for (BleFile *file in bleFiles) {
-        // 创建文件基本信息字典
+        // Create file basic info dictionary
         NSDictionary *fileDict = @{
             @"sessionId": @(file.sessionId),
             @"fileSize": @(file.size),
             @"scene": @(file.scenes),
-            @"createTime": @(file.sessionId), // sessionId 就是时间戳
+            @"createTime": @(file.sessionId), // sessionId is timestamp
             @"channels": @(file.channels ?: 1)
         };
         [filesArray addObject:fileDict];
@@ -732,23 +732,23 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
         @"timestamp": @([[NSDate date] timeIntervalSince1970] * 1000)
     }];
     
-    // 设置文件列表已接收标志
+    // Set file list received flag
     self.hasReceivedFileList = YES;
 }
 
 #pragma mark - Helper Methods
 
-// 更新电池信息的统一方法
+// Unified method to update battery info
 - (void)updateBatteryInfo:(NSInteger)level isCharging:(BOOL)isCharging
 {
     NSString *batteryText;
     if (level >= 0 && level <= 100) {
         batteryText = [NSString stringWithFormat:@"%ld%%", (long)level];
     } else {
-        batteryText = @"未知";
+        batteryText = @"Unknown";
     }
     
-    // 更新电池信息缓存
+    // Update battery info cache
     [self.batteryInfo setObject:@{
         @"batteryLevel": @(level),
         @"isCharging": @(isCharging),
@@ -756,20 +756,20 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
         @"timestamp": @([[NSDate date] timeIntervalSince1970] * 1000)
     } forKey:@"battery"];
     
-    // 通知其他模块电池信息更新
+    // Notify other modules battery info update
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudBatteryInfoUpdated" object:self.batteryInfo[@"battery"]];
     
-    // 发送电池信息事件到JS端
+    // Send battery info event to JS side
     dispatch_async(dispatch_get_main_queue(), ^{
         [self sendEventWithName:@"onBatteryInfoUpdated" body:self.batteryInfo[@"battery"]];
     });
     
-    // 设置电池信息已接收标志
+    // Set battery info received flag
     self.hasReceivedBatteryInfo = YES;
     [self checkConnectionCompletionStatus];
 }
 
-// 格式化存储大小 - 使用1000作为单位换算，与原生demo保持一致  
+// Format storage size - use 1000 as unit conversion, consistent with native demo  
 - (NSString *)formatStorageBytes:(NSInteger)bytes
 {
     if (bytes < 0) return @"--";
@@ -794,13 +794,13 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     if (!device) return nil;
     
     @try {
-        // 安全处理字符串属性
+        // Safely handle string properties
         NSString *safeUuid = (device.uuid && [device.uuid isKindOfClass:[NSString class]]) ? device.uuid : @"unknown";
         NSString *safeName = (device.name && [device.name isKindOfClass:[NSString class]]) ? device.name : @"Unknown Device";
         NSString *safeSerialNumber = (device.serialNumber && [device.serialNumber isKindOfClass:[NSString class]]) ? device.serialNumber : @"unknown";
         NSString *safeManufacturer = (device.manufacturer && [device.manufacturer isKindOfClass:[NSString class]]) ? device.manufacturer : @"unknown";
         
-        // 尝试获取完整版本信息
+        // Try to get complete version info
         NSString *fullVersion = nil;
         if ([device respondsToSelector:@selector(wholeVersion)]) {
             fullVersion = [(id)device wholeVersion];
@@ -824,7 +824,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
         
     } @catch (NSException *exception) {
         RCTLogError(@"🍎 Error in deviceToDictionary: %@", exception.reason);
-        // 返回最基本的设备信息
+        // Return most basic device info
         return @{
             @"id": @"unknown",
             @"name": @"Device",
@@ -846,7 +846,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
 {
     if (!file) return nil;
     
-    // 基本文件信息，用于事件通知
+    // Basic file info for event notification
     return @{
         @"sessionId": @(file.sessionId),
         @"fileSize": @(file.size),
@@ -858,12 +858,12 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
 
 #pragma mark - File Download Delegate Methods
 
-// 接收文件下载数据并转发给文件管理模块
+// Receive file download data and forward to file management module
 - (void)bleDataWithSessionId:(int)sessionId start:(int)start data:(NSData *)data
 {
     NSLog(@"🍎 [PlaudBluetoothModule] bleData - sessionId:%d start:%d dataSize:%lu", sessionId, start, (unsigned long)data.length);
     
-    // 转发数据到文件管理模块的通知
+    // Forward data to file management module notification
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudFileDataReceived" object:nil userInfo:@{
         @"sessionId": @(sessionId),
         @"start": @(start),
@@ -871,7 +871,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     }];
 }
 
-// 文件同步头信息
+// File sync header info
 - (void)bleSyncFileHeadWithSessionId:(int)sessionId size:(int)size start:(int)start end:(int)end
 {
     NSLog(@"🍎 [PlaudBluetoothModule] bleSyncFileHead - sessionId:%d size:%d start:%d end:%d", sessionId, size, start, end);
@@ -884,7 +884,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     }];
 }
 
-// 文件同步完成
+// File sync completed
 - (void)bleSyncFileTailWithSessionId:(int)sessionId crc:(int)crc
 {
     NSLog(@"🍎 [PlaudBluetoothModule] bleSyncFileTail - sessionId:%d crc:%d", sessionId, crc);
@@ -895,7 +895,7 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     }];
 }
 
-// 文件同步停止
+// File sync stopped
 - (void)bleSyncFileStop
 {
     NSLog(@"🍎 [PlaudBluetoothModule] bleSyncFileStop");
@@ -903,10 +903,10 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PlaudFileSyncStop" object:nil userInfo:@{}];
 }
 
-// 添加delegate监控机制 - 更频繁的检查
+// Add delegate monitoring mechanism - more frequent checks
 - (void)startDelegateMonitoring
 {
-    // 每2秒检查一次delegate状态
+    // Check delegate status every 2 seconds
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         while (YES) {
             sleep(2);
@@ -914,14 +914,14 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
                 PlaudDeviceAgent *agent = [PlaudDeviceAgent shared];
                 if (agent.delegate != self) {
                     NSLog(@"[RN] 🚨🚨🚨 DELEGATE WARNING Delegate has been changed! Current: %@, Expected: %@", agent.delegate, self);
-                    // 重新设置delegate
+                    // Reset delegate
                     agent.delegate = self;
                     NSLog(@"[RN] 🔧 DELEGATE FIX Restored delegate to PlaudBluetoothModule");
                 } else {
                     NSLog(@"[RN] ✅ DELEGATE CHECK Delegate is correctly set: %@", agent.delegate);
                 }
                 
-                // 额外检查：验证delegate是否响应我们的方法
+                // Additional check: verify delegate responds to our methods
                 if (agent.delegate && [(id)agent.delegate respondsToSelector:@selector(bleRecordStartWithSessionId:start:status:scene:startTime:reason:)]) {
                     NSLog(@"[RN] ✅ METHOD CHECK Delegate responds to bleRecordStart");
                 } else {
@@ -932,10 +932,10 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
     });
 }
 
-// 手动触发delegate状态检查
+// Manually trigger delegate status check
 - (void)checkDelegateStatusNow
 {
-    // 简化的delegate检查，仅在需要时使用
+    // Simplified delegate check, use only when needed
     PlaudDeviceAgent *agent = [PlaudDeviceAgent shared];
     if (agent.delegate != self) {
         NSLog(@"[RN] ⚠️ Delegate changed, restoring...");
@@ -957,10 +957,10 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
 {
     NSLog(@"[RN] 📡 Fetching battery, storage and file info...");
     
-    // 不重置状态标志，因为设备状态已经设置过了
+    // Don't reset status flags because device status already set
     // [self resetConnectionCompletionFlags];
     
-    // 立即获取电池和存储信息（设备状态已经在之前获取过了）
+    // Immediately get battery and storage info (device status already obtained before)
     NSLog(@"[RN] 🔋 Getting charging state...");
     [[PlaudDeviceAgent shared] getChargingState];
     
@@ -973,14 +973,14 @@ RCT_EXPORT_METHOD(getConnectedDevice:(RCTPromiseResolveBlock)resolve
 
 - (void)checkConnectionCompletionStatus
 {
-    // 检查是否所有关键信息都已获取（仅用于内部状态跟踪）
+    // Check if all key info obtained (for internal status tracking only)
     BOOL isBasicInfoComplete = self.hasReceivedDeviceState && 
                               self.hasReceivedBatteryInfo && 
                               self.hasReceivedStorageInfo;
     
     if (isBasicInfoComplete) {
         NSLog(@"[RN] ✅ All device info fetched in background!");
-        // 重置标志，为下次连接准备
+        // Reset flags, prepare for next connection
         [self resetConnectionCompletionFlags];
     } else {
         NSLog(@"[RN] ⏳ Background info fetching: state=%@, battery=%@, storage=%@", 

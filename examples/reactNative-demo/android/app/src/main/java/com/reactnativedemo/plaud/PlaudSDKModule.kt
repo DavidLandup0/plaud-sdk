@@ -18,7 +18,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 发送事件到React Native
+     * Send event to React Native
      */
     private fun sendEvent(eventName: String, params: WritableMap?) {
         reactApplicationContext
@@ -27,13 +27,13 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 初始化SDK
+     * Initialize SDK
      */
     @ReactMethod
     fun initSdk(options: ReadableMap?, promise: Promise) {
         try {
-            // 如果提供了options，则使用其中的appKey和appSecret
-            // 否则使用环境配置中的默认值
+            // If options are provided, use appKey and appSecret from them
+            // Otherwise use default values from environment configuration
             val appKey = options?.getString("appKey")
             val appSecret = options?.getString("appSecret")
             val environment = options?.getString("environment")
@@ -45,7 +45,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
             CoroutineScope(Dispatchers.Main).launch {
                 try {
                     val bleCore = PlaudBleCore.getInstance(reactApplicationContext)
-                    // 强制重新初始化，确保使用新的AppKey和AppSecret
+                    // Force reinitialization to ensure new AppKey and AppSecret are used
                     val success = bleCore.initSdk(appKey, appSecret, environment, true)
 
                     if (success) {
@@ -70,7 +70,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 用户登录
+     * User login
      */
     @ReactMethod
     fun login(appKey: String, appSecret: String, promise: Promise) {
@@ -104,7 +104,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 用户登出
+     * User logout
      */
     @ReactMethod
     fun logout(promise: Promise) {
@@ -122,7 +122,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 检查是否已登录
+     * Check if user is logged in
      */
     @ReactMethod
     fun isLoggedIn(promise: Promise) {
@@ -139,7 +139,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 切换服务器环境
+     * Switch server environment
      */
     @ReactMethod
     fun switchEnvironment(environment: String, promise: Promise) {
@@ -164,7 +164,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取当前环境信息
+     * Get current environment information
      */
     @ReactMethod
     fun getCurrentEnvironment(promise: Promise) {
@@ -181,7 +181,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 绑定设备
+     * Bind device
      */
     @ReactMethod
     fun bindDevice(ownerId: String, sn: String, snType: String, promise: Promise) {
@@ -210,7 +210,7 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 解绑设备
+     * Unbind device
      */
     @ReactMethod
     fun unbindDevice(ownerId: String, sn: String, snType: String, promise: Promise) {
@@ -239,18 +239,18 @@ class PlaudSDKModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 添加事件监听器方法（React Native端会调用）
+     * Add event listener method (called by React Native)
      */
     @ReactMethod
     fun addListener(eventName: String) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 
     /**
-     * 移除事件监听器方法（React Native端会调用）
+     * Remove event listener method (called by React Native)
      */
     @ReactMethod
     fun removeListeners(count: Int) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 }

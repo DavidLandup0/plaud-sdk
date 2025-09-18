@@ -31,7 +31,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 发送事件到React Native
+     * Send event to React Native
      */
     private fun sendEvent(eventName: String, params: WritableMap?) {
         reactApplicationContext
@@ -40,7 +40,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取录音文件列表
+     * Get recording file list
      */
     @ReactMethod
     fun getFileList(promise: Promise) {
@@ -49,7 +49,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
             
             val bleAgent = TntAgent.getInstant().bleAgent
             
-            // 获取所有文件，sessionId设为0表示获取全部
+            // Get all files, sessionId set to 0 means get all
             bleAgent.getRecSessions(
                 0L,
                 object : AgentCallback.OnRequest {
@@ -64,7 +64,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                             val fileList = response.fileList
                             Log.i(TAG, "✅ Found ${fileList.size} files")
                             
-                            // 转换为React Native可用的数据格式
+                            // Convert to React Native compatible data format
                             val rnFileList = Arguments.createArray()
                             for ((index, file) in fileList.withIndex()) {
                                 try {
@@ -89,7 +89,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                                     Log.d(TAG, "📄 File $index added to array successfully")
                                 } catch (e: Exception) {
                                     Log.e(TAG, "❌ Error processing file $index: ${e.message}", e)
-                                    // 继续处理下一个文件，不要因为一个文件出错就停止
+                                    // Continue processing next file, don't stop because one file error
                                 }
                             }
                             Log.i(TAG, "📁 Final file array size: ${rnFileList.size()}")
@@ -121,7 +121,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取设备存储信息
+     * Get device storage information
      */
     @ReactMethod
     fun getStorageInfo(promise: Promise) {
@@ -178,7 +178,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取设备状态
+     * Get device status
      */
     @ReactMethod
     fun getDeviceState(promise: Promise) {
@@ -226,7 +226,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 清理设备上的所有录音文件
+     * Clean all recording files on device
      */
     @ReactMethod
     fun clearAllFiles(promise: Promise) {
@@ -278,7 +278,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取设备电池状态
+     * Get device battery status
      */
     @ReactMethod
     fun getBatteryStatus(promise: Promise) {
@@ -323,16 +323,16 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取设备固件版本
+     * Get device firmware version
      */
     @ReactMethod
     fun getDeviceVersion(promise: Promise) {
         try {
-            // 从缓存的设备信息中获取版本
+            // Get version from cached device information
             val discoveredDevices = PlaudBleCore.getInstance(reactApplicationContext).getDiscoveredDevices()
             if (discoveredDevices.isNotEmpty()) {
                 val device = discoveredDevices.values.first()
-                val versionName = device.versionName ?: "未知版本"
+                val versionName = device.versionName ?: "Unknown version"
                 promise.resolve(Arguments.createMap().apply {
                     putBoolean("success", true)
                     putString("version", versionName)
@@ -353,7 +353,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 下载文件
+     * Download file
      */
     @ReactMethod
     fun downloadFile(sessionId: Double, options: ReadableMap?, promise: Promise) {
@@ -363,7 +363,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
             
             val bleAgent = TntAgent.getInstant().bleAgent
             
-            // 创建下载目录
+            // Create download directory
             val downloadDir = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "PlaudRecordings")
             if (!downloadDir.exists()) {
                 downloadDir.mkdirs()
@@ -377,7 +377,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                 var totalBytes = 0L
                 var lastUpdateTime = 0L
                 
-                // 创建数据处理回调
+                // Create data processing callback
                 val voiceDataCallback = object : ISyncVoiceDataKeepOut<ByteArray> {
                     override fun receiveVoiceData(data: ByteArray?, start: Long) {
                         data?.let { bytes ->
@@ -386,7 +386,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                                 totalBytes += bytes.size
                                 
                                 val currentTime = System.currentTimeMillis()
-                                if (currentTime - lastUpdateTime >= 500) { // 每0.5秒更新一次进度
+                                if (currentTime - lastUpdateTime >= 500) { // Update progress every 0.5 seconds
                                     sendEvent("onDownloadProgress", Arguments.createMap().apply {
                                         putDouble("sessionId", sessionId)
                                         putDouble("downloadedBytes", totalBytes.toDouble())
@@ -395,7 +395,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                                     lastUpdateTime = currentTime
                                 }
                             } catch (e: Exception) {
-                                Log.e(TAG, "写入文件数据出错: ${e.message}")
+                                Log.e(TAG, "Error writing file data: ${e.message}")
                             }
                         }
                     }
@@ -409,13 +409,13 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                     }
                     
                     override fun finish(code: Int) {
-                        Log.i(TAG, "文件处理完成，代码: $code")
+                        Log.i(TAG, "File processing completed, code: $code")
                     }
                     
                     override fun hasCompleteTail(): Boolean = true
                     
                     override fun flush() {
-                        Log.d(TAG, "数据刷新")
+                        Log.d(TAG, "Data refresh")
                     }
                 }
                 
@@ -450,10 +450,10 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                                     putString("filePath", outputFile.absolutePath)
                                     putString("fileName", fileName)
                                     putDouble("fileSize", totalBytes.toDouble())
-                                    putString("message", "文件下载完成，已保存到Downloads/PlaudRecordings文件夹")
+                                    putString("message", "File download completed, saved to Downloads/PlaudRecordings folder")
                                 })
                                 
-                                // 发送下载完成事件
+                                // Send download completed event
                                 sendEvent("onDownloadComplete", Arguments.createMap().apply {
                                     putDouble("sessionId", sessionId)
                                     putString("filePath", outputFile.absolutePath)
@@ -462,7 +462,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                                 })
                                 
                             } catch (e: Exception) {
-                                Log.e(TAG, "下载完成处理出错: ${e.message}")
+                                Log.e(TAG, "Download completion processing error: ${e.message}")
                                 promise.reject("DOWNLOAD_ERROR", "Download completion error: ${e.message}")
                             }
                         }
@@ -482,7 +482,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                 )
                 
             } catch (e: Exception) {
-                Log.e(TAG, "文件输出流创建失败: ${e.message}")
+                Log.e(TAG, "File output stream creation failed: ${e.message}")
                 promise.reject("DOWNLOAD_ERROR", "Failed to create output stream: ${e.message}")
             }
 
@@ -493,7 +493,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 兼容性方法：删除单个文件（目前SDK只支持清理全部文件）
+     * Compatibility method: delete single file (currently SDK only supports cleaning all files)
      */
     @ReactMethod
     fun deleteFile(sessionId: Double, promise: Promise) {
@@ -509,21 +509,21 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 格式化场景名称
+     * Format scene name
      */
     private fun getSceneName(scene: Int): String {
         return when (scene) {
-            1 -> "会议"
-            2 -> "课堂"
-            3 -> "访谈"
-            4 -> "音乐"
-            5 -> "备忘"
-            else -> "未知"
+            1 -> "Meeting"
+            2 -> "Classroom"
+            3 -> "Interview"
+            4 -> "Music"
+            5 -> "Memo"
+            else -> "Unknown"
         }
     }
 
     /**
-     * 格式化文件大小
+     * Format file size
      */
     private fun formatFileSize(bytes: Long): String {
         return when {
@@ -535,7 +535,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 格式化时长
+     * Format duration
      */
     private fun formatDuration(milliseconds: Long): String {
         val seconds = milliseconds / 1000
@@ -549,7 +549,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 格式化时间
+     * Format time
      */
     private fun formatTime(timestamp: Long): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
@@ -557,18 +557,18 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 添加事件监听器方法
+     * Add event listener method
      */
     @ReactMethod
     fun addListener(eventName: String) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 
     /**
-     * 移除事件监听器方法
+     * Remove event listener method
      */
     @ReactMethod
     fun removeListeners(count: Int) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 }

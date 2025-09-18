@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSMutableArray<BleFile *> *deviceFiles;
 @property (nonatomic, strong) NSMutableDictionary *downloadProgress;
 @property (nonatomic, strong) BleDevice *currentConnectedDevice;
-// 缓存实时设备信息
+// Cache real-time device information
 @property (nonatomic, strong) NSDictionary *cachedDeviceState;
 @property (nonatomic, strong) NSDictionary *cachedStorageInfo;
 @property (nonatomic, strong) NSDictionary *cachedBatteryInfo;
@@ -44,18 +44,18 @@ RCT_EXPORT_MODULE(PlaudFileManager);
 {
     self = [super init];
     if (self) {
-        // 不在初始化时设置delegate，避免与蓝牙模块冲突
-        // delegate将在实际需要文件操作时设置
+        // Don't set delegate during initialization to avoid conflicts with Bluetooth module
+        // Delegate will be set when file operations are actually needed
         _deviceFiles = [NSMutableArray array];
         _downloadProgress = [NSMutableDictionary dictionary];
         
-        // 监听来自蓝牙模块的文件列表更新通知
+        // Listen for file list update notifications from Bluetooth module
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleFileListUpdated:)
                                                      name:@"PlaudFileListUpdated"
                                                    object:nil];
         
-        // 监听设备连接/断开通知
+        // Listen for device connection/disconnection notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleDeviceConnected:)
                                                      name:@"PlaudDeviceConnected"
@@ -66,31 +66,31 @@ RCT_EXPORT_MODULE(PlaudFileManager);
                                                      name:@"PlaudDeviceDisconnected"
                                                    object:nil];
         
-        // 监听设备状态更新通知
+        // Listen for device status update notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleDeviceStateUpdated:)
                                                      name:@"PlaudDeviceStateUpdated"
                                                    object:nil];
         
-        // 监听存储信息更新通知
+        // Listen for storage information update notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleStorageInfoUpdated:)
                                                      name:@"PlaudStorageInfoUpdated"
                                                    object:nil];
         
-        // 监听电池信息更新通知
+        // Listen for battery information update notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleBatteryInfoUpdated:)
                                                      name:@"PlaudBatteryInfoUpdated"
                                                    object:nil];
         
-        // 监听文件列表更新通知
+        // Listen for file list update notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleFileListUpdated:)
                                                      name:@"PlaudFileListUpdated"
                                                    object:nil];
         
-        // 监听文件下载相关通知
+        // Listen for file download related notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleFileDataReceived:)
                                                      name:@"PlaudFileDataReceived"
@@ -111,8 +111,8 @@ RCT_EXPORT_MODULE(PlaudFileManager);
                                                      name:@"PlaudFileSyncStop"
                                                    object:nil];
         
-        // 不再设置delegate - 改为依赖PlaudBluetoothModule作为唯一delegate
-        // [PlaudDeviceAgent shared].delegate = self; // 移除：避免覆盖PlaudBluetoothModule的delegate
+        // No longer set delegate - changed to rely on PlaudBluetoothModule as unique delegate
+        // [PlaudDeviceAgent shared].delegate = self; // Removed: avoid overriding PlaudBluetoothModule's delegate
     }
     return self;
 }
@@ -148,7 +148,7 @@ RCT_EXPORT_MODULE(PlaudFileManager);
 {
     RCTLogInfo(@"🍎 [FileManagerModule] Device disconnected");
     self.currentConnectedDevice = nil;
-    // 清除缓存的设备信息
+    // Clear cached device information
     self.cachedDeviceState = nil;
     self.cachedStorageInfo = nil;
     self.cachedBatteryInfo = nil;
@@ -190,8 +190,8 @@ RCT_EXPORT_METHOD(getFileList:(RCTPromiseResolveBlock)resolve
     
     dispatch_async(dispatch_get_main_queue(), ^{
         @try {
-            // 返回当前已有的文件列表（由蓝牙模块管理）
-            // 或返回空列表，让应用知道需要通过其他方式获取
+            // Return current existing file list (managed by Bluetooth module)
+            // Or return empty list, let application know it needs to get through other means
             NSMutableArray *filesArray = [NSMutableArray array];
             for (BleFile *file in self.deviceFiles) {
                 [filesArray addObject:[self fileToDictionary:file]];
@@ -398,7 +398,7 @@ RCT_EXPORT_METHOD(getStorageInfo:(RCTPromiseResolveBlock)resolve
     
     dispatch_async(dispatch_get_main_queue(), ^{
         @try {
-            // 优先使用缓存的实时存储信息
+            // Prioritize using cached real-time storage info
             if (self.cachedStorageInfo) {
                 RCTLogInfo(@"🍎 Using cached storage info");
                 NSMutableDictionary *result = [self.cachedStorageInfo mutableCopy];
@@ -408,10 +408,10 @@ RCT_EXPORT_METHOD(getStorageInfo:(RCTPromiseResolveBlock)resolve
                 return;
             }
             
-            // 使用连接的设备信息计算存储空间
+            // Use connected device info to calculate storage space
             BleDevice *connectedDevice = self.currentConnectedDevice;
             if (!connectedDevice) {
-                // 设备未连接时返回默认值，避免JS端错误
+                // Return default values when device not connected, avoid JS errors
                 NSDictionary *defaultResult = @{
                     @"success": @YES,
                     @"totalSpace": @(0),
@@ -431,7 +431,7 @@ RCT_EXPORT_METHOD(getStorageInfo:(RCTPromiseResolveBlock)resolve
             NSInteger freeSpace = connectedDevice.free;
             NSInteger usedSpace = totalSpace - freeSpace;
             
-            // 格式化大小文本
+            // Format size text
             NSString *totalSpaceText = [self formatBytes:totalSpace];
             NSString *usedSpaceText = [self formatBytes:usedSpace];
             NSString *freeSpaceText = [self formatBytes:freeSpace];
@@ -472,7 +472,7 @@ RCT_EXPORT_METHOD(getDeviceState:(RCTPromiseResolveBlock)resolve
             NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
             
             if (!connectedDevice) {
-                // 设备未连接时返回默认状态，而不是拒绝
+                // Return default status when device not connected, rather than reject
                 result = [@{
                     @"success": @YES,
                     @"isRecording": @NO,
@@ -484,7 +484,7 @@ RCT_EXPORT_METHOD(getDeviceState:(RCTPromiseResolveBlock)resolve
                     @"message": @"Device not connected, returning default state"
                 } mutableCopy];
             } else {
-                // 设备已连接，返回实际状态
+                // Device connected, return actual status
                 result = [@{
                     @"success": @YES,
                     @"isRecording": @NO,
@@ -496,7 +496,7 @@ RCT_EXPORT_METHOD(getDeviceState:(RCTPromiseResolveBlock)resolve
                     @"message": @"Device state retrieved successfully"
                 } mutableCopy];
                 
-                // 如果有缓存的设备状态，包含USB模式信息
+                // If there's cached device status, include USB mode info
                 if (self.cachedDeviceState) {
                     result[@"usbDiskMode"] = self.cachedDeviceState[@"usbDiskMode"] ?: @NO;
                     result[@"usbAccessEnabled"] = self.cachedDeviceState[@"usbAccessEnabled"] ?: @NO;
@@ -521,12 +521,12 @@ RCT_EXPORT_METHOD(getBatteryStatus:(RCTPromiseResolveBlock)resolve
     
     dispatch_async(dispatch_get_main_queue(), ^{
         @try {
-            // 优先使用缓存的实时电池信息
+            // Prioritize using cached real-time battery info
             if (self.cachedBatteryInfo) {
                 RCTLogInfo(@"🍎 Using cached battery info");
                 NSMutableDictionary *result = [self.cachedBatteryInfo mutableCopy];
                 result[@"success"] = @YES;
-                result[@"charging"] = result[@"isCharging"]; // 保持API兼容性
+                result[@"charging"] = result[@"isCharging"]; // Maintain API compatibility
                 result[@"message"] = @"Real-time battery info retrieved successfully";
                 resolve(result);
                 return;
@@ -534,12 +534,12 @@ RCT_EXPORT_METHOD(getBatteryStatus:(RCTPromiseResolveBlock)resolve
             
             BleDevice *connectedDevice = self.currentConnectedDevice;
             if (!connectedDevice) {
-                // 设备未连接时返回默认电池状态
+                // Return default battery status when device not connected
                 NSDictionary *defaultResult = @{
                     @"success": @YES,
                     @"batteryLevel": @(-1),
                     @"charging": @NO,
-                    @"batteryText": @"未知",
+                    @"batteryText": @"Unknown",
                     @"message": @"Device not connected"
                 };
                 resolve(defaultResult);
@@ -553,7 +553,7 @@ RCT_EXPORT_METHOD(getBatteryStatus:(RCTPromiseResolveBlock)resolve
             if (batteryLevel >= 0 && batteryLevel <= 100) {
                 batteryText = [NSString stringWithFormat:@"%ld%%", (long)batteryLevel];
             } else {
-                batteryText = @"未知";
+                batteryText = @"Unknown";
             }
             
             NSDictionary *result = @{
@@ -583,10 +583,10 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
         @try {
             BleDevice *connectedDevice = self.currentConnectedDevice;
             if (!connectedDevice) {
-                // 设备未连接时返回默认版本信息
+                // Return default version info when device not connected
                 NSDictionary *defaultResult = @{
                     @"success": @YES,
-                    @"versionName": @"未知版本",
+                    @"versionName": @"Unknown version",
                     @"versionCode": @(0),
                     @"message": @"Device not connected"
                 };
@@ -594,7 +594,7 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
                 return;
             }
             
-            // 使用device.wholeVersion()方法获取真实固件版本
+            // Use device.wholeVersion() method to get real firmware version
             NSString *versionName = [connectedDevice wholeVersion] ?: @"v1.0.0";
             
             NSDictionary *result = @{
@@ -683,23 +683,23 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
     }];
 }
 
-// SDK 数据传输回调 - 实现类似原生demo的文件保存逻辑
+// SDK data transfer callback - implement file saving logic similar to native demo
 - (void)bleDataWithSessionId:(NSInteger)sessionId start:(NSInteger)start data:(NSData *)data
 {
     RCTLogInfo(@"🍎 Download data received: sessionId:%ld start:%ld dataSize:%lu", (long)sessionId, (long)start, (unsigned long)data.length);
     
-    // 获取文档目录和文件路径
+    // Get documents directory and file path
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
     NSString *fileName = [NSString stringWithFormat:@"%ld.dat", (long)sessionId];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:fileName];
     
-    // 使用文件句柄进行数据写入（类似原生demo的PLBleFileManager）
+    // Use file handle for data writing (similar to native demo PLBleFileManager)
     if (start == 0) {
-        // 第一次写入，创建新文件
+        // First write, create new file
         [data writeToFile:filePath atomically:YES];
     } else {
-        // 后续写入，追加数据
+        // Subsequent writes, append data
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
         if (fileHandle) {
             [fileHandle seekToFileOffset:start];
@@ -708,11 +708,11 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
         }
     }
     
-    // 累计已下载的字节数
+    // Accumulate downloaded bytes
     NSInteger totalDownloaded = start + data.length;
     self.downloadProgress[@(sessionId)] = @(totalDownloaded);
     
-    // 找到对应的文件获取总大小
+    // Find corresponding file to get total size
     BleFile *targetFile = nil;
     for (BleFile *file in self.deviceFiles) {
         if (file.sessionId == sessionId) {
@@ -722,7 +722,7 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
     }
     
     if (targetFile) {
-        // 发送下载进度事件
+        // Send download progress event
         [self sendEventWithName:@"onDownloadProgress" body:@{
             @"sessionId": @(sessionId),
             @"downloadedBytes": @(totalDownloaded),
@@ -732,12 +732,12 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
             @"timestamp": @([[NSDate date] timeIntervalSince1970] * 1000)
         }];
         
-        // 检查下载是否完成
+        // Check if download is completed
         if (totalDownloaded >= targetFile.size) {
             RCTLogInfo(@"🍎 Download completed for sessionId: %ld", (long)sessionId);
             [self.downloadProgress removeObjectForKey:@(sessionId)];
             
-            // 发送下载完成事件
+            // Send download completion event
             [self sendEventWithName:@"onDownloadComplete" body:@{
                 @"sessionId": @(sessionId),
                 @"filePath": filePath,
@@ -757,7 +757,7 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
     RCTLogInfo(@"🍎 [FileManagerModule] Updating file list with %lu files", (unsigned long)files.count);
     self.deviceFiles = [files mutableCopy];
     
-    // 通知JS端文件列表已更新
+    // Notify JS side file list updated
     NSMutableArray *filesArray = [NSMutableArray array];
     for (BleFile *file in files) {
         [filesArray addObject:[self fileToDictionary:file]];
@@ -804,7 +804,7 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
     NSInteger seconds = durationSeconds % 60;
     NSString *durationString = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
     
-    // Format file size - 使用1000作为单位换算，与原生demo保持一致
+    // Format file size - use 1000 as unit conversion, consistent with native demo
     NSString *sizeText;
     if (file.size < 1000) {
         sizeText = [NSString stringWithFormat:@"%ld B", (long)file.size];
@@ -821,18 +821,18 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
     NSString *createTime = [formatter stringFromDate:createDate];
     
     // Scene name mapping
-    NSString *sceneName = @"录音";
+    NSString *sceneName = @"Recording";
     switch (file.scenes) {
-        case 1: sceneName = @"会议"; break;
-        case 2: sceneName = @"课堂"; break;
-        case 3: sceneName = @"访谈"; break;
-        case 4: sceneName = @"音乐"; break;
-        case 5: sceneName = @"备忘"; break;
-        default: sceneName = @"录音"; break;
+        case 1: sceneName = @"Meeting"; break;
+        case 2: sceneName = @"Classroom"; break;
+        case 3: sceneName = @"Interview"; break;
+        case 4: sceneName = @"Music"; break;
+        case 5: sceneName = @"Memo"; break;
+        default: sceneName = @"Recording"; break;
     }
     
     @try {
-        // 安全处理字符串属性
+        // Safely handle string properties
         NSString *safeSn = (file.sn && [file.sn isKindOfClass:[NSString class]]) ? file.sn : @"";
         
         return @{
@@ -852,12 +852,12 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
         
     } @catch (NSException *exception) {
         RCTLogError(@"🍎 Error in fileToDictionary: %@", exception.reason);
-        // 返回最基本的文件信息
+        // Return most basic file info
         return @{
             @"sessionId": @(file.sessionId),
             @"fileSize": @(file.size),
             @"scene": @(file.scenes),
-            @"sceneName": @"录音",
+            @"sceneName": @"Recording",
             @"duration": @"00:00",
             @"sizeText": @"0 B",
             @"createTime": @"1970-01-01 00:00:00",
@@ -880,7 +880,7 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
 
 - (NSString *)formatBytes:(NSInteger)bytes
 {
-    // 使用1000作为单位换算，与原生demo保持一致
+    // Use 1000 as unit conversion, consistent with native demo
     if (bytes < 1000) {
         return [NSString stringWithFormat:@"%ld B", (long)bytes];
     } else if (bytes < 1000 * 1000) {
@@ -1006,7 +1006,7 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
 
 #pragma mark - File Download Notification Handlers
 
-// 处理从PlaudBluetoothModule转发的文件数据
+// Handle file data forwarded from PlaudBluetoothModule
 - (void)handleFileDataReceived:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
@@ -1016,11 +1016,11 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
     
     NSLog(@"🍎 [FileManager] Received file data - sessionId:%d start:%d dataSize:%lu", sessionId, start, (unsigned long)data.length);
     
-    // 调用原来的bleData方法逻辑
+    // Call original bleData method logic
     [self bleDataWithSessionId:sessionId start:start data:data];
 }
 
-// 处理文件同步头信息
+// Handle file sync header info
 - (void)handleFileSyncHead:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
@@ -1031,10 +1031,10 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
     
     NSLog(@"🍎 [FileManager] File sync head - sessionId:%d size:%d start:%d end:%d", sessionId, size, start, end);
     
-    // 这里可以添加同步头处理逻辑
+    // Sync header processing logic can be added here
 }
 
-// 处理文件同步完成
+// Handle file sync completion
 - (void)handleFileSyncTail:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
@@ -1043,24 +1043,24 @@ RCT_EXPORT_METHOD(getDeviceVersion:(RCTPromiseResolveBlock)resolve
     
     NSLog(@"🍎 [FileManager] File sync tail - sessionId:%d crc:%d", sessionId, crc);
     
-    // 调用文件同步完成逻辑
+    // Call file sync completion logic
     [self bleSyncFileTailWithSessionId:sessionId crc:crc];
 }
 
-// 处理文件同步停止
+// Handle file sync stop
 - (void)handleFileSyncStop:(NSNotification *)notification
 {
     NSLog(@"🍎 [FileManager] File sync stopped");
     
-    // 调用同步停止逻辑
+    // Call sync stop logic
     [self bleSyncFileStop];
 }
 
 #pragma mark - PlaudDeviceAgentProtocol
 
-// bleDataWithSessionId:start:data: 方法已经在上面实现了
+// bleDataWithSessionId:start:data: method already implemented above
 
-// 其他必需的delegate方法的空实现
+// Empty implementation of other required delegate methods
 - (void)bleConnectStateWithState:(NSInteger)state {}
 - (void)bleBindWithSn:(NSString *)sn status:(NSInteger)status protVersion:(NSInteger)protVersion timezone:(NSInteger)timezone {}
 - (void)blePenStateWithState:(NSInteger)state privacy:(NSInteger)privacy keyState:(NSInteger)keyState uDisk:(NSInteger)uDisk findMyToken:(NSInteger)findMyToken hasSndpKey:(NSInteger)hasSndpKey deviceAccessToken:(NSInteger)deviceAccessToken {}

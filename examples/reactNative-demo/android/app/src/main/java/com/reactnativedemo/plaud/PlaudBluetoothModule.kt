@@ -26,13 +26,13 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
                 sendEvent("onDeviceFound", createDeviceMap(device))
             }
             
-            // 使用连接监听器而不是覆盖onConnectionStateChange
+            // Use connection listener instead of overriding onConnectionStateChange
             core.addConnectionListener { isConnected, deviceId ->
                 Log.w(TAG, "🚨 PlaudBluetoothModule connection event: isConnected=$isConnected, deviceId='$deviceId'")
                 Log.w(TAG, "🔍 Stack trace for debugging: ${Thread.currentThread().stackTrace.take(5).joinToString { it.toString() }}")
                 if (isConnected) {
                     Log.d(TAG, "📤 Sending onDeviceConnected event to React Native")
-                    // 获取连接的设备信息
+                    // Get connected device information
                     val connectedDevice = core.getDiscoveredDevices().values.firstOrNull { it.serialNumber == deviceId }
                         ?: core.getDiscoveredDevices().values.firstOrNull()
                     
@@ -41,14 +41,14 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
                         putString("deviceId", deviceId ?: "")
                         putString("message", "Device connected successfully")
                         
-                        // 添加设备信息
+                        // Add device information
                         if (connectedDevice != null) {
                             val deviceMap = Arguments.createMap().apply {
                                 putString("name", connectedDevice.name)
                                 putString("serialNumber", connectedDevice.serialNumber)
                                 putString("macAddress", connectedDevice.macAddress)
                                 putInt("rssi", connectedDevice.rssi)
-                                // 添加固件版本信息
+                                // Add firmware version info
                                 putString("wholeVersion", connectedDevice.versionName ?: "")
                                 putInt("versionCode", connectedDevice.versionCode)
                             }
@@ -58,16 +58,16 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
                     })
                     Log.d(TAG, "✅ onDeviceConnected event sent")
                     
-                    // 连接成功后，延时获取设备状态信息和手动触发信息更新
+                    // After successful connection, delay fetching device status and manually trigger info updates
                     android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                         Log.d(TAG, "📱 Auto-requesting device status after connection...")
                         core.getDeviceStatus()
                         
-                        // 同时获取真实的设备信息
+                        // Also get real device information
                         Log.d(TAG, "🧪 Getting real device info...")
-                        core.triggerBatteryInfo() // 电池信息先保留假数据（等找到正确的API）
-                        core.getRealStorageInfo() // 使用真实的存储信息API
-                    }, 3000L) // 3秒后获取设备状态
+                        core.triggerBatteryInfo() // Battery info keeps fake data for now (until correct API is found)
+                        core.getRealStorageInfo() // Use real storage info API
+                    }, 3000L) // Get device status after 3 seconds
                 } else {
                     Log.w(TAG, "⚠️ DISCONNECT EVENT TRIGGERED - This will cause popup!")
                     Log.w(TAG, "📤 Sending onDeviceDisconnected event to React Native")
@@ -81,7 +81,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
                 }
             }
             
-            // 录音状态监听
+            // Recording status monitoring
             core.onRecordingStateChange = { isRecording, sessionId ->
                 Log.d(TAG, "🎙️ Recording state changed: isRecording=$isRecording, sessionId=$sessionId")
                 
@@ -99,10 +99,10 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
                     })
                 }
                 
-                // 直接通过单例获取 PlaudRecordingModule 的状态同步
+                // Directly get PlaudRecordingModule status sync through singleton
                 try {
                     Log.d(TAG, "🔄 Directly syncing recording state to PlaudRecordingModule")
-                    // 直接调用 PlaudRecordingModule 的静态方法进行状态同步
+                    // Directly call PlaudRecordingModule static method for status sync
                     PlaudRecordingModule.syncRecordingState(isRecording, sessionId)
                     Log.d(TAG, "✅ Recording state synced directly")
                 } catch (e: Exception) {
@@ -110,19 +110,19 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
                 }
             }
             
-            // 电池信息监听
+            // Battery information monitoring
             core.onBatteryInfoUpdated = { deviceId, level ->
                 Log.d(TAG, "🔋 Battery info updated: device=$deviceId, level=$level%")
                 sendEvent("onBatteryInfoUpdated", Arguments.createMap().apply {
                     putString("deviceId", deviceId ?: "")
-                    putInt("batteryLevel", level) // 使用前端期望的字段名
-                    putString("batteryText", "${level}%") // 提供文本格式
-                    putBoolean("isCharging", false) // 临时设为false，等获取到充电状态后更新
+                    putInt("batteryLevel", level) // Use field name expected by frontend
+                    putString("batteryText", "${level}%") // Provide text format
+                    putBoolean("isCharging", false) // Temporarily set to false, update when charging status is obtained
                     putLong("timestamp", System.currentTimeMillis())
                 })
             }
             
-            // 存储信息监听
+            // Storage information monitoring
             core.onStorageInfoUpdated = { deviceId, storageInfo ->
                 Log.d(TAG, "💾 Storage info updated: device=$deviceId, info=$storageInfo")
                 
@@ -133,12 +133,12 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
                 
                 sendEvent("onStorageInfoUpdated", Arguments.createMap().apply {
                     putString("deviceId", deviceId ?: "")
-                    // 使用前端期望的字段名和格式
+                    // Use field names and format expected by frontend
                     putString("freeSpaceText", "${freeMB}MB")
                     putString("totalSpaceText", "${totalMB}MB") 
                     putString("usedSpaceText", "${usedMB}MB")
-                    putString("usagePercent", "$usedPercent") // 字符串格式
-                    // 保留原始数值字段作为备用
+                    putString("usagePercent", "$usedPercent") // String format
+                    // Keep original numeric fields as backup
                     putLong("freeMB", freeMB)
                     putLong("totalMB", totalMB)
                     putLong("usedMB", usedMB)
@@ -156,14 +156,14 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
             putInt("rssi", device.rssi)
             putString("serialNumber", device.serialNumber)
             putString("id", if (device.serialNumber.isNotEmpty()) device.serialNumber else device.macAddress)
-            // 添加固件版本信息
+            // Add firmware version information
             putString("wholeVersion", device.versionName ?: "")
             putInt("versionCode", device.versionCode)
         }
     }
 
     /**
-     * 发送事件到React Native
+     * Send event to React Native
      */
     private fun sendEvent(eventName: String, params: WritableMap?) {
         reactApplicationContext
@@ -172,7 +172,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 开始扫描设备
+     * Start scanning devices
      */
     @ReactMethod
     fun startScan(options: ReadableMap?, promise: Promise) {
@@ -203,7 +203,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 停止扫描
+     * Stop scanning
      */
     @ReactMethod
     fun stopScan(promise: Promise) {
@@ -232,7 +232,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 连接到指定设备
+     * Connect to specified device
      */
     @ReactMethod
     fun connect(serialNumber: String, token: String, options: ReadableMap?, promise: Promise) {
@@ -267,7 +267,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 断开设备连接
+     * Disconnect device connection
      */
     @ReactMethod
     fun disconnect(promise: Promise) {
@@ -303,7 +303,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取设备状态
+     * Get device status
      */
     @ReactMethod
     fun getDeviceState(promise: Promise) {
@@ -327,7 +327,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 检查是否已连接
+     * Check if connected
      */
     @ReactMethod
     fun isConnected(promise: Promise) {
@@ -348,7 +348,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 获取蓝牙管理器状态（用于调试）
+     * Get Bluetooth manager status (for debugging)
      */
     @ReactMethod
     fun getBluetoothManagerStatus(promise: Promise) {
@@ -372,7 +372,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * Connect device的便捷方法（只需要设备ID）
+     * Convenient method for connect device (only need device ID)
      */
     @ReactMethod
     fun connectDevice(deviceId: String, promise: Promise) {
@@ -380,7 +380,7 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * Disconnect device的便捷方法
+     * Convenient method for disconnect device
      */
     @ReactMethod
     fun disconnectDevice(promise: Promise) {
@@ -388,18 +388,18 @@ class PlaudBluetoothModule(reactContext: ReactApplicationContext) :
     }
 
     /**
-     * 添加事件监听器方法（React Native端会调用）
+     * Add event listener method (called by React Native)
      */
     @ReactMethod
     fun addListener(eventName: String) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 
     /**
-     * 移除事件监听器方法（React Native端会调用）
+     * Remove event listener method (called by React Native)
      */
     @ReactMethod
     fun removeListeners(count: Int) {
-        // React Native需要这个方法来避免警告
+        // React Native needs this method to avoid warnings
     }
 }

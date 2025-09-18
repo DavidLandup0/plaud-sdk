@@ -34,7 +34,7 @@ class PlaudPermissionModule(reactContext: ReactApplicationContext) :
             val result = Arguments.createMap().apply {
                 putBoolean("allGranted", permissionStatus.values.all { it })
                 
-                // 详细权限状态
+                // Detailed permission status
                 putBoolean("bluetooth", checkBluetoothPermissions())
                 putBoolean("location", checkLocationPermissions())
                 putBoolean("audio", checkAudioPermissions())
@@ -51,7 +51,7 @@ class PlaudPermissionModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     fun requestPermissions(promise: Promise) {
         try {
-            // 简化权限请求，让前端使用React Native的PermissionsAndroid
+            // Simplify permission request, let frontend use React Native's PermissionsAndroid
             promise.resolve(Arguments.createMap().apply {
                 putBoolean("success", true)
                 putString("message", "Please use PermissionsAndroid in JavaScript for better compatibility")
@@ -64,7 +64,7 @@ class PlaudPermissionModule(reactContext: ReactApplicationContext) :
     private fun getRequiredPermissions(): List<String> {
         val permissions = mutableListOf<String>()
         
-        // 基础蓝牙权限
+        // Basic Bluetooth permissions
         permissions.addAll(listOf(
             Manifest.permission.BLUETOOTH,
             Manifest.permission.BLUETOOTH_ADMIN,
@@ -72,7 +72,7 @@ class PlaudPermissionModule(reactContext: ReactApplicationContext) :
             Manifest.permission.ACCESS_COARSE_LOCATION
         ))
         
-        // Android 12+ 蓝牙权限
+        // Android 12+ Bluetooth permissions
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             permissions.addAll(listOf(
                 Manifest.permission.BLUETOOTH_SCAN,
@@ -81,10 +81,10 @@ class PlaudPermissionModule(reactContext: ReactApplicationContext) :
             ))
         }
         
-        // 录音权限
+        // Audio recording permission
         permissions.add(Manifest.permission.RECORD_AUDIO)
         
-        // 存储权限
+        // Storage permissions
         permissions.addAll(listOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
