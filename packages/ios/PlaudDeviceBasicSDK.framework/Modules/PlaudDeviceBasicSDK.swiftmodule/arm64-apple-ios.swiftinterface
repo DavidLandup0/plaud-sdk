@@ -853,6 +853,7 @@ extension PlaudDeviceBasicSDK.PlaudDeviceAgent {
   public func checkRecordingExist(sessionId: Swift.Int) -> Swift.Bool
   public func getDownloadedRecordingPath(sessionId: Swift.Int, desiredPath: Swift.String) -> Swift.String
   @objc public func uploadRecording(sn: Swift.String, sessionId: Swift.Int, duration: Swift.Double, onProgress: @escaping (Swift.Double) -> Swift.Void, onSuccess: @escaping ([Swift.String : Any]) -> Swift.Void, onFailure: @escaping (any Swift.Error) -> Swift.Void)
+  @objc public func uploadLogFile(filePath: Swift.String, sn: Swift.String, onProgress: @escaping (Swift.Double) -> Swift.Void, onSuccess: @escaping ([Swift.String : Any]) -> Swift.Void, onFailure: @escaping (any Swift.Error) -> Swift.Void)
   @objc public static func calculateSnType(sn: Swift.String) -> Swift.String
   public func bindDevice(ownerId: Swift.String, sn: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void)
   public func unbindDevice(ownerId: Swift.String, sn: Swift.String, completion: @escaping (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void)
@@ -1297,6 +1298,41 @@ extension UIKit.UIViewController : UIKit.UIViewControllerTransitioningDelegate {
   @_Concurrency.MainActor @preconcurrency public func presentBottom(_ vc: PlaudDeviceBasicSDK.PresentBottomVC)
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func presentationController(forPresented presented: UIKit.UIViewController, presenting: UIKit.UIViewController?, source: UIKit.UIViewController) -> UIKit.UIPresentationController?
 }
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class PlaudLogUploadManager : ObjectiveC.NSObject {
+  @objc public static let shared: PlaudDeviceBasicSDK.PlaudLogUploadManager
+  @objc deinit
+  @objc public func setAutoUploadEnabled(_ enabled: Swift.Bool)
+  @objc public func startAutoUpload()
+  @objc public func stopAutoUpload()
+  @objc public func uploadLogFiles(onProgress: @escaping (Swift.Double) -> Swift.Void, onSuccess: @escaping ([Swift.String : Any]) -> Swift.Void, onFailure: @escaping (any Swift.Error) -> Swift.Void)
+  @objc public func cleanupLogFiles()
+  @objc public func getUploadStatistics() -> [Swift.String : Any]
+  @objc public func uploadLogFilesWithDeviceSN(sn: Swift.String, onProgress: @escaping (Swift.Double) -> Swift.Void, onSuccess: @escaping ([Swift.String : Any]) -> Swift.Void, onFailure: @escaping (any Swift.Error) -> Swift.Void)
+  @objc public func uploadLogsAfterRecording(sn: Swift.String, sessionId: Swift.Int, onCompletion: @escaping (Swift.Bool, (any Swift.Error)?) -> Swift.Void)
+}
+@objc public enum PlaudLogUploadError : Swift.Int, Swift.Error {
+  case alreadyUploading = 0
+  case directoryNotFound = 1
+  case partialUpload = 2
+  public var localizedDescription: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public static var _nsErrorDomain: Swift.String {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct PlaudLogUploadPartialError : Swift.Error {
+  public let result: [Swift.String : Any]
+  public init(result: [Swift.String : Any])
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
 public struct PlaudWifiInfo {
   public init(name: Swift.String, password: Swift.String, isConnected: Swift.Bool, index: Swift.UInt32 = 0)
 }
@@ -1341,3 +1377,6 @@ extension PlaudDeviceBasicSDK.WorkflowStatus : Swift.RawRepresentable {}
 extension PlaudDeviceBasicSDK.WorkflowTaskType : Swift.Equatable {}
 extension PlaudDeviceBasicSDK.WorkflowTaskType : Swift.Hashable {}
 extension PlaudDeviceBasicSDK.WorkflowTaskType : Swift.RawRepresentable {}
+extension PlaudDeviceBasicSDK.PlaudLogUploadError : Swift.Equatable {}
+extension PlaudDeviceBasicSDK.PlaudLogUploadError : Swift.Hashable {}
+extension PlaudDeviceBasicSDK.PlaudLogUploadError : Swift.RawRepresentable {}

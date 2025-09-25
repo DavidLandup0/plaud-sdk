@@ -27794,6 +27794,108 @@
           },
           {
             "kind": "Function",
+            "name": "uploadLogFile",
+            "printedName": "uploadLogFile(filePath:sn:onProgress:onSuccess:onFailure:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Double) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "([Swift.String : Any]) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(any Swift.Error) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudFileUploader(im)uploadLogFileWithFilePath:sn:onProgress:onSuccess:onFailure:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A12FileUploaderC09uploadLogE08filePath2sn10onProgress0L7Success0L7FailureySS_SSySdcySDySSypGcys5Error_pctF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "uploadLogFileWithFilePath:sn:onProgress:onSuccess:onFailure:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "calculateSnType",
             "printedName": "calculateSnType(sn:)",
             "children": [
@@ -46718,6 +46820,1129 @@
       },
       {
         "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PlaudDeviceBasicSDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "PlaudDeviceBasicSDK"
+      },
+      {
+        "kind": "Import",
+        "name": "PenBleSDK",
+        "printedName": "PenBleSDK",
+        "declKind": "Import",
+        "moduleName": "PlaudDeviceBasicSDK"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PlaudLogUploadManager",
+        "printedName": "PlaudLogUploadManager",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "shared",
+            "printedName": "shared",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PlaudLogUploadManager",
+                "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadManager",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(cpy)shared",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC6sharedACvpZ",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PlaudLogUploadManager",
+                    "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadManager",
+                    "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(cm)shared",
+                "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC6sharedACvgZ",
+                "moduleName": "PlaudDeviceBasicSDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "setAutoUploadEnabled",
+            "printedName": "setAutoUploadEnabled(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(im)setAutoUploadEnabled:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC07setAutoF7EnabledyySbF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "startAutoUpload",
+            "printedName": "startAutoUpload()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(im)startAutoUpload",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC09startAutoF0yyF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "stopAutoUpload",
+            "printedName": "stopAutoUpload()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(im)stopAutoUpload",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC08stopAutoF0yyF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "uploadLogFiles",
+            "printedName": "uploadLogFiles(onProgress:onSuccess:onFailure:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Double) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "([Swift.String : Any]) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(any Swift.Error) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(im)uploadLogFilesOnProgress:onSuccess:onFailure:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC06uploadE5Files10onProgress0J7Success0J7FailureyySdc_ySDySSypGcys5Error_pctF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "uploadLogFilesOnProgress:onSuccess:onFailure:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cleanupLogFiles",
+            "printedName": "cleanupLogFiles()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(im)cleanupLogFiles",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC07cleanupE5FilesyyF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "getUploadStatistics",
+            "printedName": "getUploadStatistics()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(im)getUploadStatistics",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC03getF10StatisticsSDySSypGyF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "uploadLogFilesWithDeviceSN",
+            "printedName": "uploadLogFilesWithDeviceSN(sn:onProgress:onSuccess:onFailure:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Double) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "([Swift.String : Any]) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(any Swift.Error) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(im)uploadLogFilesWithDeviceSNWithSn:onProgress:onSuccess:onFailure:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC06uploade9FilesWithB2SN2sn10onProgress0M7Success0M7FailureySS_ySdcySDySSypGcys5Error_pctF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "uploadLogFilesWithDeviceSNWithSn:onProgress:onSuccess:onFailure:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "uploadLogsAfterRecording",
+            "printedName": "uploadLogsAfterRecording(sn:sessionId:onCompletion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Bool, (any Swift.Error)?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Swift.Bool, (any Swift.Error)?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "(any Swift.Error)?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "any Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager(im)uploadLogsAfterRecordingWithSn:sessionId:onCompletion:",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC24uploadLogsAfterRecording2sn9sessionId12onCompletionySS_SiySb_s5Error_pSgtctF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "objc_name": "uploadLogsAfterRecordingWithSn:sessionId:onCompletion:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@PlaudDeviceBasicSDK@objc(cs)PlaudLogUploadManager",
+        "mangledName": "$s19PlaudDeviceBasicSDK0A16LogUploadManagerC",
+        "moduleName": "PlaudDeviceBasicSDK",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PlaudLogUploadError",
+        "printedName": "PlaudLogUploadError",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "alreadyUploading",
+            "printedName": "alreadyUploading",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(PlaudDeviceBasicSDK.PlaudLogUploadError.Type) -> PlaudDeviceBasicSDK.PlaudLogUploadError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PlaudLogUploadError",
+                    "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError",
+                    "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "PlaudLogUploadError",
+                        "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError",
+                        "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError@PlaudLogUploadErrorAlreadyUploading",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO16alreadyUploadingyA2CmF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 0
+          },
+          {
+            "kind": "Var",
+            "name": "directoryNotFound",
+            "printedName": "directoryNotFound",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(PlaudDeviceBasicSDK.PlaudLogUploadError.Type) -> PlaudDeviceBasicSDK.PlaudLogUploadError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PlaudLogUploadError",
+                    "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError",
+                    "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "PlaudLogUploadError",
+                        "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError",
+                        "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError@PlaudLogUploadErrorDirectoryNotFound",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO17directoryNotFoundyA2CmF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 1
+          },
+          {
+            "kind": "Var",
+            "name": "partialUpload",
+            "printedName": "partialUpload",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(PlaudDeviceBasicSDK.PlaudLogUploadError.Type) -> PlaudDeviceBasicSDK.PlaudLogUploadError",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PlaudLogUploadError",
+                    "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError",
+                    "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "PlaudLogUploadError",
+                        "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError",
+                        "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError@PlaudLogUploadErrorPartialUpload",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO07partialF0yA2CmF",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "ObjC"
+            ],
+            "fixedbinaryorder": 2
+          },
+          {
+            "kind": "Var",
+            "name": "localizedDescription",
+            "printedName": "localizedDescription",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:19PlaudDeviceBasicSDK0A14LogUploadErrorO20localizedDescriptionSSvp",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO20localizedDescriptionSSvp",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:19PlaudDeviceBasicSDK0A14LogUploadErrorO20localizedDescriptionSSvg",
+                "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO20localizedDescriptionSSvg",
+                "moduleName": "PlaudDeviceBasicSDK",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PlaudLogUploadError",
+                    "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadError",
+                    "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:19PlaudDeviceBasicSDK0A14LogUploadErrorO8rawValueACSgSi_tcfc",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO8rawValueACSgSi_tcfc",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:19PlaudDeviceBasicSDK0A14LogUploadErrorO8rawValueSivp",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO8rawValueSivp",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:19PlaudDeviceBasicSDK0A14LogUploadErrorO8rawValueSivg",
+                "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO8rawValueSivg",
+                "moduleName": "PlaudDeviceBasicSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "_nsErrorDomain",
+            "printedName": "_nsErrorDomain",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:19PlaudDeviceBasicSDK0A14LogUploadErrorO03_nsG6DomainSSvpZ",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO03_nsG6DomainSSvpZ",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "static": true,
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:19PlaudDeviceBasicSDK0A14LogUploadErrorO03_nsG6DomainSSvgZ",
+                "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO03_nsG6DomainSSvgZ",
+                "moduleName": "PlaudDeviceBasicSDK",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "c:@M@PlaudDeviceBasicSDK@E@PlaudLogUploadError",
+        "mangledName": "$s19PlaudDeviceBasicSDK0A14LogUploadErrorO",
+        "moduleName": "PlaudDeviceBasicSDK",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "Int",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_BridgedNSError",
+            "printedName": "_BridgedNSError",
+            "usr": "s:10Foundation15_BridgedNSErrorP",
+            "mangledName": "$s10Foundation15_BridgedNSErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_ObjectiveCBridgeableError",
+            "printedName": "_ObjectiveCBridgeableError",
+            "usr": "s:10Foundation26_ObjectiveCBridgeableErrorP",
+            "mangledName": "$s10Foundation26_ObjectiveCBridgeableErrorP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PlaudLogUploadPartialError",
+        "printedName": "PlaudLogUploadPartialError",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "result",
+            "printedName": "result",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV6resultSDySSypGvp",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV6resultSDySSypGvp",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV6resultSDySSypGvg",
+                "mangledName": "$s19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV6resultSDySSypGvg",
+                "moduleName": "PlaudDeviceBasicSDK",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(result:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PlaudLogUploadPartialError",
+                "printedName": "PlaudDeviceBasicSDK.PlaudLogUploadPartialError",
+                "usr": "s:19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV6resultACSDySSypG_tcfc",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV6resultACSDySSypG_tcfc",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "localizedDescription",
+            "printedName": "localizedDescription",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV20localizedDescriptionSSvp",
+            "mangledName": "$s19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV20localizedDescriptionSSvp",
+            "moduleName": "PlaudDeviceBasicSDK",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV20localizedDescriptionSSvg",
+                "mangledName": "$s19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV20localizedDescriptionSSvg",
+                "moduleName": "PlaudDeviceBasicSDK",
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV",
+        "mangledName": "$s19PlaudDeviceBasicSDK0A21LogUploadPartialErrorV",
+        "moduleName": "PlaudDeviceBasicSDK",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Error",
+            "printedName": "Error",
+            "usr": "s:s5ErrorP",
+            "mangledName": "$ss5ErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
         "name": "UIKit",
         "printedName": "UIKit",
         "declKind": "Import",
@@ -56964,35 +58189,35 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 16710,
+      "offset": 16825,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 17175,
+      "offset": 17290,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "BooleanLiteral",
-      "offset": 17649,
+      "offset": 17764,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "Dictionary",
-      "offset": 30192,
+      "offset": 30307,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/PlaudDeviceAgent.swift",
       "kind": "IntegerLiteral",
-      "offset": 47245,
+      "offset": 47360,
       "length": 1,
       "value": "1"
     },
@@ -60096,6 +61321,62 @@
       "offset": 15630,
       "length": 9,
       "value": "\"toValue\""
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudLogUploadManager.swift",
+      "kind": "StringLiteral",
+      "offset": 756,
+      "length": 22,
+      "value": "\"com.plaud.log.upload\""
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudLogUploadManager.swift",
+      "kind": "StringLiteral",
+      "offset": 845,
+      "length": 21,
+      "value": "\"com.plaud.log.timer\""
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudLogUploadManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1016,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudLogUploadManager.swift",
+      "kind": "Array",
+      "offset": 1067,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudLogUploadManager.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1108,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudLogUploadManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35712,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudLogUploadManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35743,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Utils\/PlaudLogUploadManager.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35770,
+      "length": 1,
+      "value": "2"
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PlaudDeviceBasicSDK\/swiftfiles\/Legency\/UI\/CustomView\/JXSnakebar.swift",

@@ -978,7 +978,76 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudFileUpl
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (void)uploadRecordingWithSn:(NSString * _Nonnull)sn sessionId:(NSInteger)sessionId duration:(double)duration onProgress:(void (^ _Nonnull)(double))onProgress onSuccess:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))onSuccess onFailure:(void (^ _Nonnull)(NSError * _Nonnull))onFailure;
+/// Upload log file
+/// \param filePath Path to the log file
+///
+/// \param sn Device serial number
+///
+/// \param onProgress Upload progress callback (0.0 to 1.0)
+///
+/// \param onSuccess Success callback with upload result
+///
+/// \param onFailure Failure callback with error
+///
+- (void)uploadLogFileWithFilePath:(NSString * _Nonnull)filePath sn:(NSString * _Nonnull)sn onProgress:(void (^ _Nonnull)(double))onProgress onSuccess:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))onSuccess onFailure:(void (^ _Nonnull)(NSError * _Nonnull))onFailure;
 + (NSString * _Nonnull)calculateSnTypeWithSn:(NSString * _Nonnull)sn SWIFT_WARN_UNUSED_RESULT;
+@end
+
+typedef SWIFT_ENUM(NSInteger, PlaudLogUploadError, open) {
+  PlaudLogUploadErrorAlreadyUploading = 0,
+  PlaudLogUploadErrorDirectoryNotFound = 1,
+  PlaudLogUploadErrorPartialUpload = 2,
+};
+static NSString * _Nonnull const PlaudLogUploadErrorDomain = @"PlaudDeviceBasicSDK.PlaudLogUploadError";
+
+/// Log upload manager for automatic periodic upload and management
+SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK21PlaudLogUploadManager")
+@interface PlaudLogUploadManager : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudLogUploadManager * _Nonnull shared;)
++ (PlaudLogUploadManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+/// Enable or disable automatic log upload
+/// \param enabled true to enable auto upload, false to disable
+///
+- (void)setAutoUploadEnabled:(BOOL)enabled;
+/// Start automatic log upload timer
+- (void)startAutoUpload;
+/// Stop automatic log upload timer
+- (void)stopAutoUpload;
+/// Upload log files with progress tracking
+/// \param onProgress Progress callback (0.0 to 1.0)
+///
+/// \param onSuccess Success callback with upload results
+///
+/// \param onFailure Failure callback with error
+///
+- (void)uploadLogFilesOnProgress:(void (^ _Nonnull)(double))onProgress onSuccess:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))onSuccess onFailure:(void (^ _Nonnull)(NSError * _Nonnull))onFailure;
+/// Manually trigger log cleanup
+- (void)cleanupLogFiles;
+/// Get upload statistics
+///
+/// returns:
+/// Dictionary with upload statistics
+- (NSDictionary<NSString *, id> * _Nonnull)getUploadStatistics SWIFT_WARN_UNUSED_RESULT;
+/// Upload log files with specific device serial number
+/// \param sn Device serial number
+///
+/// \param onProgress Progress callback (0.0 to 1.0)
+///
+/// \param onSuccess Success callback with upload results
+///
+/// \param onFailure Failure callback with error
+///
+- (void)uploadLogFilesWithDeviceSNWithSn:(NSString * _Nonnull)sn onProgress:(void (^ _Nonnull)(double))onProgress onSuccess:(void (^ _Nonnull)(NSDictionary<NSString *, id> * _Nonnull))onSuccess onFailure:(void (^ _Nonnull)(NSError * _Nonnull))onFailure;
+/// Upload logs after recording upload completion
+/// \param sn Device serial number
+///
+/// \param sessionId Session ID
+///
+/// \param onCompletion Completion callback
+///
+- (void)uploadLogsAfterRecordingWithSn:(NSString * _Nonnull)sn sessionId:(NSInteger)sessionId onCompletion:(void (^ _Nonnull)(BOOL, NSError * _Nullable))onCompletion;
 @end
 
 SWIFT_CLASS("_TtC19PlaudDeviceBasicSDK14PlaudSDKLogger")

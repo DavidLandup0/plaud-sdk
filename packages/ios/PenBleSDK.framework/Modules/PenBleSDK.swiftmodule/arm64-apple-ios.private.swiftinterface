@@ -445,6 +445,14 @@ extension PenBleSDK.JXFirmUpdater : PenBleSDK.OtaProtocol {
   @objc public func checkCrc(crc: Swift.Int, ofFile path: Swift.String) -> Swift.Bool
   @objc deinit
 }
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class PlaudLogFileRotationManager : ObjectiveC.NSObject {
+  @objc public static let shared: PenBleSDK.PlaudLogFileRotationManager
+  @objc public func forceRotateCurrentLogFile()
+  @objc public func checkAndRotateIfNeeded(filePath: Swift.String, additionalSize: Swift.Int64) -> Swift.Bool
+  @objc public func getCurrentLogFilePath() -> Swift.String
+  @objc public func notifyUploadCompleted()
+  @objc deinit
+}
 @objc public protocol BleAgentProtocol {
   @objc func bleUpdatePowerLowErr()
   @objc func bleDeviceDisconnectErr()
