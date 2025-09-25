@@ -2253,29 +2253,29 @@ SWIFT_PROTOCOL("_TtP9PenBleSDK16PDVolumeProtocol_")
 - (void)onVolumePerTwentyMsecWithMescSecond:(NSInteger)mescSecond volume:(NSInteger)volume;
 @end
 
-/// 日志文件轮转管理器
-/// 负责统一管理日志文件的切换逻辑，确保上传后立即切换到新文件
+/// Log file rotation manager
+/// Responsible for unified management of log file switching logic, ensuring immediate switch to new file after upload
 SWIFT_CLASS("_TtC9PenBleSDK27PlaudLogFileRotationManager")
 @interface PlaudLogFileRotationManager : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudLogFileRotationManager * _Nonnull shared;)
 + (PlaudLogFileRotationManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-/// 强制轮转当前日志文件
-/// 通常在上传成功后调用，确保后续日志写入新文件
+/// Force rotate current log file
+/// Usually called after successful upload to ensure subsequent logs are written to new file
 - (void)forceRotateCurrentLogFile;
-/// 检查并执行基于大小的轮转
-/// \param filePath 日志文件路径
+/// Check and perform size-based rotation
+/// \param filePath Log file path
 ///
-/// \param additionalSize 即将写入的数据大小
+/// \param additionalSize Size of data to be written
 ///
 ///
 /// returns:
-/// 是否执行了轮转
+/// Whether rotation was performed
 - (BOOL)checkAndRotateIfNeededWithFilePath:(NSString * _Nonnull)filePath additionalSize:(int64_t)additionalSize SWIFT_WARN_UNUSED_RESULT;
-/// 获取当前活跃的日志文件路径
+/// Get current active log file path
 - (NSString * _Nonnull)getCurrentLogFilePath SWIFT_WARN_UNUSED_RESULT;
-/// 通知管理器上传已完成，建议进行文件轮转
+/// Notify manager that upload is completed, suggest file rotation
 - (void)notifyUploadCompleted;
 @end
 

@@ -39517,7 +39517,7 @@
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/PlaudLogFileRotationManager.swift",
       "kind": "StringLiteral",
-      "offset": 535,
+      "offset": 560,
       "length": 24,
       "value": "\"com.plaud.log.rotation\""
     },
