@@ -441,4 +441,17 @@
     
     <!-- Firmware update protection mechanism messages -->
     <string name="firmware_update_error_retry_limit">Device detected frequent upgrade attempts and has activated protection mechanism. Please wait 10-15 minutes before retrying, or restart the device.</string>
+    
+    <!-- Common Settings Test -->
+    <string name="button_test_common_settings">Test Common Settings</string>
+    <string name="dialog_title_test_common_settings">Test Common Settings</string>
+    <string name="dialog_message_test_common_settings">Enter setting type and value to test</string>
+    <string name="dialog_hint_setting_type">Setting Type (e.g., 1)</string>
+    <string name="dialog_hint_setting_value">Setting Value (e.g., 20)</string>
+    <string name="dialog_result_title_success">Setting Result</string>
+    <string name="dialog_result_title_failed">Setting Failed</string>
+    <string name="dialog_result_message_success">Setting successful!\nSetting Type: %1$d\nSetting Value: %2$d\nReturn Result: %3$d</string>
+    <string name="dialog_result_message_failed">Setting failed, please check device connection</string>
+    <string name="toast_invalid_input">Please enter valid numbers</string>
+    <string name="toast_input_required">Please enter both values</string>
 </resources>

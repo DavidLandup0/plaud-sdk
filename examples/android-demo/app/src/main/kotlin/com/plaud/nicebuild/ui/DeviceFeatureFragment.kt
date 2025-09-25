@@ -98,6 +98,7 @@ class DeviceFeatureFragment : Fragment() {
     private lateinit var btnBindCloud: MaterialButton
     private lateinit var btnUnbindCloud: MaterialButton
     private lateinit var btnCheckUpdate: MaterialButton
+    private lateinit var btnTestCommonSettings: MaterialButton
 
     private var uDiskSwitchListener: CompoundButton.OnCheckedChangeListener? = null
     
@@ -180,6 +181,7 @@ class DeviceFeatureFragment : Fragment() {
         btnWifiTransfer = view.findViewById(R.id.btn_wifi_transfer)
         btnBindCloud = view.findViewById(R.id.btn_bind_cloud)
         btnUnbindCloud = view.findViewById(R.id.btn_unbind_cloud)
+        btnTestCommonSettings = view.findViewById(R.id.btn_test_common_settings)
         
         return view
     }
@@ -473,6 +475,10 @@ class DeviceFeatureFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        btnTestCommonSettings.setOnClickListener {
+            showCommonSettingsInputDialog()
         }
         
         // Set up real-time sync UI components (if they exist)
@@ -1203,5 +1209,94 @@ class DeviceFeatureFragment : Fragment() {
         activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         timeoutRunnable?.let { timeoutHandler.removeCallbacks(it) }
+    }
+
+    /**
+     * 显示通用设置输入对话框
+     */
+    private fun showCommonSettingsInputDialog() {
+        if (!isAdded) return
+
+        val dialog = Dialog(requireContext())
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_common_settings_test, null)
+        dialog.setContentView(view)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val title = view.findViewById<TextView>(R.id.tv_dialog_title)
+        val typeInputField = view.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.et_setting_type)
+        val valueInputField = view.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.et_setting_value)
+        val btnOk = view.findViewById<TextView>(R.id.btn_dialog_positive)
+        val btnCancel = view.findViewById<TextView>(R.id.btn_dialog_negative)
+
+        title.text = getString(R.string.dialog_title_test_common_settings)
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnOk.setOnClickListener {
+            val typeValue = typeInputField.text.toString().trim()
+            val valueValue = valueInputField.text.toString().trim()
+            
+            if (typeValue.isNotEmpty() && valueValue.isNotEmpty()) {
+                try {
+                    val settingType = typeValue.toInt()
+                    val settingValue = valueValue.toInt()
+                    dialog.dismiss()
+                    testCommonSettings(settingType, settingValue)
+                } catch (e: NumberFormatException) {
+                    Toast.makeText(requireContext(), getString(R.string.toast_invalid_input), Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.toast_input_required), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialog.show()
+    }
+
+    /**
+     * 执行通用设置测试
+     */
+    private fun testCommonSettings(settingType: Int, settingValue: Int) {
+        bleCore.commonSettings(settingType, settingValue) { success, response ->
+            if (isAdded) {
+                requireActivity().runOnUiThread {
+                    if (success && response != null) {
+                        val message = getString(R.string.dialog_result_message_success, settingType, settingValue, response.value.toInt())
+                        showResultDialog(getString(R.string.dialog_result_title_success), message)
+                    } else {
+                        showResultDialog(getString(R.string.dialog_result_title_failed), getString(R.string.dialog_result_message_failed))
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 显示结果对话框
+     */
+    private fun showResultDialog(title: String, message: String) {
+        if (!isAdded) return
+
+        val dialog = Dialog(requireContext())
+        val view = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_view_summary, null)
+        dialog.setContentView(view)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val titleView = view.findViewById<TextView>(R.id.tv_summary_title)
+        val messageView = view.findViewById<TextView>(R.id.tv_summary_content)
+        val btnOk = view.findViewById<ImageButton>(R.id.btn_close)
+
+        titleView.text = title
+        messageView.text = message
+
+        btnOk.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

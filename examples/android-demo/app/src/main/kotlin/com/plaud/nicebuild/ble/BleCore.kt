@@ -928,7 +928,39 @@ class BleCore private constructor(private val context: Context) {
         })
     }
 
-
+    /**
+     * 通用设置方法 - 设置设备参数
+     * @param type 设置类型代码
+     * @param value 设置值
+     * @param callback 回调函数，返回是否成功和响应数据
+     */
+    fun commonSettings(
+        type: Int,
+        value: Int,
+        callback: (Boolean, sdk.penblesdk.entity.bean.ble.response.CommonSettingsRsp?) -> Unit
+    ) {
+        try {
+            getBleAgent().commonSettings(sdk.penblesdk.Constants.CommonSettings.ActionType.SETTING, type, value.toLong(), 0, {
+                Log.d(TAG, "commonSettings request: $it")
+            }, { rsp ->
+                Log.d(TAG, "commonSettings response: $rsp")
+                Handler(Looper.getMainLooper()).post {
+                    callback(true, rsp)
+                }
+            }, { errorCode ->
+                Log.e(TAG, "commonSettings error: $errorCode")
+                handleBleError(errorCode)
+                Handler(Looper.getMainLooper()).post {
+                    callback(false, null)
+                }
+            })
+        } catch (e: Exception) {
+            Log.e(TAG, "commonSettings error: ${e.message}", e)
+            Handler(Looper.getMainLooper()).post {
+                callback(false, null)
+            }
+        }
+    }
 
     private fun handleBleError(errorCode: BleErrorCode) {
         Log.e(TAG, "BLE Error: ${errorCode.name}")

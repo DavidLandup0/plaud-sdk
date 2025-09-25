@@ -449,4 +449,17 @@
     
     <!-- 固件更新保护机制消息 -->
     <string name="firmware_update_error_retry_limit">设备检测到频繁升级尝试，已启动保护机制。请等待10-15分钟后重试，或重启设备。</string>
+    
+    <!-- 通用设置测试 -->
+    <string name="button_test_common_settings">测试通用设置</string>
+    <string name="dialog_title_test_common_settings">测试通用设置</string>
+    <string name="dialog_message_test_common_settings">输入设置类型和值进行测试</string>
+    <string name="dialog_hint_setting_type">设置类型 (例如: 1)</string>
+    <string name="dialog_hint_setting_value">设置值 (例如: 20)</string>
+    <string name="dialog_result_title_success">设置结果</string>
+    <string name="dialog_result_title_failed">设置失败</string>
+    <string name="dialog_result_message_success">设置成功！\n设置类型: %1$d\n设置值: %2$d\n返回结果: %3$d</string>
+    <string name="dialog_result_message_failed">设置失败，请检查设备连接</string>
+    <string name="toast_invalid_input">请输入有效的数字</string>
+    <string name="toast_input_required">请输入两个值</string>
 </resources>
