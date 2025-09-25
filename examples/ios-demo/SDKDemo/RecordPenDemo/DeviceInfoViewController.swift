@@ -172,6 +172,9 @@ import UIKit
     private lazy var openDeviceWifiButton = createActionButton(title: "⚡ " + NSLocalizedString("device.action.wifi_fast_transfer", comment: ""))
     private lazy var closeDeviceWifiButton = createActionButton(title: NSLocalizedString("device.action.device_name", comment: ""))
     
+    // Common setting test button
+    private lazy var commonSettingTestButton = createActionButton(title: NSLocalizedString("device.action.common_setting_test", comment: ""))
+    
     // New audio player button
     //    private lazy var audioPlayerButton: UIButton = {
     //        let button = UIButton(type: .system)
@@ -211,6 +214,7 @@ import UIKit
         updateDeviceInfo()
         setupToastView()
         setupNavigationBarButtons()
+        setupShakeGesture()
         
         // deviceAgent.getChargingState()
     }
@@ -381,6 +385,7 @@ import UIKit
             return stackView
         }()
         
+        horizontalStackView6.addArrangedSubview(commonSettingTestButton)
         horizontalStackView6.addArrangedSubview(deleteAllFilesButton)
         
         // Add all views to main stack
@@ -475,6 +480,8 @@ import UIKit
             openDeviceWifi(button: sender)
         case closeDeviceWifiButton:
             showDeviceNameDialog(button: sender)
+        case commonSettingTestButton:
+            showCommonSettingTestDialog()
             //        case audioPlayerButton:
             //            audioPlayerButtonTapped()
         default:
@@ -1063,6 +1070,47 @@ import UIKit
         let cancelAction = UIAlertAction(title: NSLocalizedString("common.cancel", comment: ""), style: .cancel)
         alert.addAction(associateAction)
         alert.addAction(dissociateAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
+    }
+    
+    // MARK: - Common Setting Test Dialog
+    
+    @objc private func showCommonSettingTestDialog() {
+        let alert = UIAlertController(title: NSLocalizedString("common_setting.dialog.title", comment: ""), message: nil, preferredStyle: .alert)
+        
+        // Add type input field
+        alert.addTextField { textField in
+            textField.placeholder = NSLocalizedString("common_setting.dialog.type_placeholder", comment: "")
+            textField.keyboardType = .numberPad
+            textField.tag = 0
+        }
+        
+        // Add setting input field
+        alert.addTextField { textField in
+            textField.placeholder = NSLocalizedString("common_setting.dialog.setting_placeholder", comment: "")
+            textField.keyboardType = .numberPad
+            textField.tag = 1
+        }
+        
+        let confirmAction = UIAlertAction(title: NSLocalizedString("common.confirm", comment: ""), style: .default) { [weak alert, weak self] _ in
+            guard let typeText = alert?.textFields?.first(where: { $0.tag == 0 })?.text,
+                  let settingText = alert?.textFields?.first(where: { $0.tag == 1 })?.text,
+                  let type = Int(typeText),
+                  let setting = Int(settingText) else {
+                self?.showToastWithMessage(NSLocalizedString("common_setting.dialog.invalid_input", comment: ""))
+                return
+            }
+            
+            // Call setCommonSetting method
+            self?.deviceAgent.setCommonSetting(type: type, setting: setting)
+            
+            // Show success message
+            //self?.showToastWithMessage(NSLocalizedString("common_setting.dialog.result_success", comment: ""))
+        }
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("common.cancel", comment: ""), style: .cancel)
+        alert.addAction(confirmAction)
         alert.addAction(cancelAction)
         present(alert, animated: true)
     }
@@ -2089,4 +2137,169 @@ extension DeviceInfoViewController: PlaudWiFiAgentProtocol {
             }
         }
     }
+    
+    // MARK: - PlaudDeviceAgentProtocol
+    
+    //    func blePenState(state: Int, privacy: Int, keyState: Int, uDisk: Int, findMyToken: Int, hasSndpKey: Int, deviceAccessToken: Int) {
+    //        // Handle device state changes if needed
+    //    }
+    
+    func bleCommonSetting(setting: Int) {
+        DispatchQueue.main.async { [weak self] in
+            let message = String(format: NSLocalizedString("common_setting.dialog.result_success", comment: "") + " (Value: %d)", setting)
+            self?.showToastWithMessage(message)
+        }
+    }
+    
+    // MARK: - Shake Gesture for Log Export
+    
+    private func setupShakeGesture() {
+        // Shake gesture recognizer works automatically, no additional setup needed
+        // Just need to implement motionBegan method
+        
+        // Add debug test for troubleshooting
+        #if DEBUG
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            print("🧪 DeviceInfoViewController: Running debug tests for shake export")
+            //ShakeExportDebugTest.runAllTests()
+        }
+        #endif
+    }
+    
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        print("🔔 DeviceInfoViewController: motionBegan called with motion: \(motion.rawValue)")
+        if motion == .motionShake {
+            print("🔔 DeviceInfoViewController: Shake gesture detected, starting log export")
+            exportLogs()
+        }
+    }
+    
+    private func exportLogs() {
+        print("📤 DeviceInfoViewController: exportLogs() called")
+        // Show export start message
+        showToastWithMessage(NSLocalizedString("log.export.exporting", comment: ""))
+        print("📤 DeviceInfoViewController: Toast message shown")
+        
+        // Create export directory
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let exportDirectory = documentsPath.appendingPathComponent("LogExport")
+        print("📤 DeviceInfoViewController: Export directory: \(exportDirectory.path)")
+        
+        // Export logs directly
+        print("📤 DeviceInfoViewController: Calling exportLogFilesToDirectory")
+        exportLogFilesToDirectory(exportDirectory) { [weak self] success, error in
+            DispatchQueue.main.async {
+                if success {
+                    let message = String(format: NSLocalizedString("log.export.success.message", comment: ""), exportDirectory.path)
+                    self?.showLogExportSuccessAlert(message: message, exportPath: exportDirectory.path)
+                } else {
+                    let errorMessage = error?.localizedDescription ?? NSLocalizedString("common.error", comment: "")
+                    let failedMessage = String(format: NSLocalizedString("log.export.failed.message", comment: ""), errorMessage)
+                    self?.showToastWithMessage(failedMessage)
+                }
+            }
+        }
+    }
+    
+    private func exportLogFilesToDirectory(_ destinationDirectory: URL, completion: @escaping (Bool, Error?) -> Void) {
+        DispatchQueue.global(qos: .utility).async {
+            print("📁 DeviceInfoViewController: exportLogFilesToDirectory started")
+            let fileManager = FileManager.default
+            let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let logsDirectory = documentsPath.appendingPathComponent("PlaudLogs")
+            print("📁 DeviceInfoViewController: Documents path: \(documentsPath.path)")
+            print("📁 DeviceInfoViewController: Logs directory: \(logsDirectory.path)")
+            print("📁 DeviceInfoViewController: Logs directory exists: \(fileManager.fileExists(atPath: logsDirectory.path))")
+            
+            do {
+                // Ensure destination directory exists
+                print("📁 DeviceInfoViewController: Creating destination directory: \(destinationDirectory.path)")
+                try fileManager.createDirectory(at: destinationDirectory, withIntermediateDirectories: true, attributes: nil)
+                
+                // Get all log files from PlaudLogs directory
+                let allFiles = try fileManager.contentsOfDirectory(at: logsDirectory, includingPropertiesForKeys: nil, options: [])
+                print("📁 DeviceInfoViewController: Found \(allFiles.count) files in logs directory")
+                for file in allFiles {
+                    print("📄 DeviceInfoViewController: File: \(file.lastPathComponent)")
+                }
+                
+                let logFiles = allFiles.filter { $0.pathExtension == "log" && $0.lastPathComponent.hasPrefix("plaud") }
+                print("📁 DeviceInfoViewController: Found \(logFiles.count) log files to export")
+                
+                if logFiles.isEmpty {
+                    print("⚠️ DeviceInfoViewController: No log files found to export")
+                    completion(true, nil)
+                    return
+                }
+                
+                // Copy all log files to destination
+                for logFile in logFiles {
+                    print("📤 DeviceInfoViewController: Copying \(logFile.lastPathComponent)")
+                    let destinationFile = destinationDirectory.appendingPathComponent(logFile.lastPathComponent)
+                    
+                    // Remove existing file if it exists
+                    if fileManager.fileExists(atPath: destinationFile.path) {
+                        try fileManager.removeItem(at: destinationFile)
+                    }
+                    
+                    // Copy file
+                    try fileManager.copyItem(at: logFile, to: destinationFile)
+                    print("✅ DeviceInfoViewController: Successfully copied \(logFile.lastPathComponent)")
+                }
+                
+                print("🎉 DeviceInfoViewController: Successfully exported \(logFiles.count) log files")
+                completion(true, nil)
+            } catch {
+                print("❌ DeviceInfoViewController: Export failed with error: \(error.localizedDescription)")
+                completion(false, error)
+            }
+        }
+    }
+    
+    private func showLogExportSuccessAlert(message: String, exportPath: String) {
+        let alert = UIAlertController(title: NSLocalizedString("log.export.success.title", comment: ""), message: message, preferredStyle: .alert)
+        
+        // Add share button
+        let shareAction = UIAlertAction(title: NSLocalizedString("log.export.share", comment: ""), style: .default) { [weak self] _ in
+            self?.shareLogFiles(from: exportPath)
+        }
+        alert.addAction(shareAction)
+        
+        // Add OK button
+        let okAction = UIAlertAction(title: NSLocalizedString("common.ok", comment: ""), style: .default, handler: nil)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func shareLogFiles(from exportPath: String) {
+        let fileManager = FileManager.default
+        let exportURL = URL(fileURLWithPath: exportPath)
+        
+        do {
+            let logFiles = try fileManager.contentsOfDirectory(at: exportURL, includingPropertiesForKeys: nil, options: [])
+                .filter { $0.pathExtension == "log" }
+            
+            if logFiles.isEmpty {
+                showToastWithMessage(NSLocalizedString("log.export.no_files", comment: ""))
+                return
+            }
+            
+            let activityViewController = UIActivityViewController(activityItems: logFiles, applicationActivities: nil)
+            
+            // iPad support
+            if let popover = activityViewController.popoverPresentationController {
+                popover.sourceView = view
+                popover.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+                popover.permittedArrowDirections = []
+            }
+            
+            present(activityViewController, animated: true, completion: nil)
+            
+        } catch {
+            let errorMessage = String(format: NSLocalizedString("log.export.share_failed", comment: ""), error.localizedDescription)
+            showToastWithMessage(errorMessage)
+        }
+    }
 }
+    

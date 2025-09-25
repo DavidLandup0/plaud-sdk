@@ -126,6 +126,7 @@
 "device.action.wifi_fast_transfer" = "Wi-Fi快传";
 "device.action.close_device_wifi" = "关闭设备WiFi";
 "device.action.device_name" = "设置设备名称";
+"device.action.common_setting_test" = "通用设置测试";
 
 /* Device Status */
 "device.status.connecting" = "设备连接中";
@@ -605,3 +606,25 @@
 "device.update.install_failed" = "安装失败：%@";
 "device.update.version_info_missing" = "版本信息不可用";
 "device.update.unexpected_downloaded_state" = "更新检查中出现意外的下载状态";
+
+/* Common Setting Test Dialog */
+"common_setting.dialog.title" = "通用设置测试";
+"common_setting.dialog.type_label" = "类型 (Type):";
+"common_setting.dialog.setting_label" = "设置值 (Setting):";
+"common_setting.dialog.type_placeholder" = "请输入类型值";
+"common_setting.dialog.setting_placeholder" = "请输入设置值";
+"common_setting.dialog.result_title" = "设置结果";
+"common_setting.dialog.result_success" = "设置返回";
+"common_setting.dialog.result_failed" = "设置失败";
+"common_setting.dialog.invalid_input" = "请输入有效的数字";
+
+/* Log Export */
+"log.export.title" = "日志导出";
+"log.export.exporting" = "正在导出日志文件...";
+"log.export.success.title" = "日志导出成功";
+"log.export.success.message" = "日志文件导出成功！\n路径: %@";
+"log.export.failed.title" = "导出失败";
+"log.export.failed.message" = "日志导出失败: %@";
+"log.export.share" = "分享";
+"log.export.no_files" = "没有找到日志文件";
+"log.export.share_failed" = "分享失败: %@";

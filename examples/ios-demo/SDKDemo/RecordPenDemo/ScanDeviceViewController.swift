@@ -21,6 +21,7 @@ import UIKit
         super.viewDidLoad()
         setupUI()
         setupTableView()
+        setupShakeGesture()
     }
 
     func onScanResult(bleDevices: [BleDevice]) {
@@ -220,5 +221,156 @@ extension ScanDeviceViewController {
 //                self?.present(alert, animated: true)
 //            }
 //        }
+    }
+}
+
+// MARK: - Shake Gesture for Log Export
+
+extension ScanDeviceViewController {
+    private func setupShakeGesture() {
+        // Shake gesture recognizer works automatically, no additional setup needed
+        // Just need to implement motionBegan method
+    }
+    
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        print("🔔 ScanDeviceViewController: motionBegan called with motion: \(motion.rawValue)")
+        if motion == .motionShake {
+            print("🔔 ScanDeviceViewController: Shake gesture detected, starting log export")
+            exportLogs()
+        }
+    }
+    
+    private func exportLogs() {
+        print("📤 ScanDeviceViewController: exportLogs() called")
+        // Show export start message
+        showAlert(title: NSLocalizedString("log.export.title", comment: ""), message: NSLocalizedString("log.export.exporting", comment: ""))
+        print("📤 ScanDeviceViewController: Alert shown")
+        
+        // Create export directory
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let exportDirectory = documentsPath.appendingPathComponent("LogExport")
+        print("📤 ScanDeviceViewController: Export directory: \(exportDirectory.path)")
+        
+        // Export logs directly
+        print("📤 ScanDeviceViewController: Calling exportLogFilesToDirectory")
+        exportLogFilesToDirectory(exportDirectory) { [weak self] (success: Bool, error: Error?) in
+            DispatchQueue.main.async {
+                if success {
+                    let message = String(format: NSLocalizedString("log.export.success.message", comment: ""), exportDirectory.path)
+                    self?.showLogExportSuccessAlert(message: message, exportPath: exportDirectory.path)
+                } else {
+                    let errorMessage = error?.localizedDescription ?? NSLocalizedString("common.error", comment: "")
+                    let failedMessage = String(format: NSLocalizedString("log.export.failed.message", comment: ""), errorMessage)
+                    self?.showAlert(title: NSLocalizedString("log.export.failed.title", comment: ""), message: failedMessage)
+                }
+            }
+        }
+    }
+    
+    private func exportLogFilesToDirectory(_ destinationDirectory: URL, completion: @escaping (Bool, Error?) -> Void) {
+        DispatchQueue.global(qos: .utility).async {
+            print("📁 ScanDeviceViewController: exportLogFilesToDirectory started")
+            let fileManager = FileManager.default
+            let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let logsDirectory = documentsPath.appendingPathComponent("PlaudLogs")
+            print("📁 ScanDeviceViewController: Documents path: \(documentsPath.path)")
+            print("📁 ScanDeviceViewController: Logs directory: \(logsDirectory.path)")
+            print("📁 ScanDeviceViewController: Logs directory exists: \(fileManager.fileExists(atPath: logsDirectory.path))")
+            
+            do {
+                // Ensure destination directory exists
+                print("📁 ScanDeviceViewController: Creating destination directory: \(destinationDirectory.path)")
+                try fileManager.createDirectory(at: destinationDirectory, withIntermediateDirectories: true, attributes: nil)
+                
+                // Get all log files from PlaudLogs directory
+                let allFiles = try fileManager.contentsOfDirectory(at: logsDirectory, includingPropertiesForKeys: nil, options: [])
+                print("📁 ScanDeviceViewController: Found \(allFiles.count) files in logs directory")
+                for file in allFiles {
+                    print("📄 ScanDeviceViewController: File: \(file.lastPathComponent)")
+                }
+                
+                let logFiles = allFiles.filter { $0.pathExtension == "log" && $0.lastPathComponent.hasPrefix("plaud") }
+                print("📁 ScanDeviceViewController: Found \(logFiles.count) log files to export")
+                
+                if logFiles.isEmpty {
+                    print("⚠️ ScanDeviceViewController: No log files found to export")
+                    completion(true, nil)
+                    return
+                }
+                
+                // Copy all log files to destination
+                for logFile in logFiles {
+                    print("📤 ScanDeviceViewController: Copying \(logFile.lastPathComponent)")
+                    let destinationFile = destinationDirectory.appendingPathComponent(logFile.lastPathComponent)
+                    
+                    // Remove existing file if it exists
+                    if fileManager.fileExists(atPath: destinationFile.path) {
+                        try fileManager.removeItem(at: destinationFile)
+                    }
+                    
+                    // Copy file
+                    try fileManager.copyItem(at: logFile, to: destinationFile)
+                    print("✅ ScanDeviceViewController: Successfully copied \(logFile.lastPathComponent)")
+                }
+                
+                print("🎉 ScanDeviceViewController: Successfully exported \(logFiles.count) log files")
+                completion(true, nil)
+            } catch {
+                print("❌ ScanDeviceViewController: Export failed with error: \(error.localizedDescription)")
+                completion(false, error)
+            }
+        }
+    }
+    
+    private func showLogExportSuccessAlert(message: String, exportPath: String) {
+        let alert = UIAlertController(title: NSLocalizedString("log.export.success.title", comment: ""), message: message, preferredStyle: .alert)
+        
+        // Add share button
+        let shareAction = UIAlertAction(title: NSLocalizedString("log.export.share", comment: ""), style: .default) { [weak self] _ in
+            self?.shareLogFiles(from: exportPath)
+        }
+        alert.addAction(shareAction)
+        
+        // Add OK button
+        let okAction = UIAlertAction(title: NSLocalizedString("common.ok", comment: ""), style: .default, handler: nil)
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func shareLogFiles(from exportPath: String) {
+        let fileManager = FileManager.default
+        let exportURL = URL(fileURLWithPath: exportPath)
+        
+        do {
+            let logFiles = try fileManager.contentsOfDirectory(at: exportURL, includingPropertiesForKeys: nil, options: [])
+                .filter { $0.pathExtension == "log" }
+            
+            if logFiles.isEmpty {
+                showAlert(title: NSLocalizedString("common.warning", comment: ""), message: NSLocalizedString("log.export.no_files", comment: ""))
+                return
+            }
+            
+            let activityViewController = UIActivityViewController(activityItems: logFiles, applicationActivities: nil)
+            
+            // iPad support
+            if let popover = activityViewController.popoverPresentationController {
+                popover.sourceView = view
+                popover.sourceRect = CGRect(x: view.bounds.midX, y: view.bounds.midY, width: 0, height: 0)
+                popover.permittedArrowDirections = []
+            }
+            
+            present(activityViewController, animated: true, completion: nil)
+            
+        } catch {
+            let errorMessage = String(format: NSLocalizedString("log.export.share_failed", comment: ""), error.localizedDescription)
+            showAlert(title: NSLocalizedString("log.export.failed.title", comment: ""), message: errorMessage)
+        }
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("common.ok", comment: ""), style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

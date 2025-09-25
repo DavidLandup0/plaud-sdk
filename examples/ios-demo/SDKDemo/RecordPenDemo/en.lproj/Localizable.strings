@@ -147,6 +147,7 @@
 "device.action.wifi_fast_transfer" = "Wi-Fi Fast-Transfer";
 "device.action.close_device_wifi" = "Close Device WiFi";
 "device.action.device_name" = "Set DeviceName";
+"device.action.common_setting_test" = "Common Setting Test";
 
 /* Device Status */
 "device.status.connecting" = "Connecting...";
@@ -657,3 +658,25 @@
 "device.update.install_failed" = "Installation failed: %@";
 "device.update.version_info_missing" = "Version information not available";
 "device.update.unexpected_downloaded_state" = "Unexpected download state in update check";
+
+/* Common Setting Test Dialog */
+"common_setting.dialog.title" = "Common Setting Test";
+"common_setting.dialog.type_label" = "Type:";
+"common_setting.dialog.setting_label" = "Setting:";
+"common_setting.dialog.type_placeholder" = "Enter type value";
+"common_setting.dialog.setting_placeholder" = "Enter setting value";
+"common_setting.dialog.result_title" = "Setting Result";
+"common_setting.dialog.result_success" = "Setting Callback";
+"common_setting.dialog.result_failed" = "Setting failed";
+"common_setting.dialog.invalid_input" = "Please enter valid numbers";
+
+/* Log Export */
+"log.export.title" = "Log Export";
+"log.export.exporting" = "Exporting log files...";
+"log.export.success.title" = "Log Export Successful";
+"log.export.success.message" = "Log files exported successfully!\nPath: %@";
+"log.export.failed.title" = "Export Failed";
+"log.export.failed.message" = "Log export failed: %@";
+"log.export.share" = "Share";
+"log.export.no_files" = "No log files found";
+"log.export.share_failed" = "Share failed: %@";

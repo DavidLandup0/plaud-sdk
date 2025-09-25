@@ -343,6 +343,7 @@
     self.deviceAgent.delegate = self;
     [self setupUI];
     [self setupTableView];
+    [self setupShakeGesture];
     
     // Initially show guide view since no devices are found yet
     [self updateViewsVisibility];
@@ -1208,6 +1209,219 @@
         self.currentDevice = device;
         [self.deviceAgent connectBleDeviceWithBleDevice:device deviceToken:device.serialNumber];
     }
+}
+
+#pragma mark - Shake Gesture for Log Export
+
+- (void)setupShakeGesture {
+    // Shake gesture recognizer works automatically, no additional setup needed
+    // Just need to implement motionBegan method
+}
+
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake) {
+        [self exportLogs];
+    }
+}
+
+- (void)exportLogs {
+    // Show export start message with progress indicator
+    UIAlertController *progressAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"log.export.title", @"Log Export")
+                                                                           message:NSLocalizedString(@"log.export.exporting", @"Exporting log files...")
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Add a loading indicator
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleMedium];
+    indicator.translatesAutoresizingMaskIntoConstraints = NO;
+    [indicator startAnimating];
+    
+    [progressAlert.view addSubview:indicator];
+    [NSLayoutConstraint activateConstraints:@[
+        [indicator.centerXAnchor constraintEqualToAnchor:progressAlert.view.centerXAnchor],
+        [indicator.bottomAnchor constraintEqualToAnchor:progressAlert.view.bottomAnchor constant:-50]
+    ]];
+    
+    [self presentViewController:progressAlert animated:YES completion:nil];
+    
+    // Create export directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    NSString *exportDirectory = [documentsPath stringByAppendingPathComponent:@"LogExport"];
+    
+    // Export logs directly
+    [self exportLogFilesToDirectory:exportDirectory completion:^(BOOL success, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Dismiss progress alert first
+            [progressAlert dismissViewControllerAnimated:YES completion:^{
+                if (success) {
+                    NSString *message = [NSString stringWithFormat:NSLocalizedString(@"log.export.success.message", @"Log files exported successfully!\nPath: %@"), exportDirectory];
+                    [self showLogExportSuccessAlertWithMessage:message exportPath:exportDirectory];
+                } else {
+                    NSString *errorMessage = error.localizedDescription ?: NSLocalizedString(@"common.error", @"Error");
+                    NSString *failedMessage = [NSString stringWithFormat:NSLocalizedString(@"log.export.failed.message", @"Log export failed: %@"), errorMessage];
+                    [self showAlertWithTitle:NSLocalizedString(@"log.export.failed.title", @"Export Failed") 
+                                     message:failedMessage];
+                }
+            }];
+        });
+    }];
+}
+
+- (void)exportLogFilesToDirectory:(NSString *)destinationDirectory completion:(void(^)(BOOL success, NSError *error))completion {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsPath = [paths objectAtIndex:0];
+        NSString *logsDirectory = [documentsPath stringByAppendingPathComponent:@"PlaudLogs"];
+        
+        NSError *error = nil;
+        
+        // Check if logs directory exists
+        BOOL isDirectory;
+        if (![fileManager fileExistsAtPath:logsDirectory isDirectory:&isDirectory] || !isDirectory) {
+            // Create logs directory if it doesn't exist
+            [fileManager createDirectoryAtPath:logsDirectory 
+                   withIntermediateDirectories:YES 
+                                    attributes:nil 
+                                         error:&error];
+            if (error) {
+                NSLog(@"Failed to create logs directory: %@", error.localizedDescription);
+                completion(NO, error);
+                return;
+            }
+        }
+        
+        // Ensure destination directory exists
+        [fileManager createDirectoryAtPath:destinationDirectory 
+               withIntermediateDirectories:YES 
+                                attributes:nil 
+                                     error:&error];
+        if (error) {
+            NSLog(@"Failed to create destination directory: %@", error.localizedDescription);
+            completion(NO, error);
+            return;
+        }
+        
+        // Get all log files from PlaudLogs directory
+        NSArray *files = [fileManager contentsOfDirectoryAtPath:logsDirectory error:&error];
+        if (error) {
+            NSLog(@"Failed to read logs directory: %@", error.localizedDescription);
+            completion(NO, error);
+            return;
+        }
+        
+        NSMutableArray *logFiles = [NSMutableArray array];
+        for (NSString *fileName in files) {
+            if ([fileName hasPrefix:@"plaud"] && [fileName hasSuffix:@".log"]) {
+                [logFiles addObject:fileName];
+            }
+        }
+        
+        NSLog(@"Found %lu log files to export", (unsigned long)logFiles.count);
+        
+        // If no log files found, still return success
+        if (logFiles.count == 0) {
+            NSLog(@"No log files found to export");
+            completion(YES, nil);
+            return;
+        }
+        
+        // Copy all log files to destination
+        for (NSString *logFileName in logFiles) {
+            NSString *sourcePath = [logsDirectory stringByAppendingPathComponent:logFileName];
+            NSString *destinationPath = [destinationDirectory stringByAppendingPathComponent:logFileName];
+            
+            NSLog(@"Copying %@ to %@", sourcePath, destinationPath);
+            
+            // Remove existing file if it exists
+            if ([fileManager fileExistsAtPath:destinationPath]) {
+                [fileManager removeItemAtPath:destinationPath error:nil];
+            }
+            
+            // Copy file
+            [fileManager copyItemAtPath:sourcePath toPath:destinationPath error:&error];
+            if (error) {
+                NSLog(@"Failed to copy file %@: %@", logFileName, error.localizedDescription);
+                completion(NO, error);
+                return;
+            }
+        }
+        
+        NSLog(@"Successfully exported %lu log files", (unsigned long)logFiles.count);
+        completion(YES, nil);
+    });
+}
+
+- (void)showLogExportSuccessAlertWithMessage:(NSString *)message exportPath:(NSString *)exportPath {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"log.export.success.title", @"Log Export Successful")
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    // Add share button
+    UIAlertAction *shareAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"log.export.share", @"Share")
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * _Nonnull action) {
+        [self shareLogFilesFromPath:exportPath];
+    }];
+    [alert addAction:shareAction];
+    
+    // Add OK button
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"common.ok", @"OK")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)shareLogFilesFromPath:(NSString *)exportPath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSError *error = nil;
+    NSArray *files = [fileManager contentsOfDirectoryAtPath:exportPath error:&error];
+    if (error) {
+        [self showAlertWithTitle:NSLocalizedString(@"log.export.failed.title", @"Export Failed")
+                         message:[NSString stringWithFormat:NSLocalizedString(@"log.export.share_failed", @"Share failed: %@"), error.localizedDescription]];
+        return;
+    }
+    
+    NSMutableArray *logFiles = [NSMutableArray array];
+    for (NSString *fileName in files) {
+        if ([fileName hasSuffix:@".log"]) {
+            NSString *filePath = [exportPath stringByAppendingPathComponent:fileName];
+            [logFiles addObject:[NSURL fileURLWithPath:filePath]];
+        }
+    }
+    
+    if (logFiles.count == 0) {
+        [self showAlertWithTitle:NSLocalizedString(@"common.warning", @"Warning")
+                         message:NSLocalizedString(@"log.export.no_files", @"No log files found")];
+        return;
+    }
+    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:logFiles applicationActivities:nil];
+    
+    // iPad support
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        activityViewController.popoverPresentationController.sourceView = self.view;
+        activityViewController.popoverPresentationController.sourceRect = CGRectMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds), 0, 0);
+        activityViewController.popoverPresentationController.permittedArrowDirections = 0;
+    }
+    
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"common.ok", @"OK")
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
