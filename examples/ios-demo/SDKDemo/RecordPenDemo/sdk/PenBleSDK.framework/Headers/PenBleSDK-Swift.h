@@ -478,10 +478,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BleAgent * _
 /// @see    CallbackbleBacklightDuration
 ///
 - (void)setBacklightDurationWithType:(NSInteger)type;
-/// setCommonSetting
-/// CommonSetting
-/// @see    bleCommonSetting
-- (void)setCommonSettingWithType:(NSInteger)type setting:(NSInteger)setting;
 /// Read backlight brightness
 /// Used for screen non-multi-key projects e.g. P23R1.
 /// @see    setBacklightBright
@@ -1027,7 +1023,6 @@ SWIFT_PROTOCOL("_TtP9PenBleSDK16BleAgentProtocol_")
 /// \param password Initial password after reset
 ///
 - (void)blePasswordResetWithPassword:(NSInteger)password;
-- (void)bleCommonSetting:(NSInteger)setting;
 /// Read or set backlight duration callback
 /// \param duration Duration enumeration 0: 10 seconds 1: 20 seconds 2: 30 seconds 4: Always on
 ///
@@ -2251,32 +2246,6 @@ SWIFT_PROTOCOL("_TtP9PenBleSDK16PDVolumeProtocol_")
 /// \param volume Unit decibels
 ///
 - (void)onVolumePerTwentyMsecWithMescSecond:(NSInteger)mescSecond volume:(NSInteger)volume;
-@end
-
-/// Log file rotation manager
-/// Responsible for unified management of log file switching logic, ensuring immediate switch to new file after upload
-SWIFT_CLASS("_TtC9PenBleSDK27PlaudLogFileRotationManager")
-@interface PlaudLogFileRotationManager : NSObject
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PlaudLogFileRotationManager * _Nonnull shared;)
-+ (PlaudLogFileRotationManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-/// Force rotate current log file
-/// Usually called after successful upload to ensure subsequent logs are written to new file
-- (void)forceRotateCurrentLogFile;
-/// Check and perform size-based rotation
-/// \param filePath Log file path
-///
-/// \param additionalSize Size of data to be written
-///
-///
-/// returns:
-/// Whether rotation was performed
-- (BOOL)checkAndRotateIfNeededWithFilePath:(NSString * _Nonnull)filePath additionalSize:(int64_t)additionalSize SWIFT_WARN_UNUSED_RESULT;
-/// Get current active log file path
-- (NSString * _Nonnull)getCurrentLogFilePath SWIFT_WARN_UNUSED_RESULT;
-/// Notify manager that upload is completed, suggest file rotation
-- (void)notifyUploadCompleted;
 @end
 
 /// Recording pen firmware upgrade information

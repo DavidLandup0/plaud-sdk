@@ -2,8 +2,8 @@
 //  JXWebSocketServer.h
 //  PenBleSDK
 //
-//  Created by Plaud on 2019/12/13.
-//  Copyright © 2019 Plaud. All rights reserved.
+//  Created by PLAUD on 2019/12/13.
+//  Copyright © 2019 PLAUD. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

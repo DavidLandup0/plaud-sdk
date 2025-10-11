@@ -53,8 +53,8 @@
                 }
             }
             
-            // 使用统一的日志文件轮转管理器检查是否需要轮转
-            // Objective-C通过反射调用PenBleSDK模块中的轮转管理器
+            // Use unified log file rotation manager to check if rotation is needed
+            // Objective-C calls rotation manager in PenBleSDK module through reflection
             Class rotationManagerClass = NSClassFromString(@"PlaudLogFileRotationManager");
             if (rotationManagerClass) {
                 id sharedInstance = [rotationManagerClass performSelector:@selector(shared)];
@@ -65,7 +65,7 @@
                                          withObject:additionalSize];
                 }
             } else {
-                // 降级到原有逻辑（仅作为备用）
+                // Fallback to original logic (as backup only)
                 if (fileSize && [fileSize longLongValue] + [logData length] > maxFileSize) {
                     // Rotate file
                     NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
@@ -243,9 +243,9 @@
     });
 }
 
-#pragma mark - 内部时间戳函数
+#pragma mark - Internal Timestamp Functions
 
-/// 获取共享的日期格式化器（性能优化）
+/// Get shared date formatter (performance optimization)
 + (NSDateFormatter *)sharedTimestampFormatter {
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
@@ -258,7 +258,7 @@
     return formatter;
 }
 
-/// 获取当前时间戳字符串
+/// Get current timestamp string
 + (NSString *)getCurrentTimestamp {
     return [[self sharedTimestampFormatter] stringFromDate:[NSDate date]];
 }

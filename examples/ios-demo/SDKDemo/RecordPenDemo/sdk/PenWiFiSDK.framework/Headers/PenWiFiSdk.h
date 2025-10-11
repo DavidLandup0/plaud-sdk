@@ -3,7 +3,7 @@
 //  PenWiFiSdk
 //
 //  Created by TNT on 2020/3/13.
-//  Copyright © 2020 Plaud. All rights reserved.
+//  Copyright © 2020 PLAUD. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

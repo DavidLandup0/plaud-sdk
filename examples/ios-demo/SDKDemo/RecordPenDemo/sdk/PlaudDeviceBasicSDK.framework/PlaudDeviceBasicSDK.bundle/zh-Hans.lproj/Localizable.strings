@@ -67,7 +67,7 @@
 "wifi_cloud_desc" = "NotePin 会自动连接到你配置的 Wi-Fi 网络，将录音上传到云端。你可以添加多个常用网络（例如家里、工作）。目前仅支持 2.4GHz 网络。";
 "wifi_cloud_switch" = "Wi-Fi上云";
 "wifi_cloud_set_address" = "设置地址";
-"wifi_cloud_info" = "Private Cloud Sync 是 Plaud.AI 为每位用户提供的独立私有云空间，用于安全备份数据并防止丢失。";
+"wifi_cloud_info" = "Private Cloud Sync 是 PLAUD.AI 为每位用户提供的独立私有云空间，用于安全备份数据并防止丢失。";
 "wifi_configure" = "配置 Wi-Fi";
 "wifi_network_list" = "网络列表";
 "wifi_other" = "其他...";

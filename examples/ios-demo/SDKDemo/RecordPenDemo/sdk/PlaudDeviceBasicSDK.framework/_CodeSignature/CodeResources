@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/PlaudDeviceBasicSDK-Swift.h</key>
 		<data>
-		5aTPu7NWgXJkS9slV6QIBdoHZV4=
+		8cqVAFfJjqqyjb501TFczNN5Ihs=
 		</data>
 		<key>Headers/PlaudDeviceBasicSDK.h</key>
 		<data>
@@ -22,27 +22,27 @@
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		zORnARU6dlI7kcLQqynCdKXm3Ac=
+		9QnLmn9YxWhXyNYjlllBmZc0TFU=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		S4YQfoWZWYrvBvJ5xWtOp38VyrA=
+		6E01sU8x9znKrTo9VLdqr8TbUc0=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		v0T6glrZEWhuACpGOylYain/KnU=
+		1k7MJCeHWP98QAIvRm9KQrAoDRY=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		MQh3KsJJtYcEwKUeIJd9TbBJ+Is=
+		x+c3MKOHfuOAvMSDUC5t7tW8vDE=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		v0T6glrZEWhuACpGOylYain/KnU=
+		1k7MJCeHWP98QAIvRm9KQrAoDRY=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		0XfIifE414Rpxk3NmLGQNm150xk=
+		Y5//GeRLWIm9JgKUs0Tbs3Ydl+M=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -56,7 +56,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wMAmf73xxnfRA5adBiJcjpHv0WA=
+			lu9Zk9YtwXOS6KfpwKkunVUkqRs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -65,7 +65,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bApgxzM1OZkEyoSVAZ2qq04LOmA=
+			rF4o8iUvZMgfXOe31yfj1itPN40=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -81,11 +81,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5aTPu7NWgXJkS9slV6QIBdoHZV4=
+			8cqVAFfJjqqyjb501TFczNN5Ihs=
 			</data>
 			<key>hash2</key>
 			<data>
-			JRSp6bL8h4gYoWxbqn/dVhOO/xH36RUIRDqOArijjoA=
+			SxIo8E7jt8vyNswi3UCnWeR53v+9+0dn+O7h1K9FCKs=
 			</data>
 		</dict>
 		<key>Headers/PlaudDeviceBasicSDK.h</key>
@@ -114,66 +114,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			zORnARU6dlI7kcLQqynCdKXm3Ac=
+			9QnLmn9YxWhXyNYjlllBmZc0TFU=
 			</data>
 			<key>hash2</key>
 			<data>
-			wRz467N7VToLnctBW1Z/FwSA7HSQVR5aXW28Z9RB8Aw=
+			s+P+N4Oj+Kz33X9dPcGtBTLUJX52nAqnOLPiAVqGS6g=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			S4YQfoWZWYrvBvJ5xWtOp38VyrA=
+			6E01sU8x9znKrTo9VLdqr8TbUc0=
 			</data>
 			<key>hash2</key>
 			<data>
-			2GQHnNMtqGthm4CG1sKQv2/pOHkOcaNkde9CcPf+o5Y=
+			vfDEXbpE2EYBelGPgfiX5142axUGTzWd92Se61kiTUc=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v0T6glrZEWhuACpGOylYain/KnU=
+			1k7MJCeHWP98QAIvRm9KQrAoDRY=
 			</data>
 			<key>hash2</key>
 			<data>
-			l5wVAJPq6tcCPE7VJdeg9QJe0/hus3vLipfDbmTddmg=
+			PIlo0OvBXNiQ17RL1VkTnoMKrUrCaOHLB3GWVCJWHuU=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MQh3KsJJtYcEwKUeIJd9TbBJ+Is=
+			x+c3MKOHfuOAvMSDUC5t7tW8vDE=
 			</data>
 			<key>hash2</key>
 			<data>
-			Lc8qWphkPTdhJd7kNrg2jJcqV4M1jqB/rrzB5Ni5UZk=
+			jyIsMqzihKZu7O7jKwLfIEhZd2dum7iD9hMJwdovYwo=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			v0T6glrZEWhuACpGOylYain/KnU=
+			1k7MJCeHWP98QAIvRm9KQrAoDRY=
 			</data>
 			<key>hash2</key>
 			<data>
-			l5wVAJPq6tcCPE7VJdeg9QJe0/hus3vLipfDbmTddmg=
+			PIlo0OvBXNiQ17RL1VkTnoMKrUrCaOHLB3GWVCJWHuU=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0XfIifE414Rpxk3NmLGQNm150xk=
+			Y5//GeRLWIm9JgKUs0Tbs3Ydl+M=
 			</data>
 			<key>hash2</key>
 			<data>
-			Tt6z4rEVVlhQs2A4Whxoz7zpc/lgxgv3qDzb9eCdjso=
+			tYZUedsRw49G5dh2+Dayl6DJPWfkJ1OY/Jc0aJE4q7o=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -202,11 +202,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wMAmf73xxnfRA5adBiJcjpHv0WA=
+			lu9Zk9YtwXOS6KfpwKkunVUkqRs=
 			</data>
 			<key>hash2</key>
 			<data>
-			G0pY2fvF/epULhD9i2hy6v22XRRrHv6rDd+w4uyIhoU=
+			EFFeaz8WV/Tevn8NvDp2Z7b6EFKoDt9Brt+W1M19H2c=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -215,11 +215,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bApgxzM1OZkEyoSVAZ2qq04LOmA=
+			rF4o8iUvZMgfXOe31yfj1itPN40=
 			</data>
 			<key>hash2</key>
 			<data>
-			5jyMPl73wOz+N+XmsXCNY3Eeb+pdUXZS97EWu6kn75M=
+			hHblUm3Y1wEEmRd8xOWPVbpjvVxXcHDB63UhPzW/4Wk=
 			</data>
 			<key>optional</key>
 			<true/>

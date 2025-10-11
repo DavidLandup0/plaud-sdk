@@ -15,7 +15,7 @@
 "auth.appkey.placeholder" = "AppKey";
 "auth.appsecret.placeholder" = "AppSecret";
 "auth.input.empty" = "请输入AppKey和AppSecret";
-"auth.email.support" = "AppKey和AppSecret用于确保PLAUD设备被安全地连接和访问，如果您目前没有它们，请联系%@申请用于测试的Key";
+"auth.email.support" = "AppKey和AppSecret用于确保Plaud设备被安全地连接和访问，如果您目前没有它们，请联系%@申请用于测试的Key";
 
 /* Progress */
 "progress.loading" = "加载中...";
@@ -45,14 +45,14 @@
 "ble.scan.start" = "开始扫描";
 "ble.scan.stop" = "停止扫描";
 "ble.scan.searching" = "搜索中..";
-"ble.scan.subtitle" = "找到您的 PLAUD NotePin 并建立连接";
+"ble.scan.subtitle" = "找到您的 Plaud NotePin 并建立连接";
 "ble.scan.step1.title" = "步骤 1";
-"ble.scan.step1.instruction" = "按住 PLAUD NotePin 的录音按键，直到白灯闪烁";
+"ble.scan.step1.instruction" = "按住 Plaud NotePin 的录音按键，直到白灯闪烁";
 "ble.scan.step1.description" = "长按录音按钮直到白灯闪烁";
 "ble.scan.step2.title" = "步骤 2";
-"ble.scan.step2.instruction" = "将您的 PLAUD NotePin 靠近您的手机";
+"ble.scan.step2.instruction" = "将您的 Plaud NotePin 靠近您的手机";
 "ble.scan.step2.description" = "将设备靠近手机以建立连接";
-"ble.scan.help.title" = "无法激活您的 PLAUD NotePin?";
+"ble.scan.help.title" = "无法激活您的 Plaud NotePin?";
 "ble.scan.help.message" = "请确保您的设备已充电，然后重试上述步骤。如果问题持续存在，请联系 support@plaud.ai";
 "ble.status.connected" = "已连接";
 "ble.status.disconnected" = "已断开";
@@ -79,8 +79,8 @@
 "file.delete.failed" = "文件删除失败";
 
 /* Main Screen */
-"main.title" = "PLAUD SDK 演示";
-"main.description" = "本程序展示PLAUD SDK的接入和使用方法";
+"main.title" = "Plaud SDK 演示";
+"main.description" = "本程序展示Plaud SDK的接入和使用方法";
 "main.button.check_permission" = "检查权限";
 "main.button.scan_device" = "扫描设备";
 

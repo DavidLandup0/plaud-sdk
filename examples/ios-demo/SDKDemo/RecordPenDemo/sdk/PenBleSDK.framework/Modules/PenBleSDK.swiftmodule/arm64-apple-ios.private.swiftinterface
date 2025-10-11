@@ -445,14 +445,6 @@ extension PenBleSDK.JXFirmUpdater : PenBleSDK.OtaProtocol {
   @objc public func checkCrc(crc: Swift.Int, ofFile path: Swift.String) -> Swift.Bool
   @objc deinit
 }
-@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class PlaudLogFileRotationManager : ObjectiveC.NSObject {
-  @objc public static let shared: PenBleSDK.PlaudLogFileRotationManager
-  @objc public func forceRotateCurrentLogFile()
-  @objc public func checkAndRotateIfNeeded(filePath: Swift.String, additionalSize: Swift.Int64) -> Swift.Bool
-  @objc public func getCurrentLogFilePath() -> Swift.String
-  @objc public func notifyUploadCompleted()
-  @objc deinit
-}
 @objc public protocol BleAgentProtocol {
   @objc func bleUpdatePowerLowErr()
   @objc func bleDeviceDisconnectErr()
@@ -471,7 +463,6 @@ extension PenBleSDK.JXFirmUpdater : PenBleSDK.OtaProtocol {
   @objc func blePenTime(stamp: Swift.Int, timezone: Swift.Int, zoneMin: Swift.Int)
   @objc func bleStorage(total: Swift.Int, free: Swift.Int, duration: Swift.Int)
   @objc func blePasswordReset(password: Swift.Int)
-  @objc func bleCommonSetting(_ setting: Swift.Int)
   @objc func bleBacklightDuration(_ duration: Swift.Int)
   @objc func bleBacklightBright(_ bright: Swift.Int)
   @objc func bleLanguage(_ type: Swift.Int)
@@ -631,7 +622,6 @@ extension PenBleSDK.JXFirmUpdater : PenBleSDK.OtaProtocol {
   @objc public func appResetPassword()
   @objc public func readBacklightDuration()
   @objc public func setBacklightDuration(type: Swift.Int)
-  @objc public func setCommonSetting(type: Swift.Int, setting: Swift.Int)
   public func setBacklight(duration: PenBleSDK.BacklightDuration)
   @objc public func readBacklightBright()
   @objc public func setBacklightBright(type: Swift.Int)
