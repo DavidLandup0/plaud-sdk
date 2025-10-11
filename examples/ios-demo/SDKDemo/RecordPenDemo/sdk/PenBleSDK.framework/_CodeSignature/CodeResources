@@ -30,11 +30,11 @@
 		</data>
 		<key>Headers/PenBleSDK-Swift.h</key>
 		<data>
-		N1jHWkSUXv74ageQTeTNwEqajJo=
+		Qi2XdhMbhUqWIizvyFmkLkHubQs=
 		</data>
 		<key>Headers/PenBleSDK.h</key>
 		<data>
-		0YgUlmMkHyGgClZhHcG8QvmzL3A=
+		5uAzURbcZLmimkTksk7c18pL14o=
 		</data>
 		<key>Headers/SoundPlusTool.h</key>
 		<data>
@@ -50,27 +50,27 @@
 		</data>
 		<key>Modules/PenBleSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		4bJQwNV78O79qCbOrYtUx8ve9yQ=
+		Jk/M6Mmm9tbnCXRTfnDRjw9qjTE=
 		</data>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		g6nI+hqxO8/K+/HqCSsv7o0a9HY=
+		Ir58L7IEyCjWjow6TfxjLFH6dSk=
 		</data>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		9puerFrO8LCcrPsnkFSYPaI5tzs=
+		8lM7oH0PirO12LlZWi8zsOYDQtQ=
 		</data>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		pW2XvBmrLwx1CysMW69cVahmzzU=
+		IvouQY8cxeEC5VO0g345wCvys/c=
 		</data>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		9puerFrO8LCcrPsnkFSYPaI5tzs=
+		8lM7oH0PirO12LlZWi8zsOYDQtQ=
 		</data>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		hJvTlpr4WVdUiJklbp0wWu2WQ1c=
+		jpMUkcSQUBBBwXF5H7gaQgEwy/U=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -125,14 +125,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6bs6ST1um0zLprh5BhA+IOXeBM4XE6DOk3WPj8TI4P4=
+			XS/LXqsJHoiRRlDO/2PQ/BPZeDPv6UfLNOEqI283AfI=
 			</data>
 		</dict>
 		<key>Headers/PenBleSDK.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H1FXEJqOAl56AYjfssYHG8RG1x+zrDEmgr7ERTNk4oY=
+			CI3qTa2AQFeMuv92xru6BbzyhY/AWdzrcXKzdioO21I=
 			</data>
 		</dict>
 		<key>Headers/SoundPlusTool.h</key>
@@ -153,42 +153,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0bOrCtUFjoHZOU9O41nvQnq+rXncSGWfLjwHP+Xq0TY=
+			FbSmSoY/Z1vc6dysFb3xGlq2zGyNAXRVi6OUATLvZoI=
 			</data>
 		</dict>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mAjqYyYEJjL8lKiid3abHOD5vVo6n0PiT5y6XIlvR2E=
+			79Jk30sHpDj07J8xMGpXrtlfWLyEgyHZE8UZYUqUOLM=
 			</data>
 		</dict>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wgrG70z8lh7+2Ha5yPKlLpKvn0Dp7sjQSv40mXhkWxU=
+			0MNNyr+nQdjSs7ECua1dJ1lvY6AribSfnkdl+8NuD4M=
 			</data>
 		</dict>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			OB6+MuSivdoKblHAqJmVuy3LKm/bEqvzaEJfj2i62Hg=
+			8uJvvCOMt7Wt+xMl2JVkpyf1EB7xuMfq4r09ewFS1hk=
 			</data>
 		</dict>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wgrG70z8lh7+2Ha5yPKlLpKvn0Dp7sjQSv40mXhkWxU=
+			0MNNyr+nQdjSs7ECua1dJ1lvY6AribSfnkdl+8NuD4M=
 			</data>
 		</dict>
 		<key>Modules/PenBleSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			u+UY5oweuf6DkWb+vfpuAb/i1vOn71Cj8VjTugFaPXk=
+			kgs5rRESowWyofegO2DvnvwQfyg1Amm7urUFHV1ZQaE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
