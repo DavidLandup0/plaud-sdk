@@ -41045,7 +41045,7 @@
       "kind": "StringLiteral",
       "offset": 4139,
       "length": 16,
-      "value": "\"PLAUD-\""
+      "value": "\"Plaud-\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleDevice.swift",
@@ -41164,7 +41164,7 @@
       "kind": "StringLiteral",
       "offset": 4721,
       "length": 32,
-      "value": "\"PLAUD\""
+      "value": "\"Plaud\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleDevice.swift",
@@ -41276,7 +41276,7 @@
       "kind": "StringLiteral",
       "offset": 5119,
       "length": 32,
-      "value": "\"PLAUD\""
+      "value": "\"Plaud\""
     },
     {
       "filePath": "\/Users\/xionghao\/Documents\/plaud\/GitHub\/tb-plaud-mobile\/ios\/SDK\/SDKLibs\/PenSubmodules\/BlePen\/PenBleSDK\/SwiftFiles\/BleDevice.swift",

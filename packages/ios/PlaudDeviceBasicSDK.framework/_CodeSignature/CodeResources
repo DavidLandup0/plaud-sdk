@@ -22,27 +22,27 @@
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		TzfowOSeh7aWVd8VpjpQ6rxwzV8=
+		zORnARU6dlI7kcLQqynCdKXm3Ac=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		QLKI9vcYzWx67+A0UB0YMJApE08=
+		S4YQfoWZWYrvBvJ5xWtOp38VyrA=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		mYbkW60hMOyeJXuu+PoZZHEVqTI=
+		v0T6glrZEWhuACpGOylYain/KnU=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		CJDpw4tubE2NaFhpvGG0ZOXLVJA=
+		MQh3KsJJtYcEwKUeIJd9TbBJ+Is=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		mYbkW60hMOyeJXuu+PoZZHEVqTI=
+		v0T6glrZEWhuACpGOylYain/KnU=
 		</data>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		e0kpK6bsVBQNv/TlUWOXETQIgEM=
+		0XfIifE414Rpxk3NmLGQNm150xk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -56,7 +56,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lu9Zk9YtwXOS6KfpwKkunVUkqRs=
+			wMAmf73xxnfRA5adBiJcjpHv0WA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -65,7 +65,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rF4o8iUvZMgfXOe31yfj1itPN40=
+			bApgxzM1OZkEyoSVAZ2qq04LOmA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -114,66 +114,66 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			TzfowOSeh7aWVd8VpjpQ6rxwzV8=
+			zORnARU6dlI7kcLQqynCdKXm3Ac=
 			</data>
 			<key>hash2</key>
 			<data>
-			B+btrQWYh8njXDA2XVcjcfi+XdJsrYkd0QIbvbZWPjY=
+			wRz467N7VToLnctBW1Z/FwSA7HSQVR5aXW28Z9RB8Aw=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QLKI9vcYzWx67+A0UB0YMJApE08=
+			S4YQfoWZWYrvBvJ5xWtOp38VyrA=
 			</data>
 			<key>hash2</key>
 			<data>
-			BbaquDJRJpO7z5kO4+0D8bn19cg/fd0Wobyx3UGPbcA=
+			2GQHnNMtqGthm4CG1sKQv2/pOHkOcaNkde9CcPf+o5Y=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mYbkW60hMOyeJXuu+PoZZHEVqTI=
+			v0T6glrZEWhuACpGOylYain/KnU=
 			</data>
 			<key>hash2</key>
 			<data>
-			Okp/sJUuMlHTKlgwd0dSw8yd463XKE+fD9prMTGeqbQ=
+			l5wVAJPq6tcCPE7VJdeg9QJe0/hus3vLipfDbmTddmg=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CJDpw4tubE2NaFhpvGG0ZOXLVJA=
+			MQh3KsJJtYcEwKUeIJd9TbBJ+Is=
 			</data>
 			<key>hash2</key>
 			<data>
-			nO2rMz+UVDNrijBnVZC9i17u/Z8rizSrL7MjXpJwUr4=
+			Lc8qWphkPTdhJd7kNrg2jJcqV4M1jqB/rrzB5Ni5UZk=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mYbkW60hMOyeJXuu+PoZZHEVqTI=
+			v0T6glrZEWhuACpGOylYain/KnU=
 			</data>
 			<key>hash2</key>
 			<data>
-			Okp/sJUuMlHTKlgwd0dSw8yd463XKE+fD9prMTGeqbQ=
+			l5wVAJPq6tcCPE7VJdeg9QJe0/hus3vLipfDbmTddmg=
 			</data>
 		</dict>
 		<key>Modules/PlaudDeviceBasicSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			e0kpK6bsVBQNv/TlUWOXETQIgEM=
+			0XfIifE414Rpxk3NmLGQNm150xk=
 			</data>
 			<key>hash2</key>
 			<data>
-			wJ3Yj4Tn1iYOJIQIEji58hXOrpZu+Bdc9NKwR5I0k9o=
+			Tt6z4rEVVlhQs2A4Whxoz7zpc/lgxgv3qDzb9eCdjso=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -202,11 +202,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lu9Zk9YtwXOS6KfpwKkunVUkqRs=
+			wMAmf73xxnfRA5adBiJcjpHv0WA=
 			</data>
 			<key>hash2</key>
 			<data>
-			EFFeaz8WV/Tevn8NvDp2Z7b6EFKoDt9Brt+W1M19H2c=
+			G0pY2fvF/epULhD9i2hy6v22XRRrHv6rDd+w4uyIhoU=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -215,11 +215,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			rF4o8iUvZMgfXOe31yfj1itPN40=
+			bApgxzM1OZkEyoSVAZ2qq04LOmA=
 			</data>
 			<key>hash2</key>
 			<data>
-			hHblUm3Y1wEEmRd8xOWPVbpjvVxXcHDB63UhPzW/4Wk=
+			5jyMPl73wOz+N+XmsXCNY3Eeb+pdUXZS97EWu6kn75M=
 			</data>
 			<key>optional</key>
 			<true/>
