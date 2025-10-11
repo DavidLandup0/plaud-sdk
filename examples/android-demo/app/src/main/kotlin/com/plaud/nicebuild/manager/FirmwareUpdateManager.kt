@@ -63,8 +63,8 @@ class FirmwareUpdateManager private constructor(private val context: Context) {
          */
         private fun getExpectedDeviceType(snType: String): String {
             return when (snType) {
-                "notepin" -> "PLAUD NOTE Pin 设备"
-                "note" -> "PLAUD NOTE 设备"
+                "notepin" -> "Plaud NOTE Pin 设备"
+                "note" -> "Plaud NOTE 设备"
                 else -> "未知设备类型"
             }
         }
