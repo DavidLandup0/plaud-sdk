@@ -47,14 +47,14 @@ The PLAUD system architecture is designed as a modular, AI-powered platform that
 
 PLAUD SDK is designed to work across all platforms. ​Support for Android and iOS is now available, and additional platforms are currently under development.
 
-| Platform  | Support Status | Min OS Version |
-|-----------|--------|-------------|
-| iOS       | ✅ Available | iOS 13.0+ |
-| Android   | ✅ Available | API 21+ |
-| ReacNative| ✅ Available | API 21+、iOS 13.0+ |
-| Web       | 🚧 Under Development | - |
-| macOS     | 🚧 Under Development | - |
-| Windows   | 🚧 Under Development | - |
+| Platform   | Support Status | Min OS Version |
+|------------|--------|-------------|
+| iOS        | ✅ Available | iOS 13.0+ |
+| Android    | ✅ Available | API 21+ |
+| ReactNative| ✅ Available | API 21+、iOS 13.0+ |
+| Web        | 🚧 Under Development | - |
+| macOS      | 🚧 Under Development | - |
+| Windows    | 🚧 Under Development | - |
 
 ## Core Features
 
