@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="16sp"
-                tools:text="PLAUD NOTE" />
+                tools:text="Plaud NOTE" />
 
             <TextView
                 android:id="@+id/tv_device_serial"

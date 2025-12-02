@@ -12,9 +12,9 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.plaud.nicebuild.R
-import com.plaud.nicebuild.data.FirmwareUpdateInfo
-import com.plaud.nicebuild.data.UpdateProgress
-import com.plaud.nicebuild.data.FirmwareTransferPhase
+import sdk.firmware.FirmwareUpdateInfo
+import sdk.firmware.UpdateProgress
+import sdk.firmware.FirmwareTransferPhase
 
 /**
  * 固件更新对话框工具类
