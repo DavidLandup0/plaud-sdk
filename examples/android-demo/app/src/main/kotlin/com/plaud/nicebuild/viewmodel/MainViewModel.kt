@@ -115,14 +115,34 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         onResult: (Boolean, String?, String?) -> Unit // success, errorMessage, fileId
     ) {
         val sn = currentDevice.value?.serialNumber ?: "Unknown"
+        
+        // Determine file type and time based on whether it's a device log
+        val fileType = if (bleFile.isDeviceLog) "log" else "opus"
+        val startTime: Long
+        val endTime: Long
+        
+        if (bleFile.isDeviceLog) {
+            // For device log files, use current timestamp and add 1 second for duration
+            val currentTimestamp = System.currentTimeMillis() / 1000
+            startTime = currentTimestamp
+            endTime = currentTimestamp + 1  // duration = 1 second
+        } else {
+            // For recordings, use actual timestamps
+            startTime = bleFile.startTime
+            endTime = bleFile.endTime
+        }
+        
+        Log.d("MainViewModel", "Uploading file: type=$fileType, isDeviceLog=${bleFile.isDeviceLog}, sessionId=${bleFile.sessionId}")
+        Log.d("MainViewModel", "startTime:$startTime, endTime:$endTime, duration:${endTime - startTime}")
+        
         s3UploadManager.uploadFileAsync(
             filePath = opusFile.absolutePath,
             fileSize = opusFile.length(),
-            fileType = "opus",
+            fileType = fileType,
             snType = "notepin",
             sn = sn,
-            startTime = bleFile.startTime,  // Use BleFile's new method
-            endTime = bleFile.endTime,      // Use BleFile's new method
+            startTime = startTime,
+            endTime = endTime,
             timezone = TimeZone.getDefault().rawOffset / 3600000,
             zoneMins = (TimeZone.getDefault().rawOffset % 3600000) / 60000,
             onProgress = onProgress,
@@ -134,7 +154,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 onResult(false, exception.message, null)
             }
         )
-        Log.d("MainViewModel", "startTime:${bleFile.startTime},endTime:${bleFile.endTime}")
 
         /*
         viewModelScope.launch(Dispatchers.IO) {

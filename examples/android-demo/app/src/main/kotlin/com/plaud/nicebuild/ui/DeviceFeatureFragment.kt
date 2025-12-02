@@ -42,7 +42,8 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import sdk.NiceBuildSdk
 import com.plaud.nicebuild.data.*
-import com.plaud.nicebuild.manager.FirmwareUpdateManager
+import sdk.firmware.FirmwareUpdateManager
+import sdk.firmware.*
 import com.plaud.nicebuild.ui.dialogs.FirmwareUpdateDialogs
 import com.plaud.nicebuild.ui.dialogs.FirmwareUpdateProgressDialog
 import com.google.android.material.appbar.MaterialToolbar

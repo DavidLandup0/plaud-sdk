@@ -644,35 +644,72 @@ class BleCore private constructor(private val context: Context) {
         onPCMData: (type: Int, start: Long, data: ShortArray) -> Unit,
         onFinish: (endingTag: String) -> Unit
     ) {
-        val processDataCallBack = IVoiceData { data: ShortArray?, startPos: Long ->
-            data?.let {
-                if (decode) onPCMData(1, startPos, it)
+        // For device log files (sessionId < 100), use original data processor (no decoding)
+        // For recordings (sessionId >= 100), use Opus-to-PCM decoder
+        // Device log files are numbered 0-9, etc., not timestamp-based
+        val isDeviceLog = sessionId < 100
+        
+        if (isDeviceLog) {
+            // Device log files: use original data processor (no Opus decoding)
+            val originalDataCallBack = IVoiceData { data: ByteArray?, startPos: Long ->
+                data?.let {
+                    onOpusData(1, startPos, it)
+                }
             }
-        }
-        val originalDataCallBack = IVoiceData { data: ByteArray?, startPos: Long ->
-            data?.let {
-                onOpusData(1, startPos, it)
-            }
-        }
-        val dataProcess = VoiceDataCreatorFactory.newOpusToPcm()
-        dataProcess.setOriginalDataCallBack(originalDataCallBack)
-        dataProcess.setProcessDataCallBack(processDataCallBack)
-
-        getBleAgent().syncFileStart(
-            sessionId, start, end,
-            { 
-                Log.i(TAG, "syncBleFile: start")
-            },
-            { onOpusData(0, 0, ByteArray(0)); if (decode) onPCMData(0, 0, ShortArray(0)) },
-            {
+            val dataProcess = VoiceDataCreatorFactory.newOriginalData()
+            dataProcess.setOriginalDataCallBack(originalDataCallBack)
+            dataProcess.setFinishCallBack { code ->
                 onFinish("syncBleFileEnd")
-                Log.i(TAG, "syncBleFile: finish")
-            },
-            dataProcess,
-            { errorCode ->
-                handleBleError(errorCode)
-            },
-        )
+                Log.i(TAG, "syncBleFile: finish (device log)")
+            }
+            
+            getBleAgent().syncFileStart(
+                sessionId, start, end,
+                { 
+                    Log.i(TAG, "syncBleFile: start (device log, sessionId=$sessionId)")
+                },
+                { onOpusData(0, 0, ByteArray(0)) },
+                {
+                    onFinish("syncBleFileEnd")
+                    Log.i(TAG, "syncBleFile: finish (device log)")
+                },
+                dataProcess,
+                { errorCode ->
+                    handleBleError(errorCode)
+                },
+            )
+        } else {
+            // Recording files: use Opus-to-PCM decoder
+            val processDataCallBack = IVoiceData { data: ShortArray?, startPos: Long ->
+                data?.let {
+                    if (decode) onPCMData(1, startPos, it)
+                }
+            }
+            val originalDataCallBack = IVoiceData { data: ByteArray?, startPos: Long ->
+                data?.let {
+                    onOpusData(1, startPos, it)
+                }
+            }
+            val dataProcess = VoiceDataCreatorFactory.newOpusToPcm()
+            dataProcess.setOriginalDataCallBack(originalDataCallBack)
+            dataProcess.setProcessDataCallBack(processDataCallBack)
+
+            getBleAgent().syncFileStart(
+                sessionId, start, end,
+                { 
+                    Log.i(TAG, "syncBleFile: start (recording, sessionId=$sessionId)")
+                },
+                { onOpusData(0, 0, ByteArray(0)); if (decode) onPCMData(0, 0, ShortArray(0)) },
+                {
+                    onFinish("syncBleFileEnd")
+                    Log.i(TAG, "syncBleFile: finish (recording)")
+                },
+                dataProcess,
+                { errorCode ->
+                    handleBleError(errorCode)
+                },
+            )
+        }
     }
 
     fun isRecordingActive(): Boolean {

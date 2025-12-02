@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/PenWiFiSDK-Swift.h</key>
 		<data>
-		j3QEITU0AukmG6tsIQUJ7aduxp0=
+		zTdBvYKGwtVDcQaYHIv+FgNQ6pw=
 		</data>
 		<key>Headers/PenWiFiSdk.h</key>
 		<data>
@@ -18,11 +18,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ak47WOpDOg6BHWTWVO9u5RrlOXk=
+		1FMO6ls5ulDtroQO9RFygy6eVic=
 		</data>
 		<key>Modules/PenWiFiSDK.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		UUCZtLKqWct0BopEWkMgPJl6Zmc=
+		ylkDED81CpBZVKnrlo1stn+k8Is=
 		</data>
 		<key>Modules/PenWiFiSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/PenWiFiSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		M859D7/GNFPAsSxk7KCMFo1f+5A=
+		6/7X/9gX7SkwA5mHXAktBbCnWxk=
 		</data>
 		<key>Modules/PenWiFiSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		DMDdJnq7JkeYDPbbNYr1F/qYaqU=
+		JjNmo8A7sBAheh3bprhPS3tcmuw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -54,7 +54,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			CBVbce2SXKxlRVN66LAwAR8DDEo0+NCq/kxy5D2W2z8=
+			vL1r1AAVs4JhTZMHYxh0AEhJzs1CfBs1C/FxCJ2nzl8=
 			</data>
 		</dict>
 		<key>Headers/PenWiFiSdk.h</key>
@@ -68,7 +68,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ibgZmBtOskL2SS+4G6Nd2jrNytgmp0vYwsoPHdPdfEE=
+			Z1+2SaKL33xEDy0Lr8upKvk2avRi8kgwAxJTznpDYf0=
 			</data>
 		</dict>
 		<key>Modules/PenWiFiSDK.swiftmodule/arm64-apple-ios.abi.json</key>
@@ -82,14 +82,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			E5Ke1aD3/OnPlDtGyYyFHZqVufjIW5aX8x/m9v6z8HI=
+			19Qw0x7FWVKkW4EOr7rgXT2n7lfemJSDN0y+Gp8y/2Q=
 			</data>
 		</dict>
 		<key>Modules/PenWiFiSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NHUrcV6In4XzWpYL1WYZFScZGdrK8hfYQnL9G1auV14=
+			RRzXu9Iu+1jRdYPacjkf2m+Sn/VIJW9xiSYOc715Ksw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
