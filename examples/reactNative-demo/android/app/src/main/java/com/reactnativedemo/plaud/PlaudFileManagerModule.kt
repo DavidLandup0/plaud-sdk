@@ -14,6 +14,8 @@ import sdk.penblesdk.entity.bean.ble.response.SyncFileHeadRsp
 import sdk.penblesdk.entity.bean.ble.response.SyncFileTailRsp
 import sdk.penblesdk.entity.bean.ble.response.BattStatusRsp
 import sdk.penblesdk.viocedata.ISyncVoiceDataKeepOut
+import sdk.penblesdk.viocedata.ISyncVoiceDataProcessOutFile
+import sdk.penblesdk.viocedata.creator.VoiceDataCreatorFactory
 import java.util.Date
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -373,51 +375,34 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
             val outputFile = File(downloadDir, fileName)
             
             try {
-                val outputStream = FileOutputStream(outputFile)
                 var totalBytes = 0L
                 var lastUpdateTime = 0L
-                
-                // Create data processing callback
-                val voiceDataCallback = object : ISyncVoiceDataKeepOut<ByteArray> {
+
+                // Use VoiceDataCreatorFactory to create Opus-to-Ogg converter
+                // This properly wraps Opus packets in Ogg container
+                val voiceDataCallback = VoiceDataCreatorFactory.newOpusToOgg(
+                    outputFile.absolutePath,
+                    1 // mono channel
+                )
+
+                // Set up progress tracking
+                voiceDataCallback.setOriginalDataCallBack(object : sdk.penblesdk.viocedata.IVoiceData<ByteArray> {
                     override fun receiveVoiceData(data: ByteArray?, start: Long) {
                         data?.let { bytes ->
-                            try {
-                                outputStream.write(bytes)
-                                totalBytes += bytes.size
-                                
-                                val currentTime = System.currentTimeMillis()
-                                if (currentTime - lastUpdateTime >= 500) { // Update progress every 0.5 seconds
-                                    sendEvent("onDownloadProgress", Arguments.createMap().apply {
-                                        putDouble("sessionId", sessionId)
-                                        putDouble("downloadedBytes", totalBytes.toDouble())
-                                        putString("fileName", fileName)
-                                    })
-                                    lastUpdateTime = currentTime
-                                }
-                            } catch (e: Exception) {
-                                Log.e(TAG, "Error writing file data: ${e.message}")
+                            totalBytes += bytes.size
+
+                            val currentTime = System.currentTimeMillis()
+                            if (currentTime - lastUpdateTime >= 500) {
+                                sendEvent("onDownloadProgress", Arguments.createMap().apply {
+                                    putDouble("sessionId", sessionId)
+                                    putDouble("downloadedBytes", totalBytes.toDouble())
+                                    putString("fileName", fileName)
+                                })
+                                lastUpdateTime = currentTime
                             }
                         }
                     }
-                    
-                    override fun setOriginalDataCallBack(callBack: sdk.penblesdk.viocedata.IVoiceData<ByteArray>?): ISyncVoiceDataKeepOut<ByteArray> {
-                        return this
-                    }
-                    
-                    override fun setFinishCallBack(callBack: sdk.penblesdk.viocedata.ICallback.FinishCallback?): ISyncVoiceDataKeepOut<ByteArray> {
-                        return this
-                    }
-                    
-                    override fun finish(code: Int) {
-                        Log.i(TAG, "File processing completed, code: $code")
-                    }
-                    
-                    override fun hasCompleteTail(): Boolean = true
-                    
-                    override fun flush() {
-                        Log.d(TAG, "Data refresh")
-                    }
-                }
+                })
                 
                 bleAgent.syncFileStart(
                     sessionIdLong,
@@ -427,7 +412,6 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                         override fun onCallback(success: Boolean) {
                             Log.d(TAG, "📥 File sync request sent: success=$success")
                             if (!success) {
-                                try { outputStream.close() } catch (e: Exception) {}
                                 outputFile.delete()
                                 promise.reject("DOWNLOAD_FAILED", "Failed to start file sync")
                             }
@@ -441,7 +425,7 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                     object : AgentCallback.OnResponse<SyncFileTailRsp> {
                         override fun onCallback(response: SyncFileTailRsp?) {
                             try {
-                                outputStream.close()
+                                // File is automatically closed by VoiceDataCreatorFactory
                                 Log.i(TAG, "✅ File download completed: ${outputFile.absolutePath}")
                                 
                                 promise.resolve(Arguments.createMap().apply {
@@ -470,11 +454,8 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                     voiceDataCallback,
                     object : AgentCallback.OnError {
                         override fun onError(errorCode: sdk.penblesdk.entity.BleErrorCode) {
-                            try { 
-                                outputStream.close() 
-                                outputFile.delete()
-                            } catch (e: Exception) {}
-                            
+                            outputFile.delete()
+
                             Log.e(TAG, "❌ File download error: $errorCode")
                             promise.reject("DOWNLOAD_ERROR", "File download error: $errorCode")
                         }
@@ -482,8 +463,8 @@ class PlaudFileManagerModule(reactContext: ReactApplicationContext) :
                 )
                 
             } catch (e: Exception) {
-                Log.e(TAG, "File output stream creation failed: ${e.message}")
-                promise.reject("DOWNLOAD_ERROR", "Failed to create output stream: ${e.message}")
+                Log.e(TAG, "File download setup failed: ${e.message}")
+                promise.reject("DOWNLOAD_ERROR", "Failed to setup download: ${e.message}")
             }
 
         } catch (e: Exception) {
